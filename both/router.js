@@ -21,5 +21,17 @@ Router.map(function () {
     this.route('showCustomer');
     this.route('customerInfo',{
         path:'/customerInfo/:_id'
-    })
+    });
+
+    //expenseItem
+    this.route('showExpenseItem');
+    this.route('expenseItemInfo',{
+        path:'/expenseItemInfo/:_id'
+    });
+
+    //expense
+    this.route('showExpense');
+    this.route('expenseInfo',{
+        path:'/expenseInfo/:_id'
+    });
 });

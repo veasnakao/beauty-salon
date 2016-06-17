@@ -1,0 +1,46 @@
+<template name="expenseItemInfo">
+    {{#contentFor "headerButtonLeft"}}
+        {{>ionNavBackButton path="showExpenseItem"}}
+    {{/contentFor}}
+
+    {{#contentFor "headerTitle"}}
+        <h1 class="title">Expense Item Info</h1>
+    {{/contentFor}}
+
+    {{#contentFor "headerButtonRight"}}
+        <button class="button button-clear pull-left" data-ion-modal="editExpenseItem" data-id="{{expenseItemInfo._id}}">
+            {{> ionIcon icon="ion ion-edit"}}
+        </button>
+    {{/contentFor}}
+
+    {{#ionView}}
+        {{#ionContent}}
+        <!--{{#with itemInfo}}-->
+            <!--<div class="row">-->
+            <!--&lt;!&ndash;<div class="col col-10"></div>&ndash;&gt;-->
+            <!--<div class="col col-33 col-offset-10"><h4>Name</h4></div>-->
+            <!--<div class="col"><h4>:</h4></div>-->
+            <!--<div class="col col-80"><h4>{{name}}</h4></div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+            <!--<div class="col col-33 col-offset-10"><h4>Gender</h4></div>-->
+            <!--<div class="col"><h4>:</h4></div>-->
+            <!--<div class="col col-80"><h4>{{numFormat price '0,0.00 $'}}</h4></div>-->
+            <!--</div>-->
+                <!--{{/with}}-->
+            {{#ionList}}
+                {{#with expenseItemInfo}}
+                    {{#ionItem}}
+                        <div class="row">
+                            <div class="col col-33 col-offset-10"><h2>Name</h2></div>
+                            <div class="col"><h2>:</h2></div>
+                            <div class="col col-80">
+                                <h2>{{name}}</h2>
+                            </div>
+                        </div>
+                    {{/ionItem}}
+                {{/with}}
+            {{/ionList}}
+        {{/ionContent}}
+    {{/ionView}}
+</template>

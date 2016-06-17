@@ -21,3 +21,12 @@ Meteor.publish('items', function() {
 Meteor.publish('item', function(_id) {
     return Collection.Item.find({_id: _id});
 });
+
+
+//publish expenseItem
+Meteor.publish('expenseItems', function() {
+    return Collection.ExpenseItem.find();
+});
+Meteor.publish('expenseItem', function(_id) {
+    return Collection.ExpenseItem.find({_id: _id});
+});
