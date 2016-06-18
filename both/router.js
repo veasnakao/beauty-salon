@@ -29,9 +29,9 @@ Router.map(function () {
         path:'/expenseItemInfo/:_id'
     });
 
-    //expense
-    this.route('showExpense');
-    this.route('expenseInfo',{
-        path:'/expenseInfo/:_id'
+    //dayExpense
+    this.route('showDayExpense');
+    this.route('dayExpenseInfo',{
+        path:'/dayExpenseInfo/:_id'
     });
 });

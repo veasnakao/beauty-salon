@@ -8,7 +8,7 @@ List={
         }).forEach(function(obj) {
             list.push({
                 label: obj.name,
-                value: obj._id
+                value: obj.name
             });
         });
         return list;
