@@ -1,12 +1,12 @@
 //oncreated
-Template.showDayExpense.created = function () {
+Template.dayExpenseDetail.created = function () {
     this.autorun(function () {
-        this.subscription = Meteor.subscribe('dayExpenses');
+        this.subscription = Meteor.subscribe('dayExpense', Router.current().params._id);
     }.bind(this));
 };
 
 //onrender
-Template.showDayExpense.rendered = function () {
+Template.dayExpenseDetail.rendered = function () {
     try {
         this.autorun(() => {
             if (!this.subscription.ready()) {
@@ -21,30 +21,26 @@ Template.showDayExpense.rendered = function () {
 };
 
 //helper
-Template.showDayExpense.helpers({
-    // dayExpenseList:()=>{
-    //     return Collection.DayExpense.find({},{sort: {_id:1}});
-    // }
-    dayExpenseList: ()=> {
-        // let item = '';
+Template.dayExpenseDetail.helpers({
+    dayExpenseDetail: ()=> {
         let data = {};
         let content = [];
         // let expenseItem ="";
         // let totalPaid=0;
+        // let itemName = "";
+        // let itemPrice = "";
         var list = Collection.DayExpense.find();
         list.forEach((obj)=> {
             // expenseItem = obj.expenseItem;
-            let totalAmount =0;
+            // let totalAmount =0;
             for (var key in obj.expenseItem) {
-                var getItemExpense = obj.expenseItem[key];
-                totalAmount += getItemExpense.price;
+                content.push(obj.expenseItem[key]);
             }
-            // totalPaid +=totalAmount;
-            obj.totalAmount=totalAmount;
-            obj.date = moment(obj.date).format('DD/MM/YYYY');
-            content.push(obj);
+            // obj.date = moment(obj.date).format('DD/MM/YYYY');
+            // content.push(obj);
         });
         // data.totalPaid = totalPaid;
+
         data.content=content;
         return data;
     }

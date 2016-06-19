@@ -16,16 +16,13 @@
     {{#ionView}}
         {{#ionContent}}
             {{#ionList}}
-                {{#each data.content}}
-                    {{#ionItem path="dayExpenseInfo" iconRight=true}}
-                        <h2>{{date}}</h2>
-                        <h2>{{numFormat totalAmount '0,0.00 $'}}</h2>
+                {{#each dayExpenseList.content}}
+                    {{#ionItem path="dayExpenseDetail" iconRight=true}}
+                        <h2>Expense Date : {{date}}</h2>
+                        <h2>Total Paid : {{numFormat totalAmount '0,0.00 $'}}</h2>
                     {{/ionItem}}
                 {{/each}}
             {{/ionList}}
         {{/ionContent}}
     {{/ionView}}
-</template>
-<template name="listDayExpense">
-
 </template>

@@ -1,0 +1,44 @@
+<template name="dayExpenseDetail">
+    {{#contentFor "headerButtonLeft"}}
+        {{>ionNavBackButton path="showDayExpense"}}
+    {{/contentFor}}
+
+    {{#contentFor "headerTitle"}}
+        <h1 class="title">Day Expense Detail</h1>
+    {{/contentFor}}
+
+    {{#contentFor "headerButtonRight"}}
+        <button class="button button-clear pull-left" data-ion-modal="editItem" data-id="{{dayExpenseDetail._id}}">
+            {{> ionIcon icon="ion ion-edit"}}
+        </button>
+    {{/contentFor}}
+
+    {{#ionView}}
+        {{#ionContent}}
+            {{#ionList}}
+                {{#ionItem}}
+                    <div class="row">
+                        <div class="col col-50">
+                            <h2><b><u>Expense Item</u></b></h2>
+                        </div>
+                        <div class="col col-50">
+                            <h2><b> : <u>Price ($)</u></b></h2>
+                        </div>
+                    </div>
+                {{/ionItem}}
+                {{#each dayExpenseDetail.content}}
+                    {{#ionItem}}
+                        <div class="row">
+                            <div class="col col-50">
+                                <h2>{{expenseItemName}}</h2>
+                            </div>
+                            <div class="col col-50">
+                                <h2> : {{numFormat price '0,0.00 $'}}</h2>
+                            </div>
+                        </div>
+                    {{/ionItem}}
+                {{/each}}
+            {{/ionList}}
+        {{/ionContent}}
+    {{/ionView}}
+</template>

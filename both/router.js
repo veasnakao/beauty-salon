@@ -31,7 +31,7 @@ Router.map(function () {
 
     //dayExpense
     this.route('showDayExpense');
-    this.route('dayExpenseInfo',{
-        path:'/dayExpenseInfo/:_id'
+    this.route('dayExpenseDetail',{
+        path:'/dayExpenseDetail/:_id'
     });
 });
