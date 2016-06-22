@@ -55,6 +55,7 @@ juliancwirko:s-alert-scale@3.1.3
 juliancwirko:s-alert-slide@3.1.3
 juliancwirko:s-alert-stackslide@3.1.3
 launch-screen@1.0.11
+less@2.6.0
 livedata@1.0.18
 logging@1.0.12
 mdg:validation-error@0.2.0
@@ -86,6 +87,7 @@ reactive-var@1.0.9
 reload@1.1.8
 retry@1.0.7
 routepolicy@1.0.10
+sergeyt:typeahead@0.11.1_9
 session@1.1.5
 spacebars@1.0.11
 spacebars-compiler@1.0.11
@@ -100,5 +102,7 @@ ui@1.0.11
 underscore@1.0.8
 underscorestring:underscore.string@3.0.3_1
 url@1.0.9
+vazco:universe-autoform-select@0.3.9
+vazco:universe-selectize@0.1.20
 webapp@1.2.8
 webapp-hashing@1.0.9

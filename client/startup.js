@@ -1,4 +1,5 @@
 Meteor.startup(function () {
+    Meteor.typeahead.inject();
     AutoForm.setDefaultTemplate('ionic');
     sAlert.config({
         effect: 'jelly',

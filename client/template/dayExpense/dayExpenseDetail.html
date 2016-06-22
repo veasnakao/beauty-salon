@@ -16,6 +16,18 @@
     {{#ionView}}
         {{#ionContent}}
             {{#ionList}}
+                {{#each totalDayExpense.content}}
+                    {{#ionItem}}
+                        <div class="row" style="background-color: #CDC9C9;">
+                            <div class="col col-50">
+                                <h2><b><u>Paid Date</u></b></h2>
+                            </div>
+                            <div class="col col-50">
+                                <h2><b> : <u>{{date}}</u></b></h2>
+                            </div>
+                        </div>
+                    {{/ionItem}}
+                {{/each}}
                 {{#ionItem}}
                     <div class="row">
                         <div class="col col-50">
@@ -34,6 +46,18 @@
                             </div>
                             <div class="col col-50">
                                 <h2> : {{numFormat price '0,0.00 $'}}</h2>
+                            </div>
+                        </div>
+                    {{/ionItem}}
+                {{/each}}
+                {{#each totalDayExpense.content}}
+                    {{#ionItem}}
+                        <div class="row" style="background-color: #CDC9C9;">
+                            <div class="col col-50">
+                                <h2><b>Total</b></h2>
+                            </div>
+                            <div class="col col-50">
+                                <h2><b> : {{numFormat totalPaid '0,0.00 $'}}</b></h2>
                             </div>
                         </div>
                     {{/ionItem}}

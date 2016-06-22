@@ -3,7 +3,7 @@ Schema.Customer = new SimpleSchema({
     name: {
         type: String,
         label: "Name",
-        defaultValue:"General",
+        defaultValue: "General",
         max: 200
     },
     customerType: {
@@ -42,3 +42,26 @@ Schema.Customer = new SimpleSchema({
     }
 });
 Collection.Customer.attachSchema(Schema.Customer);
+
+//customerSearch
+Collection.Customer.search = function (query, limit) {
+    let limitAmount = limit || 10;
+    if (!query) {
+        return;
+    }
+    let regPattern = `${query}`;
+    let reg = new RegExp(regPattern, 'i');//match all case
+    let selector = {};
+    selector.$or = [{}, {
+        name: {
+            $regex: reg
+        }
+    }];
+
+    return Collection.Customer.find(selector, {
+        sort: {
+            name: 1
+        },
+        limit: limitAmount
+    });
+};

@@ -101,8 +101,10 @@
         <item url="file://$USER_HOME$/.meteor/packages/aldeed_autoform/5.8.1/web.browser/inputTypes/submit/submit.js" />
         <item url="file://$USER_HOME$/.meteor/packages/juliancwirko_s-alert/3.1.4/web.browser/client/s-alert.js" />
         <item url="file://$USER_HOME$/.meteor/packages/juliancwirko_s-alert/3.1.4/web.browser/client/s-alert-default.css" />
+        <item url="file://$USER_HOME$/.meteor/packages/sergeyt_typeahead/0.11.1_9/web.browser/index.js" />
         <item url="file://$USER_HOME$/.meteor/packages/aldeed_autoform/5.8.1/web.browser/inputTypes/datetime/datetime.js" />
         <item url="file://$USER_HOME$/.meteor/packages/juliancwirko_s-alert/3.1.4/web.browser/client/s-alert-template.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/sergeyt_typeahead/0.11.1_9/web.browser/typeahead.bundle.js" />
         <item url="file://$USER_HOME$/.meteor/packages/juliancwirko_s-alert/3.1.4/web.browser/client/s-alert-collection.js" />
         <item url="file://$USER_HOME$/.meteor/packages/aldeed_autoform/5.8.1/web.browser/inputTypes/password/password.js" />
         <item url="file://$USER_HOME$/.meteor/packages/aldeed_autoform/5.8.1/web.browser/inputTypes/textarea/textarea.js" />
@@ -154,6 +156,7 @@
         <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/helpers.js" />
         <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/current_options.js" />
         <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/route_controller_client.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/vazco_universe-autoform-select/0.3.9/web.browser/universe-autoform-select.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ddp-common/1.2.5/web.browser/random_stream.js" />
         <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/router_client.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ddp-common/1.2.5/web.browser/method_invocation.js" />
@@ -208,8 +211,10 @@
         <item url="file://$USER_HOME$/.meteor/packages/aldeed_schema-deny/1.0.1/web.browser/lib/deny.js" />
         <item url="file://$USER_HOME$/.meteor/packages/random/1.0.9/web.browser/deprecated.js" />
         <item url="file://$USER_HOME$/.meteor/packages/random/1.0.9/web.browser/random_tests.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/vazco_universe-selectize/0.1.20/web.browser/vendor/speakingurl.min.js" />
         <item url="file://$USER_HOME$/.meteor/packages/aldeed_schema-index/1.0.1/web.browser/lib/indexing.js" />
         <item url="file://$USER_HOME$/.meteor/packages/random/1.0.9/web.browser/random.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/vazco_universe-selectize/0.1.20/web.browser/universe-selectize.js" />
         <item url="file://$USER_HOME$/.meteor/packages/aldeed_simple-schema/1.5.3/web.browser/string-humanize.js" />
         <item url="file://$USER_HOME$/.meteor/packages/aldeed_simple-schema/1.5.3/web.browser/simple-schema-utility.js" />
         <item url="file://$USER_HOME$/.meteor/packages/aldeed_simple-schema/1.5.3/web.browser/simple-schema-validation-new.js" />
@@ -432,8 +437,10 @@
       <root url="file://$USER_HOME$/.meteor/packages/aldeed_autoform/5.8.1/web.browser/inputTypes/submit/submit.js" />
       <root url="file://$USER_HOME$/.meteor/packages/juliancwirko_s-alert/3.1.4/web.browser/client/s-alert.js" />
       <root url="file://$USER_HOME$/.meteor/packages/juliancwirko_s-alert/3.1.4/web.browser/client/s-alert-default.css" />
+      <root url="file://$USER_HOME$/.meteor/packages/sergeyt_typeahead/0.11.1_9/web.browser/index.js" />
       <root url="file://$USER_HOME$/.meteor/packages/aldeed_autoform/5.8.1/web.browser/inputTypes/datetime/datetime.js" />
       <root url="file://$USER_HOME$/.meteor/packages/juliancwirko_s-alert/3.1.4/web.browser/client/s-alert-template.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/sergeyt_typeahead/0.11.1_9/web.browser/typeahead.bundle.js" />
       <root url="file://$USER_HOME$/.meteor/packages/juliancwirko_s-alert/3.1.4/web.browser/client/s-alert-collection.js" />
       <root url="file://$USER_HOME$/.meteor/packages/aldeed_autoform/5.8.1/web.browser/inputTypes/password/password.js" />
       <root url="file://$USER_HOME$/.meteor/packages/aldeed_autoform/5.8.1/web.browser/inputTypes/textarea/textarea.js" />
@@ -485,6 +492,7 @@
       <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/helpers.js" />
       <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/current_options.js" />
       <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/route_controller_client.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/vazco_universe-autoform-select/0.3.9/web.browser/universe-autoform-select.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ddp-common/1.2.5/web.browser/random_stream.js" />
       <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/router_client.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ddp-common/1.2.5/web.browser/method_invocation.js" />
@@ -539,8 +547,10 @@
       <root url="file://$USER_HOME$/.meteor/packages/aldeed_schema-deny/1.0.1/web.browser/lib/deny.js" />
       <root url="file://$USER_HOME$/.meteor/packages/random/1.0.9/web.browser/deprecated.js" />
       <root url="file://$USER_HOME$/.meteor/packages/random/1.0.9/web.browser/random_tests.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/vazco_universe-selectize/0.1.20/web.browser/vendor/speakingurl.min.js" />
       <root url="file://$USER_HOME$/.meteor/packages/aldeed_schema-index/1.0.1/web.browser/lib/indexing.js" />
       <root url="file://$USER_HOME$/.meteor/packages/random/1.0.9/web.browser/random.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/vazco_universe-selectize/0.1.20/web.browser/universe-selectize.js" />
       <root url="file://$USER_HOME$/.meteor/packages/aldeed_simple-schema/1.5.3/web.browser/string-humanize.js" />
       <root url="file://$USER_HOME$/.meteor/packages/aldeed_simple-schema/1.5.3/web.browser/simple-schema-utility.js" />
       <root url="file://$USER_HOME$/.meteor/packages/aldeed_simple-schema/1.5.3/web.browser/simple-schema-validation-new.js" />

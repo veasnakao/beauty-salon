@@ -1,0 +1,51 @@
+<template name="itemOrder">
+    {{#contentFor "headerButtonLeft"}}
+        {{>ionNavBackButton path="showOrder"}}
+    {{/contentFor}}
+
+    {{#contentFor "headerTitle"}}
+        <h1 class="title">Item List</h1>
+    {{/contentFor}}
+
+        <!--{{#contentFor "headerButtonRight"}}-->
+    <!--<button class="button button-clear pull-left" data-ion-modal="addItem">-->
+    <!--{{> ionIcon icon="ion ion-plus-circled"}}-->
+    <!--</button>-->
+        <!--{{/contentFor}}-->
+
+    {{#ionView}}
+        {{#ionContent}}
+            {{#ionList}}
+                {{#ionItem}}
+                    <div class="row">
+                        <div class="col-33"><h2>Item Name</h2></div>
+                        <div class="col-25"><h2>Price</h2></div>
+                        <div class="col-25"><h2>Quantity</h2></div>
+                        <div class="col-25"><h2>Total</h2></div>
+                    </div>
+                {{/ionItem}}
+                {{#each showItemOrder}}
+                    {{#ionItem}}
+                        <div class="row">
+                            <div class="col-33">{{name}}
+                            </div>
+                            <div class="col-25">{{numFormat price '0,0.00 $'}}</div>
+                            <div class="col-25">5</div>
+                            <div class="col-25">5$</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <button class="button button-outline button-balanced">
+                                    {{> ionIcon icon="ion ion-plus-circled"}}
+                                </button>
+                                <button class="button button-outline button-assertive">
+                                    {{> ionIcon icon="ion ion-minus-circled"}}
+                                </button>
+                            </div>
+                        </div>
+                    {{/ionItem}}
+                {{/each}}
+            {{/ionList}}
+        {{/ionContent}}
+    {{/ionView}}
+</template>
