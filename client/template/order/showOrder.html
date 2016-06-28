@@ -8,8 +8,8 @@
     {{/contentFor}}
 
     {{#contentFor "headerButtonRight"}}
-        <button class="button button-clear pull-left" data-ion-modal="addOrder">
-            {{> ionIcon icon="ion ion-plus-circled"}}
+        <button class="button button-clear pull-left" data-ion-modal="searchCustomer">
+            {{> ionIcon icon="ion ion-plus-circled" class="add-order"}}
         </button>
     {{/contentFor}}
 
@@ -19,13 +19,13 @@
                 {{#each showCustomer}}
                     {{#ionItem path="itemOrder" iconRight=true}}
                         <h2>{{name}}</h2>
-                        <p>{{tel}}</p>
                         {{> ionIcon icon="ios-arrow-right"}}
                     {{/ionItem}}
                 {{/each}}
             {{/ionList}}
         {{/ionContent}}
     {{/ionView}}
+
 </template>
 
 

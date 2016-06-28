@@ -22,7 +22,7 @@ Template.itemOrder.rendered = function () {
 
 //helper
 Template.itemOrder.helpers({
-    showItemOrder: ()=> {
-        return Collection.Item.find({}, {sort: {_id: 1}});
-    }
+    // showItemOrder: ()=> {
+    //     return Collection.Item.find({}, {sort: {_id: 1}});
+    // }
 });

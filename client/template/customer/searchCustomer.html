@@ -1,0 +1,41 @@
+<template name="searchCustomer">
+    {{#ionModal customTemplate=true}}
+        <div class="bar bar-header bar-stable" style="background-color: #387ef5;">
+            <h2 class="title" style="color: white;">Search Customer</h2>
+            <button data-dismiss="modal" type="button" class="button button-clear pull-left" style="color: white;">
+                {{> ionIcon icon="ion ion-close-circled"}}
+            </button>
+        </div>
+        <div class="content has-header overflow-scroll">
+            <div class="list">
+                <div class="list list-inset">
+                    <label class="item item-input">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input type="text" placeholder="Search" value="{{searchQuery}}" class="txt-searchCustomer">
+                    </label>
+                </div>
+                <ul>
+                    {{#each customer}}
+                        {{> _showCustomer}}
+                    {{/each}}
+                </ul>
+                {{#if searchQuery}}
+                    <div class="col col-offset-50">
+                        <button class="button button-positive loadMore">Load More</button>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+
+
+    {{/ionModal}}
+</template>
+
+<template name="_showCustomer">
+    <div class="card" style="cursor: pointer;">
+        <div class="item item-text-wrap">
+            <!--<a href="#" data-dismiss="modal" class="customer-order"><h2>{{name}}</h2></a>-->
+            <h2 data-dismiss="modal" class="customer-order">{{name}}</h2>
+        </div>
+    </div>
+</template>

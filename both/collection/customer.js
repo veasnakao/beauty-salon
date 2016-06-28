@@ -52,11 +52,11 @@ Collection.Customer.search = function (query, limit) {
     let regPattern = `${query}`;
     let reg = new RegExp(regPattern, 'i');//match all case
     let selector = {};
-    selector.$or = [{}, {
+    selector = {
         name: {
             $regex: reg
         }
-    }];
+    };
 
     return Collection.Customer.find(selector, {
         sort: {

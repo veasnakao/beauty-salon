@@ -41,6 +41,7 @@ Router.map(function () {
         path:'/orderDetail/:_id'
     });
     this.route('itemOrder',{
-        path:'/itemOrder/customerId/:_id'
+        // path: '/restaurant/sale/:tableLocationId/table/:tableId/saleInvoice/:invoiceId',
+        path:'/itemOrder/customerId/:customerId/orderId/:orderId'
     });
 });

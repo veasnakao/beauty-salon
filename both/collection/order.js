@@ -7,7 +7,7 @@ Schema.Order = new SimpleSchema({
     customerId: {
         type: String,
         label: "Customer",
-        defaultValue: "0001",
+        defaultValue: "0001"
         // autoform: {
         //     type: 'universe-select',
         //     afFieldInput: {

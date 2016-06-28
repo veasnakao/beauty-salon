@@ -37,3 +37,22 @@ Meteor.publish('orders', function() {
 Meteor.publish('order', function(_id) {
     return Collection.Order.find({_id: _id});
 });
+
+//item search
+Meteor.publish('itemSearch', function(query, limit) {
+    if (_.isEmpty(query)) {
+        return this.ready();
+    }
+    let limitAmount = limit || 10;
+    return Collection.Item.search(query, limitAmount);
+});
+
+//customer search
+Meteor.publish('customerSearch', function(query, limit) {
+    if (_.isEmpty(query)) {
+        return this.ready();
+    }
+    let limitAmount = limit || 10;
+    return Collection.Customer.search(query, limitAmount);
+    // return customer;
+});

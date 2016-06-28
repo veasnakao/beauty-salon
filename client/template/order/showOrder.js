@@ -1,5 +1,6 @@
 //oncreated
 Template.showOrder.created = function () {
+    Session.set('orderDetailObj', {});
     this.autorun(function () {
         this.subscription = Meteor.subscribe('orders');
         this.subscription = Meteor.subscribe('customers');
@@ -9,6 +10,11 @@ Template.showOrder.created = function () {
 
 //onrender
 Template.showOrder.rendered = function () {
+    let orderId = Session.get('orderId');
+    if (!_.isUndefined(orderId)) {
+        // Meteor.call('removeSaleIfNoSaleDetailExist', invoiceId);
+        Session.set('orderId', undefined);
+    }
     try {
         this.autorun(() => {
             if (!this.subscription.ready()) {
@@ -22,12 +28,19 @@ Template.showOrder.rendered = function () {
     }
 };
 
+//event
+Template.showOrder.events({
+    'click .add-order':()=>{
+        
+    } 
+});
+
 //helper
 Template.showOrder.helpers({
     showOrder: ()=> {
         return Collection.Order.find({}, {sort: {_id: 1}});
-    },
-    showCustomer: ()=> {
-        return Collection.Customer.find({}, {sort: {_id: 1}});
     }
+    // showCustomer: ()=> {
+    //     return Collection.Customer.find({}, {sort: {_id: 1}});
+    // }
 });
