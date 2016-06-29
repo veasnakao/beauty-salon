@@ -12,7 +12,7 @@ Template.showOrder.created = function () {
 Template.showOrder.rendered = function () {
     let orderId = Session.get('orderId');
     if (!_.isUndefined(orderId)) {
-        // Meteor.call('removeSaleIfNoSaleDetailExist', invoiceId);
+        Meteor.call('removeSaleIfNoSaleDetailExist', orderId);
         Session.set('orderId', undefined);
     }
     try {
@@ -37,9 +37,6 @@ Template.showOrder.events({
 
 //helper
 Template.showOrder.helpers({
-    showOrder: ()=> {
-        return Collection.Order.find({}, {sort: {_id: 1}});
-    }
     // showCustomer: ()=> {
     //     return Collection.Customer.find({}, {sort: {_id: 1}});
     // }

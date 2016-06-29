@@ -11,7 +11,7 @@
                 <div class="list list-inset">
                     <label class="item item-input">
                         <i class="icon ion-search placeholder-icon"></i>
-                        <input type="text" placeholder="Search" value="{{searchQuery}}" class="js-txtSearch">
+                        <input type="text" placeholder="Search" value="{{searchQueryItem}}" class="js-txtSearch">
                     </label>
                 </div>
                 <ul>
@@ -32,21 +32,9 @@
 </template>
 
 <template name="_productItem">
-<!--{{#ionItem buttonRight=true avatar=true }}-->
-    <!--<span class="cursor-p" data-ion-modal="editProduct" data-id="{{_id}}">-->
-    <!--<b>{{name}}</b>-->
-    <!--</span>-->
-    <!--<p>-->
-    <!--តម្លៃៈ <b>{{price}}</b>​-->
-    <!--</p>-->
-    <!--<button data-action="confirm" class=" button button-clear">-->
-    <!--{{> ionIcon icon="close-circled"}}-->
-    <!--</button>-->
-        <!--{{/ionItem}}-->
-
     <div class="card" style="cursor: pointer;">
-        <div class="item item-text-wrap">
-            <h2>{{name}}</h2>
+        <div class="item item-text-wrap insert-order">
+            <h2>{{_id}} | {{name}}</h2>
             <p>{{numFormat price '0,0.00 $'}}</p>
         </div>
     </div>

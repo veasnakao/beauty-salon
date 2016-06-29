@@ -2,6 +2,7 @@
 Template.itemOrder.created = function () {
     this.autorun(function () {
         this.subscription = Meteor.subscribe('items');
+        this.subscription = Meteor.subscribe('orderDetail');
     }.bind(this));
 };
 
@@ -22,7 +23,11 @@ Template.itemOrder.rendered = function () {
 
 //helper
 Template.itemOrder.helpers({
-    // showItemOrder: ()=> {
-    //     return Collection.Item.find({}, {sort: {_id: 1}});
-    // }
+    showOrderDetail: ()=> {
+        let params = Router.current().params;
+        let orderId = params.orderId;
+        console.log(orderId);
+        return Collection.OrderDetail.find();
+        // return Collection.Order.find({}, {sort: {_id: 1}});
+    }
 });

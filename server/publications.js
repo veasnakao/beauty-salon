@@ -38,6 +38,14 @@ Meteor.publish('order', function(_id) {
     return Collection.Order.find({_id: _id});
 });
 
+//publish orderDetail
+Meteor.publish('orderDetails', function() {
+    return Collection.Order.find();
+});
+Meteor.publish('orderDetail', function(_id) {
+    return Collection.Order.find({_id: _id});
+});
+
 //item search
 Meteor.publish('itemSearch', function(query, limit) {
     if (_.isEmpty(query)) {
@@ -56,3 +64,5 @@ Meteor.publish('customerSearch', function(query, limit) {
     return Collection.Customer.search(query, limitAmount);
     // return customer;
 });
+
+
