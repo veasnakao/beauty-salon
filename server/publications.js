@@ -30,6 +30,14 @@ Meteor.publish('expenseItem', function(_id) {
     return Collection.ExpenseItem.find({_id: _id});
 });
 
+//publish dayExpense
+Meteor.publish('dayExpenses', function() {
+    return Collection.DayExpense.find();
+});
+Meteor.publish('dayExpense', function(_id) {
+    return Collection.DayExpense.find({_id: _id});
+});
+
 //publish order
 Meteor.publish('orders', function() {
     return Collection.Order.find();
@@ -40,10 +48,10 @@ Meteor.publish('order', function(_id) {
 
 //publish orderDetail
 Meteor.publish('orderDetails', function() {
-    return Collection.Order.find();
+    return Collection.OrderDetail.find();
 });
 Meteor.publish('orderDetail', function(_id) {
-    return Collection.Order.find({_id: _id});
+    return Collection.OrderDetail.find({orderId: _id});
 });
 
 //item search

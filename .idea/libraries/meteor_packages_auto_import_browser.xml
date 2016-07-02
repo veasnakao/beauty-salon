@@ -38,10 +38,12 @@
         <item url="file://$USER_HOME$/.meteor/packages/modules/0.6.1/web.browser/buffer.js" />
         <item url="file://$USER_HOME$/.meteor/packages/modules-runtime/0.6.3/web.browser/modules-runtime.js" />
         <item url="file://$USER_HOME$/.meteor/packages/base64/1.0.8/web.browser/base64.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/meteorhacks_aggregate/1.3.0/web.browser/packages/meteorhacks_aggregate.js" />
         <item url="file://$USER_HOME$/.meteor/packages/modules-runtime/0.6.3/web.browser/.npm/package/node_modules/install/install.js" />
         <item url="file://$USER_HOME$/.meteor/packages/binary-heap/1.0.8/web.browser/min-max-heap.js" />
         <item url="file://$USER_HOME$/.meteor/packages/binary-heap/1.0.8/web.browser/min-heap.js" />
         <item url="file://$USER_HOME$/.meteor/packages/binary-heap/1.0.8/web.browser/max-heap.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/meteorhacks_collection-utils/1.2.0/web.browser/packages/meteorhacks:collection-utils.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.1.7/web.browser/dombackend.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.1.7/web.browser/view.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.1.7/web.browser/materializer.js" />
@@ -208,6 +210,7 @@
         <item url="file://$USER_HOME$/.meteor/packages/ejson/1.0.11/web.browser/stringify.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ejson/1.0.11/web.browser/ejson.js" />
         <item url="file://$USER_HOME$/.meteor/packages/aldeed_collection2-core/1.1.1/web.browser/lib/collection2.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/natestrauser_animate-css/3.5.1/web.browser/lib/animate.css/animate.css" />
         <item url="file://$USER_HOME$/.meteor/packages/aldeed_schema-deny/1.0.1/web.browser/lib/deny.js" />
         <item url="file://$USER_HOME$/.meteor/packages/random/1.0.9/web.browser/deprecated.js" />
         <item url="file://$USER_HOME$/.meteor/packages/random/1.0.9/web.browser/random_tests.js" />
@@ -374,10 +377,12 @@
       <root url="file://$USER_HOME$/.meteor/packages/modules/0.6.1/web.browser/buffer.js" />
       <root url="file://$USER_HOME$/.meteor/packages/modules-runtime/0.6.3/web.browser/modules-runtime.js" />
       <root url="file://$USER_HOME$/.meteor/packages/base64/1.0.8/web.browser/base64.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/meteorhacks_aggregate/1.3.0/web.browser/packages/meteorhacks_aggregate.js" />
       <root url="file://$USER_HOME$/.meteor/packages/modules-runtime/0.6.3/web.browser/.npm/package/node_modules/install/install.js" />
       <root url="file://$USER_HOME$/.meteor/packages/binary-heap/1.0.8/web.browser/min-max-heap.js" />
       <root url="file://$USER_HOME$/.meteor/packages/binary-heap/1.0.8/web.browser/min-heap.js" />
       <root url="file://$USER_HOME$/.meteor/packages/binary-heap/1.0.8/web.browser/max-heap.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/meteorhacks_collection-utils/1.2.0/web.browser/packages/meteorhacks:collection-utils.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.1.7/web.browser/dombackend.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.1.7/web.browser/view.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.1.7/web.browser/materializer.js" />
@@ -544,6 +549,7 @@
       <root url="file://$USER_HOME$/.meteor/packages/ejson/1.0.11/web.browser/stringify.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ejson/1.0.11/web.browser/ejson.js" />
       <root url="file://$USER_HOME$/.meteor/packages/aldeed_collection2-core/1.1.1/web.browser/lib/collection2.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/natestrauser_animate-css/3.5.1/web.browser/lib/animate.css/animate.css" />
       <root url="file://$USER_HOME$/.meteor/packages/aldeed_schema-deny/1.0.1/web.browser/lib/deny.js" />
       <root url="file://$USER_HOME$/.meteor/packages/random/1.0.9/web.browser/deprecated.js" />
       <root url="file://$USER_HOME$/.meteor/packages/random/1.0.9/web.browser/random_tests.js" />

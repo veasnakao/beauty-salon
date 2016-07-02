@@ -6,14 +6,12 @@ Tracker.autorun(function () {
 
 Template.searchItem.created = function () {
     let orderId = Router.current().params.orderId;
-    Session.set('limit', 10)
+    Session.set('limit', 10);
     Session.set('orderDetailObj', {});
     // Session.set('saleDetailLimited', 5) // using for limit
     // Session.set('detachSaleDetailObj', {}) //using for detach sale detail
     this.autorun(() => {
         this.subscribe = Meteor.subscribe("order", orderId);
-        // this.subscribe = Meteor.subscribe("saleDetailCount", saleId);
-        // this.subscribe = Meteor.subscribe('productCount');
         this.subscribe = Meteor.subscribe("orderDetail", Router.current().params.orderId);
     });
 };
@@ -42,16 +40,24 @@ Template.searchItem.helpers({
 
 Template._productItem.events({
     'click .insert-order': function () {
+        // debugger;
         let params = Router.current().params;
+        let customerId = params.customerId;
+
+        let customer = Collection.Customer.findOne(customerId);
         let selector = Session.get('orderDetailObj');
         selector[this._id] = {
             orderId: params.orderId,
             itemId: this._id,
+            itemName: this.name,
             price: this.price,
             quantity: 1,
             discount: 0,
-            customerId:params.customerId
+            customerId: params.customerId,
+            customerName: customer.name
         };
+
+
         Meteor.call('insertOrderDetail', selector, (err, result) => {
             if (err) {
                 sAlert.error(error.message);

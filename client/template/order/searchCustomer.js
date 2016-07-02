@@ -1,15 +1,22 @@
-Tracker.autorun(function() {
+Tracker.autorun(function () {
     if (Session.get('searchQueryCustomer')) {
         Meteor.subscribe('customerSearch', Session.get('searchQueryCustomer'), Session.get('limit'));
     }
 });
+
+//onCreate
+Template.searchCustomer.created = function () {
+    this.autorun(function () {
+        this.subscription = Meteor.subscribe('customers');
+    }.bind(this));
+};
 
 //onRender
 Template.searchCustomer.rendered = function () {
     Session.set('limit', 10);
     let orderId = Session.get('orderId');
     if (!_.isUndefined(orderId)) {
-        // Meteor.call('removeSaleIfNoSaleDetailExist', invoiceId);
+        Meteor.call('removeSaleIfNoSaleDetailExist', orderId);
         Session.set('orderId', undefined);
     }
     $('.txt-searchCustomer').val("");
@@ -32,32 +39,30 @@ Template.searchCustomer.helpers({
     }
 });
 
-Template._showCustomer.helpers({
-
-});
+Template._showCustomer.helpers({});
 
 Template._showCustomer.events({
-    'click': function() {
-        Session.set("searchQueryCustomer", this._id);
-    },
-    'click .customer-order':function () {
+    // 'click': function() {
+    //     Session.set("searchQueryCustomer", this._id);
+    // },
+    'click .customer-order': function () {
+        // debugger;
         Session.set('orderDetailObj', {});
         let customerId = this._id;
         let selector = {};
         selector.date = new Date();
         selector.customerId = customerId;
+        selector.status = true;
+        // console.log(`customerId : ` + this._id);
 
         Meteor.call('insertOrder', selector, (err, result) => {
             if (err) {
-                // Bert.alert(err.message,'danger', 'growl-bottom-right');
                 sAlert.error(error.message);
                 IonLoading.hide();
             } else {
                 IonLoading.hide();
                 Session.set('orderId', result);
                 Router.go(`/itemOrder/customerId/${customerId}/orderId/${result}`);
-                // Router.go(`/restaurant/sale/${tableLocationId}/table/${tableId}/saleInvoice/${result}`);
-                //  Router.go(`/restaurant/saleList/location/${tableLocationId}/table/${tableId}/checkout/${result}`);
             }
         })
     }

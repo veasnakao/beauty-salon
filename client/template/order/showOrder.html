@@ -16,9 +16,9 @@
     {{#ionView}}
         {{#ionContent}}
             {{#ionList}}
-                {{#each showCustomer}}
+                {{#each showCustomerOrder}}
                     {{#ionItem path="itemOrder" iconRight=true}}
-                        <h2>{{name}}</h2>
+                        <h2>{{_id}} | {{customerName}}</h2>
                         {{> ionIcon icon="ios-arrow-right"}}
                     {{/ionItem}}
                 {{/each}}

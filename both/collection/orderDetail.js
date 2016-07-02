@@ -1,12 +1,16 @@
 Collection.OrderDetail = new Mongo.Collection("orderDetail");
 Schema.OrderDetail = new SimpleSchema({
-    orderId:{
-        type:String,
-        label:"Order"
+    orderId: {
+        type: String,
+        label: "Order"
     },
-    itemId:{
-        type:String,
-        label:"Item"
+    itemId: {
+        type: String,
+        label: "ItemId"
+    },
+    itemName: {
+        type: String,
+        label: "Item Name"
     },
     price: {
         type: Number,
@@ -27,8 +31,12 @@ Schema.OrderDetail = new SimpleSchema({
     },
     customerId: {
         type: String,
-        label: "Customer",
+        label: "CustomerId",
         defaultValue: "0001"
+    },
+    customerName: {
+        type: String,
+        label: "Customer Name"
     }
 });
 Collection.OrderDetail.attachSchema(Schema.OrderDetail);

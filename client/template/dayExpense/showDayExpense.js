@@ -45,7 +45,7 @@ Template.showDayExpense.helpers({
             content.push(obj);
         });
         // data.totalPaid = totalPaid;
-        data.content=content;
+        data.content= content;
         return data;
     }
 });

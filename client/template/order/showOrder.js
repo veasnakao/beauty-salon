@@ -11,6 +11,7 @@ Template.showOrder.created = function () {
 //onrender
 Template.showOrder.rendered = function () {
     let orderId = Session.get('orderId');
+    console.log(`oriderId : ${orderId}`);
     if (!_.isUndefined(orderId)) {
         Meteor.call('removeSaleIfNoSaleDetailExist', orderId);
         Session.set('orderId', undefined);
@@ -30,14 +31,26 @@ Template.showOrder.rendered = function () {
 
 //event
 Template.showOrder.events({
-    'click .add-order':()=>{
-        
-    } 
+
 });
 
 //helper
 Template.showOrder.helpers({
-    // showCustomer: ()=> {
-    //     return Collection.Customer.find({}, {sort: {_id: 1}});
-    // }
+    showCustomerOrder: ()=> {
+        let orderDetail = Collection.OrderDetail.find();
+        return orderDetail;
+        // order.forEach((obj)=>{
+        //     let customerId = obj.customerId;
+        //     console.log(`customId = ${customerId}`);
+        //     let customer =  Collection.OrderDetail.find({customerId:customerId});
+        //     // console.log(customer);
+        //     customer.forEach((objCustomer)=>{
+        //         console.log(objCustomer.itemName);
+        //     });
+        // });
+        
+        // customer
+        // data.content = content;
+        // return data;
+    }
 });

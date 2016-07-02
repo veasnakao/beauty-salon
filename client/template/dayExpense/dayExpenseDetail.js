@@ -40,16 +40,16 @@ Template.dayExpenseDetail.helpers({
         let totalPaid = 0;
         var list = Collection.DayExpense.find();
         list.forEach((obj)=> {
-            let totalAmount =0;
+            let totalAmount = 0;
             for (let key in obj.expenseItem) {
                 let getItemExpense = obj.expenseItem[key];
                 totalAmount += getItemExpense.price;
             }
-            obj.totalPaid=totalAmount;
+            obj.totalPaid = totalAmount;
             obj.date = moment(obj.date).format('DD/MM/YYYY');
             content.push(obj);
         });
-        data.content=content;
+        data.content = content;
         return data;
     }
 });
