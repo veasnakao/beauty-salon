@@ -16,9 +16,13 @@
     {{#ionView}}
         {{#ionContent}}
             {{#ionList}}
-                {{#each showCustomerOrder}}
-                    {{#ionItem path="itemOrder" iconRight=true}}
-                        <h2>{{_id}} | {{customerName}}</h2>
+                {{#each showCustomerOrder.content}}
+                    {{#ionItem iconRight=true class="show-order-item"}}
+                        <h2>{{_customerName}}</h2>
+                        <!--Item ordered :-->
+                            <!--&lt;!&ndash;{{#each showItemOrder.content}}&ndash;&gt;-->
+                        <!--<span>{{_itemName}} , </span>-->
+                            <!--&lt;!&ndash;{{/each}}&ndash;&gt;-->
                         {{> ionIcon icon="ios-arrow-right"}}
                     {{/ionItem}}
                 {{/each}}

@@ -12,6 +12,7 @@ Template.searchItem.created = function () {
     // Session.set('detachSaleDetailObj', {}) //using for detach sale detail
     this.autorun(() => {
         this.subscribe = Meteor.subscribe("order", orderId);
+        this.subscribe = Meteor.subscribe("customer", Router.current().params.customerId);
         this.subscribe = Meteor.subscribe("orderDetail", Router.current().params.orderId);
     });
 };
@@ -43,8 +44,8 @@ Template._productItem.events({
         // debugger;
         let params = Router.current().params;
         let customerId = params.customerId;
-
         let customer = Collection.Customer.findOne(customerId);
+        let customerName = customer.name;
         let selector = Session.get('orderDetailObj');
         selector[this._id] = {
             orderId: params.orderId,
@@ -54,10 +55,8 @@ Template._productItem.events({
             quantity: 1,
             discount: 0,
             customerId: params.customerId,
-            customerName: customer.name
+            customerName: customerName
         };
-
-
         Meteor.call('insertOrderDetail', selector, (err, result) => {
             if (err) {
                 sAlert.error(error.message);
@@ -67,6 +66,5 @@ Template._productItem.events({
                 Session.set('orderId', result);
             }
         })
-
     }
 });

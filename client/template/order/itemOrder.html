@@ -24,13 +24,13 @@
                             </div>
                             <div class="col-50">
                                 <div style="float: right">
-                                    <button class="button button-small button-balanced">
+                                    <button class="button button-small button-balanced increase-quantity" data-action="fake">
                                         {{> ionIcon class="ion ion-plus-round"}}
                                     </button>
-                                    <button class="button button-small button-assertive">
+                                    <button class="button button-small button-assertive decrease-quantity">
                                         {{> ionIcon class="ion ion-minus-round"}}
                                     </button>
-                                    <button class="button button-small button-assertive">
+                                    <button class="button button-small button-assertive delete-item-order">
                                         {{> ionIcon class="ion ion-trash-a"}}
                                     </button>
                                 </div>
@@ -47,8 +47,6 @@
                     </div>
                 </div>
             {{/each}}
-
-
             <div class="card">
                 <div class="item item-text-wrap button-balanced">
                     <div class="row">
@@ -65,8 +63,6 @@
                     </div>
                 </div>
             </div>
-
-
             <button class="button button-block button-positive">
                 Submit
             </button>

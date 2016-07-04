@@ -42,9 +42,12 @@ Meteor.publish('dayExpense', function(_id) {
 Meteor.publish('orders', function() {
     return Collection.Order.find();
 });
-Meteor.publish('order', function(_id) {
-    return Collection.Order.find({_id: _id});
+Meteor.publish('order', function(selector) {
+    return Collection.Order.find(selector);
 });
+// Meteor.publish('orderFindOne', function (status) {
+//     return Collection.Order.find({status:status})
+// });
 
 //publish orderDetail
 Meteor.publish('orderDetails', function() {
