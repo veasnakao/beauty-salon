@@ -26,6 +26,9 @@ Template.searchItem.rendered = function () {
 Template.searchItem.events({
     'keyup input': function (event, template) {
         Session.set('searchQueryItem', event.target.value);
+    },
+    'click .close-modal': ()=> {
+        Session.set('searchQueryItem', undefined);
     }
 });
 
@@ -54,9 +57,11 @@ Template._productItem.events({
             price: this.price,
             quantity: 1,
             discount: 0,
+            amount: this.price*1,
             customerId: params.customerId,
             customerName: customerName
         };
+
         Meteor.call('insertOrderDetail', selector, (err, result) => {
             if (err) {
                 sAlert.error(error.message);
@@ -67,4 +72,9 @@ Template._productItem.events({
             }
         })
     }
+});
+
+//onDestroyed
+Template._productItem.onDestroyed(function () {
+    Session.set('searchQueryItem', undefined);
 });

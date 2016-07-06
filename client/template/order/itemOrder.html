@@ -8,7 +8,7 @@
     {{/contentFor}}
 
     {{#contentFor "headerButtonRight"}}
-        <button class="button button-clear pull-left" data-ion-modal="searchItem">
+        <button data-ion-modal="searchItem" class="button button-clear pull-left edit-order">
             {{> ionIcon icon="ion ion-ios-search-strong"}}
         </button>
     {{/contentFor}}
@@ -24,7 +24,8 @@
                             </div>
                             <div class="col-50">
                                 <div style="float: right">
-                                    <button class="button button-small button-balanced increase-quantity" data-action="fake">
+                                    <button class="button button-small button-balanced increase-quantity"
+                                            data-action="fake">
                                         {{> ionIcon class="ion ion-plus-round"}}
                                     </button>
                                     <button class="button button-small button-assertive decrease-quantity">
@@ -36,12 +37,26 @@
                                 </div>
                             </div>
                         </div>
+                        <br>
                         <div class="row">
                             <div class="col-25" style="color: #0c60ee;">
                                 {{numFormat price '0,0.00 $'}}
                             </div>
-                            <div class="col-25">
+                            <div class="col-20">
                                 x{{quantity}}
+                            </div>
+                            <div class="col-20">
+                                {{discount}} %
+                            </div>
+                            <div class="col-25">
+                                {{numFormat amount '0,0.00 $'}}
+                            </div>
+                            <div class="col-10">
+                                <div style="float: right;margin-top: -7px;">
+                                    <button class="button button-small button-positive edit-order" data-ion-modal="editOrder" data-id="{{_id}}" data-qty="{{quantity}}">
+                                        {{> ionIcon class="ion-edit"}}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -55,9 +70,9 @@
                         </div>
                         <div class="col-25">
                             <div style="float: right;">
-                                <!--{{#each totalOrderDetail}}-->
-                                    <b>{{numFormat totalOrderDetail '0,0.00 $'}}</b>
-                                <!--{{/each}}-->
+                            <!--{{#each totalOrderDetail}}-->
+                                <b>{{numFormat totalOrderDetail '0,0.00 $'}}</b>
+                                    <!--{{/each}}-->
                             </div>
                         </div>
                     </div>

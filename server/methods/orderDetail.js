@@ -7,7 +7,7 @@ Meteor.methods({
                 itemId: selector[k].itemId,
                 itemName: selector[k].itemName,
                 discount: selector[k].discount,
-                // amount: selector[k].amount,
+                amount: selector[k].amount,
                 quantity: selector[k].quantity,
                 price: selector[k].price,
                 customerId: selector[k].customerId,
@@ -53,6 +53,7 @@ Meteor.methods({
                 // amount: selector[k].amount,
                 quantity: selector[k].quantity,
                 price: selector[k].price,
+                // total:selector[k].price*selector[k].quantity,
                 customerId: selector[k].customerId,
                 customerName: selector[k].customerName
             });

@@ -26,6 +26,9 @@ Template.searchCustomer.rendered = function () {
 Template.searchCustomer.events({
     'keyup input': function (event, template) {
         Session.set('searchQueryCustomer', event.target.value);
+    },
+    'click .close-modal':function(){
+        Session.set('searchQueryCustomer', undefined);
     }
 });
 
@@ -66,4 +69,9 @@ Template._showCustomer.events({
             }
         })
     }
+});
+
+//onDestroyed
+Template._showCustomer.onDestroyed(function(){
+    Session.set('searchQueryCustomer', undefined);
 });

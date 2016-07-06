@@ -6,14 +6,12 @@ Tracker.autorun(function () {
 //oncreated
 Template.itemOrder.created = function () {
     let params = Router.current().params;
-    // let orderId = params.orderId;
     Session.set('orderDetailObj', {});
     this.autorun(function () {
         this.subscription = Meteor.subscribe('items');
         this.subscription = Meteor.subscribe('orders');
         this.subscribe = Meteor.subscribe("customer", Router.current().params.customerId);
         this.subscribe = Meteor.subscribe("orderDetail", Router.current().params.orderId);
-
     }.bind(this));
 };
 
@@ -41,6 +39,19 @@ Template.itemOrder.helpers({
         // console.log(`orderId : ${orderId}`);
         return Collection.OrderDetail.find({orderId: orderId});
     },
+    // totalByItem: ()=> {
+    //     let params = Router.current().params;
+    //     let orderId = params.orderId;
+    //     console.log(`orderId : ${orderId}`);
+    //     let orderDetail = Collection.OrderDetail.find({orderId: orderId});
+    //     let totalByItem = 0;
+    //     orderDetail.forEach((obj)=> {
+    //         totalByItem = obj.price * obj.quantity;
+    //         console.log(totalByItem);
+    //     });
+    //     // console.log(totalByItem);
+    // },
+    
     totalOrderDetail: ()=> {
         let params = Router.current().params;
         let orderId = params.orderId;
@@ -48,7 +59,7 @@ Template.itemOrder.helpers({
         let orderDetail = Collection.OrderDetail.find({orderId: orderId});
         let totalPaid = 0;
         orderDetail.forEach((obj)=> {
-            totalPaid += obj.price * obj.quantity;
+            totalPaid += obj.amount;
         });
         return totalPaid;
     }
@@ -121,17 +132,18 @@ Template.itemOrder.events({
             onOk: () => {
                 Meteor.call('removeOrderDetail', orderDetail._id, (err, result) => {
                     if (err) {
-                        // Bert.alert(`លុបមិនបានជោគជ័យ! ${data._product.name}`, 'danger', 'growl-bottom-right', 'fa-remove')
                         sAlert.error(`Cancel ${orderDetail.itemName}`);
                     } else {
                         sAlert.success(`Item delete success ${orderDetail.itemName}`);
                     }
                 });
             },
-            onCancel: function() {
-
+            onCancel: function () {
             }
         });
-
+    },
+    'click .edit-order'(){
+        let data=this._id;
+        console.log(`orderDetailId ${data}`);
     }
 });

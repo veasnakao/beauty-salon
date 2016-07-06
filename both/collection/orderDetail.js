@@ -29,10 +29,23 @@ Schema.OrderDetail = new SimpleSchema({
         type: Number,
         label: "Quantity"
     },
+    amount: {
+        type: Number,
+        label: "Total",
+        decimal: true,
+        optional:true,
+        // autoform: {
+        //     value: function () {
+        //         let price = AutoForm.getFieldValue('price');
+        //         let quantity = AutoForm.getFieldValue('quantity');
+        //         //let data = Collection..Register.findOne(registerId);
+        //         return price * quantity;
+        //     }
+        // }
+    },
     customerId: {
         type: String,
-        label: "CustomerId",
-        defaultValue: "0001"
+        label: "CustomerId"
     },
     customerName: {
         type: String,
