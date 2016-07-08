@@ -50,7 +50,7 @@ Meteor.methods({
                 itemId: selector[k].itemId,
                 itemName: selector[k].itemName,
                 discount: selector[k].discount,
-                // amount: selector[k].amount,
+                amount: selector[k].amount,
                 quantity: selector[k].quantity,
                 price: selector[k].price,
                 // total:selector[k].price*selector[k].quantity,
@@ -103,7 +103,7 @@ var updateExistOrderDetail = (currentOrderDetail, existOrderDetail) => {
 };
 
 var decreaseExistOrderDetail = (currentOrderDetail, existOrderDetail) => {
-    let newQty = existOrderDetail.quantity - currentOrderDetail.quantity ;
+    let newQty = existOrderDetail.quantity - currentOrderDetail.quantity;
     let totalAmount = (newQty * existOrderDetail.price) * (1 - existOrderDetail.discount / 100);
     Collection.OrderDetail.update(existOrderDetail._id, {
         $set: {
@@ -112,3 +112,20 @@ var decreaseExistOrderDetail = (currentOrderDetail, existOrderDetail) => {
         }
     })
 };
+
+//update orderDetail
+Meteor.methods({
+    updateOrderDetail(orderId){
+        let subTotal = 0;
+        let orderDetails = Collection.OrderDetail.find({orderId: orderId});
+        orderDetails.forEach((objOrderDetail)=> {
+            subTotal += objOrderDetail.amount;
+        });
+        console.log(`subTotal : ${subTotal}`);
+        Collection.Order.update(orderId, {
+            $set: {
+                total: subTotal
+            }
+        })
+    }
+});

@@ -6,14 +6,47 @@
                 {{> ionIcon icon="ion ion-close-circled"}}
             </button>
         </div>
+
         <div class="content has-header overflow-scroll">
+
             <div class="list">
-                <div class="list list-inset">
-                    <label class="item item-input">
-                        <i class="icon ion-search placeholder-icon"></i>
-                        <input type="text" placeholder="Search" value="{{searchQueryItem}}" class="js-txtSearch">
+                <div class="item item-toggle">
+                    Staff
+                    <label class="toggle toggle-balanced">
+                        <input type="checkbox" class="js-staff">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
                     </label>
                 </div>
+                <div class="item item-toggle">
+                    Item
+                    <label class="toggle toggle-balanced">
+                        <input type="checkbox" class="js-item">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="list">
+                <!--search query item-->
+                <div class="list list-inset js-query-item" style="display: none;">
+                    <label class="item item-input">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input type="text" placeholder="Search Item" value="{{searchQueryItem}}">
+                    </label>
+                </div>
+
+                <!--search query staff-->
+                <div class="list list-inset js-query-staff" style="display: none;">
+                    <label class="item item-input">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input type="text" placeholder="Search Staff" value="{{searchQueryItem}}">
+                    </label>
+                </div>
+
                 <ul>
                     {{#each items}}
                         {{> _productItem}}

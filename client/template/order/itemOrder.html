@@ -53,7 +53,8 @@
                             </div>
                             <div class="col-10">
                                 <div style="float: right;margin-top: -7px;">
-                                    <button class="button button-small button-positive edit-order" data-ion-modal="editOrder" data-id="{{_id}}" data-qty="{{quantity}}">
+                                    <button class="button button-small button-positive edit-order"
+                                            data-ion-modal="editOrder" data-id="{{_id}}" data-qty="{{quantity}}">
                                         {{> ionIcon class="ion-edit"}}
                                     </button>
                                 </div>
@@ -71,7 +72,7 @@
                         <div class="col-25">
                             <div style="float: right;">
                             <!--{{#each totalOrderDetail}}-->
-                                <b>{{numFormat totalOrderDetail '0,0.00 $'}}</b>
+                                <b>{{numFormat totalOrder '0,0.00 $'}}</b>
                                     <!--{{/each}}-->
                             </div>
                         </div>
@@ -81,6 +82,10 @@
             <button class="button button-block button-positive">
                 Submit
             </button>
+
+
+        <!--test item-toggle-->
+
         {{/ionContent}}
     {{/ionView}}
 </template>

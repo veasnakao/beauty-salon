@@ -51,15 +51,14 @@ Template.itemOrder.helpers({
     //     });
     //     // console.log(totalByItem);
     // },
-    
-    totalOrderDetail: ()=> {
+    totalOrder: ()=> {
         let params = Router.current().params;
         let orderId = params.orderId;
         console.log(`orderId : ${orderId}`);
-        let orderDetail = Collection.OrderDetail.find({orderId: orderId});
+        let orders = Collection.Order.find(orderId);
         let totalPaid = 0;
-        orderDetail.forEach((obj)=> {
-            totalPaid += obj.amount;
+        orders.forEach((objOrders)=> {
+            totalPaid = objOrders.total;
         });
         return totalPaid;
     }
@@ -81,6 +80,7 @@ Template.itemOrder.events({
             itemName: orderDetail.itemName,
             price: orderDetail.price,
             quantity: 1,
+            quantityOut: 0,
             discount: 0,
             customerId: params.customerId,
             customerName: customerName
@@ -93,7 +93,18 @@ Template.itemOrder.events({
                 IonLoading.hide();
                 Session.set('orderId', result);
             }
-        })
+        });
+
+        let orderId = params.orderId;
+        Meteor.call('updateOrderDetail', orderId, (err, result)=> {
+            if (err) {
+                sAlert.error(error.message);
+                IonLoading.hide();
+            } else {
+                IonLoading.hide();
+                Session.set('orderId', result);
+            }
+        });
     },
     'click .decrease-quantity'(){
         let itemId = this.itemId;
@@ -109,6 +120,7 @@ Template.itemOrder.events({
             itemName: orderDetail.itemName,
             price: orderDetail.price,
             quantity: 1,
+            quantityOut: 0,
             discount: 0,
             customerId: params.customerId,
             customerName: customerName
@@ -121,9 +133,21 @@ Template.itemOrder.events({
                 IonLoading.hide();
                 Session.set('orderId', result);
             }
-        })
+        });
+
+        let orderId = params.orderId;
+        Meteor.call('updateOrderDetail', orderId, (err, result)=> {
+            if (err) {
+                sAlert.error(error.message);
+                IonLoading.hide();
+            } else {
+                IonLoading.hide();
+                Session.set('orderId', result);
+            }
+        });
     },
     'click .delete-item-order'(){
+        let params = Router.current().params;
         let itemId = this.itemId;
         let orderDetail = Collection.OrderDetail.findOne({itemId: itemId});
         IonPopup.confirm({
@@ -137,13 +161,21 @@ Template.itemOrder.events({
                         sAlert.success(`Item delete success ${orderDetail.itemName}`);
                     }
                 });
+
+                //update order when delete orderDetail
+                let orderId = params.orderId;
+                Meteor.call('updateOrderDetail', orderId, (err, result)=> {
+                    if (err) {
+                        sAlert.error(error.message);
+                        IonLoading.hide();
+                    } else {
+                        IonLoading.hide();
+                        Session.set('orderId', result);
+                    }
+                });
             },
             onCancel: function () {
             }
         });
-    },
-    'click .edit-order'(){
-        let data=this._id;
-        console.log(`orderDetailId ${data}`);
     }
 });

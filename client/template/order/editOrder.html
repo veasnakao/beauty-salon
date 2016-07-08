@@ -9,17 +9,12 @@
                 </button>
             </div>
             <div class="content has-header overflow-scroll">
-                {{> afQuickField name='quantity' lable='Quantity Order'}}
-                <label class="item item-input">
-                    <span class="input-label">Quantity Minus</span>
-                    <input type="text">
-                </label>
-                <label class="item item-input">
-                    <span class="input-label">Total Order</span>
-                    <input type="text" readonly="true">
-                </label>
-                {{> afQuickField name='discount' label='Discount (%)'}}
+                {{> afQuickField name='quantity' class='js-quantity'}}
+                {{> afQuickField name='price' lable='Price' class='js-price' readonly=true style="background-color: #EAEAE9;"}}
+                {{> afQuickField name='discount' label='Discount (%)'  class='js-discount'}}
+                {{> afQuickField name='amount' label='Amount ($)' readonly=true class='js-amount' style="background-color: #EAEAE9;"}}
             </div>
         {{/autoForm}}
     {{/ionModal}}
+
 </template>

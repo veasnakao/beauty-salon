@@ -38,8 +38,8 @@ Schema.OrderDetail = new SimpleSchema({
         //     value: function () {
         //         let price = AutoForm.getFieldValue('price');
         //         let quantity = AutoForm.getFieldValue('quantity');
-        //         //let data = Collection..Register.findOne(registerId);
-        //         return price * quantity;
+        //         let amount = price * quantity;
+        //         return amount;
         //     }
         // }
     },
