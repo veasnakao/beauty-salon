@@ -6,9 +6,9 @@ Tracker.autorun(function () {
 
 //onCreate
 Template.searchCustomer.created = function () {
-    this.autorun(function () {
-        this.subscription = Meteor.subscribe('customers');
-    }.bind(this));
+    // this.autorun(function () {
+    //     this.subscription = Meteor.subscribe('customers');
+    // }.bind(this));
 };
 
 //onRender
@@ -22,7 +22,21 @@ Template.searchCustomer.rendered = function () {
     $('.txt-searchCustomer').val("");
 };
 
-//event
+
+//helper searchCustomer
+Template.searchCustomer.helpers({
+    customer: function () {
+        if(Session.get('searchQueryCustomer')) {
+            let customers = Collection.Customer.search(Session.get('searchQueryCustomer'),Session.get('limit'));
+            return customers;
+        }
+    },
+    searchQuery: function () {
+        return Session.get('searchQueryCustomer');
+    }
+});
+
+//event searchCustomer
 Template.searchCustomer.events({
     'keyup input': function (event, template) {
         Session.set('searchQueryCustomer', event.target.value);
@@ -32,18 +46,13 @@ Template.searchCustomer.events({
     }
 });
 
-//helper
-Template.searchCustomer.helpers({
-    customer: function () {
-        return Collection.Customer.search(Session.get('searchQueryCustomer'), Session.get('limit'));
-    },
-    searchQuery: function () {
-        return Session.get('searchQueryCustomer');
-    }
+//onDestroyed searchCustomer
+Template.searchCustomer.onDestroyed(function(){
+    Session.set('searchQueryCustomer', undefined);
 });
 
-Template._showCustomer.helpers({});
 
+//_showCustomer event
 Template._showCustomer.events({
     // 'click': function() {
     //     Session.set("searchQueryCustomer", this._id);
@@ -71,7 +80,4 @@ Template._showCustomer.events({
     }
 });
 
-//onDestroyed
-Template._showCustomer.onDestroyed(function(){
-    Session.set('searchQueryCustomer', undefined);
-});
+

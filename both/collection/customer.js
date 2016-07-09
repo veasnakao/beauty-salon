@@ -50,18 +50,21 @@ Collection.Customer.search = function (query, limit) {
         return;
     }
     let regPattern = `${query}`;
+    // console.log(`${query}`);
+    // let trimRegPattern = regPattern.trim();
+    // console.log(trimRegPattern);
     let reg = new RegExp(regPattern, 'i');//match all case
     let selector = {};
-    selector = {
+    selector.$or = [{
         name: {
             $regex: reg
         }
-    };
-
-    return Collection.Customer.find(selector, {
+    }];
+    let customers = Collection.Customer.find(selector, {
         sort: {
             name: 1
         },
         limit: limitAmount
     });
+    return customers;
 };

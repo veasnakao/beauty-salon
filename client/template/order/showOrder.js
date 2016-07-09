@@ -6,14 +6,13 @@ Template.showOrder.created = function () {
         this.subscription = Meteor.subscribe('customers');
         this.subscription = Meteor.subscribe('items');
         this.subscription = Meteor.subscribe('orderDetails');
-        // let status = true;
-        // this.subscription = Meteor.subscribe('orderFindOne',status);
     }.bind(this));
 };
 
 //onrender
 Template.showOrder.rendered = function () {
     let orderId = Session.get('orderId');
+    console.log(`showOrder orderId : ${orderId}`);
     if (!_.isUndefined(orderId)) {
         Meteor.call('removeSaleIfNoSaleDetailExist', orderId);
         Session.set('orderId', undefined);

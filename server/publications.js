@@ -72,8 +72,20 @@ Meteor.publish('customerSearch', function(query, limit) {
         return this.ready();
     }
     let limitAmount = limit || 10;
-    return Collection.Customer.search(query, limitAmount);
-    // return customer;
+    let customer =  Collection.Customer.search(query, limitAmount);
+    console.log(customer.fetch());
+    return customer;
+});
+
+//staff search
+Meteor.publish('staffSearch', function(query, limit) {
+    if (_.isEmpty(query)) {
+        return this.ready();
+    }
+    let limitAmount = limit || 10;
+    let staff =  Collection.Staff.search(query, limitAmount);
+    console.log(staff.fetch());
+    return staff;
 });
 
 

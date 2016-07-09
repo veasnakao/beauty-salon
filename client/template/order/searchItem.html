@@ -2,7 +2,8 @@
     {{#ionModal customTemplate=true}}
         <div class="bar bar-header bar-stable" style="background-color: #387ef5;">
             <h2 class="title" style="color: white;">Search Item</h2>
-            <button data-dismiss="modal" type="button" class="button button-clear pull-left close-modal" style="color: white;">
+            <button data-dismiss="modal" type="button" class="button button-clear pull-left close-modal"
+                    style="color: white;">
                 {{> ionIcon icon="ion ion-close-circled"}}
             </button>
         </div>
@@ -28,14 +29,12 @@
                         </div>
                     </label>
                 </div>
-            </div>
-
-            <div class="list">
                 <!--search query item-->
                 <div class="list list-inset js-query-item" style="display: none;">
                     <label class="item item-input">
                         <i class="icon ion-search placeholder-icon"></i>
-                        <input type="text" placeholder="Search Item" value="{{searchQueryItem}}">
+                        <input type="text" placeholder="Search Item" value="{{searchQueryStaff}}"
+                               class="js-search-staff">
                     </label>
                 </div>
 
@@ -43,16 +42,23 @@
                 <div class="list list-inset js-query-staff" style="display: none;">
                     <label class="item item-input">
                         <i class="icon ion-search placeholder-icon"></i>
-                        <input type="text" placeholder="Search Staff" value="{{searchQueryItem}}">
+                        <input type="text" placeholder="Search Staff" value="{{searchQueryItem}}"
+                               class="js-search-item">
                     </label>
                 </div>
+                <!--</div>-->
 
-                <ul>
-                    {{#each items}}
-                        {{> _productItem}}
-                    {{/each}}
-                </ul>
-                {{#if searchQuery}}
+                <!--<div class="list">-->
+
+                {{#if searchQueryItem}}
+                    <ul>
+                        {{#each items}}
+                            {{> _productItem}}
+                        {{/each}}
+                    </ul>
+                {{/if}}
+                
+                {{#if searchQueryItem}}
                     <div class="col col-offset-50">
                         <button class="button button-positive loadMore">Load More</button>
                     </div>

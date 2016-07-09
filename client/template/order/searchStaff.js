@@ -7,7 +7,7 @@ Tracker.autorun(function () {
 Template.searchItem.created = function () {
     let orderId = Router.current().params.orderId;
     Session.set('limit', 10);
-    Session.set('orderDetailObj', {});
+    // Session.set('orderDetailObj', {});
     this.autorun(() => {
         this.subscribe = Meteor.subscribe("order", orderId);
         this.subscribe = Meteor.subscribe("customer", Router.current().params.customerId);
@@ -22,21 +22,21 @@ Template.searchItem.rendered = function () {
 
 //event
 Template.searchItem.events({
-    'keyup .js-search-item': function (event, template) {
-        Session.set('searchQueryItem', event.target.value);
+    'keyup input': function (event, template) {
+        Session.set('searchQueryStaff', event.target.value);
     },
     'click .close-modal': ()=> {
-        Session.set('searchQueryItem', undefined);
+        Session.set('searchQueryStaff', undefined);
     }
 });
 
 //helper
 Template.searchItem.helpers({
     items: function () {
-        return Collection.Item.search(Session.get('searchQueryItem'), Session.get('limit'));
+        return Collection.Item.search(Session.get('searchQueryStaff'), Session.get('limit'));
     },
     searchQuery: function () {
-        return Session.get('searchQueryItem');
+        return Session.get('searchQueryStaff');
     }
 });
 
@@ -46,14 +46,9 @@ Template.searchItem.events({
             $('.js-item').prop('checked', false);
             $('.js-query-staff').show(500);
             $('.js-query-item').hide(500);
-            console.log(`true`);
-            Session.set('searchQueryItem', undefined);
-        } else {
+        }else{
             $('.js-query-staff').hide(500);
-            $('.js-search-item').val(null);
-            $('.js-search-staff').val(null);
-            console.log(`false`);
-            Session.set('searchQueryItem', undefined);
+            Session.set('searchQueryStaff', undefined);
         }
     },
     'click .js-item'(e){
@@ -61,11 +56,9 @@ Template.searchItem.events({
             $('.js-staff').prop('checked', false);
             $('.js-query-item').show(500);
             $('.js-query-staff').hide(500);
-        } else {
+        }else{
             $('.js-query-item').hide(500);
-            $('.js-search-item').val(null);
-            $('.js-search-staff').val(null);
-            Session.set('searchQueryItem', undefined);
+            Session.set('searchQueryStaff', undefined);
         }
     }
 });
@@ -73,7 +66,7 @@ Template.searchItem.events({
 
 //onDestroyed
 Template.searchItem.onDestroyed(function () {
-    Session.set('searchQueryItem', undefined);
+    Session.set('searchQueryStaff', undefined);
 });
 
 
