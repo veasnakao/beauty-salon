@@ -15,6 +15,20 @@
 
     {{#ionView}}
         {{#ionContent}}
+            <div class="card animated bounceInDown">
+                <div class="item item-text-wrap">
+                    <div class="row">
+                        {{#with showStaff}}
+                            <div class="col-50">
+                                Customer : <b>{{customerId}}</b>
+                            </div>
+                            <div class="col-50">
+                                Staff : <b>{{staffId}}</b>
+                            </div>
+                        {{/with}}
+                    </div>
+                </div>
+            </div>
             {{#each showOrderDetail}}
                 <div class="card">
                     <div class="item animated bounceInDown item-text-wrap">
@@ -80,11 +94,11 @@
                 </div>
             </div>
             <button class="button button-block button-positive">
-                Submit
+                Paid
             </button>
 
 
-        <!--test item-toggle-->
+            <!--test item-toggle-->
 
         {{/ionContent}}
     {{/ionView}}

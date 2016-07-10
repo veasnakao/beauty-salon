@@ -9,7 +9,6 @@
         </div>
 
         <div class="content has-header overflow-scroll">
-
             <div class="list">
                 <div class="item item-toggle">
                     Staff
@@ -29,20 +28,21 @@
                         </div>
                     </label>
                 </div>
+
                 <!--search query item-->
-                <div class="list list-inset js-query-item" style="display: none;">
+                <div class="list list-inset js-query-staff" style="display: none;">
                     <label class="item item-input">
                         <i class="icon ion-search placeholder-icon"></i>
-                        <input type="text" placeholder="Search Item" value="{{searchQueryStaff}}"
+                        <input type="text" placeholder="Search Staff" value="{{searchQueryStaff}}"
                                class="js-search-staff">
                     </label>
                 </div>
 
                 <!--search query staff-->
-                <div class="list list-inset js-query-staff" style="display: none;">
+                <div class="list list-inset js-query-item" style="display: none;">
                     <label class="item item-input">
                         <i class="icon ion-search placeholder-icon"></i>
-                        <input type="text" placeholder="Search Staff" value="{{searchQueryItem}}"
+                        <input type="text" placeholder="Search Item" value="{{searchQueryItem}}"
                                class="js-search-item">
                     </label>
                 </div>
@@ -57,16 +57,22 @@
                         {{/each}}
                     </ul>
                 {{/if}}
-                
-                {{#if searchQueryItem}}
-                    <div class="col col-offset-50">
-                        <button class="button button-positive loadMore">Load More</button>
-                    </div>
+
+                {{#if searchQueryStaff}}
+                    <ul>
+                        {{#each staffs}}
+                            {{> _staffs}}
+                        {{/each}}
+                    </ul>
                 {{/if}}
+
+                <!--{{#if searchQueryItem}}-->
+                    <!--<div class="col col-offset-50">-->
+                        <!--<button class="button button-positive loadMore">Load More</button>-->
+                    <!--</div>-->
+                <!--{{/if}}-->
             </div>
         </div>
-
-
     {{/ionModal}}
 </template>
 
@@ -75,6 +81,15 @@
         <div class="item item-text-wrap insert-order">
             <h2>{{_id}} | {{name}}</h2>
             <p>{{numFormat price '0,0.00 $'}}</p>
+        </div>
+    </div>
+</template>
+
+
+<template name="_staffs">
+    <div class="card" style="cursor: pointer;">
+        <div class="item item-text-wrap insert-staff">
+            <h2>{{_id}} | {{name}}</h2>
         </div>
     </div>
 </template>

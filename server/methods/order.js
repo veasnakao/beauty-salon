@@ -17,3 +17,23 @@ Meteor.methods({
         });
     }
 });
+
+//insert staff
+Meteor.methods({
+    insertStaff(staffId,orderId){
+        let staffs = Collection.Staff.find({_id:staffId});
+        // orderDetails.forEach((objOrderDetail)=> {
+        //     subTotal += objOrderDetail.amount;
+        // });
+        // let getStaffId = '';
+        staffs.forEach((objStaffs)=> {
+            staffId = objStaffs._id;
+        });
+        console.log(`staffId : ${staffId}`);
+        Collection.Order.update(orderId, {
+            $set: {
+                staffId: staffId
+            }
+        })
+    }
+});

@@ -7,8 +7,9 @@ Tracker.autorun(function () {
 Template.searchItem.created = function () {
     let orderId = Router.current().params.orderId;
     Session.set('limit', 10);
-    Session.set('orderDetailObj', {});
+    // Session.set('orderDetailObj', {});
     this.autorun(() => {
+        this.subscribe = Meteor.subscribe("staffs");
         this.subscribe = Meteor.subscribe("order", orderId);
         this.subscribe = Meteor.subscribe("customer", Router.current().params.customerId);
         this.subscribe = Meteor.subscribe("orderDetail", Router.current().params.orderId);
@@ -22,10 +23,14 @@ Template.searchItem.rendered = function () {
 
 //event
 Template.searchItem.events({
+    'keyup .js-search-staff': function (event, template) {
+        Session.set('searchQueryStaff', event.target.value);
+    },
     'keyup .js-search-item': function (event, template) {
         Session.set('searchQueryItem', event.target.value);
     },
     'click .close-modal': ()=> {
+        Session.set('searchQueryStaff', undefined);
         Session.set('searchQueryItem', undefined);
     }
 });
@@ -35,8 +40,14 @@ Template.searchItem.helpers({
     items: function () {
         return Collection.Item.search(Session.get('searchQueryItem'), Session.get('limit'));
     },
-    searchQuery: function () {
+    searchQueryItem: function () {
         return Session.get('searchQueryItem');
+    },
+    staffs: function () {
+        return Collection.Staff.search(Session.get('searchQueryStaff'), Session.get('limit'));
+    },
+    searchQueryStaff: function () {
+        return Session.get('searchQueryStaff');
     }
 });
 
@@ -46,13 +57,10 @@ Template.searchItem.events({
             $('.js-item').prop('checked', false);
             $('.js-query-staff').show(500);
             $('.js-query-item').hide(500);
-            console.log(`true`);
             Session.set('searchQueryItem', undefined);
         } else {
             $('.js-query-staff').hide(500);
-            $('.js-search-item').val(null);
-            $('.js-search-staff').val(null);
-            console.log(`false`);
+            Session.set('searchQueryStaff', undefined);
             Session.set('searchQueryItem', undefined);
         }
     },
@@ -61,10 +69,10 @@ Template.searchItem.events({
             $('.js-staff').prop('checked', false);
             $('.js-query-item').show(500);
             $('.js-query-staff').hide(500);
+            Session.set('searchQueryStaff', undefined);
         } else {
             $('.js-query-item').hide(500);
-            $('.js-search-item').val(null);
-            $('.js-search-staff').val(null);
+            Session.set('searchQueryStaff', undefined);
             Session.set('searchQueryItem', undefined);
         }
     }
@@ -74,9 +82,10 @@ Template.searchItem.events({
 //onDestroyed
 Template.searchItem.onDestroyed(function () {
     Session.set('searchQueryItem', undefined);
+    Session.set('searchQueryStaff', undefined);
 });
 
-
+//template _productItem events
 Template._productItem.events({
     'click .insert-order': function () {
         // debugger;
@@ -120,4 +129,26 @@ Template._productItem.events({
         });
     }
 });
+
+//template _staffs events
+Template._staffs.events({
+    'click .insert-staff': function () {
+        let params = Router.current().params;
+        let orderId = params.orderId;
+        let staffId = this._id;
+        console.log(`staffId : ${staffId}`);
+        Meteor.call('insertStaff', staffId,orderId, (err, result)=> {
+            if (err) {
+                sAlert.error(error.message);
+                IonLoading.hide();
+            } else {
+                IonLoading.hide();
+                Session.set('orderId', result);
+            }
+        });
+    }
+});
+
+
+
 

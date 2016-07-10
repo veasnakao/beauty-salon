@@ -26,8 +26,8 @@ Template.searchCustomer.rendered = function () {
 //helper searchCustomer
 Template.searchCustomer.helpers({
     customer: function () {
-        if(Session.get('searchQueryCustomer')) {
-            let customers = Collection.Customer.search(Session.get('searchQueryCustomer'),Session.get('limit'));
+        if (Session.get('searchQueryCustomer')) {
+            let customers = Collection.Customer.search(Session.get('searchQueryCustomer'), Session.get('limit'));
             return customers;
         }
     },
@@ -41,13 +41,13 @@ Template.searchCustomer.events({
     'keyup input': function (event, template) {
         Session.set('searchQueryCustomer', event.target.value);
     },
-    'click .close-modal':function(){
+    'click .close-modal': function () {
         Session.set('searchQueryCustomer', undefined);
     }
 });
 
 //onDestroyed searchCustomer
-Template.searchCustomer.onDestroyed(function(){
+Template.searchCustomer.onDestroyed(function () {
     Session.set('searchQueryCustomer', undefined);
 });
 

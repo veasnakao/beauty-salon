@@ -33,10 +33,16 @@ Template.itemOrder.rendered = function () {
 
 //helper
 Template.itemOrder.helpers({
+    showStaff: ()=> {
+        let params = Router.current().params;
+        let orderId = params.orderId;
+        let order = Collection.Order.findOne(orderId);
+        // let staffId = order.staffId;
+        return order;
+    },
     showOrderDetail: ()=> {
         let params = Router.current().params;
         let orderId = params.orderId;
-        // console.log(`orderId : ${orderId}`);
         return Collection.OrderDetail.find({orderId: orderId});
     },
     // totalByItem: ()=> {

@@ -8,6 +8,11 @@ Schema.Order = new SimpleSchema({
         type: String,
         label: "Customer"
     },
+    staffId:{
+        type: String,
+        label: "Staff",
+        optional:true
+    },
     status: {
         type: String,
         label: "Status",
