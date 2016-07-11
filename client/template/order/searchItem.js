@@ -7,7 +7,6 @@ Tracker.autorun(function () {
 Template.searchItem.created = function () {
     let orderId = Router.current().params.orderId;
     Session.set('limit', 10);
-    // Session.set('orderDetailObj', {});
     this.autorun(() => {
         this.subscribe = Meteor.subscribe("staffs");
         this.subscribe = Meteor.subscribe("order", orderId);
@@ -88,7 +87,6 @@ Template.searchItem.onDestroyed(function () {
 //template _productItem events
 Template._productItem.events({
     'click .insert-order': function () {
-        // debugger;
         let params = Router.current().params;
         let customerId = params.customerId;
         let customer = Collection.Customer.findOne(customerId);

@@ -10,6 +10,7 @@ Template.itemOrder.created = function () {
     this.autorun(function () {
         this.subscription = Meteor.subscribe('items');
         this.subscription = Meteor.subscribe('orders');
+        this.subscription = Meteor.subscribe('staffs');
         this.subscribe = Meteor.subscribe("customer", Router.current().params.customerId);
         this.subscribe = Meteor.subscribe("orderDetail", Router.current().params.orderId);
     }.bind(this));
@@ -33,17 +34,38 @@ Template.itemOrder.rendered = function () {
 
 //helper
 Template.itemOrder.helpers({
-    showStaff: ()=> {
+    showCustomer: ()=> {
         let params = Router.current().params;
         let orderId = params.orderId;
         let order = Collection.Order.findOne(orderId);
-        // let staffId = order.staffId;
-        return order;
+        if (order) {
+            let customerId = order.customerId;
+            let customer = Collection.Customer.findOne(customerId);
+            return customer.name;
+        }
+
+    },
+    showStaff: ()=> {
+        let params = Router.current().params;
+        let orderId = params.orderId;
+        // let order = Meteor.call('findRecords',Collection.Order,orderId);
+        // if(order){
+        //     console.log(`order : ${order}`);
+        // }
+        let order = Collection.Order.findOne(orderId);
+        if (order) {
+            let staffId = order.staffId;
+            let staff = Collection.Staff.findOne(staffId);
+            return staff.name;
+        }
     },
     showOrderDetail: ()=> {
         let params = Router.current().params;
         let orderId = params.orderId;
-        return Collection.OrderDetail.find({orderId: orderId});
+        let orderDetail = Collection.OrderDetail.find({orderId: orderId});
+        if(orderDetail){
+            return orderDetail;
+        }
     },
     // totalByItem: ()=> {
     //     let params = Router.current().params;
@@ -72,6 +94,8 @@ Template.itemOrder.helpers({
 
 //event
 Template.itemOrder.events({
+
+    //increase quantity
     'click .increase-quantity'(){
         let itemId = this.itemId;
         let orderDetail = Collection.OrderDetail.findOne({itemId: itemId});
@@ -86,7 +110,6 @@ Template.itemOrder.events({
             itemName: orderDetail.itemName,
             price: orderDetail.price,
             quantity: 1,
-            quantityOut: 0,
             discount: 0,
             customerId: params.customerId,
             customerName: customerName
@@ -112,46 +135,60 @@ Template.itemOrder.events({
             }
         });
     },
+
+    //decrease-quantity
     'click .decrease-quantity'(){
         let itemId = this.itemId;
+        let orderDetailQuantity;
         let orderDetail = Collection.OrderDetail.findOne({itemId: itemId});
-        let params = Router.current().params;
-        let customerId = params.customerId;
-        let customer = Collection.Customer.findOne(customerId);
-        let customerName = customer.name;
-        let selector = Session.get('orderDetailObj');
-        selector[this._id] = {
-            orderId: params.orderId,
-            itemId: orderDetail.itemId,
-            itemName: orderDetail.itemName,
-            price: orderDetail.price,
-            quantity: 1,
-            quantityOut: 0,
-            discount: 0,
-            customerId: params.customerId,
-            customerName: customerName
-        };
-        Meteor.call('decreaseOrderQuantity', selector, (err, result) => {
-            if (err) {
-                sAlert.error(error.message);
-                IonLoading.hide();
+        if (orderDetail) {
+            let params = Router.current().params;
+            let customerId = params.customerId;
+            let customer = Collection.Customer.findOne(customerId);
+            let customerName = customer.name;
+            let selector = Session.get('orderDetailObj');
+            selector[this._id] = {
+                orderId: params.orderId,
+                itemId: orderDetail.itemId,
+                itemName: orderDetail.itemName,
+                price: orderDetail.price,
+                quantity: 1,
+                discount: 0,
+                customerId: params.customerId,
+                customerName: customerName
+            };
+            orderDetailQuantity = orderDetail.quantity;
+            console.log(`qty : ${orderDetailQuantity}`);
+            if (orderDetailQuantity === 1) {
+                IonPopup.alert({
+                    title: 'Quantity order.',
+                    template: 'Quantity can not be less than 1.'
+                });
             } else {
-                IonLoading.hide();
-                Session.set('orderId', result);
+                Meteor.call('decreaseOrderQuantity', selector, (err, result) => {
+                    if (err) {
+                        sAlert.error(error.message);
+                        IonLoading.hide();
+                    } else {
+                        IonLoading.hide();
+                        Session.set('orderId', result);
+                    }
+                });
+                let orderId = params.orderId;
+                Meteor.call('updateOrderDetail', orderId, (err, result)=> {
+                    if (err) {
+                        sAlert.error(error.message);
+                        IonLoading.hide();
+                    } else {
+                        IonLoading.hide();
+                        Session.set('orderId', result);
+                    }
+                });
             }
-        });
-
-        let orderId = params.orderId;
-        Meteor.call('updateOrderDetail', orderId, (err, result)=> {
-            if (err) {
-                sAlert.error(error.message);
-                IonLoading.hide();
-            } else {
-                IonLoading.hide();
-                Session.set('orderId', result);
-            }
-        });
+        }
     },
+
+    //delete-item-order
     'click .delete-item-order'(){
         let params = Router.current().params;
         let itemId = this.itemId;
@@ -181,6 +218,31 @@ Template.itemOrder.events({
                 });
             },
             onCancel: function () {
+            }
+        });
+    },
+
+    //confirm paid
+    'click .js-paid'(){
+        let params = Router.current().params;
+        IonPopup.confirm({
+            title: 'Paid.',
+            template: 'Confirm paid.',
+            onOk: () => {
+                let orderId = params.orderId;
+                Meteor.call('updateOrderStatus', orderId, (err, result)=> {
+                    if (err) {
+                        sAlert.error(error.message);
+                        IonLoading.hide();
+                    } else {
+                        IonLoading.hide();
+                        Session.set('orderId', undefined);
+                        Router.go(`/showOrder`);
+                    }
+                });
+            },
+            onCancel: function () {
+                sAlert.warning('Cancel paid.');
             }
         });
     }

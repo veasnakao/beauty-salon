@@ -18,14 +18,12 @@
             <div class="card animated bounceInDown">
                 <div class="item item-text-wrap">
                     <div class="row">
-                        {{#with showStaff}}
-                            <div class="col-50">
-                                Customer : <b>{{customerId}}</b>
-                            </div>
-                            <div class="col-50">
-                                Staff : <b>{{staffId}}</b>
-                            </div>
-                        {{/with}}
+                        <div class="col-50">
+                            Customer : <b>{{showCustomer}}</b>
+                        </div>
+                        <div class="col-50">
+                            Staff : <b>{{showStaff}}</b>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -93,7 +91,7 @@
                     </div>
                 </div>
             </div>
-            <button class="button button-block button-positive">
+            <button class="button button-block button-positive js-paid">
                 Paid
             </button>
 

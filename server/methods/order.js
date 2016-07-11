@@ -37,3 +37,18 @@ Meteor.methods({
         })
     }
 });
+
+//update order status
+Meteor.methods({
+    updateOrderStatus(orderId){
+        let order = Collection.Order.findOne(orderId);
+        if(order){
+            console.log(order);
+            Collection.Order.update(orderId, {
+                $set: {
+                    status: 'false'
+                }
+            });    
+        }
+    }
+});

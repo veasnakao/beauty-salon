@@ -12,7 +12,6 @@ Template.showOrder.created = function () {
 //onrender
 Template.showOrder.rendered = function () {
     let orderId = Session.get('orderId');
-    console.log(`showOrder orderId : ${orderId}`);
     if (!_.isUndefined(orderId)) {
         Meteor.call('removeSaleIfNoSaleDetailExist', orderId);
         Session.set('orderId', undefined);
@@ -35,10 +34,12 @@ Template.showOrder.events({
     'click .show-order-item': function () {
         let customerId = this._id;
         let order = Collection.Order.find({customerId: customerId});
-        order.forEach((objOrder)=>{
-           let orderId = objOrder._id;
-            Router.go(`/itemOrder/customerId/${customerId}/orderId/${orderId}`);
-        });
+        if(order){
+            order.forEach((objOrder)=>{
+                let orderId = objOrder._id;
+                Router.go(`/itemOrder/customerId/${customerId}/orderId/${orderId}`);
+            });    
+        }
     }
 });
 

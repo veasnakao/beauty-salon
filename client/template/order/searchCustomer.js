@@ -58,14 +58,12 @@ Template._showCustomer.events({
     //     Session.set("searchQueryCustomer", this._id);
     // },
     'click .customer-order': function () {
-        // debugger;
         Session.set('orderDetailObj', {});
         let customerId = this._id;
         let selector = {};
         selector.date = new Date();
         selector.customerId = customerId;
         selector.status = true;
-        // console.log(`customerId : ` + this._id);
 
         Meteor.call('insertOrder', selector, (err, result) => {
             if (err) {
