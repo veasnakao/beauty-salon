@@ -3,7 +3,7 @@ Schema.Customer = new SimpleSchema({
     name: {
         type: String,
         label: "Name",
-        defaultValue: "General",
+        // defaultValue: "General",
         max: 200
     },
     customerType: {

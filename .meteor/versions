@@ -92,6 +92,7 @@ reactive-var@1.0.9
 reload@1.1.8
 retry@1.0.7
 routepolicy@1.0.10
+ryanswapp:datetime-picker@0.0.1
 sergeyt:typeahead@0.11.1_9
 session@1.1.5
 spacebars@1.0.11

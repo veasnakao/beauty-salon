@@ -1,16 +1,20 @@
-<template name="staffReport">
+<template name="orderReport">
     {{#contentFor "headerButtonLeft"}}
         {{>ionNavBackButton path="reports"}}
     {{/contentFor}}
 
     {{#contentFor "headerTitle"}}
-        <h1 class="title">Staff Report</h1>
+        <h1 class="title">Order Report</h1>
     {{/contentFor}}
 
     <div class="content has-header overflow-scroll">
         <div class="list">
+            <div class="item item-icon-left item-icon-right">
+                Filter Date :
+                    <input type="date">
+            </div>
             <div class="item item-toggle">
-                Staff Fee
+                All Staff :
                 <label class="toggle toggle-balanced">
                     <input type="checkbox" class="js-staff-fee">
                     <div class="track">
@@ -19,15 +23,32 @@
                 </label>
             </div>
             <div class="item item-toggle">
-                Staff Base Salary
-                <label class="toggle toggle-balanced">
-                    <input type="checkbox" class="js-staff-base-salary">
-                    <div class="track">
-                        <div class="handle"></div>
+                <div class="row">
+                    <div class="col-25">
+                        By Staff :
                     </div>
-                </label>
+                    <div class="col-25">
+                        name
+                    </div>
+                    <div class="col-33">
+                        <div class="list list-inset">
+                            <label class="item item-input">
+                                <i class="icon ion-search placeholder-icon"></i>
+                                <input type="text" placeholder="Search">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <label class="toggle toggle-balanced">
+                            <input type="checkbox" class="js-staff-fee">
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
             </div>
-            <button class="button button-full button-balanced js-submit-report" style="display: none;">
+            <button class="button button-full button-balanced js-submit-report">
                 OK
             </button>
         </div>
