@@ -44,4 +44,8 @@ Router.map(function () {
         // path: '/restaurant/sale/:tableLocationId/table/:tableId/saleInvoice/:invoiceId',
         path:'/itemOrder/customerId/:customerId/orderId/:orderId'
     });
+
+    this.route('reports');
+    this.route('staffReport');
+    
 });

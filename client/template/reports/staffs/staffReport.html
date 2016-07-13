@@ -1,0 +1,65 @@
+<template name="staffReport">
+    {{#contentFor "headerButtonLeft"}}
+        {{>ionNavBackButton path="reports"}}
+    {{/contentFor}}
+
+    {{#contentFor "headerTitle"}}
+        <h1 class="title">Staff Report</h1>
+    {{/contentFor}}
+
+    <div class="content has-header overflow-scroll">
+        <div class="list">
+            <div class="item item-toggle">
+                Staff Fee
+                <label class="toggle toggle-balanced">
+                    <input type="checkbox" class="js-staff-fee">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </div>
+            <div class="item item-toggle">
+                Staff Base Salary
+                <label class="toggle toggle-balanced">
+                    <input type="checkbox" class="js-staff-base-salary">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </div>
+            <button class="button button-full button-balanced js-submit-report">
+                OK
+            </button>
+        </div>
+
+        <div class="list">
+            <div class="item" style="padding: 5px; background-color: #EEEDED;">
+                <div class="row">
+                    <div class="col-offset-10 col-25">
+                        Name
+                    </div>
+                    <div class="col-25">
+                        Gender
+                    </div>
+                    <div class="col-25">
+                        Salary
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" style="padding: 5px;">
+                <div class="row">
+                    <div class="col-offset-10 col-25">
+                        Name
+                    </div>
+                    <div class="col-25">
+                        Gender
+                    </div>
+                    <div class="col-50">
+                        Salary
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
