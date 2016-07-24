@@ -9,7 +9,7 @@ Template.itemOrder.created = function () {
     Session.set('orderDetailObj', {});
     this.autorun(function () {
         this.subscription = Meteor.subscribe('items');
-        this.subscription = Meteor.subscribe('orders');
+        // this.subscription = Meteor.subscribe('orders');
         this.subscription = Meteor.subscribe('staffs');
         this.subscribe = Meteor.subscribe("customer", Router.current().params.customerId);
         this.subscribe = Meteor.subscribe("orderDetail", Router.current().params.orderId);
@@ -56,6 +56,7 @@ Template.itemOrder.helpers({
         if (order) {
             let staffId = order.staffId;
             let staff = Collection.Staff.findOne(staffId);
+            console.log(staff.name);
             return staff.name;
         }
     },
@@ -82,13 +83,14 @@ Template.itemOrder.helpers({
     totalOrder: ()=> {
         let params = Router.current().params;
         let orderId = params.orderId;
-        console.log(`orderId : ${orderId}`);
         let orders = Collection.Order.find(orderId);
-        let totalPaid = 0;
-        orders.forEach((objOrders)=> {
-            totalPaid = objOrders.total;
-        });
-        return totalPaid;
+        if(orders){
+            let totalPaid = 0;
+            orders.forEach((objOrders)=> {
+                totalPaid = objOrders.total;
+            });
+            return totalPaid;
+        }
     }
 });
 

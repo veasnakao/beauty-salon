@@ -49,19 +49,21 @@ Template.showOrder.helpers({
         let data = {};
         let content = [];
         let orders = Collection.Order.find({'status': 'true'});
-        orders.forEach((objOrder)=> {
-            let customerId = objOrder.customerId;
-            let customers = Collection.Customer.find({_id: customerId});
-            customers.forEach((objCustomers)=> {
-                let customerId = objCustomers._id;
-                let customerName = objCustomers.name;
-                objCustomers.customerId = customerId;
-                objCustomers.customerName = customerName;
-                content.push(objCustomers);
+        if(orders){
+            orders.forEach((objOrder)=> {
+                let customerId = objOrder.customerId;
+                let customers = Collection.Customer.find({_id: customerId});
+                customers.forEach((objCustomers)=> {
+                    let customerId = objCustomers._id;
+                    let customerName = objCustomers.name;
+                    objCustomers.customerId = customerId;
+                    objCustomers.customerName = customerName;
+                    content.push(objCustomers);
+                });
             });
-        });
-        data.content = content;
-        return data;
+            data.content = content;
+            return data;
+        }
 
         // Meteor.call('findOrder', true, (err, result) => {
         //     if (err) {

@@ -1,0 +1,45 @@
+<template name="searchStaff">
+    {{#ionModal customTemplate=true}}
+        <div class="bar bar-header bar-stable" style="background-color: #387ef5;">
+            <h2 class="title" style="color: white;">Search Staff</h2>
+            <button data-dismiss="modal" type="button" class="button button-clear pull-left close-modal"
+                    style="color: white;">
+                {{> ionIcon icon="ion ion-close-circled"}}
+            </button>
+        </div>
+        <div class="content has-header overflow-scroll">
+            <div class="list">
+                <div class="list list-inset">
+                    <label class="item item-input">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input type="text" placeholder="Search" value="{{searchQueryStaff}}" class="js-search-staff">
+                    </label>
+                </div>
+                {{#if searchQueryStaff}}
+                    <ul>
+                        {{#each staffs}}
+                            {{> _showStaffs}}
+                        {{/each}}
+                    </ul>
+                {{/if}}
+                {{#if searchQueryStaff}}
+                    <div class="col col-offset-50">
+                        <button class="button button-positive loadMore">Load More</button>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+
+
+    {{/ionModal}}
+</template>
+
+<template name="_showStaffs">
+    <div class="content">
+        {{#ionList}}
+            <div class="insert-staff">
+                {{#ionRadio name="selectStaff"}}{{_id}} | {{name}}{{/ionRadio}}
+            </div>
+        {{/ionList}}
+    </div>
+</template>

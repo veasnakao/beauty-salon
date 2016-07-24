@@ -9,135 +9,111 @@
 
     <div class="content has-header overflow-scroll">
         <div class="list">
-            <div class="item item-icon-left item-icon-right">
-                Filter Date :
-                    <input type="date">
-            </div>
+        <!--{{#autoForm schema="Schema.OrderReport" id="orderReport"}}-->
+            <!--<label class="item item-input" style="padding: 10px;">-->
+            <!--<span class="input-label">From Date</span>-->
+            <!--{{> afQuickField name="orderDate" class="js-from-date" }}-->
+            <!--</label>-->
+                <!--{{/autoForm}}-->
+            <label class="item item-input">
+                <span class="input-label">From Date</span>
+                <input type="date" class="js-from-date">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">To Date</span>
+                <input type="date" class="js-to-date">
+            </label>
+            <!--<label class="item item-input">-->
+            <!--<span class="input-label">From Date</span>-->
+            <!--<input type="date" class="js-from-date">-->
+            <!--</label>-->
+            <!--<label class="item item-input">-->
+            <!--<span class="input-label">To Date</span>-->
+            <!--<input type="text" class="js-to-date">-->
+            <!--</label>-->
             <div class="item item-toggle">
-                All Staff :
+                All Staff
                 <label class="toggle toggle-balanced">
-                    <input type="checkbox" class="js-staff-fee">
+                    <input type="checkbox" class="js-all-staff">
                     <div class="track">
                         <div class="handle"></div>
                     </div>
                 </label>
             </div>
             <div class="item item-toggle">
-                <div class="row">
-                    <div class="col-25">
-                        By Staff :
+                By Staff
+                <label class="toggle toggle-balanced">
+                    <input type="checkbox" class="js-by-staff">
+                    <div class="track">
+                        <div class="handle"></div>
                     </div>
-                    <div class="col-25">
-                        name
-                    </div>
-                    <div class="col-33">
-                        <div class="list list-inset">
-                            <label class="item item-input">
-                                <i class="icon ion-search placeholder-icon"></i>
-                                <input type="text" placeholder="Search">
-                            </label>
-                        </div>
+                </label>
+            </div>
+            <div class="item item-icon-left item-icon-right show-staff" style="display: none;">
+                <div class="row ">
+                    <div class="col-90">
+                        Staff name : <b>{{staffName}}</b>
                     </div>
                     <div class="col-10">
-                        <label class="toggle toggle-balanced">
-                            <input type="checkbox" class="js-staff-fee">
-                            <div class="track">
-                                <div class="handle"></div>
-                            </div>
-                        </label>
+                        <div style="margin-top: -10px;margin-bottom:-25px;float: right;">
+                            <button class="button button-clear" data-ion-modal="searchStaff">
+                                {{> ionIcon icon="ion ion-search js-search-staff"}}
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <button class="button button-full button-balanced js-submit-report">
+            <button class="button button-full button-balanced js-submit-report" style="display: none;">
                 OK
             </button>
         </div>
 
-
-        {{#if staffFee}}
-            <div class="list list-staffFee" style="display: none;">
-                <div class="item" style="padding: 5px; background-color: #EEEDED;margin-top: -22px;">
-                    <div class="row">
-                        <div class="col-offset-10 col-25">
-                            Name
-                        </div>
-                        <div class="col-25">
-                            Gender
-                        </div>
-                        <div class="col-25">
-                            Fee (%)
-                        </div>
-                    </div>
-                </div>
-                {{#each staffFee}}
-                    <div class="item" style="padding: 5px;">
-                        <div class="row">
-                            <div class="col-offset-10 col-25">
-                                {{name}}
-                            </div>
-                            <div class="col-25">
-                                {{gender}}
-                            </div>
-                            <div class="col-50">
-                                {{fee}} <span> %</span>
+        {{#if staffOrderReport}}
+            {{#each staffOrderReport.content}}
+                {{#each items}}
+                    <div class="card">
+                        <div class="item item-text-wrap" style="background-color: #EEEDED;">
+                            <div class="row">
+                                <div class="col-50">
+                                    Staff name : {{staff}}
+                                </div>
+                                <div class="col-50">
+                                    Date : {{moFormat date 'DD/MM/YYYY'}}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {{/each}}
-                <div class="item" style="padding: 5px; background-color: #DAD9D9;">
-                    <div class="row">
-                        <div class="col-offset-10 col-50">
-                            Total Staff
+                        <div class="item item-text-wrap">
+                            Customer Name : {{customer}}
                         </div>
-                        <div class="col-50">
-                            {{countStaffFee}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {{/if}}
-
-        {{#if staffBaseSalary}}
-            <div class="list list-staffBaseSalary" style="display: none; margin-top: -22px;">
-                <div class="item" style="padding: 5px; background-color: #EEEDED;">
-                    <div class="row">
-                        <div class="col-offset-10 col-25">
-                            Name
-                        </div>
-                        <div class="col-25">
-                            Gender
-                        </div>
-                        <div class="col-25">
-                            Base Salary ($)
-                        </div>
-                    </div>
-                </div>
-                {{#each staffBaseSalary}}
-                    <div class="item" style="padding: 5px;">
-                        <div class="row">
-                            <div class="col-offset-10 col-25">
-                                {{name}}
-                            </div>
-                            <div class="col-25">
-                                {{gender}}
-                            </div>
-                            <div class="col-50">
-                                {{numFormat baseSalary '0,0.00 $'}}
+                        <div class="item item-text-wrap">
+                            <div class="row">
+                                <div class="col-25">
+                                    {{itemName}}
+                                </div>
+                                <div class="col-20">
+                                    x{{qty}}
+                                </div>
+                                <div class="col-20">
+                                    {{numFormat price '0,0.00 $'}}
+                                </div>
+                                <div class="col-20">
+                                    {{discount}}%
+                                </div>
+                                <div class="col-25">
+                                    {{numFormat amount '0,0.00 $'}}
+                                </div>
                             </div>
                         </div>
                     </div>
                 {{/each}}
-                <div class="item" style="padding: 5px; background-color: #DAD9D9;">
-                    <div class="row">
-                        <div class="col-offset-10 col-50">
-                            Total Staff
-                        </div>
-                        <div class="col-50">
-                            {{countStaffBaseSalary}}
-                        </div>
-                    </div>
+            {{/each}}
+        {{else}}
+            <div class="list">
+                <div class="item" style="text-align: center; background-color: #11C709;">
+                    <h2 style="color: white;">No data available</h2>
                 </div>
             </div>
         {{/if}}
+
     </div>
 </template>

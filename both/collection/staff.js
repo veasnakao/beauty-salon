@@ -58,7 +58,7 @@ Collection.Staff.search = function (query, limit) {
     }];
     let staffs = Collection.Staff.find(selector, {
         sort: {
-            name: 1
+            _id: 1
         },
         limit: limitAmount
     });

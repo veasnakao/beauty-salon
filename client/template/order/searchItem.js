@@ -37,13 +37,19 @@ Template.searchItem.events({
 //helper
 Template.searchItem.helpers({
     items: function () {
-        return Collection.Item.search(Session.get('searchQueryItem'), Session.get('limit'));
+        let items = Collection.Item.search(Session.get('searchQueryItem'), Session.get('limit'));
+        if(items){
+            return items;
+        } 
     },
     searchQueryItem: function () {
         return Session.get('searchQueryItem');
     },
     staffs: function () {
-        return Collection.Staff.search(Session.get('searchQueryStaff'), Session.get('limit'));
+        let staffs = Collection.Staff.search(Session.get('searchQueryStaff'), Session.get('limit'));
+        if(staffs){
+            return staffs;
+        }
     },
     searchQueryStaff: function () {
         return Session.get('searchQueryStaff');

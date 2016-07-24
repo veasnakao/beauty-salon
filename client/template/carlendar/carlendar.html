@@ -1,0 +1,22 @@
+<template name="calendar">
+    {{#contentFor "headerButtonLeft"}}
+        {{>ionNavBackButton path="index"}}
+    {{/contentFor}}
+
+    {{#contentFor "headerTitle"}}
+        <h1 class="title">Test</h1>
+    {{/contentFor}}
+
+    {{#contentFor "headerButtonRight"}}
+        <button class="button button-clear pull-left" data-ion-modal="addItem">
+            {{> ionIcon icon="ion ion-plus-circled"}}
+        </button>
+    {{/contentFor}}
+
+    {{#ionView}}
+        {{#ionContent}}
+            <h3>calendar</h3>
+            <!--{{> calendar}}-->
+        {{/ionContent}}
+    {{/ionView}}
+</template>

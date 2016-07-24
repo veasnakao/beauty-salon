@@ -28,7 +28,9 @@ Template.searchCustomer.helpers({
     customer: function () {
         if (Session.get('searchQueryCustomer')) {
             let customers = Collection.Customer.search(Session.get('searchQueryCustomer'), Session.get('limit'));
-            return customers;
+            if(customers){
+                return customers;
+            }
         }
     },
     searchQuery: function () {
