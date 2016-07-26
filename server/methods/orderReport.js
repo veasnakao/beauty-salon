@@ -1,7 +1,5 @@
 Meteor.methods({
     orderAllStaff(fromDate, toDate){
-        let data = {};
-        let content = [];
         fromDate = moment(fromDate).toDate();
         toDate = moment(toDate).toDate();
 
@@ -55,7 +53,7 @@ Meteor.methods({
             },
             {
                 $group: {
-                    _id: '$_id',
+                    _id: 'null',
                     items: {
                         $addToSet: {
                             itemName: '$orderDoc.itemDoc.name',
@@ -68,21 +66,24 @@ Meteor.methods({
                             customer: '$customerDoc.name'
 
                         }
+                    },
+                    total: {
+                        $sum: '$orderDoc.amount'
                     }
                 }
             },
             {$sort: {_id: 1}}
         ]);
+        let data = {};
+        let content = [];
         data.content = orderAllStaff;
         return data;
     },
     orderByStaff(fromDate, toDate, staffId){
-        let data = {};
-        let content = [];
         fromDate = moment(fromDate).toDate();
         toDate = moment(toDate).toDate();
 
-        let orderAllStaff = Collection.Order.aggregate([
+        let orderByStaff = Collection.Order.aggregate([
             {
                 $match: {
                     date: {
@@ -133,7 +134,7 @@ Meteor.methods({
             },
             {
                 $group: {
-                    _id: '$_id',
+                    _id: '$staffDoc._id',
                     items: {
                         $addToSet: {
                             itemName: '$orderDoc.itemDoc.name',
@@ -146,12 +147,19 @@ Meteor.methods({
                             customer: '$customerDoc.name'
 
                         }
+                    },
+                    total: {
+                        $sum: '$orderDoc.amount'
                     }
                 }
             },
             {$sort: {_id: 1}}
         ]);
-        data.content = orderAllStaff;
-        return data;
+        let data = {};
+        let content = [];
+        if(orderByStaff){
+            data.content = orderByStaff;
+            return data;
+        }
     }
 });

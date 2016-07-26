@@ -40,8 +40,12 @@ Template.orderReport.helpers({
                         Session.set('orderByStaffResult', result);
                     }
                 });
-                console.log(Session.get('orderByStaffResult'));
-                return Session.get('orderByStaffResult');
+                let data=Session.get('orderByStaffResult');
+                if(data.content.length>0){
+                    return data;
+                }else{
+                    return false;
+                }
             } else if (getAllStaffId) {
                 Meteor.call('orderAllStaff', fromDate, toDate, function (error, result) {
                     if (error) {
@@ -53,12 +57,10 @@ Template.orderReport.helpers({
                 console.log(Session.get('orderAllStaffResult'));
                 return Session.get('orderAllStaffResult');
             } else {
-                return 0;
+                return false;
             }
         }
     }
-
-
 });
 
 Template.orderReport.events({

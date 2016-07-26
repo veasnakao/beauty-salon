@@ -67,7 +67,7 @@ Template.staffReport.helpers({
                 $gte: Session.get('staffFee')
             }
         }).count();
-        if(staffFee){
+        if (staffFee) {
             return staffFee;
         }
     }

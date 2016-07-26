@@ -1,0 +1,69 @@
+<template name="profitAndLossReport">
+    {{#contentFor "headerButtonLeft"}}
+        {{>ionNavBackButton path="reports"}}
+    {{/contentFor}}
+
+    {{#contentFor "headerTitle"}}
+        <h1 class="title">Profit and Loss Report</h1>
+    {{/contentFor}}
+
+    <div class="content has-header overflow-scroll">
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">From Date</span>
+                <input type="date" class="js-from-date">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">To Date</span>
+                <input type="date" class="js-to-date">
+            </label>
+            <button class="button button-full button-balanced js-submit-report">
+                OK
+            </button>
+            {{#if dayExpenseItems}}
+                {{#each dayExpenseItems.content}}
+                    <div class="card" style="margin-bottom: -1px;">
+                        <div class="item item-divider" style="background-color: #F1F1F1;">
+                            <div class="row">
+                                <div class="col-50">
+                                    <b>Expense</b>
+                                </div>
+                                <div class="col-offset-25 col-20">
+                                    <b>Price ($)</b>
+                                </div>
+                            </div>
+                        </div>
+                        {{#each items}}
+                            <div class="item item-text-wrap">
+                                <div class="row">
+                                    <div class="col-50" style="margin-left: 20px;margin-right: -20px;">
+                                        {{expenseItemName}}
+                                    </div>
+                                    <div class="col-offset-25 col-20">
+                                        {{numFormat price '0,0.00 $'}}
+                                    </div>
+                                </div>
+                            </div>
+                        {{/each}}
+                        <div class="item item-divider">
+                            <div class="row">
+                                <div class="col-50">
+                                    <b>Total Expense</b>
+                                </div>
+                                <div class="col-offset-25 col-20">
+                                    <b>{{numFormat total '0,0.00 $'}}</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            {{else}}
+                <div class="list">
+                    <div class="item" style="text-align: center; background-color: #11C709;">
+                        <h2 style="color: white;">No data available</h2>
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+</template>

@@ -34,8 +34,9 @@ Meteor.publish('expenseItem', function(_id) {
 Meteor.publish('dayExpenses', function() {
     return Collection.DayExpense.find();
 });
-Meteor.publish('dayExpense', function(_id) {
-    return Collection.DayExpense.find({_id: _id});
+Meteor.publish('dayExpense', function(selector) {
+    // return Collection.DayExpense.find({_id: _id});
+    return Collection.DayExpense.find(selector);
 });
 
 //publish order

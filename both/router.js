@@ -48,4 +48,5 @@ Router.map(function () {
     this.route('reports');
     this.route('staffReport');
     this.route('orderReport');
+    this.route('profitAndLossReport');
 });

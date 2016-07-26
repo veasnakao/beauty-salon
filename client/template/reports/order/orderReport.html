@@ -9,12 +9,6 @@
 
     <div class="content has-header overflow-scroll">
         <div class="list">
-        <!--{{#autoForm schema="Schema.OrderReport" id="orderReport"}}-->
-            <!--<label class="item item-input" style="padding: 10px;">-->
-            <!--<span class="input-label">From Date</span>-->
-            <!--{{> afQuickField name="orderDate" class="js-from-date" }}-->
-            <!--</label>-->
-                <!--{{/autoForm}}-->
             <label class="item item-input">
                 <span class="input-label">From Date</span>
                 <input type="date" class="js-from-date">
@@ -23,14 +17,6 @@
                 <span class="input-label">To Date</span>
                 <input type="date" class="js-to-date">
             </label>
-            <!--<label class="item item-input">-->
-            <!--<span class="input-label">From Date</span>-->
-            <!--<input type="date" class="js-from-date">-->
-            <!--</label>-->
-            <!--<label class="item item-input">-->
-            <!--<span class="input-label">To Date</span>-->
-            <!--<input type="text" class="js-to-date">-->
-            <!--</label>-->
             <div class="item item-toggle">
                 All Staff
                 <label class="toggle toggle-balanced">
@@ -106,6 +92,18 @@
                         </div>
                     </div>
                 {{/each}}
+                <div class="card">
+                    <div class="item item-text-wrap" style="text-align: center;">
+                        <div class="row">
+                            <div class="col-offset-50 col-25">
+                                Total
+                            </div>
+                            <div class="col-25">
+                                <b>{{numFormat total '0,0.00 $'}}</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             {{/each}}
         {{else}}
             <div class="list">
