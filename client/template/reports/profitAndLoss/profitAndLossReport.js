@@ -22,6 +22,9 @@ Template.profitAndLossReport.created = function () {
 };
 
 Template.profitAndLossReport.helpers({
+    calculateProfit(income, expense){
+        return numeral(income - expense).format('0,0.00') + '$';
+    },
     dayExpenseItems() {
         let fromDate = Session.get('fromDate');
         let toDate = Session.get('toDate');

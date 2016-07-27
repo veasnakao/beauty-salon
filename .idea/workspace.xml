@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5fbfa6e6-227e-46b1-917f-9caa09b60352" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/methods/profitAndLossReport.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/both/router.js" afterPath="$PROJECT_DIR$/both/router.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/index.html" afterPath="$PROJECT_DIR$/client/template/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/reports/order/orderReport.html" afterPath="$PROJECT_DIR$/client/template/reports/order/orderReport.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/reports/order/orderReport.js" afterPath="$PROJECT_DIR$/client/template/reports/order/orderReport.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/reports/reports.html" afterPath="$PROJECT_DIR$/client/template/reports/reports.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/reports/staffs/staffReport.js" afterPath="$PROJECT_DIR$/client/template/reports/staffs/staffReport.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/methods/orderReport.js" afterPath="$PROJECT_DIR$/server/methods/orderReport.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/publications.js" afterPath="$PROJECT_DIR$/server/publications.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.html" afterPath="$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.js" afterPath="$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/methods/profitAndLossReport.js" afterPath="$PROJECT_DIR$/server/methods/profitAndLossReport.js" />
     </list>
     <ignored path="beauty-shop.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,8 +29,8 @@
       <file leaf-file-name="orderReport.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/methods/orderReport.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="55" column="32" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
+            <state relative-caret-position="225">
+              <caret line="57" column="24" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -47,42 +39,21 @@
       <file leaf-file-name="profitAndLossReport.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/methods/profitAndLossReport.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1350">
-              <caret line="54" column="32" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
+            <state relative-caret-position="247">
+              <caret line="39" column="12" selection-start-line="39" selection-start-column="15" selection-end-line="46" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="orderReport.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/template/reports/order/orderReport.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="577">
-              <caret line="58" column="31" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="profitAndLossReport.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="profitAndLossReport.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="profitAndLossReport.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
+            <state relative-caret-position="25">
+              <caret line="78" column="56" selection-start-line="78" selection-start-column="56" selection-end-line="78" selection-end-column="56" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -144,9 +115,9 @@
         <option value="$PROJECT_DIR$/client/template/reports/staffs/staffReport.js" />
         <option value="$PROJECT_DIR$/server/publications.js" />
         <option value="$PROJECT_DIR$/server/methods/orderReport.js" />
+        <option value="$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.js" />
         <option value="$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.html" />
         <option value="$PROJECT_DIR$/server/methods/profitAndLossReport.js" />
-        <option value="$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.js" />
       </list>
     </option>
   </component>
@@ -161,8 +132,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
     <option name="y" value="24" />
-    <option name="width" value="1855" />
-    <option name="height" value="1056" />
+    <option name="width" value="1535" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -189,7 +160,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -451,6 +421,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -632,18 +603,19 @@
       <workItem from="1469433033126" duration="2983000" />
       <workItem from="1469455246387" duration="6509000" />
       <workItem from="1469519517171" duration="8114000" />
-      <workItem from="1469541453894" duration="5096000" />
+      <workItem from="1469541453894" duration="5234000" />
+      <workItem from="1469603466535" duration="8916000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="470703000" />
+    <option name="totallyTimeSpent" value="479757000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
+    <frame x="65" y="24" width="1535" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2139738" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18981482" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -932,14 +904,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/layout/layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1025">
-          <caret line="41" column="30" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/template/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
@@ -1009,47 +973,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/methods/orderReport.js">
+    <entry file="file://$PROJECT_DIR$/client/template/reports/order/orderReport.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="55" column="32" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
+        <state relative-caret-position="602">
+          <caret line="47" column="30" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.html">
+    <entry file="file://$PROJECT_DIR$/client/template/layout/layout.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="322">
+          <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/methods/orderReport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="57" column="24" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/methods/profitAndLossReport.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1350">
-          <caret line="54" column="32" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/reports/order/orderReport.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="577">
-          <caret line="58" column="31" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
+        <state relative-caret-position="247">
+          <caret line="39" column="12" selection-start-line="39" selection-start-column="15" selection-end-line="46" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
+        <state relative-caret-position="-150">
+          <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="78" column="56" selection-start-line="78" selection-start-column="56" selection-end-line="78" selection-end-column="56" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

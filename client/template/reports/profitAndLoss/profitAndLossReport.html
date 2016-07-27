@@ -21,41 +21,98 @@
                 OK
             </button>
             {{#if dayExpenseItems}}
-                {{#each dayExpenseItems.content}}
-                    <div class="card" style="margin-bottom: -1px;">
-                        <div class="item item-divider" style="background-color: #F1F1F1;">
-                            <div class="row">
-                                <div class="col-50">
-                                    <b>Expense</b>
+                {{#each obj in dayExpenseItems.content}}
+                    <!--<div class="card" style="margin-bottom: -1px;">-->
+                    <!--<div class="item item-divider" style="background-color: #F1F1F1;">-->
+                    <!--<div class="row">-->
+                    <!--<div class="col-50">-->
+                    <!--<b>Expense Item</b>-->
+                    <!--</div>-->
+                    <!--<div class="col-offset-25 col-20">-->
+                    <!--<b>Price ($)</b>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    {{#each obj.dayExpenseItems}}
+                        <div class="card" style="margin-bottom: -1px;">
+                            <div class="item item-divider" style="background-color: #F1F1F1;">
+                                <div class="row">
+                                    <div class="col-50">
+                                        <b>Expense Item</b>
+                                    </div>
+                                    <div class="col-offset-25 col-20">
+                                        <b>Price ($)</b>
+                                    </div>
                                 </div>
-                                <div class="col-offset-25 col-20">
-                                    <b>Price ($)</b>
+                            </div>
+
+                            {{#each items}}
+                                <div class="item item-text-wrap">
+                                    <div class="row">
+                                        <div class="col-50" style="margin-left: 20px;margin-right: -20px;">
+                                            {{expenseItemName}}
+                                        </div>
+                                        <div class="col-offset-25 col-20">
+                                            {{numFormat price '0,0.00 $'}}
+                                        </div>
+                                    </div>
+                                </div>
+                            {{/each}}
+                            <div class="item item-divider">
+                                <div class="row">
+                                    <div class="col-50">
+                                        <b>Total Expense</b>
+                                    </div>
+                                    <div class="col-offset-25 col-20">
+                                        <b>{{numFormat total '0,0.00 $'}}</b>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        {{#each items}}
+                        <div class="card">
+                            <div class="item item-divider">
+                                <div class="row">
+                                    <div class="col-50">
+                                        <b>Income</b>
+                                    </div>
+                                    <div class="col-offset-25 col-20">
+                                        <b>Price ($)</b>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="item item-text-wrap">
                                 <div class="row">
                                     <div class="col-50" style="margin-left: 20px;margin-right: -20px;">
-                                        {{expenseItemName}}
+                                        Order
                                     </div>
-                                    <div class="col-offset-25 col-20">
-                                        {{numFormat price '0,0.00 $'}}
+                                    <div class="col-offset-25 col20">
+                                        <b>{{numFormat obj.orders '0,0.00 $'}}</b>
                                     </div>
                                 </div>
                             </div>
-                        {{/each}}
-                        <div class="item item-divider">
-                            <div class="row">
-                                <div class="col-50">
-                                    <b>Total Expense</b>
+                            <div class="item item-divider">
+                                <div class="row">
+                                    <div class="col-50">
+                                        <b>Total Income</b>
+                                    </div>
+                                    <div class="col-offset-25 col-20">
+                                        <b>{{numFormat obj.orders '0,0.00 $'}}</b>
+                                    </div>
                                 </div>
-                                <div class="col-offset-25 col-20">
-                                    <b>{{numFormat total '0,0.00 $'}}</b>
+                            </div>
+                            <div class="item item-divider">
+                                <div class="row">
+                                    <div class="col-50">
+                                        <b>Profit</b>
+                                    </div>
+                                    <div class="col-offset-25 col-20">
+                                        <b>{{calculateProfit obj.orders total}}</b>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {{/each}}
+                    <!--</div>-->
                 {{/each}}
             {{else}}
                 <div class="list">

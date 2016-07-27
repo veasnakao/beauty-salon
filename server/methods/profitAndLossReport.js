@@ -29,17 +29,6 @@ Meteor.methods({
                 }
             }
         ]);
-        let data = {};
-        let content = [];
-        if (dayExpenseItems) {
-            console.log(dayExpenseItems);
-            data.content = dayExpenseItems;
-            return data;
-        }
-    },
-    income(fromDate, toDate){
-        fromDate = moment(fromDate).toDate();
-        toDate = moment(toDate).toDate();
         let orders = Collection.Order.aggregate([
             {
                 $match: {
@@ -48,6 +37,14 @@ Meteor.methods({
                     }
                 }
             },
+            // {
+            //     $group: {
+            //         _id: {$dayOfYear: '$date'},
+            //         amount: {
+            //             $sum: '$total'
+            //         }
+            //     }
+            // },
             {
                 $group: {
                     _id: 'null',
@@ -57,12 +54,40 @@ Meteor.methods({
                 }
             }
         ]);
+        let obj = {
+            dayExpenseItems: dayExpenseItems,
+            orders: _.isEmpty(orders) ? 0 : orders[0].total,
+        };
         let data = {};
-        let content = [];
-        if (orders) {
-            console.log(orders);
-            data.content = orders;
-            return data;
-        }
-    }
+        data.content = [];
+        data.content.push(obj);
+        console.log(data);
+
+        return data;
+
+    },
+    // income(fromDate, toDate){
+    //     fromDate = moment(fromDate).toDate();
+    //     toDate = moment(toDate).toDate();
+    //     let orders = Collection.Order.aggregate([
+    //         {
+    //             $match: {
+    //                 date: {
+    //                     $gte: fromDate, $lte: toDate
+    //                 }
+    //             }
+    //         },
+    //         {
+    //             $group: {
+    //                 _id: 'null',
+    //                 total: {
+    //                     $sum: '$total'
+    //                 }
+    //             }
+    //         }
+    //     ]);
+    //     if (orders) {
+    //         return orders;
+    //     }
+    // }
 });
