@@ -6,12 +6,36 @@ Schema.Order = new SimpleSchema({
     },
     customerId: {
         type: String,
-        label: "Customer"
+        label: "Customer",
+        optional: true,
+        defaultValue:"0001",
+        autoform: {
+            type: "select",
+            options: function () {
+                let customer = Collection.Customer.find();
+                let list = [];
+                customer.forEach(function (obj) {
+                    list.push({label: obj.name, value: obj._id})
+                });
+                return list;
+            }
+        }
     },
-    staffId:{
+    staffId: {
         type: String,
         label: "Staff",
-        optional:true
+        optional: true,
+        autoform: {
+            type: "select",
+            options: function () {
+                let staff = Collection.Staff.find();
+                let list = [];
+                staff.forEach(function (obj) {
+                    list.push({label: obj.name, value: obj._id})
+                });
+                return list;
+            }
+        }
     },
     status: {
         type: String,

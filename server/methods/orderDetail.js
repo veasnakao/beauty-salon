@@ -10,8 +10,8 @@ Meteor.methods({
                 amount: selector[k].amount,
                 quantity: selector[k].quantity,
                 price: selector[k].price,
-                customerId: selector[k].customerId,
-                customerName: selector[k].customerName
+                // customerId: selector[k].customerId,
+                // customerName: selector[k].customerName
             });
         }
         console.log(orderDetails);
@@ -54,8 +54,8 @@ Meteor.methods({
                 quantity: selector[k].quantity,
                 price: selector[k].price,
                 // total:selector[k].price*selector[k].quantity,
-                customerId: selector[k].customerId,
-                customerName: selector[k].customerName
+                // customerId: selector[k].customerId,
+                // customerName: selector[k].customerName
             });
         }
         console.log(orderDetails);
@@ -113,9 +113,10 @@ var decreaseExistOrderDetail = (currentOrderDetail, existOrderDetail) => {
     })
 };
 
-//update orderDetail
+//update orderTotal
 Meteor.methods({
-    updateOrderDetail(orderId){
+    //update orderTotal
+    updateOrderTotal(orderId){
         let subTotal = 0;
         let orderDetails = Collection.OrderDetail.find({orderId: orderId});
         orderDetails.forEach((objOrderDetail)=> {
@@ -125,6 +126,24 @@ Meteor.methods({
         Collection.Order.update(orderId, {
             $set: {
                 total: subTotal
+            }
+        })
+    },
+
+    //update orderCustomerId
+    updateOrderCustomerId(orderId, customerId){
+        Collection.Order.update(orderId, {
+            $set: {
+                customerId: customerId
+            }
+        })
+    },
+
+    //update orderStaffId
+    updateOrderStaffId(orderId, staffId){
+        Collection.Order.update(orderId, {
+            $set: {
+                staffId: staffId
             }
         })
     }

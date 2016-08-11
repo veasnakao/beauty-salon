@@ -31,14 +31,37 @@ Template.showOrder.rendered = function () {
 
 //event
 Template.showOrder.events({
+    'click .button': function () {
+        console.log(`true`);
+    },
+    'click .add-order': function () {
+        Session.set('orderDetailObj', {});
+        // let customerId = this._id;
+        let selector = {};
+        selector.date = new Date();
+        // selector.customerId = customerId;
+        selector.status = "active";
+
+        Meteor.call('insertOrder', selector, (error, result) => {
+            if (error) {
+                sAlert.error(error.message);
+                IonLoading.hide();
+            } else {
+                IonLoading.hide();
+                Session.set('orderId', result);
+                // Router.go(`/itemOrder/customerId/${customerId}/orderId/${result}`);
+                Router.go(`/itemOrder/orderId/${result}`);
+            }
+        })
+    },
     'click .show-order-item': function () {
         let customerId = this._id;
         let order = Collection.Order.find({customerId: customerId});
-        if(order){
-            order.forEach((objOrder)=>{
+        if (order) {
+            order.forEach((objOrder)=> {
                 let orderId = objOrder._id;
                 Router.go(`/itemOrder/customerId/${customerId}/orderId/${orderId}`);
-            });    
+            });
         }
     }
 });
@@ -48,8 +71,8 @@ Template.showOrder.helpers({
     showCustomerOrder: function () {
         let data = {};
         let content = [];
-        let orders = Collection.Order.find({'status': 'true'});
-        if(orders){
+        let orders = Collection.Order.find({'status': 'active'});
+        if (orders) {
             orders.forEach((objOrder)=> {
                 let customerId = objOrder.customerId;
                 let customers = Collection.Customer.find({_id: customerId});

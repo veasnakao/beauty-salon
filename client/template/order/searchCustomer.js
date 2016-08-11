@@ -28,7 +28,7 @@ Template.searchCustomer.helpers({
     customer: function () {
         if (Session.get('searchQueryCustomer')) {
             let customers = Collection.Customer.search(Session.get('searchQueryCustomer'), Session.get('limit'));
-            if(customers){
+            if (customers) {
                 return customers;
             }
         }
@@ -56,16 +56,11 @@ Template.searchCustomer.onDestroyed(function () {
 
 //_showCustomer event
 Template._showCustomer.events({
-    // 'click': function() {
-    //     Session.set("searchQueryCustomer", this._id);
-    // },
     'click .customer-order': function () {
         Session.set('orderDetailObj', {});
-        let customerId = this._id;
         let selector = {};
         selector.date = new Date();
-        selector.customerId = customerId;
-        selector.status = true;
+        selector.status = active;
 
         Meteor.call('insertOrder', selector, (err, result) => {
             if (err) {
@@ -74,7 +69,7 @@ Template._showCustomer.events({
             } else {
                 IonLoading.hide();
                 Session.set('orderId', result);
-                Router.go(`/itemOrder/customerId/${customerId}/orderId/${result}`);
+                Router.go(`/itemOrder/orderId/${result}`);
             }
         })
     }

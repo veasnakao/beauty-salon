@@ -22,15 +22,12 @@ Template.searchItem.rendered = function () {
 
 //event
 Template.searchItem.events({
-    'keyup .js-search-staff': function (event, template) {
-        Session.set('searchQueryStaff', event.target.value);
-    },
     'keyup .js-search-item': function (event, template) {
         Session.set('searchQueryItem', event.target.value);
     },
     'click .close-modal': ()=> {
-        Session.set('searchQueryStaff', undefined);
-        Session.set('searchQueryItem', undefined);
+        // Session.set('searchQueryStaff', undefined);
+        // Session.set('searchQueryItem', undefined);
     }
 });
 
@@ -38,16 +35,16 @@ Template.searchItem.events({
 Template.searchItem.helpers({
     items: function () {
         let items = Collection.Item.search(Session.get('searchQueryItem'), Session.get('limit'));
-        if(items){
+        if (items) {
             return items;
-        } 
+        }
     },
     searchQueryItem: function () {
         return Session.get('searchQueryItem');
     },
     staffs: function () {
         let staffs = Collection.Staff.search(Session.get('searchQueryStaff'), Session.get('limit'));
-        if(staffs){
+        if (staffs) {
             return staffs;
         }
     },
@@ -86,17 +83,20 @@ Template.searchItem.events({
 
 //onDestroyed
 Template.searchItem.onDestroyed(function () {
-    Session.set('searchQueryItem', undefined);
-    Session.set('searchQueryStaff', undefined);
+    // Session.set('searchQueryItem', undefined);
+    // Session.set('searchQueryStaff', undefined);
 });
 
 //template _productItem events
 Template._productItem.events({
     'click .insert-order': function () {
         let params = Router.current().params;
-        let customerId = params.customerId;
-        let customer = Collection.Customer.findOne(customerId);
-        let customerName = customer.name;
+        // let customerId = params.customerId;
+        let customerId = $('.js-customer');
+        let staffId = $('.js-staff');
+        // let customer = Collection.Customer.findOne(customerId);
+        // let customerName = customer.name;
+
         let selector = Session.get('orderDetailObj');
         selector[this._id] = {
             orderId: params.orderId,
@@ -106,9 +106,11 @@ Template._productItem.events({
             quantity: 1,
             discount: 0,
             amount: this.price * 1,
-            customerId: params.customerId,
-            customerName: customerName
+            // customerId: params.customerId,
+            // customerId: customerId,
+            // customerName: customerName
         };
+        console.log(selector);
 
         Meteor.call('insertOrderDetail', selector, (err, result) => {
             if (err) {
@@ -122,7 +124,7 @@ Template._productItem.events({
 
         let orderId = params.orderId;
         console.log(`orderId : ${orderId}`);
-        Meteor.call('updateOrderDetail', orderId, (err, result)=> {
+        Meteor.call('updateOrderTotal', orderId, (err, result)=> {
             if (err) {
                 sAlert.error(error.message);
                 IonLoading.hide();
@@ -133,26 +135,4 @@ Template._productItem.events({
         });
     }
 });
-
-//template _staffs events
-Template._staffs.events({
-    'click .insert-staff': function () {
-        let params = Router.current().params;
-        let orderId = params.orderId;
-        let staffId = this._id;
-        console.log(`staffId : ${staffId}`);
-        Meteor.call('insertStaff', staffId,orderId, (err, result)=> {
-            if (err) {
-                sAlert.error(error.message);
-                IonLoading.hide();
-            } else {
-                IonLoading.hide();
-                Session.set('orderId', result);
-            }
-        });
-    }
-});
-
-
-
 

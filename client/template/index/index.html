@@ -1,15 +1,17 @@
 <template name="index">
-    {{> sideMenuLeft}}
-    {{#contentFor "headerTitle"}}
-        <h1 class="title">Beauty Salon</h1>
-    {{/contentFor}}
-
-    {{#ionView}}
-        {{#ionContent}}
-            {{#ionList}}
-                <h2>Home</h2>
-            {{/ionList}}
-        {{/ionContent}}
-    {{/ionView}}
+    <!--{{#if currentUser}}-->
+        {{> sideMenuLeft}}
+        {{#contentFor "headerTitle"}}
+            <h1 class="title">Beauty Salon</h1>
+        {{/contentFor}}
+        {{#ionView}}
+            {{#ionContent}}
+                {{#ionView class="home-bg"}}
+                {{/ionView}}
+            {{/ionContent}}
+        {{/ionView}}
+    <!--{{else}}-->
+        <!--{{> login}}-->
+    <!--{{/if}}-->
 </template>
 

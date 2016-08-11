@@ -37,14 +37,6 @@ Meteor.methods({
                     }
                 }
             },
-            // {
-            //     $group: {
-            //         _id: {$dayOfYear: '$date'},
-            //         amount: {
-            //             $sum: '$total'
-            //         }
-            //     }
-            // },
             {
                 $group: {
                     _id: 'null',
@@ -53,18 +45,35 @@ Meteor.methods({
                     }
                 }
             }
+            // {
+            //     $group: {
+            //         _id: {
+            //             year: {
+            //                 $year: '$date'
+            //             },
+            //             month: {
+            //                 $month: '$date'
+            //             },
+            //             day: {
+            //                 $dayOfMonth: '$date'
+            //             }
+            //         },
+            //         total: {
+            //             $sum: '$total'
+            //         }
+            //     }
+            // }
         ]);
         let obj = {
             dayExpenseItems: dayExpenseItems,
-            orders: _.isEmpty(orders) ? 0 : orders[0].total,
+            // orders: orders
+            orders: _.isEmpty(orders) ? 0 : orders[0].total //orders[0]
         };
         let data = {};
         data.content = [];
         data.content.push(obj);
         console.log(data);
-
         return data;
-
     },
     // income(fromDate, toDate){
     //     fromDate = moment(fromDate).toDate();

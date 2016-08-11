@@ -22,17 +22,6 @@
             </button>
             {{#if dayExpenseItems}}
                 {{#each obj in dayExpenseItems.content}}
-                    <!--<div class="card" style="margin-bottom: -1px;">-->
-                    <!--<div class="item item-divider" style="background-color: #F1F1F1;">-->
-                    <!--<div class="row">-->
-                    <!--<div class="col-50">-->
-                    <!--<b>Expense Item</b>-->
-                    <!--</div>-->
-                    <!--<div class="col-offset-25 col-20">-->
-                    <!--<b>Price ($)</b>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
                     {{#each obj.dayExpenseItems}}
                         <div class="card" style="margin-bottom: -1px;">
                             <div class="item item-divider" style="background-color: #F1F1F1;">
@@ -69,6 +58,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!--income-->
                         <div class="card">
                             <div class="item item-divider">
                                 <div class="row">
@@ -80,6 +71,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="item item-text-wrap">
                                 <div class="row">
                                     <div class="col-50" style="margin-left: 20px;margin-right: -20px;">
@@ -112,7 +104,6 @@
                             </div>
                         </div>
                     {{/each}}
-                    <!--</div>-->
                 {{/each}}
             {{else}}
                 <div class="list">

@@ -1,18 +1,19 @@
 Tracker.autorun(function () {
-    if (Session.get('paramsOrderId')) {
-        Meteor.subscribe("order", Session.get('paramsOrderId'));
-    }
+    // if (Session.get('paramsOrderId')) {
+    //     Meteor.subscribe("order", Session.get('paramsOrderId'));
+    // }
 });
+
 //oncreated
 Template.itemOrder.created = function () {
     let params = Router.current().params;
     Session.set('orderDetailObj', {});
     this.autorun(function () {
         this.subscription = Meteor.subscribe('items');
-        // this.subscription = Meteor.subscribe('orders');
         this.subscription = Meteor.subscribe('staffs');
-        this.subscribe = Meteor.subscribe("customer", Router.current().params.customerId);
-        this.subscribe = Meteor.subscribe("orderDetail", Router.current().params.orderId);
+        this.subscription = Meteor.subscribe("customer", Router.current().params.customerId);
+        this.subscription = Meteor.subscribe("orderDetail", Router.current().params.orderId);
+        this.subscription = Meteor.subscribe('order', Router.current().params.orderId);
     }.bind(this));
 };
 
@@ -34,37 +35,40 @@ Template.itemOrder.rendered = function () {
 
 //helper
 Template.itemOrder.helpers({
+    listCustomers: ()=> {
+        let customers = Collection.Customer.find();
+        if (customers) {
+            return customers;
+        }
+    },
     showCustomer: ()=> {
         let params = Router.current().params;
-        let orderId = params.orderId;
-        let order = Collection.Order.findOne(orderId);
-        if (order) {
-            let customerId = order.customerId;
+        let customerId = params.customerId;
+        if (customerId) {
             let customer = Collection.Customer.findOne(customerId);
-            return customer.name;
+            if (customer) {
+                return customer.name;
+            }
         }
-
     },
     showStaff: ()=> {
         let params = Router.current().params;
         let orderId = params.orderId;
-        // let order = Meteor.call('findRecords',Collection.Order,orderId);
-        // if(order){
-        //     console.log(`order : ${order}`);
-        // }
-        let order = Collection.Order.findOne(orderId);
-        if (order) {
-            let staffId = order.staffId;
-            let staff = Collection.Staff.findOne(staffId);
-            console.log(staff.name);
-            return staff.name;
+        if (orderId) {
+            let order = Collection.Order.findOne(orderId);
+            if (order) {
+                console.log(`staffId ${order.staffId}`);
+                let staffId = order.staffId;
+                let staff = Collection.Staff.findOne(staffId);
+                return staff.name;
+            }
         }
     },
     showOrderDetail: ()=> {
         let params = Router.current().params;
         let orderId = params.orderId;
         let orderDetail = Collection.OrderDetail.find({orderId: orderId});
-        if(orderDetail){
+        if (orderDetail) {
             return orderDetail;
         }
     },
@@ -84,7 +88,7 @@ Template.itemOrder.helpers({
         let params = Router.current().params;
         let orderId = params.orderId;
         let orders = Collection.Order.find(orderId);
-        if(orders){
+        if (orders) {
             let totalPaid = 0;
             orders.forEach((objOrders)=> {
                 totalPaid = objOrders.total;
@@ -96,7 +100,33 @@ Template.itemOrder.helpers({
 
 //event
 Template.itemOrder.events({
-
+    //update customerId
+    'click .js-customer'(){
+        let params = Router.current().params;
+        let customerId = $('.js-customer').val();
+        console.log(`customerId ${customerId}`);
+        let orderId = params.orderId;
+        console.log(`orderId : ${orderId}`);
+        Meteor.call('updateOrderCustomerId', orderId, customerId, (error)=> {
+            if (error) {
+                sAlert.error(error.message);
+                IonLoading.hide();
+            }
+        });
+    },
+    'click .js-staff'(){
+        let params = Router.current().params;
+        let staffId = $('.js-staff').val();
+        console.log(`staffId ${staffId}`);
+        let orderId = params.orderId;
+        console.log(`orderId : ${orderId}`);
+        Meteor.call('updateOrderStaffId', orderId, staffId, (error)=> {
+            if (error) {
+                sAlert.error(error.message);
+                IonLoading.hide();
+            }
+        });
+    },
     //increase quantity
     'click .increase-quantity'(){
         let itemId = this.itemId;
@@ -104,7 +134,6 @@ Template.itemOrder.events({
         let params = Router.current().params;
         let customerId = params.customerId;
         let customer = Collection.Customer.findOne(customerId);
-        let customerName = customer.name;
         let selector = Session.get('orderDetailObj');
         selector[this._id] = {
             orderId: params.orderId,
@@ -112,9 +141,7 @@ Template.itemOrder.events({
             itemName: orderDetail.itemName,
             price: orderDetail.price,
             quantity: 1,
-            discount: 0,
-            customerId: params.customerId,
-            customerName: customerName
+            discount: 0
         };
         Meteor.call('insertOrderDetail', selector, (err, result) => {
             if (err) {
@@ -127,7 +154,7 @@ Template.itemOrder.events({
         });
 
         let orderId = params.orderId;
-        Meteor.call('updateOrderDetail', orderId, (err, result)=> {
+        Meteor.call('updateOrderTotal', orderId, (err, result)=> {
             if (err) {
                 sAlert.error(error.message);
                 IonLoading.hide();
@@ -147,7 +174,6 @@ Template.itemOrder.events({
             let params = Router.current().params;
             let customerId = params.customerId;
             let customer = Collection.Customer.findOne(customerId);
-            let customerName = customer.name;
             let selector = Session.get('orderDetailObj');
             selector[this._id] = {
                 orderId: params.orderId,
@@ -155,9 +181,7 @@ Template.itemOrder.events({
                 itemName: orderDetail.itemName,
                 price: orderDetail.price,
                 quantity: 1,
-                discount: 0,
-                customerId: params.customerId,
-                customerName: customerName
+                discount: 0
             };
             orderDetailQuantity = orderDetail.quantity;
             console.log(`qty : ${orderDetailQuantity}`);
@@ -177,7 +201,7 @@ Template.itemOrder.events({
                     }
                 });
                 let orderId = params.orderId;
-                Meteor.call('updateOrderDetail', orderId, (err, result)=> {
+                Meteor.call('updateOrderTotal', orderId, (err, result)=> {
                     if (err) {
                         sAlert.error(error.message);
                         IonLoading.hide();
@@ -209,7 +233,7 @@ Template.itemOrder.events({
 
                 //update order when delete orderDetail
                 let orderId = params.orderId;
-                Meteor.call('updateOrderDetail', orderId, (err, result)=> {
+                Meteor.call('updateOrderTotal', orderId, (err, result)=> {
                     if (err) {
                         sAlert.error(error.message);
                         IonLoading.hide();

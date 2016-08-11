@@ -42,14 +42,6 @@ Schema.OrderDetail = new SimpleSchema({
         //         return amount;
         //     }
         // }
-    },
-    customerId: {
-        type: String,
-        label: "CustomerId"
-    },
-    customerName: {
-        type: String,
-        label: "Customer Name"
     }
 });
 Collection.OrderDetail.attachSchema(Schema.OrderDetail);

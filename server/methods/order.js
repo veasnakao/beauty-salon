@@ -1,7 +1,7 @@
 Meteor.methods({
     insertOrder(selector){
         selector._id = idGenerator.gen(Collection.Order, 4);
-        var orderId = Collection.Order.insert(selector);
+        let orderId = Collection.Order.insert(selector);
         return orderId;
     },
     removeSaleIfNoSaleDetailExist(orderId) {
