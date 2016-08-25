@@ -1,14 +1,14 @@
-<template name="dayExpenseDetail">
+<template name="journalEntryDetail">
     {{#contentFor "headerButtonLeft"}}
-        {{>ionNavBackButton path="showDayExpense"}}
+        {{>ionNavBackButton path="showJournalEntry"}}
     {{/contentFor}}
 
     {{#contentFor "headerTitle"}}
-        <h1 class="title">Day Expense Detail</h1>
+        <h1 class="title">Journal Entry Detail</h1>
     {{/contentFor}}
 
     {{#contentFor "headerButtonRight"}}
-        <button class="button button-clear pull-left" data-ion-modal="editItem" data-id="{{dayExpenseDetail._id}}">
+        <button class="button button-clear pull-left" data-ion-modal="" data-id="{{journalEntryDetail._id}}">
             {{> ionIcon icon="ion ion-edit"}}
         </button>
     {{/contentFor}}

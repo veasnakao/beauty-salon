@@ -64,3 +64,4 @@ ejson
 risul:moment-timezone
 lbee:moment-helpers
 accounts-password
+simple:reactive-method

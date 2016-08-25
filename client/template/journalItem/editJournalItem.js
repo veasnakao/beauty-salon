@@ -1,12 +1,12 @@
 //oncreate
-Template.editExpenseItem.created = function () {
+Template.editJournalItem.created = function () {
     this.autorun(function () {
-        this.subscription = Meteor.subscribe('expenseItem', Router.current().params._id);
+        this.subscription = Meteor.subscribe('journalItem', Router.current().params._id);
     }.bind(this));
 };
 
 //onrender
-Template.editExpenseItem.rendered = function() {
+Template.editJournalItem.rendered = function() {
     try {
         this.autorun(() => {
             if (!this.subscription.ready()) {
@@ -21,10 +21,10 @@ Template.editExpenseItem.rendered = function() {
 };
 
 //helper
-Template.editExpenseItem.helpers({
-    expenseItemInfo() {
+Template.editJournalItem.helpers({
+    journalItemInfo() {
         var template = Template.instance();
-        return Collection.ExpenseItem.findOne({
+        return Collection.JournalItem.findOne({
             _id: template.data.id
         });
     }
@@ -32,9 +32,9 @@ Template.editExpenseItem.helpers({
 
 //autoform hook
 AutoForm.hooks({
-    editExpenseItem: {
+    editJournalItem: {
         onSuccess(formType, id){
-            sAlert.success('Expense Item Edit Success');
+            sAlert.success('Journal Item Edit Success');
         },
         onError(formType, error){
             sAlert.error(error.message);

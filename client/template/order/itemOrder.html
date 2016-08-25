@@ -4,11 +4,11 @@
     {{/contentFor}}
 
     {{#contentFor "headerTitle"}}
-        <h1 class="title">Item List</h1>
+        <h1 class="title">Order List</h1>
     {{/contentFor}}
 
     {{#contentFor "headerButtonRight"}}
-        <button data-ion-modal="searchItem" class="button button-clear pull-left edit-order">
+        <button data-ion-modal="searchItem" class="button button-clear pull-left search-item">
             {{> ionIcon icon="ion ion-ios-search-strong"}}
         </button>
     {{/contentFor}}
@@ -16,16 +16,49 @@
     {{#ionView}}
         {{#ionContent}}
             <div class="card animated bounceInDown">
-                {{#autoForm collection="Collection.Order" id="addOrder" type="insert"}}
-                    <div class="row">
-                        <div class="col-50">
-                            {{> afQuickField name='customerId' class="js-customer"}}
-                        </div>
-                        <div class="col-50">
-                            {{> afQuickField name='staffId' class="js-staff"}}
+                <!--{{#autoForm collection="Collection.Order" id="addOrder" type="insert"}}-->
+                    <!--<div class="row">-->
+                        <!--<div class="col-50">-->
+                            <!--{{> afQuickField name='customerId' class="js-customer"}}-->
+                        <!--</div>-->
+                        <!--<div class="col-50">-->
+                            <!--{{> afQuickField name='staffId' class="js-staff"}}-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--{{/autoForm}}-->
+
+                <div class="row">
+                    <div class="col-50">
+                        <div class="list">
+                            <label class="item item-input item-select">
+                                <div class="input-label">
+                                    Customer
+                                </div>
+                                <select class="js-customer">
+                                    {{#each showCustomer}}
+                                        <option value={{_id}}>{{name}}</option>
+                                    {{/each}}
+                                </select>
+                            </label>
                         </div>
                     </div>
-                {{/autoForm}}
+                    <div class="col-50">
+                        <div class="list">
+                            <label class="item item-input item-select">
+                                <div class="input-label">
+                                    Staff
+                                </div>
+                                <select class="js-staff">
+                                    <option value="">(Select One)</option>
+                                    {{#each showStaff}}
+                                        <option value={{_id}}>{{name}}</option>
+                                    {{/each}}
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             {{#each showOrderDetail}}
@@ -92,20 +125,10 @@
                     </div>
                 </div>
             </div>
-        <div class="row">
-            <div class="col-50">
-                <button class="button button-round button-block button-positive js-paid">
-                    Paid
-                </button>
-            </div>
-            <div class="col-50">
-                <button class="button button-block button-balanced">
-                    Order
-                </button>
-            </div>
-        </div>
+            <button class="button button-round button-block button-positive js-paid">
+                Paid
+            </button>
             <!--test item-toggle-->
-
         {{/ionContent}}
     {{/ionView}}
 </template>

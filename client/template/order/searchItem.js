@@ -6,23 +6,23 @@ Tracker.autorun(function () {
 
 Template.searchItem.created = function () {
     let orderId = Router.current().params.orderId;
-    Session.set('limit', 10);
+    // Session.set('limit', 10);
     this.autorun(() => {
         this.subscribe = Meteor.subscribe("staffs");
         this.subscribe = Meteor.subscribe("order", orderId);
-        this.subscribe = Meteor.subscribe("customer", Router.current().params.customerId);
+        this.subscribe = Meteor.subscribe("customers");
         this.subscribe = Meteor.subscribe("orderDetail", Router.current().params.orderId);
     });
 };
 
 //onRender
 Template.searchItem.rendered = function () {
-    Session.set('limit', 10);
+    // Session.set('limit', 10);
 };
 
 //event
 Template.searchItem.events({
-    'keyup .js-search-item': function (event, template) {
+    'keyup .js-search-item': (event, template)=> {
         Session.set('searchQueryItem', event.target.value);
     },
     'click .close-modal': ()=> {
@@ -34,7 +34,7 @@ Template.searchItem.events({
 //helper
 Template.searchItem.helpers({
     items: function () {
-        let items = Collection.Item.search(Session.get('searchQueryItem'), Session.get('limit'));
+        let items = Collection.Item.search(Session.get('searchQueryItem'));//, Session.get('limit')
         if (items) {
             return items;
         }
@@ -54,48 +54,39 @@ Template.searchItem.helpers({
 });
 
 Template.searchItem.events({
-    'click .js-staff'(e){
-        if ($(e.currentTarget).prop('checked')) {
-            $('.js-item').prop('checked', false);
-            $('.js-query-staff').show(500);
-            $('.js-query-item').hide(500);
-            Session.set('searchQueryItem', undefined);
-        } else {
-            $('.js-query-staff').hide(500);
-            Session.set('searchQueryStaff', undefined);
-            Session.set('searchQueryItem', undefined);
-        }
-    },
-    'click .js-item'(e){
-        if ($(e.currentTarget).prop('checked')) {
-            $('.js-staff').prop('checked', false);
-            $('.js-query-item').show(500);
-            $('.js-query-staff').hide(500);
-            Session.set('searchQueryStaff', undefined);
-        } else {
-            $('.js-query-item').hide(500);
-            Session.set('searchQueryStaff', undefined);
-            Session.set('searchQueryItem', undefined);
-        }
-    }
+    // 'click .js-staff'(e){
+    //     if ($(e.currentTarget).prop('checked')) {
+    //         $('.js-item').prop('checked', false);
+    //         $('.js-query-staff').show(500);
+    //         $('.js-query-item').hide(500);
+    //         Session.set('searchQueryItem', undefined);
+    //     } else {
+    //         $('.js-query-staff').hide(500);
+    //         Session.set('searchQueryStaff', undefined);
+    //         Session.set('searchQueryItem', undefined);
+    //     }
+    // },
+    // 'click .js-item'(e){
+    //     if ($(e.currentTarget).prop('checked')) {
+    //         $('.js-staff').prop('checked', false);
+    //         $('.js-query-item').show(500);
+    //         $('.js-query-staff').hide(500);
+    //         Session.set('searchQueryStaff', undefined);
+    //     } else {
+    //         $('.js-query-item').hide(500);
+    //         Session.set('searchQueryStaff', undefined);
+    //         Session.set('searchQueryItem', undefined);
+    //     }
+    // }
 });
 
-
-//onDestroyed
-Template.searchItem.onDestroyed(function () {
-    // Session.set('searchQueryItem', undefined);
-    // Session.set('searchQueryStaff', undefined);
-});
 
 //template _productItem events
 Template._productItem.events({
     'click .insert-order': function () {
         let params = Router.current().params;
-        // let customerId = params.customerId;
         let customerId = $('.js-customer');
         let staffId = $('.js-staff');
-        // let customer = Collection.Customer.findOne(customerId);
-        // let customerName = customer.name;
 
         let selector = Session.get('orderDetailObj');
         selector[this._id] = {
@@ -105,34 +96,39 @@ Template._productItem.events({
             price: this.price,
             quantity: 1,
             discount: 0,
-            amount: this.price * 1,
-            // customerId: params.customerId,
-            // customerId: customerId,
-            // customerName: customerName
+            amount: this.price * 1
         };
         console.log(selector);
-
-        Meteor.call('insertOrderDetail', selector, (err, result) => {
-            if (err) {
-                sAlert.error(error.message);
-                IonLoading.hide();
-            } else {
-                IonLoading.hide();
-                Session.set('orderId', result);
-            }
-        });
-
+        if(selector){
+            Meteor.call('insertOrderDetail', selector, (err, result) => {
+                if (err) {
+                    sAlert.error(error.message);
+                    IonLoading.hide();
+                } else {
+                    IonLoading.hide();
+                    Session.set('orderId', result);
+                }
+            });
+        }
+        
         let orderId = params.orderId;
         console.log(`orderId : ${orderId}`);
-        Meteor.call('updateOrderTotal', orderId, (err, result)=> {
-            if (err) {
-                sAlert.error(error.message);
-                IonLoading.hide();
-            } else {
-                IonLoading.hide();
-                Session.set('orderId', result);
-            }
-        });
+        if(orderId){
+            Meteor.call('updateOrderTotal', orderId, (error, result)=> {
+                if (error) {
+                    sAlert.error(error.message);
+                    IonLoading.hide();
+                } else {
+                    IonLoading.hide();
+                    Session.set('orderId', result);
+                }
+            });
+        }
     }
+});
+
+//onDestroyed
+Template.searchItem.onDestroyed(function () {
+    Session.set('searchQueryItem', undefined);
 });
 

@@ -128,6 +128,7 @@
         <item url="file://$USER_HOME$/.meteor/packages/rate-limit/1.0.4/web.browser/rate-limit.js" />
         <item url="file://$USER_HOME$/.meteor/packages/service-configuration/1.0.9/web.browser/service_configuration_common.js" />
         <item url="file://$USER_HOME$/.meteor/packages/sha/1.0.7/web.browser/sha256.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/simple_reactive-method/1.0.2/web.browser/packages/simple_reactive-method.js" />
         <item url="file://$USER_HOME$/.meteor/packages/srp/1.0.8/web.browser/srp.js" />
         <item url="file://$USER_HOME$/.meteor/packages/srp/1.0.8/web.browser/biginteger.js" />
         <item url="file://$USER_HOME$/.meteor/packages/meteoric_ionic/0.2.0/web.browser/components/ionTab/ionTab.js" />
@@ -511,6 +512,7 @@
       <root url="file://$USER_HOME$/.meteor/packages/rate-limit/1.0.4/web.browser/rate-limit.js" />
       <root url="file://$USER_HOME$/.meteor/packages/service-configuration/1.0.9/web.browser/service_configuration_common.js" />
       <root url="file://$USER_HOME$/.meteor/packages/sha/1.0.7/web.browser/sha256.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/simple_reactive-method/1.0.2/web.browser/packages/simple_reactive-method.js" />
       <root url="file://$USER_HOME$/.meteor/packages/srp/1.0.8/web.browser/srp.js" />
       <root url="file://$USER_HOME$/.meteor/packages/srp/1.0.8/web.browser/biginteger.js" />
       <root url="file://$USER_HOME$/.meteor/packages/meteoric_ionic/0.2.0/web.browser/components/ionTab/ionTab.js" />

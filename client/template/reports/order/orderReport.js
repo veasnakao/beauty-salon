@@ -19,6 +19,7 @@ Tracker.autorun(function () {
 
 
 Template.orderReport.helpers({
+ 
     staffName: function () {
         let staff = Collection.Staff.findOne(Session.get('staffId'));
         if (staff) {

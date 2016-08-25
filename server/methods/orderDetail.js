@@ -118,16 +118,19 @@ Meteor.methods({
     //update orderTotal
     updateOrderTotal(orderId){
         let subTotal = 0;
-        let orderDetails = Collection.OrderDetail.find({orderId: orderId});
-        orderDetails.forEach((objOrderDetail)=> {
-            subTotal += objOrderDetail.amount;
-        });
-        console.log(`subTotal : ${subTotal}`);
-        Collection.Order.update(orderId, {
-            $set: {
-                total: subTotal
-            }
-        })
+        let orderDetail = Collection.OrderDetail.find({orderId: orderId});
+        if(orderDetail){
+            orderDetail.forEach((objOrderDetail)=> {
+                subTotal += objOrderDetail.amount;
+                console.log(`subTotal : ${subTotal}`);
+            });
+            Collection.Order.update(orderId, {
+                $set: {
+                    total: subTotal
+                }
+            })
+        }
+
     },
 
     //update orderCustomerId
@@ -146,5 +149,100 @@ Meteor.methods({
                 staffId: staffId
             }
         })
+    }
+});
+
+//orderItemDetailByCustomer
+Meteor.methods({
+    orderItemDetailByCustomer(){
+        let orderItemDetail = Collection.Order.aggregate([
+            {
+                $match: {
+                    status:'active',
+                    total: {$ne: 0}
+                    // total: {$exists: true}
+                }
+            },
+            {
+                $lookup: {
+                    from: "orderDetail",
+                    localField: "_id",
+                    foreignField: "orderId",
+                    as: "orderDoc"
+                }
+            },
+            {
+                $unwind: {path: '$orderDoc', preserveNullAndEmptyArrays: true}
+            },
+            {
+                $lookup: {
+                    from: "item",
+                    localField: "orderDoc.itemId",
+                    foreignField: "_id",
+                    as: "orderDoc.itemDoc"
+                }
+            },
+            {$unwind: {path: '$orderDoc.itemDoc', preserveNullAndEmptyArrays: true}},
+            {
+                $lookup: {
+                    from: "customer",
+                    localField: "customerId",
+                    foreignField: "_id",
+                    as: "customerDoc"
+                }
+            },
+            {$unwind: {path: '$customerDoc', preserveNullAndEmptyArrays: true}},
+            {
+                $lookup: {
+                    from: "staff",
+                    localField: "staffId",
+                    foreignField: "_id",
+                    as: "orderDoc.staffDoc"
+                }
+            },
+            {
+                $unwind: {path: '$orderDoc.staffDoc', preserveNullAndEmptyArrays: true}
+            },
+            {
+                $group: {
+                    _id: '$_id',
+                    // _id: {
+                    //     id:'$_id',
+                    //     customerId:'$customerDoc.customerDoc._id',
+                    //     itemId:'$orderDoc.itemDoc._id'
+                    // },
+                    items: {
+                        $addToSet: {
+                            itemName: '$orderDoc.itemDoc.name',
+                            price: '$orderDoc.price',
+                            qty: '$orderDoc.quantity',
+                            discount: '$orderDoc.discount',
+                            amount: '$orderDoc.amount',
+                            staff: '$orderDoc.staffDoc.name',
+                            date: '$date',
+                            customer: '$customerDoc.name'
+
+                        }
+                    },
+                    customer: {
+                        $addToSet: {
+                            customer: '$customerDoc.name',
+                            staff: '$orderDoc.staffDoc.name'
+                        }
+                    },
+                    total: {
+                        $sum: '$orderDoc.amount'
+                    }
+                }
+            },
+            {$sort: {_id: 1}}
+        ]);
+        let data = {};
+        let content = [];
+        if (orderItemDetail) {
+            data.content = orderItemDetail;
+            console.log(data);
+            return data;
+        }
     }
 });

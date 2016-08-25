@@ -1,12 +1,12 @@
 //oncreated
-Template.dayExpenseDetail.created = function () {
+Template.journalEntryDetail.created = function () {
     this.autorun(function () {
-        this.subscription = Meteor.subscribe('dayExpense', Router.current().params._id);
+        this.subscription = Meteor.subscribe('journalEntry', Router.current().params._id);
     }.bind(this));
 };
 
 //onrender
-Template.dayExpenseDetail.rendered = function () {
+Template.journalEntryDetail.rendered = function () {
     try {
         this.autorun(() => {
             if (!this.subscription.ready()) {
@@ -21,7 +21,7 @@ Template.dayExpenseDetail.rendered = function () {
 };
 
 //helper
-Template.dayExpenseDetail.helpers({
+Template.journalEntryDetail.helpers({
     dayExpenseDetail: ()=> {
         let data = {};
         let content = [];

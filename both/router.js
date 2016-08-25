@@ -44,15 +44,15 @@ Router.map(function () {
     });
 
     //expenseItem
-    this.route('showExpenseItem');
-    this.route('expenseItemInfo',{
-        path:'/expenseItemInfo/:_id'
+    this.route('showJournalItem');
+    this.route('journalItemInfo',{
+        path:'/journalItemInfo/:_id'
     });
 
-    //dayExpense
-    this.route('showDayExpense');
-    this.route('dayExpenseDetail',{
-        path:'/dayExpenseDetail/:_id'
+    //journalEntry
+    this.route('showJournalEntry');
+    this.route('journalEntryDetail',{
+        path:'/journalEntryDetail/:_id'
     });
 
     //order
@@ -68,6 +68,7 @@ Router.map(function () {
     this.route('reports');
     this.route('staffReport');
     this.route('orderReport');
+    this.route('journalEntryReport');
     this.route('profitAndLossReport');
     this.route('login');
     this.route('signup');

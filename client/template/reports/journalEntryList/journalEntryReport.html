@@ -1,0 +1,173 @@
+<template name="journalEntryReport">
+    {{#contentFor "headerButtonLeft"}}
+        {{>ionNavBackButton path="index"}}
+    {{/contentFor}}
+
+    {{#contentFor "headerTitle"}}
+        <h1 class="title">Journal Entry Report</h1>
+    {{/contentFor}}
+
+        <!--{{#contentFor "headerButtonRight"}}-->
+    <!--<button class="button button-clear pull-left" data-ion-modal="addJournalEntry">-->
+    <!--{{> ionIcon icon="ion ion-plus-circled"}}-->
+    <!--</button>-->
+        <!--{{/contentFor}}-->
+
+    {{#ionView}}
+        {{#ionContent}}
+            {{#ionList}}
+                <div class="list">
+
+                    <label class="item item-input">
+                        <div class="input-label">
+                            From Date
+                        </div>
+                        <input type="date" class="js-from-date">
+                    </label>
+                    <label class="item item-input">
+                        <div class="input-label">
+                            To Date
+                        </div>
+                        <input type="date" class="js-to-date">
+                    </label>
+                    <ul class="list">
+                        <li class="item item-toggle">
+                            Expense
+                            <label class="toggle toggle-balance">
+                                <input type="checkbox" class="js-expense">
+                                <div class="track">
+                                    <div class="handle"></div>
+                                </div>
+                            </label>
+                        </li>
+                        <li class="item item-toggle">
+                            Income
+                            <label class="toggle toggle-balance">
+                                <input type="checkbox" class="js-income">
+                                <div class="track">
+                                    <div class="handle"></div>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+
+                    <button class="button button-block button-positive js-journalEntry-report">
+                        OK
+                    </button>
+
+                </div>
+            {{/ionList}}
+
+                <!--{{#if journalEntry}}-->
+                <!--{{#each journalEntry.content}}-->
+                    <!--{{#ionItem iconRight=true}}-->
+                    <!--Date : {{moFormat date 'DD/MM/YYYY'}} |-->
+                    <!--Journal Type : {{typeOfJournal}} <br>-->
+
+                        <!--{{#each orderDetailDoc}}-->
+                        <!--Order Item : {{itemName}} |-->
+                        <!--Quantity : {{qty}} |-->
+                        <!--Price : {{price}} |-->
+                        <!--Amount : {{amount}}<br>-->
+                            <!--{{/each}}-->
+                        <!--{{#with orderDoc}}-->
+                        <!--Total : {{numFormat total '0,0.00 $'}}<br>-->
+                            <!--{{/with}}-->
+
+                        <!--{{/ionItem}}-->
+                    <!--{{/each}}-->
+                <!--{{/if}}-->
+
+            {{#if journalEntryIncome}}
+                {{#each journalEntryIncome.content}}
+                    <div class="card">
+                        <div class="item item-divider">
+                            <div class="row">
+                                <div class="col">
+                                    Date : {{moFormat date 'DD/MM/YYYY'}}
+                                </div>
+                                <div class="col">
+                                    Journal Type : {{typeOfJournal}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item item-text-wrap">
+                            <div class="row">
+                                <div class="col"><u>Order Item</u></div>
+                                <div class="col"><u>Quantity</u></div>
+                                <div class="col"><u>Price</u></div>
+                                <div class="col"><u>Amount</u></div>
+                            </div>
+                            {{#each orderDetailDoc}}
+                                <div class="row">
+                                    <div class="col">{{itemName}}</div>
+                                    <div class="col">{{qty}}</div>
+                                    <div class="col">{{numFormat price '0,0.00 $'}}</div>
+                                    <div class="col">{{numFormat amount '0,0.00 $'}}</div>
+                                </div>
+                            {{/each}}
+                        </div>
+
+                        {{#with orderDoc}}
+
+                            <div class="item item-divider">
+                                <div class="row">
+                                    <div class="col">Total</div>
+                                    <div class="col-25">
+                                        {{numFormat total '0,0.00 $'}}
+                                    </div>
+                                </div>
+                            </div>
+                        {{/with}}
+                    </div>
+                {{/each}}
+            {{/if}}
+
+            {{#if journalEntryExpense}}
+                {{#each journalEntryExpense.content}}
+                    <div class="card">
+                        <div class="item item-divider">
+                            <div class="row">
+                                <div class="col">
+                                    Date : {{moFormat date 'DD/MM/YYYY'}}
+                                </div>
+                                <div class="col">
+                                    Journal Type : {{typeOfJournal}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item item-text-wrap">
+                            <div class="row">
+                                <div class="col"><u>Item Name</u></div>
+                                <div class="col"><u>Amount</u></div>
+                            </div>
+                            {{#each journalEntryItem}}
+                                <div class="row">
+                                    <div class="col">
+                                        {{#with journalItemDoc}}
+                                            {{journalItemName}}
+                                        {{/with}}
+                                    </div>
+                                    <div class="col">
+                                        {{numFormat journalItemPrice '0,0.00 $'}}
+                                    </div>
+                                </div>
+                            {{/each}}
+                        </div>
+                        <div class="item item-divider">
+                            <div class="row">
+                                <div class="col">Total</div>
+                                <div class="col">
+                                    {{numFormat totalJournalItem '0,0.00 $'}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            {{/if}}
+
+
+        {{/ionContent}}
+    {{/ionView}}
+
+</template>

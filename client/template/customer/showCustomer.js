@@ -6,7 +6,7 @@ Template.showCustomer.created = function () {
 };
 
 //onrender
-Template.showCustomer.rendered = function() {
+Template.showCustomer.rendered = function () {
     try {
         this.autorun(() => {
             if (!this.subscription.ready()) {
@@ -22,7 +22,10 @@ Template.showCustomer.rendered = function() {
 
 //helper
 Template.showCustomer.helpers({
-    showCustomer:()=>{
-        return Collection.Customer.find({},{sort: {_id:1}});
+    showCustomer: ()=> {
+        let customer = Collection.Customer.find({}, {sort: {_id: 1}});
+        if (customer) {
+            return customer;
+        }
     }
 });

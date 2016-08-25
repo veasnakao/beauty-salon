@@ -22,21 +22,21 @@ Meteor.publish('item', function(_id) {
     return Collection.Item.find({_id: _id});
 });
 
-//publish expenseItem
-Meteor.publish('expenseItems', function() {
-    return Collection.ExpenseItem.find();
+//publish journalItem
+Meteor.publish('journalItems', function() {
+    return Collection.JournalItem.find();
 });
-Meteor.publish('expenseItem', function(_id) {
-    return Collection.ExpenseItem.find({_id: _id});
+Meteor.publish('journalItem', function(_id) {
+    return Collection.JournalItem.find({_id: _id});
 });
 
 //publish dayExpense
-Meteor.publish('dayExpenses', function() {
-    return Collection.DayExpense.find();
+Meteor.publish('journalEntrys', function() {
+    return Collection.JournalEntry.find();
 });
-Meteor.publish('dayExpense', function(selector) {
+Meteor.publish('journalEntry', function(selector) {
     // return Collection.DayExpense.find({_id: _id});
-    return Collection.DayExpense.find(selector);
+    return Collection.JournalEntry.find(selector);
 });
 
 //publish order

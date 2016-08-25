@@ -1,9 +1,3 @@
-Template.addStaff.rendered = function () {
-};
-Template.addCustomer.events({
-    
-});
-
 AutoForm.hooks({
     addCustomer: {//id autoform
         before: {
