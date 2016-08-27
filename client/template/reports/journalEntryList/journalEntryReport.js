@@ -15,22 +15,6 @@ Tracker.autorun(function () {
         Meteor.subscribe("journalEntry", selector);
     }
 });
-
-Template.journalEntryReport.helpers({
-    journalEntryExpense(){
-        let journalEntryExpenseReport = Session.get('journalEntryExpenseReport');
-        if (journalEntryExpenseReport) {
-            return journalEntryExpenseReport;
-        }
-    },
-    journalEntryIncome(){
-        let journalEntryIncomeReport = Session.get('journalEntryIncomeReport');
-        if(journalEntryIncomeReport){
-            return journalEntryIncomeReport;
-        }
-    }
-});
-
 Template.journalEntryReport.rendered = function () {
     try {
         this.autorun(() => {
@@ -45,6 +29,32 @@ Template.journalEntryReport.rendered = function () {
     }
 };
 
+Template.journalEntryReport.helpers({
+    subTotalIsNotZero(total){
+        return total!=0 && total!=null;
+    },
+    journalEntryByExpense(){
+        let journalEntryByExpense = Session.get('journalEntryByExpense');
+        if (journalEntryByExpense) {
+            return journalEntryByExpense;
+        }
+    },
+    journalEntryByIncome(){
+        let journalEntryByIncome = Session.get('journalEntryByIncome');
+        if (journalEntryByIncome) {
+            return journalEntryByIncome;
+        }
+    },
+    journalEntryIncomeFromOrder(){
+        let journalEntryIncomeFromOrder = Session.get('journalEntryIncomeFromOrder');
+        if (journalEntryIncomeFromOrder) {
+            return journalEntryIncomeFromOrder;
+        }
+    }
+});
+
+
+
 Template.journalEntryReport.events({
     'click .js-expense'(e){
         if ($(e.currentTarget).prop('checked')) {
@@ -56,39 +66,56 @@ Template.journalEntryReport.events({
             $('.js-expense').prop('checked', false);
         }
     },
-    'click .js-journalEntry-report'(){
-        let fromDate = $('.js-from-date').val();
-        let toDate = $('.js-to-date').val();
+    'click .js-journalEntry-report'(e, instance){
+        let fromDate = instance.$('.js-from-date').val();
+        let toDate = instance.$('.js-to-date').val();
 
         if ($('.js-expense').is(':checked')) {
             let typeOfJournal = 'expense';
-            Meteor.call('journalEntryExpenseReport', fromDate, toDate,typeOfJournal, (error, result)=> {
+            Meteor.call('journalEntryByJournalType', fromDate, toDate, typeOfJournal, (error, result)=> {
+                if (error) {
+                    sAlert.error(error.message)
+                } else {
+                    Session.set('journalEntryIncomeFromOrder', undefined);
+                    Session.set('journalEntryByIncome', undefined);
+                    Session.set('journalEntryByExpense', result);
+
+                }
+            });
+
+        } else if ($('.js-income').is(':checked')) {
+            
+            //journalEntryIncomeFromOrder
+            Meteor.call('journalEntryIncomeFromOrder', fromDate, toDate, (error, result)=> {
+                if (error) {
+                    sAlert.error(error.message)
+                } else {
+                    Session.set('journalEntryByExpense', undefined);
+                    Session.set('journalEntryIncomeFromOrder', result);
+
+                }
+            });
+            
+            //journalEntryByIncome
+            let typeOfJournal = 'income';
+            Meteor.call('journalEntryByJournalType', fromDate, toDate, typeOfJournal, (error, result)=> {
                 if (error) {
                     sAlert.error(error.message)
                 } else {
                     Session.set('journalEntryIncomeReport', undefined);
-                    Session.set('journalEntryExpenseReport', result);
-
+                    Session.set('journalEntryByIncome', result);
+            
                 }
             });
-        }else if ($('.js-income').is(':checked')) {
-            let typeOfJournal = 'income';
-            Meteor.call('journalEntryIncomeReport', fromDate, toDate,typeOfJournal, (error, result)=> {
-                if (error) {
-                    sAlert.error(error.message)
-                } else {
-                    Session.set('journalEntryExpenseReport', undefined);
-                    Session.set('journalEntryIncomeReport', result);
-
-                }
-            });
-        }else{
-            Session.set('journalEntryExpenseReport', undefined);
-            Session.set('journalEntryIncomeReport', undefined);
+        } else {
+            Session.set('journalEntryByExpense', undefined);
+            Session.set('journalEntryByIncome', undefined);
+            Session.set('journalEntryIncomeFromOrder', undefined);
         }
     }
 });
 Template.journalEntryReport.onDestroyed(function () {
-    Session.set('journalEntryExpenseReport', undefined);
-    Session.set('journalEntryIncomeReport', undefined);
+    Session.set('journalEntryByExpense', undefined);
+    Session.set('journalEntryByIncome', undefined);
+    Session.set('journalEntryIncomeFromOrder', undefined);
 });

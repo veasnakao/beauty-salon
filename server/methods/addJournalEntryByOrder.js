@@ -1,9 +1,13 @@
 Meteor.methods({
     addJournalEntryByOrder(selector){
-        var todayDate = moment().format('YYYYMMDD');
-        var prefix = todayDate + '-';
-        selector._id = idGenerator.genWithPrefix(Collection.Order, prefix, 4);
-        let orderId = Collection.JournalEntry.insert(selector);
-        return orderId;
+        let todayDate = moment().format('YYYYMMDD');
+        let prefix = todayDate + '-';
+        // selector.orderId = idGenerator.genWithPrefix(Collection.Order, prefix, 4);
+        selector._id = idGenerator.genWithPrefix(Collection.JournalEntry, prefix, 4);
+        let journalEntry = Collection.JournalEntry.insert(selector);
+        if(journalEntry){
+            console.log(journalEntry);
+            return journalEntry;
+        }
     }
 });

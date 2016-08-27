@@ -65,3 +65,6 @@ risul:moment-timezone
 lbee:moment-helpers
 accounts-password
 simple:reactive-method
+stevezhu:lodash
+#kevohagan:sweetalert
+paulkr:overhang

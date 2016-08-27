@@ -1,7 +1,7 @@
 Tracker.autorun(function () {
-    // if (Session.get('paramsOrderId')) {
-    //     Meteor.subscribe("order", Session.get('paramsOrderId'));
-    // }
+    if (Session.get('OrderId')) {
+        Meteor.subscribe("journalEntrys");
+    }
 });
 
 //oncreated
@@ -14,6 +14,7 @@ Template.itemOrder.created = function () {
         this.subscription = Meteor.subscribe("customers");
         this.subscription = Meteor.subscribe("orderDetail", Router.current().params.orderId);
         this.subscription = Meteor.subscribe('order', Router.current().params.orderId);
+        // this.subscription = Meteor.subscribe('journalEntrys');
     }.bind(this));
 };
 
@@ -258,14 +259,8 @@ Template.itemOrder.events({
             title: 'Paid.',
             template: 'Confirm paid.',
             onOk: () => {
+                debugger;
                 let orderId = params.orderId;
-                Meteor.call('updateOrderStatus', orderId, (error, result)=> {
-                    if (error) {
-                        sAlert.error(error.message);
-                        IonLoading.hide();
-                    }
-                });
-
                 let selector = {};
                 selector.date = new Date();
                 selector.orderId = orderId;
@@ -276,10 +271,20 @@ Template.itemOrder.events({
                         sAlert.error(error.message);
                     } else {
                         IonLoading.hide();
-                        Session.set('orderId', undefined);
+                    }
+                });
+
+
+                Meteor.call('updateOrderStatus', orderId, (error, result)=> {
+                    if (error) {
+                        sAlert.error(error.message);
+                        IonLoading.hide();
+                    }else{
                         Router.go(`/showOrder`);
                     }
                 });
+
+
             },
             onCancel: function () {
                 sAlert.warning('Cancel paid.');

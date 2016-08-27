@@ -15,91 +15,94 @@
 
     {{#ionView}}
         {{#ionContent}}
-            {{#if journalEntryIncome}}
-                {{#each journalEntryIncome.content}}
-                    <div class="card">
-                        <div class="item item-divider">
-                            <div class="row">
-                                <div class="col">
-                                    Date : {{moFormat date 'DD/MM/YYYY'}}
-                                </div>
-                                <div class="col">
-                                    Journal Type : {{typeOfJournal}}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item item-text-wrap">
-                            <div class="row">
-                                <div class="col"><u>Order Item</u></div>
-                                <div class="col"><u>Quantity</u></div>
-                                <div class="col"><u>Price</u></div>
-                                <div class="col"><u>Amount</u></div>
-                            </div>
-                            {{#each orderDetailDoc}}
+        <!--{{#if journalEntryIncomeFromOrder}}-->
+                <!--{{#each journalEntryIncomeFromOrder.content}}-->
+                <!--<div class="card">-->
+                <!--<div class="item item-divider">-->
+                <!--<div class="row">-->
+                <!--<div class="col">-->
+                <!--Date : {{moFormat date 'DD/MM/YYYY'}}-->
+                <!--</div>-->
+                <!--<div class="col">-->
+                <!--Journal Type : {{typeOfJournal}}-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="item item-text-wrap">-->
+                <!--<div class="row">-->
+                <!--<div class="col"><u>Order Item</u></div>-->
+                <!--<div class="col"><u>Quantity</u></div>-->
+                <!--<div class="col"><u>Price</u></div>-->
+                <!--<div class="col"><u>Amount</u></div>-->
+                <!--</div>-->
+                    <!--{{#each orderDetailDoc}}-->
+                    <!--<div class="row">-->
+                    <!--<div class="col">{{itemName}}</div>-->
+                    <!--<div class="col">{{qty}}</div>-->
+                    <!--<div class="col">{{numFormat price '0,0.00 $'}}</div>-->
+                    <!--<div class="col">{{numFormat amount '0,0.00 $'}}</div>-->
+                    <!--</div>-->
+                        <!--{{/each}}-->
+                <!--</div>-->
+
+                    <!--{{#with orderDoc}}-->
+
+                    <!--<div class="item item-divider">-->
+                    <!--<div class="row">-->
+                    <!--<div class="col">Total</div>-->
+                    <!--<div class="col-25">-->
+                    <!--{{numFormat total '0,0.00 $'}}-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                        <!--{{/with}}-->
+                <!--</div>-->
+                    <!--{{/each}}-->
+                <!--{{/if}}-->
+
+            {{#if journalEntry}}
+                {{#each journalEntry.content}}
+                    {{#if subTotalIsNotZero subTotal}}
+                        <div class="card">
+                            <div class="item item-divider">
                                 <div class="row">
-                                    <div class="col">{{itemName}}</div>
-                                    <div class="col">{{qty}}</div>
-                                    <div class="col">{{numFormat price '0,0.00 $'}}</div>
-                                    <div class="col">{{numFormat amount '0,0.00 $'}}</div>
+                                    <div class="col">
+                                        Date : {{moFormat date 'DD/MM/YYYY'}}
+                                    </div>
+                                    <div class="col">
+                                        Journal Type : {{typeOfJournal}}
+                                    </div>
                                 </div>
-                            {{/each}}
-                        </div>
-
-                        {{#with orderDoc}}
-
+                            </div>
+                            <div class="item item-text-wrap">
+                                <div class="row">
+                                    <div class="col"><u>Item Name</u></div>
+                                    <div class="col"><u>Amount</u></div>
+                                </div>
+                                {{#each journalEntryItem}}
+                                    <div class="row">
+                                        <div class="col">
+                                            {{#with journalItemDoc}}
+                                                {{journalItemName}}
+                                            {{/with}}
+                                        </div>
+                                        <div class="col">
+                                            {{numFormat journalItemPrice '0,0.00 $'}}
+                                        </div>
+                                    </div>
+                                {{/each}}
+                            </div>
                             <div class="item item-divider">
                                 <div class="row">
                                     <div class="col">Total</div>
-                                    <div class="col-25">
-                                        {{numFormat total '0,0.00 $'}}
+                                    <div class="col">
+                                        {{numFormat subTotal '0,0.00 $'}}
                                     </div>
                                 </div>
                             </div>
-                        {{/with}}
-                    </div>
-                {{/each}}
-            {{/if}}
+                        </div>
+                    {{/if}}
 
-            {{#if journalEntryExpense}}
-                {{#each journalEntryExpense.content}}
-                    <div class="card">
-                        <div class="item item-divider">
-                            <div class="row">
-                                <div class="col">
-                                    Date : {{moFormat date 'DD/MM/YYYY'}}
-                                </div>
-                                <div class="col">
-                                    Journal Type : {{typeOfJournal}}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item item-text-wrap">
-                            <div class="row">
-                                <div class="col"><u>Item Name</u></div>
-                                <div class="col"><u>Amount</u></div>
-                            </div>
-                            {{#each journalEntryItem}}
-                                <div class="row">
-                                    <div class="col">
-                                        {{#with journalItemDoc}}
-                                            {{journalItemName}}
-                                        {{/with}}
-                                    </div>
-                                    <div class="col">
-                                        {{numFormat journalItemPrice '0,0.00 $'}}
-                                    </div>
-                                </div>
-                            {{/each}}
-                        </div>
-                        <div class="item item-divider">
-                            <div class="row">
-                                <div class="col">Total</div>
-                                <div class="col">
-                                    {{numFormat totalJournalItem '0,0.00 $'}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 {{/each}}
             {{/if}}
             <button class="button button-block button-positive ion-refresh">

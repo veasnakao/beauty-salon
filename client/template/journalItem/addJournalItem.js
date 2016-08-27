@@ -1,12 +1,12 @@
 //oncreated
-Template.addJournalEntry.created = function () {
+Template.addJournalItem.created = function () {
     this.autorun(function () {
         this.subscription = Meteor.subscribe('journalItems');
     }.bind(this));
 };
 
 //onrender
-Template.addJournalEntry.rendered = function() {
+Template.addJournalItem.rendered = function() {
     try {
         this.autorun(() => {
             if (!this.subscription.ready()) {

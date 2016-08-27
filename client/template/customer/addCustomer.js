@@ -7,7 +7,11 @@ AutoForm.hooks({
             }
         },
         onSuccess(formType, id){
-            sAlert.success('Customer add success');
+            // sAlert.success('Customer add success');
+            overhang.notify({
+                type : "success",
+                message: "Woohoo! Our message works!"
+            });
         },
         onError(formType, error){
             sAlert.error(error.message);

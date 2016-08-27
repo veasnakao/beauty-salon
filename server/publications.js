@@ -30,7 +30,7 @@ Meteor.publish('journalItem', function(_id) {
     return Collection.JournalItem.find({_id: _id});
 });
 
-//publish dayExpense
+//publish journalEntry
 Meteor.publish('journalEntrys', function() {
     return Collection.JournalEntry.find();
 });
