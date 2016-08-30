@@ -1,0 +1,52 @@
+<template name="payment">
+    {{#if currentUser}}
+        {{#contentFor "headerButtonLeft"}}
+            {{>ionNavBackButton path="itemOrder"}}
+        {{/contentFor}}
+
+        {{#contentFor "headerTitle"}}
+            <h1 class="title">Payment</h1>
+        {{/contentFor}}
+
+        {{#ionView}}
+            {{#ionContent}}
+                {{#autoForm collection="Collection.Payment" id="payment" doc=order type="insert"}}
+                    {{> afQuickField name='orderId' class="js-customer" type="hidden"}}
+                    {{> afQuickField name='customerId' class="js-customer"}}
+                    {{> afQuickField name='staffId' class="js-staff"}}
+                    {{> afQuickField name='paymentDate'}}
+                    {{> afQuickField name='dueAmount' readonly=true class="js-dueAmount" style="background-color: #D8D8D7"}}
+                    {{> afQuickField name='paidAmount' class="js-paidAmount"}}
+                    {{> afQuickField name='return' readonly=true class="js-return"}}
+                    <!--js-paid-->
+                    <div class="row">
+                        <div class="col">
+                            <button class="button button-round button-block button-positive js-payment">
+                                {{> ionIcon class="ion ion-cash"}}
+                                Payment
+                            </button>
+                        </div>
+                    </div>
+
+                {{/autoForm}}
+            <div class="row">
+                <div class="col">
+                    <div class="col">
+                        <button class="button button-small button-balanced js-generate">
+                            {{> ionIcon class="ion ion-refresh"}}
+                            Generate
+                        </button>
+                    </div>
+                    <!--<button class="button button-round button-block button-balanced js-paymentPrint">-->
+                        <!--{{> ionIcon class="ion ion-printer"}}-->
+                        <!--Payment & Print-->
+                    <!--</button>-->
+                </div>
+            </div>
+            {{/ionContent}}
+        {{/ionView}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
