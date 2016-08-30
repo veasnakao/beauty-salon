@@ -104,7 +104,7 @@ Template.itemOrder.events({
         let params = Router.current().params;
         let customerId = $('.js-customer').val();
         let orderId = params.orderId;
-        if(customerId && orderId){
+        if (customerId && orderId) {
             Meteor.call('updateOrderCustomerId', orderId, customerId, (error)=> {
                 if (error) {
                     sAlert.error(error.message);
@@ -117,12 +117,12 @@ Template.itemOrder.events({
         let params = Router.current().params;
         let staffId = $('.js-staff').val();
         let orderId = params.orderId;
-        if(staffId.length<0){
+        if (staffId.length < 0) {
             $('.search-item').hide(300);
-        }else{
+        } else {
             $('.search-item').show(300);
         }
-        if(staffId && orderId){
+        if (staffId && orderId) {
             Meteor.call('updateOrderStaffId', orderId, staffId, (error)=> {
                 if (error) {
                     sAlert.error(error.message);
@@ -279,17 +279,21 @@ Template.itemOrder.events({
                     if (error) {
                         sAlert.error(error.message);
                         IonLoading.hide();
-                    }else{
+                    } else {
                         Router.go(`/showOrder`);
                     }
                 });
-
-
             },
             onCancel: function () {
                 sAlert.warning('Cancel paid.');
             }
         });
+    },
+    'click .js-payment'(){
+        let params = Router.current().params;
+        let orderId = params.orderId;
+        console.log(`orderId ${orderId}`);
+        Router.go(`/itemOrder/orderId/${orderId}/payment`);
     }
 });
 

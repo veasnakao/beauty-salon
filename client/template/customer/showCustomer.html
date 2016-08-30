@@ -1,18 +1,13 @@
 <template name="showCustomer">
     {{#if currentUser}}
-        {{#contentFor "headerButtonLeft"}}
-            {{>ionNavBackButton path="index"}}
-        {{/contentFor}}
-
-        {{#contentFor "headerTitle"}}
-            <h1 class="title">Customer List</h1>
-        {{/contentFor}}
-
-        {{#contentFor "headerButtonRight"}}
-            <button class="button button-clear pull-left" data-ion-modal="addCustomer">
-                {{> ionIcon icon="ion ion-plus-circled"}}
+        <div class="bar bar-header bar-positive nav-bar-block nav-bar-transition-ios nav-bar-direction-forward" data-navbar-container>
+            <button class="button button-clear pull-left button-entering button-active" data-ion-menu-toggle="left">
+                <i class="icon ion-navicon"></i>
             </button>
-        {{/contentFor}}
+            <h1 class="title">Customer List</h1>
+            <button class="button button-clear add-order button-icon icon ion-plus-circled" data-ion-modal="addCustomer">
+            </button>
+        </div>
 
         {{#ionView}}
             {{#ionContent}}

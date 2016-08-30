@@ -2,28 +2,12 @@ Router.configure({
     layoutTemplate: 'layout'
 });
 
-// Router.configure({
-//     layoutTemplate: "layout",
-//     before: function () {
-//         if(!Meteor.user()) {
-//             // render the login template but keep the url in the browser the same
-//             this.router.layout("loginLayout");
-//             this.render('login');
-//             // this.route('login');
-//         }else{
-//             //Here we have to change the layoutTemplate back to the default
-//             this.router.layout("layout");
-//         }
-//     }
-// });
-
-// Router.configure({
-//     layoutTemplate:"login"
-// });
-
-
 Router.map(function () {
-    this.route('index', {path: '/'});
+    // this.route('index', {path: '/'});
+
+    this.route('index', {
+        path: '/'
+    });
 
     //staff
     this.route('showStaff');
@@ -33,36 +17,42 @@ Router.map(function () {
 
     //item
     this.route('showItem');
-    this.route('itemInfo',{
-        path:'/itemInfo/:_id'
+    this.route('itemInfo', {
+        path: '/itemInfo/:_id'
     });
 
     //customer
     this.route('showCustomer');
-    this.route('customerInfo',{
-        path:'/customerInfo/:_id'
+    this.route('customerInfo', {
+        path: '/customerInfo/:_id'
     });
 
     //expenseItem
     this.route('showJournalItem');
-    this.route('journalItemInfo',{
-        path:'/journalItemInfo/:_id'
+    this.route('journalItemInfo', {
+        path: '/journalItemInfo/:_id',
     });
 
     //journalEntry
     this.route('showJournalEntry');
-    this.route('journalEntryDetail',{
-        path:'/journalEntryDetail/:_id'
+    this.route('journalEntryDetail', {
+        path: '/journalEntryDetail/:_id'
     });
+    this.route('addJournalEntry');
 
     //order
     this.route('showOrder');
-    this.route('orderDetail',{
-        path:'/orderDetail/:_id'
+    this.route('orderDetail', {
+        path: '/orderDetail/:_id'
     });
-    this.route('itemOrder',{
-        path:'/itemOrder/orderId/:orderId'
-        // path:'/itemOrder/customerId/:customerId/orderId/:orderId'
+    this.route('itemOrder', {
+        path: '/itemOrder/orderId/:orderId'
+    });
+    this.route('payment',{
+        path: '/itemOrder/orderId/:orderId/payment'
+    });
+    this.route('printOrder', {
+        path:'/itemOrder/orderId/:orderId/print'
     });
 
     this.route('reports');
@@ -70,6 +60,8 @@ Router.map(function () {
     this.route('orderReport');
     this.route('journalEntryReport');
     this.route('profitAndLossReport');
+    this.route('setting');
+    this.route('setRole');
     this.route('login');
     this.route('signup');
 });

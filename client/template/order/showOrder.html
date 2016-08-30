@@ -1,67 +1,43 @@
 <template name="showOrder">
-    <div class="bar bar-header bar-positive">
-        <!--{{> sideMenuLeft}}-->
-        <!--{{#ionNavButtons side="left"}}-->
-            <button class="button button-clear pull-left" data-ion-menu-toggle="left">
+    {{#if currentUser}}
+        <div class="bar bar-header bar-positive nav-bar-block nav-bar-transition-ios nav-bar-direction-forward"
+             data-navbar-container>
+            <button class="button button-clear pull-left button-entering button-active" data-ion-menu-toggle="left">
                 <i class="icon ion-navicon"></i>
             </button>
-        <!--{{/ionNavButtons}}-->
+            <h1 class="title">Order List</h1>
+            <button class="button button-clear add-order button-icon icon ion-plus-circled">
+            </button>
+        </div>
 
-    <!--<a href="/" class="button button-icon icon ion-ios-arrow-back"> Back</a>-->
-    <h1 class="title">Order List</h1>
-    <button class="button button-clear add-order button-icon icon ion-plus-circled">
-    </button>
-    </div>
-
-        <!--{{#contentFor "headerButtonLeft"}}-->
-    <!--{{> sideMenuLeft}}-->
-    <!--{{>ionNavBackButton path="index"}}-->
-        <!--{{/contentFor}}-->
-
-    <!--{{#contentFor "headerTitle"}}-->
-        <!--<h1 class="title">Order List</h1>-->
-    <!--{{/contentFor}}-->
-
-    <!--{{#contentFor "headerButtonRight"}}-->
-        <!--<button class="button button-clear button-icon icon ion-plus-circled">-->
-            <!--&lt;!&ndash;{{> ionIcon icon="ion ion-plus-circled"}}&ndash;&gt;-->
-        <!--</button>-->
-    <!--{{/contentFor}}-->
-
-    {{#ionView}}
-        {{#ionContent}}
-            {{#ionList}}
-                {{#if showCustomerOrder}}
-                    {{#each showCustomerOrder.content}}
-                        <div class="show-order-item">
-                            {{#ionItem iconRight=true}}
-                                {{_id}} |
-                                {{#each customer}}
-                                    Customer : {{customer}} | Staff : {{staff}}
-                                {{/each}}<br>
-                                {{#each items}}
-                                    {{itemName}} : {{numFormat amount '0,0.00$'}}  |
-                                {{/each}}<br>
-                                <u>Total</u> : {{numFormat total '0,0.00 $'}}
-                                {{> ionIcon icon="ios-arrow-right"}}
-                            {{/ionItem}}
-                        </div>
-                    {{/each}}
-                {{else}}
-                    <h2>No data</h2>
-                {{/if}}
-
-                    <!--{{#each showCustomerOrder.content}}-->
-                <!--<div class="show-order-item">-->
-                    <!--{{#ionItem iconRight=true}}-->
-                    <!--<h2>{{_id}} | {{customerName}}</h2>-->
-                    <!--{{> ionIcon icon="ios-arrow-right"}}-->
-                        <!--{{/ionItem}}-->
-                <!--</div>-->
-                    <!--{{/each}}-->
-            {{/ionList}}
-        {{/ionContent}}
-    {{/ionView}}
+        {{#ionView}}
+            {{#ionContent}}
+                {{#ionList}}
+                    {{#if showCustomerOrder}}
+                        {{#each showCustomerOrder.content}}
+                            <div class="show-order-item">
+                                {{#ionItem iconRight=true}}
+                                    {{_id}} |
+                                    {{#each customer}}
+                                        Customer : {{customer}} | Staff : {{staff}}
+                                    {{/each}}<br>
+                                    {{#each items}}
+                                        {{itemName}} : {{numFormat amount '0,0.00$'}}  |
+                                    {{/each}}<br>
+                                    <u>Total</u> : {{numFormat total '0,0.00 $'}}
+                                    {{> ionIcon icon="ios-arrow-right"}}
+                                {{/ionItem}}
+                            </div>
+                        {{/each}}
+                    {{else}}
+                        <h2>No data</h2>
+                    {{/if}}
+                {{/ionList}}
+            {{/ionContent}}
+        {{/ionView}}
+    {{else}}
+        {{> login}}
+    {{/if}}
 </template>
 
 

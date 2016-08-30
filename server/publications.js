@@ -58,6 +58,11 @@ Meteor.publish('orderDetail', function(_id) {
     return Collection.OrderDetail.find({orderId: _id});
 });
 
+//publish payment
+Meteor.publish('payments',function () {
+    return Collection.Payment.find();
+});
+
 //item search
 Meteor.publish('itemSearch', function(query, limit) {
     if (_.isEmpty(query)) {
@@ -87,6 +92,11 @@ Meteor.publish('staffSearch', function(query, limit) {
     let staff =  Collection.Staff.search(query, limitAmount);
     console.log(staff.fetch());
     return staff;
+});
+
+//user
+Meteor.publish('allUser', function() {
+    return Meteor.users.find();
 });
 
 

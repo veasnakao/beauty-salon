@@ -1,136 +1,124 @@
 <template name="itemOrder">
-    {{#contentFor "headerButtonLeft"}}
-        {{>ionNavBackButton path="showOrder"}}
-    {{/contentFor}}
+    {{#if currentUser}}
+        {{#contentFor "headerButtonLeft"}}
+            {{>ionNavBackButton path="showOrder"}}
+        {{/contentFor}}
 
-    {{#contentFor "headerTitle"}}
-        <h1 class="title">Order List</h1>
-    {{/contentFor}}
+        {{#contentFor "headerTitle"}}
+            <h1 class="title">Order List</h1>
+        {{/contentFor}}
 
-    {{#contentFor "headerButtonRight"}}
-        <button data-ion-modal="searchItem" class="button button-clear pull-left search-item">
-            {{> ionIcon icon="ion ion-ios-search-strong"}}
-        </button>
-    {{/contentFor}}
-
-    {{#ionView}}
-        {{#ionContent}}
-            <div class="card animated bounceInDown">
-            <!--{{#autoForm collection="Collection.Order" id="addOrder" type="insert"}}-->
-                <!--<div class="row">-->
-                <!--<div class="col-50">-->
-                <!--{{> afQuickField name='customerId' class="js-customer"}}-->
-                <!--</div>-->
-                <!--<div class="col-50">-->
-                <!--{{> afQuickField name='staffId' class="js-staff"}}-->
-                <!--</div>-->
-                <!--</div>-->
-                    <!--{{/autoForm}}-->
-
-                <div class="row">
-                    <div class="col-50">
-                        <div class="list">
-                            <label class="item item-input item-select">
-                                <div class="input-label">
-                                    Customer
-                                </div>
-                                <select class="js-customer">
-                                    {{#each showCustomer}}
-                                        <option value={{_id}}>{{name}}</option>
-                                    {{/each}}
-                                </select>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-50">
-                        <div class="list">
-                            <label class="item item-input item-select">
-                                <div class="input-label">
-                                    Staff
-                                </div>
-                                <select class="js-staff">
-                                    <option value="">(Select One)</option>
-                                    {{#each showStaff}}
-                                        <option value={{_id}}>{{name}}</option>
-                                    {{/each}}
-                                </select>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            {{#each showOrderDetail}}
-                <div class="card">
-                    <div class="item animated bounceInDown item-text-wrap">
-                        <!--<div class="row">-->
-                        <!--<div class="col-50">-->
-                        <!--{{itemId}} | {{itemName}}-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<br>-->
-                        <div class="row">
-                            <div class="col">
-                                {{itemName}}
-                            </div>
-                            <div class="col" style="color: #0c60ee;">
-                                {{numFormat price '0,0.00 $'}}
-                            </div>
-                            <div class="col">
-                                x{{quantity}}
-                            </div>
-                            <div class="col">
-                                {{discount}} %
-                            </div>
-                            <div class="col">
-                                {{numFormat amount '0,0.00 $'}}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div style="float: right">
-                                    <button class="button button-balanced increase-quantity"
-                                            data-action="fake">
-                                        {{> ionIcon class="ion ion-plus-round"}}
-                                    </button>
-                                    <button class="button button-assertive decrease-quantity">
-                                        {{> ionIcon class="ion ion-minus-round"}}
-                                    </button>
-                                    <button class="button button-positive edit-order"
-                                            data-ion-modal="editOrder" data-id="{{_id}}" data-qty="{{quantity}}">
-                                        {{> ionIcon class="ion-edit"}}
-                                    </button>
-                                    <button class="button button-assertive delete-item-order">
-                                        {{> ionIcon class="ion ion-trash-a"}}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {{/each}}
-            <div class="card">
-                <div class="item item-text-wrap button-balanced">
-                    <div class="row">
-                        <div class="col-75">
-                            <b>Total :</b>
-                        </div>
-                        <div class="col-25">
-                            <div style="float: right;">
-                            <!--{{#each totalOrderDetail}}-->
-                                <b>{{numFormat totalOrder '0,0.00 $'}}</b>
-                                    <!--{{/each}}-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="button button-round button-block button-positive js-paid">
-                Paid
+        {{#contentFor "headerButtonRight"}}
+            <button data-ion-modal="searchItem" class="button button-clear pull-left search-item">
+                {{> ionIcon icon="ion ion-ios-search-strong"}}
             </button>
-            <!--test item-toggle-->
-        {{/ionContent}}
-    {{/ionView}}
+        {{/contentFor}}
+
+        {{#ionView}}
+            {{#ionContent}}
+                <div class="card animated bounceInDown">
+                    <div class="row">
+                        <div class="col-50">
+                            <div class="list">
+                                <label class="item item-input item-select">
+                                    <div class="input-label">
+                                        Customer
+                                    </div>
+                                    <select class="js-customer">
+                                        {{#each showCustomer}}
+                                            <option value={{_id}}>{{name}}</option>
+                                        {{/each}}
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-50">
+                            <div class="list">
+                                <label class="item item-input item-select">
+                                    <div class="input-label">
+                                        Staff
+                                    </div>
+                                    <select class="js-staff">
+                                        <option value="">(Select One)</option>
+                                        {{#each showStaff}}
+                                            <option value={{_id}}>{{name}}</option>
+                                        {{/each}}
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                {{#each showOrderDetail}}
+                    <div class="card">
+                        <div class="item animated bounceInDown item-text-wrap">
+                            <div class="row">
+                                <div class="col">
+                                    {{itemName}}
+                                </div>
+                                <div class="col" style="color: #0c60ee;">
+                                    {{numFormat price '0,0.00 $'}}
+                                </div>
+                                <div class="col">
+                                    x{{quantity}}
+                                </div>
+                                <div class="col">
+                                    {{discount}} %
+                                </div>
+                                <div class="col">
+                                    {{numFormat amount '0,0.00 $'}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div style="float: right">
+                                        <button class="button button-balanced increase-quantity"
+                                                data-action="fake">
+                                            {{> ionIcon class="ion ion-plus-round"}}
+                                        </button>
+                                        <button class="button button-assertive decrease-quantity">
+                                            {{> ionIcon class="ion ion-minus-round"}}
+                                        </button>
+                                        <button class="button button-positive edit-order"
+                                                data-ion-modal="editOrder" data-id="{{_id}}" data-qty="{{quantity}}">
+                                            {{> ionIcon class="ion-edit"}}
+                                        </button>
+                                        <button class="button button-assertive delete-item-order">
+                                            {{> ionIcon class="ion ion-trash-a"}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+                <div class="card">
+                    <div class="item item-text-wrap button-balanced">
+                        <div class="row">
+                            <div class="col-75">
+                                <b>Total :</b>
+                            </div>
+                            <div class="col-25">
+                                <div style="float: right;">
+                                <!--{{#each totalOrderDetail}}-->
+                                    <b>{{numFormat totalOrder '0,0.00 $'}}</b>
+                                        <!--{{/each}}-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--js-paid-->
+                <button class="button button-round button-block button-positive js-payment">
+                    {{> ionIcon class="ion ion-cash"}}
+                    Payment
+                </button>
+            {{/ionContent}}
+        {{/ionView}}
+    {{else}}
+        {{> login}}
+    {{/if}}
 </template>
 

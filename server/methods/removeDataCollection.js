@@ -1,0 +1,11 @@
+Meteor.methods({
+    removeStaff(id){
+        Collection.Staff.remove(id);
+    },
+    removeCustomer(id){
+        Collection.Customer.remove(id);
+    },
+    removeOrderItem(id){
+        Collection.Item.remove(id)
+    }
+});

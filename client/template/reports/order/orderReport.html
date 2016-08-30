@@ -1,117 +1,118 @@
 <template name="orderReport">
-    {{#contentFor "headerButtonLeft"}}
-        {{>ionNavBackButton path="reports"}}
-    {{/contentFor}}
+    {{#if currentUser}}
+        {{#contentFor "headerButtonLeft"}}
+            {{>ionNavBackButton path="reports"}}
+        {{/contentFor}}
 
-    {{#contentFor "headerTitle"}}
-        <h1 class="title">Order Report</h1>
-    {{/contentFor}}
+        {{#contentFor "headerTitle"}}
+            <h1 class="title">Order Report</h1>
+        {{/contentFor}}
 
-    <div class="content has-header overflow-scroll">
-        <div class="list">
-            <label class="item item-input">
-                <span class="input-label">From Date</span>
-                <input type="date" class="js-from-date">
-            </label>
-            <label class="item item-input">
-                <span class="input-label">To Date</span>
-                <input type="date" class="js-to-date">
-            </label>
-            <div class="item item-toggle">
-                All Staff
-                <label class="toggle toggle-balanced">
-                    <input type="checkbox" class="js-all-staff">
-                    <div class="track">
-                        <div class="handle"></div>
-                    </div>
+        <div class="content has-header overflow-scroll">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">From Date</span>
+                    <input type="date" class="js-from-date">
                 </label>
-            </div>
-            <div class="item item-toggle">
-                By Staff
-                <label class="toggle toggle-balanced">
-                    <input type="checkbox" class="js-by-staff">
-                    <div class="track">
-                        <div class="handle"></div>
-                    </div>
+                <label class="item item-input">
+                    <span class="input-label">To Date</span>
+                    <input type="date" class="js-to-date">
                 </label>
-            </div>
-            <div class="item item-icon-left item-icon-right show-staff" style="display: none;">
-                <div class="row ">
-                    <div class="col-90">
-                        Staff name : <b>{{staffName}}</b>
-                    </div>
-                    <div class="col-10">
-                        <div style="margin-top: -10px;margin-bottom:-25px;float: right;">
-                            <button class="button button-clear" data-ion-modal="searchStaff">
-                                {{> ionIcon icon="ion ion-search js-search-staff"}}
-                            </button>
+                <div class="item item-toggle">
+                    All Staff
+                    <label class="toggle toggle-balanced">
+                        <input type="checkbox" class="js-all-staff">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </div>
+                <div class="item item-toggle">
+                    By Staff
+                    <label class="toggle toggle-balanced">
+                        <input type="checkbox" class="js-by-staff">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </div>
+                <div class="item item-icon-left item-icon-right show-staff" style="display: none;">
+                    <div class="row ">
+                        <div class="col-90">
+                            Staff name : <b>{{staffName}}</b>
+                        </div>
+                        <div class="col-10">
+                            <div style="margin-top: -10px;margin-bottom:-25px;float: right;">
+                                <button class="button button-clear" data-ion-modal="searchStaff">
+                                    {{> ionIcon icon="ion ion-search js-search-staff"}}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <button class="button button-full button-positive js-submit-report" style="display: none;">
+                    OK
+                </button>
             </div>
-            <button class="button button-full button-balanced js-submit-report" style="display: none;">
-                OK
-            </button>
-        </div>
 
-        {{#if staffOrderReport}}
-            {{#each staffOrderReport.content}}
-                {{#each items}}
-                    <div class="card">
-                        <div class="item item-text-wrap" style="background-color: #EEEDED;">
-                            <div class="row">
-                                <div class="col-50">
-                                    Staff name : {{staff}}
+            {{#if staffOrderReport}}
+                {{#each staffOrderReport.content}}
+                    {{#each items}}
+                        <div class="card">
+                            <div class="item item-text-wrap" style="background-color: #EEEDED;">
+                                <div class="row">
+                                    <div class="col-50">
+                                        Staff name : {{staff}}
+                                    </div>
+                                    <div class="col-50">
+                                        Date : {{moFormat date 'DD/MM/YYYY'}}
+                                    </div>
                                 </div>
-                                <div class="col-50">
-                                    Date : {{moFormat date 'DD/MM/YYYY'}}
+                            </div>
+                            <div class="item item-text-wrap">
+                                Customer Name : {{customer}}
+                            </div>
+                            <div class="item item-text-wrap">
+                                <div class="row">
+                                    <div class="col-25">
+                                        {{itemName}}
+                                    </div>
+                                    <div class="col-20">
+                                        x{{qty}}
+                                    </div>
+                                    <div class="col-20">
+                                        {{numFormat price '0,0.00 $'}}
+                                    </div>
+                                    <div class="col-20">
+                                        {{discount}}%
+                                    </div>
+                                    <div class="col-25">
+                                        {{numFormat amount '0,0.00 $'}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="item item-text-wrap">
-                            Customer Name : {{customer}}
-                        </div>
-                        <div class="item item-text-wrap">
+                    {{/each}}
+                    <div class="card">
+                        <div class="item item-text-wrap" style="text-align: center;">
                             <div class="row">
-                                <div class="col-25">
-                                    {{itemName}}
-                                </div>
-                                <div class="col-20">
-                                    x{{qty}}
-                                </div>
-                                <div class="col-20">
-                                    {{numFormat price '0,0.00 $'}}
-                                </div>
-                                <div class="col-20">
-                                    {{discount}}%
+                                <div class="col-offset-50 col-25">
+                                    Total
                                 </div>
                                 <div class="col-25">
-                                    {{numFormat amount '0,0.00 $'}}
+                                    <b>{{numFormat total '0,0.00 $'}}</b>
                                 </div>
                             </div>
                         </div>
                     </div>
                 {{/each}}
+            {{else}}
                 <div class="card">
-                    <div class="item item-text-wrap" style="text-align: center;">
-                        <div class="row">
-                            <div class="col-offset-50 col-25">
-                                Total
-                            </div>
-                            <div class="col-25">
-                                <b>{{numFormat total '0,0.00 $'}}</b>
-                            </div>
-                        </div>
-                    </div>
+                    <h4 style="text-align: center;">No data available</h4>
                 </div>
-            {{/each}}
-        {{else}}
-            <div class="list">
-                <div class="item" style="text-align: center; background-color: #11C709;">
-                    <h2 style="color: white;">No data available</h2>
-                </div>
-            </div>
-        {{/if}}
-
-    </div>
+            {{/if}}
+        </div>
+    {{else}}
+        {{> login}}
+    {{/if}}
 </template>

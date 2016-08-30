@@ -56,6 +56,12 @@ Template.journalEntryReport.helpers({
 
 
 Template.journalEntryReport.events({
+    'click #print'(){
+        var mode = 'iframe'; // popup
+        var close = mode == "popup";
+        var options = {mode: mode, popClose: close};
+        $("div.print").printArea(options);
+    },
     'click .js-expense'(e){
         if ($(e.currentTarget).prop('checked')) {
             $('.js-income').prop('checked', false);

@@ -66,5 +66,6 @@ lbee:moment-helpers
 accounts-password
 simple:reactive-method
 stevezhu:lodash
-#kevohagan:sweetalert
+kevohagan:sweetalert
 paulkr:overhang
+alanning:roles

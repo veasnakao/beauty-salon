@@ -20,15 +20,6 @@ Template.showOrder.rendered = function () {
             Session.set('orderByStaffResult', result);
         }
     });
-    // Meteor.setTimeout(function () {
-    //     Meteor.call('orderItemDetailByCustomer', function (error, result) {
-    //         if (error) {
-    //             sAlert.error(error.message);
-    //         } else {
-    //             Session.set('orderByStaffResult', result);
-    //         }
-    //     });
-    // }, 1000);
 
     try {
         this.autorun(() => {
@@ -57,52 +48,6 @@ Template.showOrder.helpers({
                 return false;
             }
         }
-
-        // let data = {};
-        // let content = [];
-        // let orders = Collection.Order.find({'status': 'active'});
-        // if (orders) {
-        //     orders.forEach((objOrder)=> {
-        //         let customerId = objOrder.customerId;
-        //         let customers = Collection.Customer.find({_id: customerId});
-        //         customers.forEach((objCustomers)=> {
-        //             let customerId = objCustomers._id;
-        //             let customerName = objCustomers.name;
-        //             objCustomers.customerId = customerId;
-        //             objCustomers.customerName = customerName;
-        //             content.push(objCustomers);
-        //         });
-        //     });
-        //     data.content = content;
-        //     return data;
-        // }
-
-        // Meteor.call('findOrder', true, (err, result) => {
-        //     if (err) {
-        //         sAlert.error(error.message);
-        //         IonLoading.hide();
-        //     } else {
-        //         // console.log(result.content.customerId);
-        //         // IonLoading.hide();
-        //         // Session.set('orderId', result);
-        //     }
-        // });
-        // let data = {};
-        // let content = [];
-        // let orders = Collection.Order.find({"status": "true"});
-        // orders.forEach((objOrders)=> {
-        //     let customerName = "";
-        //     let customerId = objOrders.customerId;
-        //     let customers = Collection.Customer.find({_id:customerId});
-        //     customers.forEach((objCustomers)=>{
-        //         customerName = objCustomers.name;
-        //         objCustomers.id = customerId;
-        //         objCustomers._customerName = customerName;
-        //         content.push(objCustomers)
-        //     });
-        // });
-        // data.content = content;
-        // return data;
     }
 });
 
@@ -138,16 +83,6 @@ Template.showOrder.events({
         let order = Collection.Order.findOne(orderId);
         console.log(`customer : ${order.customerId}`);
         console.log(`staff : ${order.staffId}`);
-
         Router.go(`/itemOrder/orderId/${orderId}?staffId=${order.staffId}&customerId=${order.customerId}`);
-
-        // let order = Collection.Order.findOne(orderId);
-
-        // if (order) {
-        //     order.forEach((objOrder)=> {
-        //         let orderId = objOrder._id;
-        //         Router.go(`/itemOrder/orderId/${orderId}`);
-        //     });
-        // }
     }
 });

@@ -10,10 +10,6 @@ Template.signup.events({
             Accounts.createUser({
                 username: username,
                 password: password,
-                // profile: {
-                //     username: template.find("#signup-username").value
-                //     // Other required field values can go here
-                // }
             }, function (error) {
                 if (error) {
                     sAlert.error(error.message);

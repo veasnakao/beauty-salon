@@ -1,239 +1,253 @@
 <template name="journalEntryReport">
-    {{#contentFor "headerButtonLeft"}}
-        {{>ionNavBackButton path="index"}}
-    {{/contentFor}}
+    {{#if currentUser}}
+        {{#contentFor "headerButtonLeft"}}
+            {{>ionNavBackButton path="index"}}
+        {{/contentFor}}
 
-    {{#contentFor "headerTitle"}}
-        <h1 class="title">Journal Entry Report</h1>
-    {{/contentFor}}
+        {{#contentFor "headerTitle"}}
+            <h1 class="title">Journal Entry Report</h1>
+        {{/contentFor}}
 
-        <!--{{#contentFor "headerButtonRight"}}-->
-    <!--<button class="button button-clear pull-left" data-ion-modal="addJournalEntry">-->
-    <!--{{> ionIcon icon="ion ion-plus-circled"}}-->
-    <!--</button>-->
-        <!--{{/contentFor}}-->
+        {{#ionView}}
+            {{#ionContent}}
+                {{#ionList}}
+                    <div class="list">
+                        <label class="item item-input">
+                            <div class="input-label">
+                                From Date
+                            </div>
+                            <input type="date" class="js-from-date">
+                        </label>
+                        <label class="item item-input">
+                            <div class="input-label">
+                                To Date
+                            </div>
+                            <input type="date" class="js-to-date">
+                        </label>
+                        <ul class="list">
+                            <li class="item item-toggle">
+                                Expense
+                                <label class="toggle toggle-balance">
+                                    <input type="checkbox" class="js-expense">
+                                    <div class="track">
+                                        <div class="handle"></div>
+                                    </div>
+                                </label>
+                            </li>
+                            <li class="item item-toggle">
+                                Income
+                                <label class="toggle toggle-balance">
+                                    <input type="checkbox" class="js-income">
+                                    <div class="track">
+                                        <div class="handle"></div>
+                                    </div>
+                                </label>
+                            </li>
+                        </ul>
 
-    {{#ionView}}
-        {{#ionContent}}
-            {{#ionList}}
-                <div class="list">
-                    <label class="item item-input">
-                        <div class="input-label">
-                            From Date
-                        </div>
-                        <input type="date" class="js-from-date">
-                    </label>
-                    <label class="item item-input">
-                        <div class="input-label">
-                            To Date
-                        </div>
-                        <input type="date" class="js-to-date">
-                    </label>
-                    <ul class="list">
-                        <li class="item item-toggle">
-                            Expense
-                            <label class="toggle toggle-balance">
-                                <input type="checkbox" class="js-expense">
-                                <div class="track">
-                                    <div class="handle"></div>
-                                </div>
-                            </label>
-                        </li>
-                        <li class="item item-toggle">
-                            Income
-                            <label class="toggle toggle-balance">
-                                <input type="checkbox" class="js-income">
-                                <div class="track">
-                                    <div class="handle"></div>
-                                </div>
-                            </label>
-                        </li>
-                    </ul>
+                        <button class="button button-block button-positive js-journalEntry-report">
+                            OK
+                        </button>
 
-                    <button class="button button-block button-positive js-journalEntry-report">
-                        OK
-                    </button>
-
+                    </div>
+                {{/ionList}}
+                <div class="card">
+                    <div class="item item-text-wrap" style="float: right;">
+                        <button id="print" class="button button-small button-balanced ion-printer js-print">
+                            Print
+                        </button>
+                    </div>
                 </div>
-            {{/ionList}}
+                <div class="print">
+                    {{#if journalEntryIncomeFromOrder}}
+                        {{#each journalEntryIncomeFromOrder.content}}
 
-            {{#if journalEntryIncomeFromOrder}}
-                {{#each journalEntryIncomeFromOrder.content}}
-                    <div class="card">
-                        <div class="item item-divider">
-                            <u>Journal Type </u>: Income from order
-                        </div>
-                        <div class="item item-text-wrap">
-                            <div class="row">
-                                <div class="col">
-                                    <u>Date</u>
+                            <div class="card">
+                                <div class="item item-divider">
+                                    <u>Journal Type </u>: Income from order
                                 </div>
-                                <div class="col"><u>Item name</u></div>
-                                <div class="col"><u>Quantity</u></div>
-                                <div class="col"><u>Price</u></div>
-                                <div class="col"><u>Discount</u></div>
-                                <div class="col"><u>Amount</u></div>
-                            </div>
-                            <hr>
-                            {{#each data}}
-                                {{#if subTotalIsNotZero orderDoc.total}}
-                                    <dir class="row" style="margin-bottom: -35px;margin-top: 15px;">
+                                <div class="item item-text-wrap">
+                                    <div class="row">
                                         <div class="col">
-                                            {{moFormat date 'DD/MM/YYYY'}}
+                                            <u>Date</u>
                                         </div>
-                                    </dir>
-                                    {{#each orderDetailDoc}}
-                                        <dir class="row">
-                                            <div class="col"></div>
-                                            <div class="col">{{itemName}}</div>
-                                            <div class="col">{{qty}}</div>
-                                            <div class="col">{{numFormat price '0,0.00 $'}}</div>
-                                            <div class="col">{{discount}} %</div>
-                                            <div class="col">{{numFormat amount '0,0.00 $'}}</div>
-                                        </dir>
-                                    {{/each}}
-                                    <hr>
-                                    {{#with orderDoc}}
-                                        <div class="row" style="background-color: #E0E7E7;margin-top: -10px;">
-                                            <div class="col"></div>
-                                            <div class="col"></div>
-                                            <div class="col"></div>
-                                            <div class="col"></div>
-                                            <div class="col">Sub Total</div>
-                                            <div class="col">
-                                                {{numFormat total '0,0.00 $'}}
-                                            </div>
-                                        </div>
-                                    {{/with}}
-                                    <hr style="margin-top: -2px;">
-                                {{/if}}
-                            {{/each}}
-                        </div>
-                        <div class="item item-divider">
-                            <div class="row">
-                                <div class="col"></div>
-                                <div class="col"></div>
-                                <div class="col"></div>
-                                <div class="col"></div>
-                                <div class="col">Total</div>
-                                <div class="col">
-                                    {{numFormat total '0,0.00 $'}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {{/each}}
-            {{/if}}
-            {{#if journalEntryByIncome}}
-                {{#each journalEntryByIncome.content}}
-                    <div class="card">
-                        <div class="item item-divider">
-                            <u>Journal Type </u>: Income from sale item
-                        </div>
-                        <div class="item item-text-wrap">
-                            <div class="row">
-                                <div class="col"><u>Date</u></div>
-                                <div class="col"><u>Item Name</u></div>
-                                <div class="col"><u>Amount</u></div>
-                            </div>
-                            <hr>
-                            {{#each data}}
-                                <!--{{#if subTotalIsNotZero subTotal}}-->
-                                    <div class="row" style="margin-bottom: -35px;margin-top: 15px;">
-                                        <div class="col">{{moFormat date 'DD/MM/YYYY'}}</div>
+                                        <div class="col"><u>Item name</u></div>
+                                        <div class="col"><u>Quantity</u></div>
+                                        <div class="col"><u>Price</u></div>
+                                        <div class="col"><u>Discount</u></div>
+                                        <div class="col"><u>Amount</u></div>
                                     </div>
-                                    {{#each journalEntryItem}}
-                                        <div class="row">
-                                            <div class="col"></div>
-                                            <div class="col">
-                                                {{#with journalItemDoc}}
-                                                    {{journalItemName}}
-                                                {{/with}}
-                                            </div>
-                                            <div class="col">
-                                                {{numFormat journalItemPrice '0,0.00 $'}}
-                                            </div>
-                                        </div>
-                                    {{/each}}
                                     <hr>
-                                    <div class="row" style="background-color: #E0E7E7;margin-top: -10px;">
-                                        <div class="col">Sub Total</div>
-                                        <div class="col"></div>
-                                        <div class="col">
-                                            {{numFormat subTotal '0,0.00 $'}}
-                                        </div>
-                                    </div>
-                                    <hr style="margin-top: -2px;">
-                                <!--{{/if}}-->
-                            {{/each}}
-                        </div>
-                        <div class="item item-divider">
-                            <div class="row">
-                                <div class="col">Total</div>
-                                <div class="col"></div>
-                                <div class="col">
-                                    {{numFormat total '0,0.00 $'}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {{/each}}
-            {{/if}}
+                                    {{#each data}}
+                                        {{#if subTotalIsNotZero orderDoc.total}}
+                                            <dir class="row" style="margin-bottom: -35px;margin-top: 15px;">
+                                                <div class="col">
+                                                    {{moFormat date 'DD/MM/YYYY'}}
+                                                </div>
+                                            </dir>
+                                            {{#each orderDetailDoc}}
+                                                <dir class="row">
+                                                    <div class="col"></div>
+                                                    <div class="col">{{itemName}}</div>
+                                                    <div class="col">{{qty}}</div>
+                                                    <div class="col">{{numFormat price '0,0.00 $'}}</div>
+                                                    <div class="col">{{discount}} %</div>
+                                                    <div class="col">{{numFormat amount '0,0.00 $'}}</div>
+                                                </dir>
+                                                <hr style="border-top: 1px dashed #8c8b8b;margin-top: -10px;margin-bottom: -10px;">
 
-            {{#if journalEntryByExpense}}
-                {{#each journalEntryByExpense.content}}
-                    <div class="card">
-                        <!--<div class="item item-divider">-->
-                        <!--Journal Type : {{typeOfJournal}}-->
-                        <!--</div>-->
-                        <div class="item item-text-wrap">
-                            <div class="row">
-                                <div class="col"><u>Date</u></div>
-                                <div class="col"><u>Item Name</u></div>
-                                <div class="col"><u>Amount</u></div>
-                            </div>
-                            <hr>
-                            {{#each data}}
-                                <div class="row" style="margin-bottom: -35px;margin-top: 15px;">
-                                    <div class="col">{{moFormat date 'DD/MM/YYYY'}}</div>
+                                            {{/each}}
+
+                                            {{#with orderDoc}}
+                                                <div class="row" style="background-color: #E0E7E7;margin-top: -10px;">
+                                                    <div class="col">Total Amount</div>
+                                                    <div class="col"></div>
+                                                    <div class="col"></div>
+                                                    <div class="col"></div>
+                                                    <div class="col"></div>
+                                                    <div class="col">
+                                                        {{numFormat total '0,0.00 $'}}
+                                                    </div>
+                                                </div>
+                                            {{/with}}
+                                        {{/if}}
+                                    {{/each}}
                                 </div>
-                                {{#each journalEntryItem}}
+                                <div class="item item-divider">
                                     <div class="row">
                                         <div class="col"></div>
+                                        <div class="col"></div>
+                                        <div class="col"></div>
+                                        <div class="col"></div>
+                                        <div class="col">Total</div>
                                         <div class="col">
-                                            {{#with journalItemDoc}}
-                                                {{journalItemName}}
-                                            {{/with}}
-                                        </div>
-                                        <div class="col">
-                                            {{numFormat journalItemPrice '0,0.00 $'}}
+                                            {{numFormat total '0,0.00 $'}}
                                         </div>
                                     </div>
-                                {{/each}}
-                                <hr>
-                                <div class="row" style="background-color: #E0E7E7;margin-top: -10px;">
-                                    <div class="col">Sub Total</div>
-                                    <div class="col"></div>
-                                    <div class="col">
-                                        {{numFormat subTotal '0,0.00 $'}}
-                                    </div>
-                                </div>
-                                <hr style="margin-top: -2px;">
-                            {{/each}}
-                        </div>
-                        <div class="item item-divider">
-                            <div class="row">
-                                <div class="col">Total</div>
-                                <div class="col"></div>
-                                <div class="col">
-                                    {{numFormat total '0,0.00 $'}}
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                {{/each}}
-            {{/if}}
-        {{/ionContent}}
-    {{/ionView}}
 
+                        {{/each}}
+                    {{/if}}
+
+
+                    {{#if journalEntryByIncome}}
+                        {{#each journalEntryByIncome.content}}
+                            <div class="card">
+                                <div class="item item-divider">
+                                    <u>Journal Type </u>: Income from sale item
+                                </div>
+                                <div class="item item-text-wrap">
+                                    <div class="row">
+                                        <div class="col"><u>Date</u></div>
+                                        <div class="col"><u>Item Name</u></div>
+                                        <div class="col"><u>Amount</u></div>
+                                    </div>
+                                    <hr>
+                                    {{#each data}}
+                                        {{#if subTotalIsNotZero subTotal}}
+                                            <div class="row" style="margin-bottom: -35px;margin-top: 15px;">
+                                                <div class="col">{{moFormat date 'DD/MM/YYYY'}}</div>
+                                            </div>
+                                            {{#each journalEntryItem}}
+                                                <div class="row">
+                                                    <div class="col"></div>
+                                                    <div class="col">
+                                                        {{#with journalItemDoc}}
+                                                            {{journalItemName}}
+                                                        {{/with}}
+                                                    </div>
+                                                    <div class="col">
+                                                        {{numFormat journalItemPrice '0,0.00 $'}}
+                                                    </div>
+                                                </div>
+                                                <hr style="border-top: 1px dashed #8c8b8b;margin-top: -5px;margin-bottom: 5px;">
+
+                                            {{/each}}
+                                            <!--<hr>-->
+                                            <div class="row" style="background-color: #E0E7E7;margin-top: -8px;">
+                                                <div class="col">Sub Total</div>
+                                                <div class="col"></div>
+                                                <div class="col">
+                                                    {{numFormat subTotal '0,0.00 $'}}
+                                                </div>
+                                            </div>
+                                            <!--<hr style="margin-top: -2px;">-->
+                                        {{/if}}
+                                    {{/each}}
+                                </div>
+                                <div class="item item-divider">
+                                    <div class="row">
+                                        <div class="col">Total</div>
+                                        <div class="col"></div>
+                                        <div class="col">
+                                            {{numFormat total '0,0.00 $'}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {{/each}}
+                    {{/if}}
+                </div>
+
+                <div class="print">
+                    {{#if journalEntryByExpense}}
+                        {{#each journalEntryByExpense.content}}
+                            <div class="card">
+                                <!--<div class="item item-divider">-->
+                                <!--Journal Type : {{typeOfJournal}}-->
+                                <!--</div>-->
+                                <div class="item item-text-wrap">
+                                    <div class="row">
+                                        <div class="col"><u>Date</u></div>
+                                        <div class="col"><u>Item Name</u></div>
+                                        <div class="col"><u>Amount</u></div>
+                                    </div>
+                                    <hr>
+                                    {{#each data}}
+                                        <div class="row" style="margin-bottom: -35px;margin-top: 15px;">
+                                            <div class="col">{{moFormat date 'DD/MM/YYYY'}}</div>
+                                        </div>
+                                        {{#each journalEntryItem}}
+                                            <div class="row" style="margin-bottom: 5px;">
+                                                <div class="col"></div>
+                                                <div class="col">
+                                                    {{#with journalItemDoc}}
+                                                        {{journalItemName}}
+                                                    {{/with}}
+                                                </div>
+                                                <div class="col">
+                                                    {{numFormat journalItemPrice '0,0.00 $'}}
+                                                </div>
+                                            </div>
+                                        {{/each}}
+
+                                        <div class="row" style="background-color: #E0E7E7;margin-top: -10px;">
+                                            <div class="col">Total Amount</div>
+                                            <div class="col"></div>
+                                            <div class="col">
+                                                {{numFormat subTotal '0,0.00 $'}}
+                                            </div>
+                                        </div>
+
+                                    {{/each}}
+                                </div>
+                                <div class="item item-divider">
+                                    <div class="row">
+                                        <div class="col">Total</div>
+                                        <div class="col"></div>
+                                        <div class="col">
+                                            {{numFormat total '0,0.00 $'}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {{/each}}
+                    {{/if}}
+                </div>
+            {{/ionContent}}
+        {{/ionView}}
+    {{else}}
+        {{> login}}
+    {{/if}}
 </template>

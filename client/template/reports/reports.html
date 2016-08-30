@@ -1,12 +1,12 @@
 <template name="reports">
     {{#if currentUser}}
-        {{#contentFor "headerButtonLeft"}}
-            {{>ionNavBackButton path="index"}}
-        {{/contentFor}}
-
-        {{#contentFor "headerTitle"}}
+        <div class="bar bar-header bar-positive nav-bar-block nav-bar-transition-ios nav-bar-direction-forward" data-navbar-container>
+            <button class="button button-clear pull-left button-entering button-active" data-ion-menu-toggle="left">
+                <i class="icon ion-navicon"></i>
+            </button>
             <h1 class="title">Report</h1>
-        {{/contentFor}}
+        </div>
+
         {{#ionView}}
             {{#ionContent}}
                 {{#ionList}}

@@ -1,5 +1,5 @@
 <template name="index">
-    <!--{{#if currentUser}}-->
+    {{#if currentUser}}
         {{> sideMenuLeft}}
         {{#contentFor "headerTitle"}}
             <h1 class="title">Beauty Salon</h1>
@@ -10,8 +10,8 @@
                 {{/ionView}}
             {{/ionContent}}
         {{/ionView}}
-    <!--{{else}}-->
-        <!--{{> login}}-->
-    <!--{{/if}}-->
+    {{else}}
+        {{> login}}
+    {{/if}}
 </template>
 

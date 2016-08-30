@@ -39,3 +39,9 @@ AutoForm.hooks({
         }
     }
 });
+
+Template.addJournalEntry.events({
+    'click .js-back'(){
+        Router.go('showJournalEntry');
+    }
+});

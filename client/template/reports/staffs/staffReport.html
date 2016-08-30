@@ -1,122 +1,126 @@
 <template name="staffReport">
-    {{#contentFor "headerButtonLeft"}}
-        {{>ionNavBackButton path="reports"}}
-    {{/contentFor}}
+    {{#if currentUser}}
+        {{#contentFor "headerButtonLeft"}}
+            {{>ionNavBackButton path="reports"}}
+        {{/contentFor}}
 
-    {{#contentFor "headerTitle"}}
-        <h1 class="title">Staff Report</h1>
-    {{/contentFor}}
+        {{#contentFor "headerTitle"}}
+            <h1 class="title">Staff Report</h1>
+        {{/contentFor}}
 
-    <div class="content has-header overflow-scroll">
-        <div class="list">
-            <div class="item item-toggle">
-                Staff Fee
-                <label class="toggle toggle-balanced">
-                    <input type="checkbox" class="js-staff-fee">
-                    <div class="track">
-                        <div class="handle"></div>
-                    </div>
-                </label>
+        <div class="content has-header overflow-scroll">
+            <div class="list">
+                <div class="item item-toggle">
+                    Staff Fee
+                    <label class="toggle toggle-balanced">
+                        <input type="checkbox" class="js-staff-fee">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </div>
+                <div class="item item-toggle">
+                    Staff Base Salary
+                    <label class="toggle toggle-balanced">
+                        <input type="checkbox" class="js-staff-base-salary">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </div>
+                <button class="button button-full button-balanced js-submit-report" style="display: none;">
+                    OK
+                </button>
             </div>
-            <div class="item item-toggle">
-                Staff Base Salary
-                <label class="toggle toggle-balanced">
-                    <input type="checkbox" class="js-staff-base-salary">
-                    <div class="track">
-                        <div class="handle"></div>
+
+
+            {{#if staffFee}}
+                <div class="list list-staffFee" style="display: none;">
+                    <div class="item" style="padding: 5px; background-color: #EEEDED;margin-top: -22px;">
+                        <div class="row">
+                            <div class="col-offset-10 col-25">
+                                Name
+                            </div>
+                            <div class="col-25">
+                                Gender
+                            </div>
+                            <div class="col-25">
+                                Fee (%)
+                            </div>
+                        </div>
                     </div>
-                </label>
-            </div>
-            <button class="button button-full button-balanced js-submit-report" style="display: none;">
-                OK
-            </button>
+                    {{#each staffFee}}
+                        <div class="item" style="padding: 5px;">
+                            <div class="row">
+                                <div class="col-offset-10 col-25">
+                                    {{name}}
+                                </div>
+                                <div class="col-25">
+                                    {{gender}}
+                                </div>
+                                <div class="col-50">
+                                    {{fee}} <span> %</span>
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                    <div class="item" style="padding: 5px; background-color: #DAD9D9;">
+                        <div class="row">
+                            <div class="col-offset-10 col-50">
+                                Total Staff
+                            </div>
+                            <div class="col-50">
+                                {{countStaffFee}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if staffBaseSalary}}
+                <div class="list list-staffBaseSalary" style="display: none; margin-top: -22px;">
+                    <div class="item" style="padding: 5px; background-color: #EEEDED;">
+                        <div class="row">
+                            <div class="col-offset-10 col-25">
+                                Name
+                            </div>
+                            <div class="col-25">
+                                Gender
+                            </div>
+                            <div class="col-25">
+                                Base Salary ($)
+                            </div>
+                        </div>
+                    </div>
+                    {{#each staffBaseSalary}}
+                        <div class="item" style="padding: 5px;">
+                            <div class="row">
+                                <div class="col-offset-10 col-25">
+                                    {{name}}
+                                </div>
+                                <div class="col-25">
+                                    {{gender}}
+                                </div>
+                                <div class="col-50">
+                                    {{numFormat baseSalary '0,0.00 $'}}
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                    <div class="item" style="padding: 5px; background-color: #DAD9D9;">
+                        <div class="row">
+                            <div class="col-offset-10 col-50">
+                                Total Staff
+                            </div>
+                            <div class="col-50">
+                                {{countStaffBaseSalary}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
         </div>
-
-
-        {{#if staffFee}}
-            <div class="list list-staffFee" style="display: none;">
-                <div class="item" style="padding: 5px; background-color: #EEEDED;margin-top: -22px;">
-                    <div class="row">
-                        <div class="col-offset-10 col-25">
-                            Name
-                        </div>
-                        <div class="col-25">
-                            Gender
-                        </div>
-                        <div class="col-25">
-                            Fee (%)
-                        </div>
-                    </div>
-                </div>
-                {{#each staffFee}}
-                    <div class="item" style="padding: 5px;">
-                        <div class="row">
-                            <div class="col-offset-10 col-25">
-                                {{name}}
-                            </div>
-                            <div class="col-25">
-                                {{gender}}
-                            </div>
-                            <div class="col-50">
-                                {{fee}} <span> %</span>
-                            </div>
-                        </div>
-                    </div>
-                {{/each}}
-                <div class="item" style="padding: 5px; background-color: #DAD9D9;">
-                    <div class="row">
-                        <div class="col-offset-10 col-50">
-                            Total Staff
-                        </div>
-                        <div class="col-50">
-                            {{countStaffFee}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {{/if}}
-
-        {{#if staffBaseSalary}}
-            <div class="list list-staffBaseSalary" style="display: none; margin-top: -22px;">
-                <div class="item" style="padding: 5px; background-color: #EEEDED;">
-                    <div class="row">
-                        <div class="col-offset-10 col-25">
-                            Name
-                        </div>
-                        <div class="col-25">
-                            Gender
-                        </div>
-                        <div class="col-25">
-                            Base Salary ($)
-                        </div>
-                    </div>
-                </div>
-                {{#each staffBaseSalary}}
-                    <div class="item" style="padding: 5px;">
-                        <div class="row">
-                            <div class="col-offset-10 col-25">
-                                {{name}}
-                            </div>
-                            <div class="col-25">
-                                {{gender}}
-                            </div>
-                            <div class="col-50">
-                                {{numFormat baseSalary '0,0.00 $'}}
-                            </div>
-                        </div>
-                    </div>
-                {{/each}}
-                <div class="item" style="padding: 5px; background-color: #DAD9D9;">
-                    <div class="row">
-                        <div class="col-offset-10 col-50">
-                            Total Staff
-                        </div>
-                        <div class="col-50">
-                            {{countStaffBaseSalary}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {{/if}}
-    </div>
+    {{else}}
+        {{> login}}
+    {{/if}}
 </template>

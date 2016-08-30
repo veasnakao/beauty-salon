@@ -27,7 +27,15 @@ Template.login.events({
                 if (error) {
                     sAlert.error(error.message);
                 } else {
-                    Router.go(`/`);
+                    if (!(Roles.userIsInRole(Meteor.userId(), ['setting','staff']))) {
+                        swal({
+                            title: "Please ask permission from Admin!",
+                            timer: 10000,
+                            showConfirmButton: true
+                        });
+                    } else {
+                        Router.go(`/`);
+                    }
                 }
             }
         );

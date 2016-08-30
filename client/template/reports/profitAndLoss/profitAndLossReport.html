@@ -1,89 +1,132 @@
 <template name="profitAndLossReport">
-    {{#contentFor "headerButtonLeft"}}
-        {{>ionNavBackButton path="reports"}}
-    {{/contentFor}}
+    {{#if currentUser}}
+        {{#contentFor "headerButtonLeft"}}
+            {{>ionNavBackButton path="reports"}}
+        {{/contentFor}}
 
-    {{#contentFor "headerTitle"}}
-        <h1 class="title">Profit and Loss Report</h1>
-    {{/contentFor}}
+        {{#contentFor "headerTitle"}}
+            <h1 class="title">Profit and Loss Report</h1>
+        {{/contentFor}}
 
-    <div class="content has-header overflow-scroll">
-        <div class="list">
-            <label class="item item-input">
-                <span class="input-label">From Date</span>
-                <input type="date" class="js-from-date">
-            </label>
-            <label class="item item-input">
-                <span class="input-label">To Date</span>
-                <input type="date" class="js-to-date">
-            </label>
-            <button class="button button-full button-positive js-submit-report">
-                OK
-            </button>
+        <div class="content has-header overflow-scroll">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">From Date</span>
+                    <input type="date" class="js-from-date">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">To Date</span>
+                    <input type="date" class="js-to-date">
+                </label>
+                <button class="button button-full button-positive js-submit-report">
+                    OK
+                </button>
 
-            {{#if incomeFromOrder}}
-                <div class="card">
-                    <div class="item item-text-wrap">
-                        {{#if incomeFromOrder}}
-                            {{#each incomeFromOrder.content}}
-                                <div class="item item-divider">
-                                    <u>Journal Type </u>: Income
-                                </div>
-
-                                <div class="row">
-                                    <div class="col">
-                                        <u>Date</u>
+                {{#if incomeFromOrder}}
+                    <div class="card">
+                        <div class="item item-text-wrap">
+                            {{#if incomeFromOrder}}
+                                {{#each incomeFromOrder.content}}
+                                    <div class="item item-divider">
+                                        <u>Journal Type </u>: Income
                                     </div>
-                                    <div class="col"><u>Item name</u></div>
-                                    <div class="col"><u>Amount</u></div>
-                                </div>
-                                <hr>
-                                {{#each data}}
-                                    {{#if subTotalIsNotZero orderDoc.total}}
-                                        <dir class="row" style="margin-bottom: -35px;margin-top: 15px;">
-                                            <div class="col">
-                                                {{moFormat date 'DD/MM/YYYY'}}
-                                            </div>
-                                        </dir>
-                                        {{#each orderDetailDoc}}
-                                            <dir class="row">
-                                                <div class="col"></div>
-                                                <div class="col">{{itemName}}</div>
-                                                <div class="col">{{numFormat amount '0,0.00 $'}}</div>
-                                            </dir>
-                                            <hr style="border-top: 1px dashed #8c8b8b;margin-top: -10px;margin-bottom: -10px;">
-                                        {{/each}}
 
-                                        {{#with orderDoc}}
+                                    <div class="row">
+                                        <div class="col">
+                                            <u>Date</u>
+                                        </div>
+                                        <div class="col"><u>Item name</u></div>
+                                        <div class="col"><u>Amount</u></div>
+                                    </div>
+                                    <hr>
+                                    {{#each data}}
+                                        {{#if subTotalIsNotZero orderDoc.total}}
+                                            <dir class="row" style="margin-bottom: -35px;margin-top: 15px;">
+                                                <div class="col">
+                                                    {{moFormat date 'DD/MM/YYYY'}}
+                                                </div>
+                                            </dir>
+                                            {{#each orderDetailDoc}}
+                                                <dir class="row">
+                                                    <div class="col"></div>
+                                                    <div class="col">{{itemName}}</div>
+                                                    <div class="col">{{numFormat amount '0,0.00 $'}}</div>
+                                                </dir>
+                                                <hr style="border-top: 1px dashed #8c8b8b;margin-top: -10px;margin-bottom: -10px;">
+                                            {{/each}}
+
+                                            {{#with orderDoc}}
+                                                <div class="row" style="background-color: #CEEDF3;margin-top: -10px;">
+                                                    <div class="col"><u>Total Amount</u></div>
+                                                    <div class="col"></div>
+                                                    <div class="col">
+                                                        {{numFormat total '0,0.00 $'}}
+                                                    </div>
+                                                </div>
+                                            {{/with}}
+                                            <!--<hr style="margin-top: -2px;">-->
+                                        {{/if}}
+                                    {{/each}}
+                                {{/each}}
+                            {{/if}}
+                            <!--close incomeFromOrder-->
+
+                            <!--incomeFromJournal-->
+                            {{#if incomeFromJournal}}
+                                {{#each incomeFromJournal.content}}
+                                    <!--<div class="item item-text-wrap">-->
+                                    {{#each data}}
+                                        {{#if subTotalIsNotZero subTotal}}
+                                            <div class="row" style="margin-bottom: -35px;margin-top: 15px;">
+                                                <div class="col">{{moFormat date 'DD/MM/YYYY'}}</div>
+                                            </div>
+                                            {{#each journalEntryItem}}
+                                                <div class="row">
+                                                    <div class="col"></div>
+                                                    <div class="col">
+                                                        {{#with journalItemDoc}}
+                                                            {{journalItemName}}
+                                                        {{/with}}
+                                                    </div>
+                                                    <div class="col">
+                                                        {{numFormat journalItemPrice '0,0.00 $'}}
+                                                    </div>
+                                                </div>
+                                                <hr style="border-top: 1px dashed #8c8b8b;margin-bottom: -2px;">
+                                            {{/each}}
                                             <div class="row" style="background-color: #CEEDF3;margin-top: -10px;">
                                                 <div class="col"><u>Total Amount</u></div>
                                                 <div class="col"></div>
                                                 <div class="col">
-                                                    {{numFormat total '0,0.00 $'}}
+                                                    {{numFormat subTotal '0,0.00 $'}}
                                                 </div>
                                             </div>
-                                        {{/with}}
-                                        <!--<hr style="margin-top: -2px;">-->
-                                    {{/if}}
+                                        {{/if}}
+                                    {{/each}}
                                 {{/each}}
-                                <!--<hr>-->
-                                <!--<div class="row" style="background-color: #B1F3A1;">-->
-                                <!--<div class="col"><u>Total Income</u></div>-->
-                                <!--<div class="col"></div>-->
-                                <!--<div class="col">-->
-                                <!--{{numFormat total '0,0.00 $'}}-->
-                                <!--</div>-->
-                                <!--</div>-->
-                            {{/each}}
-                        {{/if}}
-                        <!--close incomeFromOrder-->
+                            {{/if}}
 
-                        <!--incomeFromJournal-->
-                        {{#if incomeFromJournal}}
-                            {{#each incomeFromJournal.content}}
-                                <!--<div class="item item-text-wrap">-->
-                                {{#each data}}
-                                    {{#if subTotalIsNotZero subTotal}}
+                            <hr style="margin-bottom: 20px;border-top: 1px solid #8c8b8b;">
+                            <div class="row" style="background-color: #B1F3A1;margin-top: -10px;">
+                                <div class="col">Total Income</div>
+                                <div class="col"></div>
+                                <div class="col">{{totalIncome incomeFromOrder incomeFromJournal}}</div>
+                            </div>
+
+                            <br>
+                            <!--expenseFromJournal-->
+                            {{#if expenseFromJournal}}
+                                {{#each expenseFromJournal.content}}
+                                    <div class="item item-divider">
+                                        <u>Journal Type </u>: Expense
+                                    </div>
+                                    <div class="row">
+                                        <div class="col"><u>Date</u></div>
+                                        <div class="col"><u>Item Name</u></div>
+                                        <div class="col"><u>Amount</u></div>
+                                    </div>
+                                    <hr>
+                                    {{#each data}}
                                         <div class="row" style="margin-bottom: -35px;margin-top: 15px;">
                                             <div class="col">{{moFormat date 'DD/MM/YYYY'}}</div>
                                         </div>
@@ -99,193 +142,42 @@
                                                     {{numFormat journalItemPrice '0,0.00 $'}}
                                                 </div>
                                             </div>
-                                            <hr style="border-top: 1px dashed #8c8b8b;">
+                                            <hr style="border-top: 1px dashed #8c8b8b;margin-bottom: -2px;">
                                         {{/each}}
-                                        <hr>
-                                        <div class="row" style="background-color: #CEEDF3;margin-top: -10px;">
-                                            <div class="col"><u>Total Amount</u></div>
+
+                                        <div class="row" style="background-color: #CEEDF3;">
+                                            <div class="col">Total Amount</div>
                                             <div class="col"></div>
                                             <div class="col">
                                                 {{numFormat subTotal '0,0.00 $'}}
                                             </div>
                                         </div>
-                                    {{/if}}
-                                {{/each}}
-                                <!--</div>-->
-                                <!--<hr>-->
-                                    <!--{{#if incomeFromJournal}}-->
-                                <!--<div class="row" style="background-color: #B1F3A1;margin-top: -10px;">-->
-                                <!--<div class="col"></div>-->
-                                <!--<div class="col">Total Income</div>-->
-                                <!--<div class="col">-->
-                                <!--{{numFormat total '0,0.00 $'}}-->
-                                <!--</div>-->
-                                <!--</div>-->
-                                    <!--{{/if}}-->
-                            {{/each}}
-                        {{/if}}
-
-                        <hr style="margin-bottom: 20px;border-top: 1px solid #8c8b8b;">
-                        <div class="row" style="background-color: #B1F3A1;margin-top: -10px;">
-                            <div class="col">Total Income</div>
-                            <div class="col"></div>
-                            <div class="col">{{totalIncome incomeFromOrder incomeFromJournal}}</div>
-                        </div>
-
-                        <br>
-                        <!--expenseFromJournal-->
-                        {{#if expenseFromJournal}}
-                            {{#each expenseFromJournal.content}}
-                                <div class="item item-divider">
-                                    <u>Journal Type </u>: Expense
-                                </div>
-                                <div class="row">
-                                    <div class="col"><u>Date</u></div>
-                                    <div class="col"><u>Item Name</u></div>
-                                    <div class="col"><u>Amount</u></div>
-                                </div>
-                                <hr>
-                                {{#each data}}
-                                    <div class="row" style="margin-bottom: -35px;margin-top: 15px;">
-                                        <div class="col">{{moFormat date 'DD/MM/YYYY'}}</div>
-                                    </div>
-                                    {{#each journalEntryItem}}
-                                        <div class="row">
-                                            <div class="col"></div>
-                                            <div class="col">
-                                                {{#with journalItemDoc}}
-                                                    {{journalItemName}}
-                                                {{/with}}
-                                            </div>
-                                            <div class="col">
-                                                {{numFormat journalItemPrice '0,0.00 $'}}
-                                            </div>
-                                        </div>
                                     {{/each}}
-                                    <hr>
-                                    <div class="row" style="background-color: #CEEDF3;margin-top: -10px;">
-                                        <div class="col">Total Amount</div>
+                                    <hr style="margin-bottom: 20px;border-top: 1px solid #8c8b8b;">
+                                    <div class="row" style="background-color: #B1F3A1;margin-top: -10px;">
+                                        <div class="col">Total Expense</div>
                                         <div class="col"></div>
-                                        <div class="col">
-                                            {{numFormat subTotal '0,0.00 $'}}
-                                        </div>
+                                        <div class="col">{{numFormat total '0,0.00 $'}}</div>
                                     </div>
-
                                 {{/each}}
-                                <hr style="margin-bottom: 20px;border-top: 1px solid #8c8b8b;">
-                                <div class="row" style="background-color: #B1F3A1;margin-top: -10px;">
-                                    <div class="col">Total Expense</div>
-                                    <div class="col"></div>
-                                    <div class="col">{{numFormat total '0,0.00 $'}}</div>
-                                </div>
-                            {{/each}}
-                        {{/if}}
+                            {{/if}}
 
-                        <hr style="margin-bottom: 20px;border-top: 3px double #8c8b8b;">
-                        <div class="row" style="background-color: #F5B7C3;margin-top: -10px;">
-                            <div class="col">Net Income</div>
-                            <div class="col"></div>
-                            <div class="col">{{calculateProfit incomeFromOrder incomeFromJournal expenseFromJournal}}</div>
+                            <hr style="margin-bottom: 20px;border-top: 3px double #8c8b8b;">
+                            <div class="row" style="background-color: #F5B7C3;margin-top: -10px;">
+                                <div class="col">Net Income</div>
+                                <div class="col"></div>
+                                <div class="col">{{calculateProfit incomeFromOrder incomeFromJournal expenseFromJournal}}</div>
+                            </div>
                         </div>
-
-
                     </div>
-                </div>
-            {{else}}
-                <div class="card">
-                    <h4 style="text-align: center;">No data</h4>
-                </div>
-            {{/if}}
+                {{else}}
+                    <div class="card">
+                        <h4 style="text-align: center;">No data</h4>
+                    </div>
+                {{/if}}
+            </div>
         </div>
-    </div>
-
-
-        <!--{{#if dayExpenseItems}}-->
-        <!--{{#each obj in dayExpenseItems.content}}-->
-            <!--{{#each obj.dayExpenseItems}}-->
-            <!--<div class="card" style="margin-bottom: -1px;">-->
-            <!--<div class="item item-divider" style="background-color: #F1F1F1;">-->
-            <!--<div class="row">-->
-            <!--<div class="col-50">-->
-            <!--<b>Expense Item</b>-->
-            <!--</div>-->
-            <!--<div class="col-offset-25 col-20">-->
-            <!--<b>Price ($)</b>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-
-                <!--{{#each items}}-->
-                <!--<div class="item item-text-wrap">-->
-                <!--<div class="row">-->
-                <!--<div class="col-50" style="margin-left: 20px;margin-right: -20px;">-->
-                <!--{{expenseItemName}}-->
-                <!--</div>-->
-                <!--<div class="col-offset-25 col-20">-->
-                <!--{{numFormat price '0,0.00 $'}}-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                    <!--{{/each}}-->
-            <!--<div class="item item-divider">-->
-            <!--<div class="row">-->
-            <!--<div class="col-50">-->
-            <!--<b>Total Expense</b>-->
-            <!--</div>-->
-            <!--<div class="col-offset-25 col-20">-->
-            <!--<b>{{numFormat total '0,0.00 $'}}</b>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-
-            <!--&lt;!&ndash;income&ndash;&gt;-->
-            <!--<div class="card">-->
-            <!--<div class="item item-divider">-->
-            <!--<div class="row">-->
-            <!--<div class="col-50">-->
-            <!--<b>Income</b>-->
-            <!--</div>-->
-            <!--<div class="col-offset-25 col-20">-->
-            <!--<b>Price ($)</b>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-
-            <!--<div class="item item-text-wrap">-->
-            <!--<div class="row">-->
-            <!--<div class="col-50" style="margin-left: 20px;margin-right: -20px;">-->
-            <!--Order-->
-            <!--</div>-->
-            <!--<div class="col-offset-25 col20">-->
-            <!--<b>{{numFormat obj.orders '0,0.00 $'}}</b>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="item item-divider">-->
-            <!--<div class="row">-->
-            <!--<div class="col-50">-->
-            <!--<b>Total Income</b>-->
-            <!--</div>-->
-            <!--<div class="col-offset-25 col-20">-->
-            <!--<b>{{numFormat obj.orders '0,0.00 $'}}</b>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="item item-divider">-->
-            <!--<div class="row">-->
-            <!--<div class="col-50">-->
-            <!--<b>Profit</b>-->
-            <!--</div>-->
-            <!--<div class="col-offset-25 col-20">-->
-            <!--<b>{{calculateProfit obj.orders total}}</b>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-                <!--{{/each}}-->
-            <!--{{/each}}-->
-        <!--{{else}}-->
-    <!--<h4 style="text-align: center;">No data available</h4>-->
-        <!--{{/if}}-->
+    {{else}}
+        {{> login}}
+    {{/if}}
 </template>

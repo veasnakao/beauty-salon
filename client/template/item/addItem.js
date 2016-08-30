@@ -12,9 +12,16 @@ AutoForm.hooks({
             }
         },
         onSuccess(formType, id){
-            sAlert.success('Add Item Success');
+            overhang.notify({
+                type : "success",
+                message: "Item is added success"
+            });
         },
         onError(formType, error){
+            // overhang.notify({
+            //     type : "error",
+            //     message: 'error'
+            // });
             sAlert.error(error.message);
         }
     }

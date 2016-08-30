@@ -1,18 +1,15 @@
 <template name="showItem">
     {{#if currentUser}}
-        {{#contentFor "headerButtonLeft"}}
-            {{>ionNavBackButton path="index"}}
-        {{/contentFor}}
-
-        {{#contentFor "headerTitle"}}
+        <div class="bar bar-header bar-positive nav-bar-block nav-bar-transition-ios nav-bar-direction-forward"
+             data-navbar-container>
+            <button class="button button-clear pull-left button-entering button-active" data-ion-menu-toggle="left">
+                <i class="icon ion-navicon"></i>
+            </button>
             <h1 class="title">Item List</h1>
-        {{/contentFor}}
-
-        {{#contentFor "headerButtonRight"}}
             <button class="button button-clear pull-left" data-ion-modal="addItem">
                 {{> ionIcon icon="ion ion-plus-circled"}}
             </button>
-        {{/contentFor}}
+        </div>
 
         {{#ionView}}
             {{#ionContent}}

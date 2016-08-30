@@ -8,11 +8,11 @@ Meteor.methods({
                     foreignField: "_id",
                     as: "staffDoc"
                 }
-            },{
+            }, {
                 $unwind: {path: '$staffDoc', preserveNullAndEmptyArrays: true}
             }
         ]);
-        if(showStaff){
+        if (showStaff) {
             return showStaff;
         }
     }
