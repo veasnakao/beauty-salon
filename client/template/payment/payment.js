@@ -20,8 +20,6 @@ Template.payment.rendered = function () {
                 IonLoading.hide();
             }
         });
-        // $('.js-customer').prop('disabled', true);
-        // $('.js-staff').prop('disabled', true);
     } catch (e) {
         console.log(e);
     }
@@ -33,11 +31,9 @@ Template.payment.helpers({
         try {
             let selector = {
                 orderId: order._id,
-                customerId: order.customerId,
-                staffId: order.staffId,
-                paymentDate: new Date(),
                 dueAmount: order.total,
-                paidAmount: order.total
+                paidAmount: order.total,
+                balance: 0
             };
             return selector;
         } catch (e) {
@@ -51,9 +47,15 @@ Template.payment.events({
     'keyup .js-paidAmount'(){
         let dueAmount = $('.js-dueAmount').val();
         let paidAmount = $('.js-paidAmount').val();
-        if (paidAmount > 0) {
-            let moneyReturn = paidAmount - dueAmount;
-            $('.js-return').val(numeral(moneyReturn).format('0,0.00'));
+        if (paidAmount === null || paidAmount === "") {
+            let a = numeral(dueAmount);
+            console.log(a)
+            $('.js-paidAmount').val(a);
+            $('.js-balance').val(0);
+        } else {
+            let balance = dueAmount - paidAmount;
+
+            $('.js-balance').val(balance);
         }
     },
     'keypress .js-paidAmount'(evt){
@@ -93,8 +95,8 @@ AutoForm.hooks({
             insert: function (doc) {
                 let todayDate = moment().format('YYYYMMDD');
                 let prefix = todayDate + '-';
-                doc.status='paid';
-                doc._id = idGenerator.genWithPrefix(Collection.Payment,prefix, 4);
+                doc.status = 'paid';
+                doc._id = idGenerator.genWithPrefix(Collection.Payment, prefix, 4);
                 return doc;
             }
         },

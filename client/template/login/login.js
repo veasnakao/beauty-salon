@@ -18,8 +18,6 @@ Template.login.events({
     },
     'click .js-login': function (event, template) {
         event.preventDefault();
-        // let username = $('.js-username').val();
-        // let password = $('.js-password').val();
         Meteor.loginWithPassword(
             template.find(".js-username").value,
             template.find(".js-password").value,
@@ -27,13 +25,14 @@ Template.login.events({
                 if (error) {
                     sAlert.error(error.message);
                 } else {
-                    if (!(Roles.userIsInRole(Meteor.userId(), ['setting','staff']))) {
+                    if(!Meteor.user().profile.approved){
                         swal({
                             title: "Please ask permission from Admin!",
+                            imageUrl: "/sad_face.png",
                             timer: 10000,
                             showConfirmButton: true
                         });
-                    } else {
+                    }else{
                         Router.go(`/`);
                     }
                 }

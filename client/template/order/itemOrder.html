@@ -17,38 +17,22 @@
         {{#ionView}}
             {{#ionContent}}
                 <div class="card animated bounceInDown">
-                    <div class="row">
-                        <div class="col-50">
-                            <div class="list">
-                                <label class="item item-input item-select">
-                                    <div class="input-label">
-                                        Customer
-                                    </div>
-                                    <select class="js-customer">
-                                        {{#each showCustomer}}
-                                            <option value={{_id}}>{{name}}</option>
-                                        {{/each}}
-                                    </select>
-                                </label>
+                    {{#autoForm collection="Collection.Order" id="orderList" doc=order}}
+                        <div class="row">
+                            <div class="col">
+                                {{> afQuickField name='date' class="js-orderDate"}}
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {{> afQuickField name='customerId' class="js-customer"}}
+                            </div>
+                            <div class="col">
+                                {{> afQuickField name='staffId' class="js-staff"}}
                             </div>
                         </div>
-                        <div class="col-50">
-                            <div class="list">
-                                <label class="item item-input item-select">
-                                    <div class="input-label">
-                                        Staff
-                                    </div>
-                                    <select class="js-staff">
-                                        <option value="">(Select One)</option>
-                                        {{#each showStaff}}
-                                            <option value={{_id}}>{{name}}</option>
-                                        {{/each}}
-                                    </select>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
+                    {{/autoForm}}
                 </div>
 
                 {{#each showOrderDetail}}
@@ -111,10 +95,21 @@
                     </div>
                 </div>
                 <!--js-paid-->
-                <button class="button button-round button-block button-positive js-payment">
-                    {{> ionIcon class="ion ion-cash"}}
-                    Payment
-                </button>
+                <div class="row">
+                    <div class="col">
+                        <button class="button button-round button-block button-assertive js-cancelOrder">
+                            {{> ionIcon class="ion ion-trash-a"}}
+                            Cancel Order
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button class="button button-round button-block button-positive js-payment">
+                            {{> ionIcon class="ion ion-cash"}}
+                            Payment
+                        </button>
+                    </div>
+                </div>
+
             {{/ionContent}}
         {{/ionView}}
     {{else}}

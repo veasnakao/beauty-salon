@@ -2,7 +2,8 @@ Collection.Order = new Mongo.Collection("order");
 Schema.Order = new SimpleSchema({
     date: {
         type: Date,
-        label: "Date"
+        label: "Date",
+        optional: true
     },
     customerId: {
         type: String,

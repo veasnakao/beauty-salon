@@ -30,12 +30,12 @@ Template.itemOrder.rendered = function () {
         });
         let params = Router.current().params;
         let staffId = params.query.staffId;
-        let customerId = params.query.customerId;
         $('.js-staff').val(staffId);
-        if (customerId) {
-            $('.js-customer').val(customerId);
+        let checkStaffId = $('.js-staff').val();
+        if (checkStaffId == null || checkStaffId == "") {
+            $('.search-item').hide();
         } else {
-            $('.js-customer').val('0001');
+            $('.search-item').show();
         }
     } catch (e) {
         console.log(e);
@@ -45,19 +45,32 @@ Template.itemOrder.rendered = function () {
 
 //helper
 Template.itemOrder.helpers({
-    listCustomers: ()=> {
+    order() {
+        let order = Collection.Order.findOne(Router.current().params.orderId);
+        try {
+            let selector = {
+                customerId: order.customerId,
+                staffId: order.staffId,
+                date: order.date
+            };
+            return selector;
+        } catch (e) {
+
+        }
+    },
+    listCustomers(){
         let customers = Collection.Customer.find();
         if (customers) {
             return customers;
         }
     },
-    showCustomer: ()=> {
+    showCustomer(){
         let customer = Collection.Customer.find();
         if (customer) {
             return customer;
         }
     },
-    showStaff: ()=> {
+    showStaff(){
         let staff = Collection.Staff.find();
         if (staff) {
             return staff;
@@ -99,13 +112,37 @@ Template.itemOrder.helpers({
 
 //event
 Template.itemOrder.events({
-    //update customerId
+    'change .js-orderDate'(){
+        let orderDate = $('.js-orderDate').val();
+        let staffId = $('.js-staff').val();
+        let params = Router.current().params;
+        let orderId = params.orderId;
+        if (orderDate.length === 0 || staffId.length === 0) {
+            $('.search-item').hide(300);
+        } else {
+            $('.search-item').show(300);
+        }
+        let updateObj = {};
+
+        if (orderDate && orderId) {
+            updateObj.date = orderDate;
+            Meteor.call('updateOrder', orderId, updateObj, (error)=> {
+                if (error) {
+                    sAlert.error(error.message);
+                    IonLoading.hide();
+                }
+            });
+        }
+    },
     'change .js-customer'(){
         let params = Router.current().params;
         let customerId = $('.js-customer').val();
         let orderId = params.orderId;
+        let updateObj = {};
+
         if (customerId && orderId) {
-            Meteor.call('updateOrderCustomerId', orderId, customerId, (error)=> {
+            updateObj.customerId = customerId;
+            Meteor.call('updateOrder', orderId, updateObj, (error)=> {
                 if (error) {
                     sAlert.error(error.message);
                     IonLoading.hide();
@@ -116,14 +153,18 @@ Template.itemOrder.events({
     'change .js-staff'(){
         let params = Router.current().params;
         let staffId = $('.js-staff').val();
+        let orderDate = $('.js-orderDate').val();
         let orderId = params.orderId;
-        if (staffId.length < 0) {
+        if (staffId.length === 0 || orderDate.length === 0) {
             $('.search-item').hide(300);
         } else {
             $('.search-item').show(300);
         }
+        let updateObj = {};
+
         if (staffId && orderId) {
-            Meteor.call('updateOrderStaffId', orderId, staffId, (error)=> {
+            updateObj.staffId = staffId;
+            Meteor.call('updateOrder', orderId, updateObj, (error)=> {
                 if (error) {
                     sAlert.error(error.message);
                     IonLoading.hide();
@@ -152,19 +193,16 @@ Template.itemOrder.events({
                 sAlert.error(error.message);
                 IonLoading.hide();
             } else {
-                IonLoading.hide();
-                Session.set('orderId', result);
-            }
-        });
-
-        let orderId = params.orderId;
-        Meteor.call('updateOrderTotal', orderId, (err, result)=> {
-            if (err) {
-                sAlert.error(error.message);
-                IonLoading.hide();
-            } else {
-                IonLoading.hide();
-                Session.set('orderId', result);
+                let orderId = params.orderId;
+                Meteor.call('updateOrderTotal', orderId, (err, result)=> {
+                    if (err) {
+                        sAlert.error(error.message);
+                        IonLoading.hide();
+                    } else {
+                        IonLoading.hide();
+                        Session.set('orderId', result);
+                    }
+                });
             }
         });
     },
@@ -200,20 +238,19 @@ Template.itemOrder.events({
                         sAlert.error(error.message);
                         IonLoading.hide();
                     } else {
-                        IonLoading.hide();
-                        Session.set('orderId', result);
+                        let orderId = params.orderId;
+                        Meteor.call('updateOrderTotal', orderId, (err, result)=> {
+                            if (err) {
+                                sAlert.error(error.message);
+                                IonLoading.hide();
+                            } else {
+                                IonLoading.hide();
+                                Session.set('orderId', result);
+                            }
+                        });
                     }
                 });
-                let orderId = params.orderId;
-                Meteor.call('updateOrderTotal', orderId, (err, result)=> {
-                    if (err) {
-                        sAlert.error(error.message);
-                        IonLoading.hide();
-                    } else {
-                        IonLoading.hide();
-                        Session.set('orderId', result);
-                    }
-                });
+
             }
         }
     },
@@ -231,19 +268,17 @@ Template.itemOrder.events({
                     if (err) {
                         sAlert.error(`Cancel ${orderDetail.itemName}`);
                     } else {
+                        let orderId = params.orderId;
+                        Meteor.call('updateOrderTotal', orderId, (err, result)=> {
+                            if (err) {
+                                sAlert.error(error.message);
+                                IonLoading.hide();
+                            } else {
+                                IonLoading.hide();
+                                Session.set('orderId', result);
+                            }
+                        });
                         sAlert.success(`Item delete success ${orderDetail.itemName}`);
-                    }
-                });
-
-                //update order when delete orderDetail
-                let orderId = params.orderId;
-                Meteor.call('updateOrderTotal', orderId, (err, result)=> {
-                    if (err) {
-                        sAlert.error(error.message);
-                        IonLoading.hide();
-                    } else {
-                        IonLoading.hide();
-                        Session.set('orderId', result);
                     }
                 });
             },
@@ -294,6 +329,28 @@ Template.itemOrder.events({
         let orderId = params.orderId;
         console.log(`orderId ${orderId}`);
         Router.go(`/itemOrder/orderId/${orderId}/payment`);
+    },
+    'click .js-cancelOrder'(){
+        let params = Router.current().params;
+        let orderId = params.orderId;
+        IonPopup.confirm({
+            title: 'Are you sure to cancel order?',
+            template: `Order Id : ${orderId}?`,
+            onOk: () => {
+                Meteor.call('deleteOrder', orderId, (error, result) => {
+                    if (error) {
+                        sAlert.error(error.message);
+                    } else {
+                        Meteor.call('removeOrderDetailByOrder', orderId, (error, result)=> {
+                            Router.go('/showOrder');
+                            sAlert.success(`Order cancel success`);
+                        });
+                    }
+                });
+            },
+            onCancel: function () {
+            }
+        });
     }
 });
 

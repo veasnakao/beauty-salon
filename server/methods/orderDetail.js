@@ -1,6 +1,6 @@
 Meteor.methods({
     insertOrderDetail(selector){
-        var orderDetails = [];
+        let orderDetails = [];
         for (let k in selector) {
             orderDetails.push({
                 orderId: selector[k].orderId,
@@ -9,18 +9,21 @@ Meteor.methods({
                 discount: selector[k].discount,
                 amount: selector[k].amount,
                 quantity: selector[k].quantity,
-                price: selector[k].price,
-                // customerId: selector[k].customerId,
-                // customerName: selector[k].customerName
+                price: selector[k].price
             });
         }
         console.log(orderDetails);
-        var order = Collection.Order.findOne(orderDetails[0].orderId);
+        let order = Collection.Order.findOne(orderDetails[0].orderId);
         if (_.isUndefined(order)) {
             Meteor.defer(() => {
                 Meteor._sleepForMs(200);
                 orderDetails.forEach((orderDetails) => {
-                    orderDetails._id = idGenerator.gen(Collection.OrderDetail, 4);
+                    let orderId = orderDetails[0].orderId;
+                    // let todayDate = moment().format('YYYYMMDD');
+                    let prefix = orderId + '-';
+                    orderDetails._id = idGenerator.genWithPrefix(Collection.OrderDetail, prefix, 4);
+
+                    // orderDetails._id = idGenerator.gen(Collection.OrderDetail, 4);
                     Collection.OrderDetail.insert(orderDetails);
                 });
             });
@@ -32,8 +35,12 @@ Meteor.methods({
                         itemId: orderDetails.itemId
                     });
                     if (!existOrderDetail) {
-                        // orderDetails._id = idGenerator.genWithPrefix(Restaurant.Collection.SaleDetails, saleDetail.saleId, 2);
-                        orderDetails._id = idGenerator.gen(Collection.OrderDetail, 4);
+                        let orderId = orderDetails.orderId;
+                        // let todayDate = moment().format('YYYYMMDD');
+                        let prefix = orderId + '-';
+                        orderDetails._id = idGenerator.genWithPrefix(Collection.OrderDetail, prefix, 4);
+
+                        // orderDetails._id = idGenerator.gen(Collection.OrderDetail, 4);
                         Collection.OrderDetail.insert(orderDetails);
                     } else {
                         updateExistOrderDetail(orderDetails, existOrderDetail);
@@ -43,7 +50,7 @@ Meteor.methods({
         }
     },
     decreaseOrderQuantity(selector){
-        var orderDetails = [];
+        let orderDetails = [];
         for (let k in selector) {
             orderDetails.push({
                 orderId: selector[k].orderId,
@@ -59,12 +66,16 @@ Meteor.methods({
             });
         }
         console.log(orderDetails);
-        var order = Collection.Order.findOne(orderDetails[0].orderId);
+        let order = Collection.Order.findOne(orderDetails[0].orderId);
         if (_.isUndefined(order)) {
             Meteor.defer(() => {
                 Meteor._sleepForMs(200);
                 orderDetails.forEach((orderDetails) => {
-                    orderDetails._id = idGenerator.gen(Collection.OrderDetail, 4);
+                    let orderId = orderDetails[0].orderId;
+                    // let todayDate = moment().format('YYYYMMDD');
+                    let prefix = orderId + '-';
+                    orderDetails._id = idGenerator.genWithPrefix(Collection.OrderDetail, prefix, 4);
+                    // orderDetails._id = idGenerator.gen(Collection.OrderDetail, 4);
                     Collection.OrderDetail.insert(orderDetails);
                 });
             });
@@ -76,8 +87,12 @@ Meteor.methods({
                         itemId: orderDetails.itemId
                     });
                     if (!existOrderDetail) {
+                        let orderId = orderDetails.orderId;
                         // orderDetails._id = idGenerator.genWithPrefix(Restaurant.Collection.SaleDetails, saleDetail.saleId, 2);
-                        orderDetails._id = idGenerator.gen(Collection.OrderDetail, 4);
+                        // let todayDate = moment().format('YYYYMMDD');
+                        let prefix = orderId + '-';
+                        orderDetails._id = idGenerator.genWithPrefix(Collection.OrderDetail, prefix, 4);
+                        // orderDetails._id = idGenerator.gen(Collection.OrderDetail, 4);
                         Collection.OrderDetail.insert(orderDetails);
                     } else {
                         decreaseExistOrderDetail(orderDetails, existOrderDetail);
@@ -87,7 +102,16 @@ Meteor.methods({
         }
     },
     removeOrderDetail(id) {
-        Collection.OrderDetail.remove(id);
+        let orderDetail = Collection.OrderDetail.remove(id);
+        if (orderDetail) {
+            return orderDetail;
+        }
+    },
+    removeOrderDetailByOrder(orderId){
+        let orderDetail = Collection.OrderDetail.remove({orderId: orderId});
+        if (orderDetail) {
+            return orderDetail;
+        }
     }
 });
 
@@ -119,26 +143,24 @@ Meteor.methods({
     updateOrderTotal(orderId){
         let subTotal = 0;
         let orderDetail = Collection.OrderDetail.find({orderId: orderId});
-        if(orderDetail){
+        if (orderDetail) {
             orderDetail.forEach((objOrderDetail)=> {
                 subTotal += objOrderDetail.amount;
                 console.log(`subTotal : ${subTotal}`);
             });
-            Collection.Order.update(orderId, {
-                $set: {
-                    total: subTotal
-                }
-            })
         }
-
-    },
-
-    //update orderCustomerId
-    updateOrderCustomerId(orderId, customerId){
         Collection.Order.update(orderId, {
             $set: {
-                customerId: customerId
+                total: subTotal
             }
+        })
+    },
+    // let updateObj={customerId:'001',staffId:'001'};
+    // updateOrderCustomer('001',null,'003')
+    //update orderCustomerId
+    updateOrder(orderId, updateObj){
+        Collection.Order.update(orderId, {
+            $set: updateObj
         })
     },
 
@@ -158,7 +180,7 @@ Meteor.methods({
         let orderItemDetail = Collection.Order.aggregate([
             {
                 $match: {
-                    status:'active',
+                    status: 'active',
                     total: {$ne: 0}
                     // total: {$exists: true}
                 }

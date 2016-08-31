@@ -87,6 +87,7 @@ Template._productItem.events({
         let params = Router.current().params;
         let customerId = $('.js-customer');
         let staffId = $('.js-staff');
+        let orderDate = Session.get('orderDate');
 
         let selector = Session.get('orderDetailObj');
         selector[this._id] = {
@@ -98,29 +99,27 @@ Template._productItem.events({
             discount: 0,
             amount: this.price * 1
         };
+
         console.log(selector);
-        if(selector){
-            Meteor.call('insertOrderDetail', selector, (err, result) => {
-                if (err) {
-                    sAlert.error(error.message);
-                    IonLoading.hide();
-                } else {
-                    IonLoading.hide();
-                    Session.set('orderId', result);
-                }
-            });
-        }
-        
-        let orderId = params.orderId;
-        console.log(`orderId : ${orderId}`);
-        if(orderId){
-            Meteor.call('updateOrderTotal', orderId, (error, result)=> {
+        if (selector) {
+            Meteor.call('insertOrderDetail', selector, (error, result) => {
                 if (error) {
                     sAlert.error(error.message);
                     IonLoading.hide();
                 } else {
-                    IonLoading.hide();
-                    Session.set('orderId', result);
+                    let orderId = params.orderId;
+                    console.log(`orderId : ${orderId}`);
+                    if (orderId) {
+                        Meteor.call('updateOrderTotal', orderId, (error, result)=> {
+                            if (error) {
+                                sAlert.error(error.message);
+                                IonLoading.hide();
+                            } else {
+                                IonLoading.hide();
+                                Session.set('orderId', result);
+                            }
+                        });
+                    }
                 }
             });
         }

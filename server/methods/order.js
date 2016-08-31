@@ -18,11 +18,7 @@ Meteor.methods({
                 Collection.Order.remove(orderId);
             }
         });
-    }
-});
-
-//insert staff
-Meteor.methods({
+    },
     insertStaff(staffId, orderId){
         let staffs = Collection.Staff.find({_id: staffId});
         // orderDetails.forEach((objOrderDetail)=> {
@@ -38,11 +34,7 @@ Meteor.methods({
                 staffId: staffId
             }
         })
-    }
-});
-
-//update order status
-Meteor.methods({
+    },
     updateOrderStatus(orderId){
         let order = Collection.Order.findOne(orderId);
         if (order) {
@@ -52,6 +44,12 @@ Meteor.methods({
                     status: 'closed'
                 }
             });
+        }
+    },
+    deleteOrder(orderId){
+        let deleteOrder = Collection.Order.remove(orderId);
+        if(deleteOrder) {
+            return deleteOrder;
         }
     }
 });

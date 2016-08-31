@@ -13,17 +13,26 @@ Schema.Payment = new SimpleSchema({
         label: "Discount (%)",
         decimal: true,
         optional: true,
-        defaultValue: 0
+        defaultValue: 0,
+        min: 0
     },
     dueAmount: {
         type: Number,
         label: "Due Amount ($)",
-        decimal: true
+        decimal: true,
+        min: 0
     },
     paidAmount: {
         type: Number,
         label: "Paid Amount ($)",
-        decimal: true
+        decimal: true,
+        min: 0
+    },
+    balance: {
+        type: Number,
+        label: "Balance ($)",
+        decimal: true,
+        defaultValue: 0
     },
     return: {
         type: Number,
@@ -32,41 +41,11 @@ Schema.Payment = new SimpleSchema({
         optional: true,
         defaultValue: 0
     },
-    customerId: {
-        type: String,
-        label: "Customer",
-        autoform: {
-            type: "select",
-            options: function () {
-                let customer = Collection.Customer.find();
-                let list = [];
-                customer.forEach(function (obj) {
-                    list.push({label: obj.name, value: obj._id})
-                });
-                return list;
-            }
-        }
-    },
-    staffId: {
-        type: String,
-        label: "Staff",
-        autoform: {
-            type: "select",
-            options: function () {
-                let staff = Collection.Staff.find();
-                let list = [];
-                staff.forEach(function (obj) {
-                    list.push({label: obj.name, value: obj._id})
-                });
-                return list;
-            }
-        }
-    },
     status: {
         type: String,
         label: "Status",
         optional: true,
-        defaultValue:"unpaid"
+        defaultValue: "unpaid"
     }
 });
 Collection.Payment.attachSchema(Schema.Payment);

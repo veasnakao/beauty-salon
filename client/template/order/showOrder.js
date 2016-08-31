@@ -61,7 +61,7 @@ Template.showOrder.events({
         Session.set('orderDetailObj', {});
         // let customerId = this._id;
         let selector = {};
-        selector.date = new Date();
+        // selector.date = new Date();
         // selector.customerId = customerId;
         selector.status = "active";
 
