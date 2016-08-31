@@ -7,13 +7,32 @@ Template.signup.events({
         let password = $('.js-password').val();
         let confirmPassword = $('.js-confirm-password').val();
         if (confirmPassword == password) {
-            Accounts.createUser({
-                username: username,
-                password: password,
-            }, function (error) {
-                if (error) {
+            let userObj={};
+            if(username=="super"){
+                let approved = true;
+                userObj = {
+                    username: username,
+                    password: password,
+                    profile: {
+                        username: username,
+                        approved: approved
+                    }
+                };
+            }else{
+                let approved = false;
+                userObj = {
+                    username: username,
+                    password: password,
+                    profile: {
+                        username: username,
+                        approved: approved
+                    }
+                };
+            }
+            let createUser = Accounts.createUser(userObj,function (error) {
+                if(error){
                     sAlert.error(error.message);
-                } else {
+                }else{
                     Router.go(`/login`);
                 }
             });
