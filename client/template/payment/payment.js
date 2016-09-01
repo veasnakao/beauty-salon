@@ -31,13 +31,13 @@ Template.payment.helpers({
         try {
             let selector = {
                 orderId: order._id,
-                dueAmount: order.total,
-                paidAmount: order.total,
+                //dueAmount: (order.total).toFixed(2),
+                dueAmount: numeral(order.total).format('00.00'),
+                paidAmount: numeral(order.total).format('00.00'),
                 balance: 0
             };
             return selector;
         } catch (e) {
-
         }
     }
 });
@@ -47,15 +47,10 @@ Template.payment.events({
     'keyup .js-paidAmount'(){
         let dueAmount = $('.js-dueAmount').val();
         let paidAmount = $('.js-paidAmount').val();
-        if (paidAmount === null || paidAmount === "") {
-            let a = numeral(dueAmount);
-            console.log(a)
-            $('.js-paidAmount').val(a);
-            $('.js-balance').val(0);
-        } else {
-            let balance = dueAmount - paidAmount;
+        let balance = dueAmount - paidAmount;
+        $('.js-balance').val(numeral(balance).format('00.00'));
+        if ($('.js-balance') < 0 || $('.js-balance') == 0) {
 
-            $('.js-balance').val(balance);
         }
     },
     'keypress .js-paidAmount'(evt){
@@ -78,28 +73,19 @@ Template.payment.events({
             }
         });
 
-        Meteor.call('updateOrderStatus', orderId, (error, result)=> {
-            if (error) {
-                sAlert.error(error.message);
-                IonLoading.hide();
-            } else {
-                Router.go(`/showOrder`);
-            }
-        });
+        // Meteor.call('updateOrderStatus', orderId, (error, result)=> {
+        //     if (error) {
+        //         sAlert.error(error.message);
+        //         IonLoading.hide();
+        //     } else {
+        //         Router.go(`/showOrder`);
+        //     }
+        // });
     }
 });
 
 AutoForm.hooks({
-    payment: {//id autoform
-        before: {
-            insert: function (doc) {
-                let todayDate = moment().format('YYYYMMDD');
-                let prefix = todayDate + '-';
-                doc.status = 'paid';
-                doc._id = idGenerator.genWithPrefix(Collection.Payment, prefix, 4);
-                return doc;
-            }
-        },
+    payment: {
         onSuccess(formType, id){
             sAlert.success('Payment success');
         },
