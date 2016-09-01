@@ -1,7 +1,9 @@
 //tracker
 Tracker.autorun(function () {
+    debugger;
     if (Session.get('orderStatus') == 'active') {
         let status = Session.get('orderStatus');
+        console.log(status);
         Meteor.call('orderItemDetailByCustomer', status, (error, result)=> {
             if (error) {
                 sAlert.error(error.message);
@@ -10,8 +12,9 @@ Tracker.autorun(function () {
                 Session.set('orderByStaffResult', result);
             }
         });
-    }else if(Session.get('orderStatus')=='partial'){
+    } else if (Session.get('orderStatus') == 'partial') {
         let status = Session.get('orderStatus');
+        console.log(status);
         Meteor.call('orderItemDetailByCustomer', status, (error, result)=> {
             if (error) {
                 sAlert.error(error.message);
@@ -24,6 +27,8 @@ Tracker.autorun(function () {
 });
 //oncreated
 Template.showOrder.created = function () {
+    debugger;
+    Session.set('orderStatus', 'active');
     Session.set('orderDetailObj', {});
     this.autorun(function () {
         this.subscription = Meteor.subscribe('orders');
@@ -35,6 +40,7 @@ Template.showOrder.created = function () {
 
 //onrender
 Template.showOrder.rendered = function () {
+    debugger;
     try {
         this.autorun(() => {
             if (!this.subscription.ready()) {
@@ -43,7 +49,7 @@ Template.showOrder.rendered = function () {
                 IonLoading.hide();
             }
         })
-        let status = 'active';
+        let status = Session.get('orderStatus');
         Meteor.call('orderItemDetailByCustomer', status, (error, result)=> {
             if (error) {
                 sAlert.error(error.message);
@@ -60,7 +66,12 @@ Template.showOrder.rendered = function () {
 
 //helper
 Template.showOrder.helpers({
-    showCustomerOrder: function () {
+    checkStatus(){
+        if(Session.get('orderStatus') == 'active'){
+            return true
+        }
+    },
+    showCustomerOrder() {
         // return ReactiveMethod.call("orderItemDetailByCustomer",);
         //return ReactiveMethod.call('orderItemDetailByCustomer');
         let order = Session.get('orderByStaffResult');
@@ -77,6 +88,7 @@ Template.showOrder.helpers({
 
 Template.showOrder.events({
     'click .order-status'(e) {
+        debugger;
         if ($(e.currentTarget).prop('checked')) {
             $('.check-status-label').text('Order');
             Session.set('orderStatus', 'active');

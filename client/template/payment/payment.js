@@ -27,19 +27,66 @@ Template.payment.rendered = function () {
 
 Template.payment.helpers({
     order() {
-        let order = Collection.Order.findOne(Router.current().params.orderId);
-        try {
+        let orderId = Router.current().params.orderId;
+        console.log(`payment orderId ${orderId}`);
+        let payment = Collection.Payment.findOne(
+            {
+                orderId: orderId
+            },
+            {
+                sort: {_id: -1}
+            }
+        );
+        if (payment) {
             let selector = {
-                orderId: order._id,
-                //dueAmount: (order.total).toFixed(2),
-                dueAmount: numeral(order.total).format('00.00'),
-                paidAmount: numeral(order.total).format('00.00'),
+                orderId: payment.orderId,
+                dueAmount: numeral(payment.balance).format('00.00'),
+                paidAmount: numeral(payment.balance).format('00.00'),
                 balance: 0
             };
             return selector;
-        } catch (e) {
+        }
+        else {
+            let order = Collection.Order.findOne(orderId);
+            if (order) {
+                let selector = {
+                    orderId: order._id,
+                    dueAmount: numeral(order.total).format('00.00'),
+                    paidAmount: numeral(order.total).format('00.00'),
+                    balance: 0
+                };
+                return selector;
+            }
         }
     }
+
+    // let payment = Collection.Payment.findOne({orderId: orderId});
+    // if (payment) {
+    //     console.log(`payment ${payment}`);
+    //     try {
+    //         let selector = {
+    //             orderId: payment._id,
+    //             dueAmount: numeral(payment.dueAmount).format('00.00'),
+    //             paidAmount: numeral(payment.dueAmount).format('00.00'),
+    //             balance: 0
+    //         };
+    //         return selector;
+    //     } catch (e) {
+    //     }
+    // }
+
+    // try {
+    //     let selector = {
+    //         orderId: order._id,
+    //         //dueAmount: (order.total).toFixed(2),
+    //         dueAmount: numeral(order.total).format('00.00'),
+    //         paidAmount: numeral(order.total).format('00.00'),
+    //         balance: 0
+    //     };
+    //     return selector;
+    // } catch (e) {
+    // }
+
 });
 
 //events

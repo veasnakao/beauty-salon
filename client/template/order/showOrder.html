@@ -6,22 +6,24 @@
                 <i class="icon ion-navicon"></i>
             </button>
             <h1 class="title">Order List</h1>
-            <button class="button button-clear add-order button-icon icon ion-plus-circled">
-            </button>
+            {{#if checkStatus}}
+                <button class="button button-clear add-order button-icon icon ion-plus-circled">
+                </button>
+            {{/if}}
         </div>
 
         {{#ionView}}
             {{#ionContent}}
                 <!--<ul class="list">-->
-                    <div class="item item-toggle">
-                        <span class="check-status-label">Order</span>
-                        <label class="toggle toggle-balanced">
-                            <input type="checkbox" class="order-status" checked="true">
-                            <div class="track">
-                                <div class="handle"></div>
-                            </div>
-                        </label>
-                    </div>
+                <div class="item item-toggle">
+                    <span class="check-status-label">Order</span>
+                    <label class="toggle toggle-balanced">
+                        <input type="checkbox" class="order-status" checked="true">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </div>
                 <!--</ul>-->
                 {{#ionList}}
                     {{#if showCustomerOrder}}
@@ -39,13 +41,9 @@
                                     {{#each items}}
                                         {{itemName}} : {{numFormat amount '0,0.00$'}}  |
                                     {{/each}}<br>
-                                    <u>Total Paid</u> : {{numFormat total '0,0.00 $'}}
-                                    <br>
-                                    {{#each payment}}
-                                        Due Amount : {{dueAmount}} |
-                                        Paid Amount : {{paidAmount}} |
-                                        Balance : {{balance}}
-                                    {{/each}}
+                                    Total Paid : {{numFormat total '0,0.00 $'}} |
+                                    Paid Amount : {{numFormat paidAmount '0,0.00 $'}} |
+                                    Balance : {{numFormat balance '0,0.00 $'}}
                                     {{> ionIcon icon="ios-arrow-right"}}
                                 {{/ionItem}}
                             </div>

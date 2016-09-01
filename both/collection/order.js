@@ -48,6 +48,17 @@ Schema.Order = new SimpleSchema({
         label: "Total",
         decimal: true,
         optional: true
-    }
+    },
+    paidAmount: {
+        type: Number,
+        decimal: true,
+        optional: true
+
+    },
+    balanceAmount: {
+        type: Number,
+        decimal: true,
+        optional: true
+    },
 });
 Collection.Order.attachSchema(Schema.Order);

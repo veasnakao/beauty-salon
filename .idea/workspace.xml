@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5fbfa6e6-227e-46b1-917f-9caa09b60352" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/hook/payment.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/packages" afterPath="$PROJECT_DIR$/.meteor/packages" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/versions" afterPath="$PROJECT_DIR$/.meteor/versions" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/both/collection/payment.js" afterPath="$PROJECT_DIR$/both/collection/payment.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/both/collection/order.js" afterPath="$PROJECT_DIR$/both/collection/order.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/order/itemOrder.html" afterPath="$PROJECT_DIR$/client/template/order/itemOrder.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/order/itemOrder.js" afterPath="$PROJECT_DIR$/client/template/order/itemOrder.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/order/showOrder.html" afterPath="$PROJECT_DIR$/client/template/order/showOrder.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/order/showOrder.js" afterPath="$PROJECT_DIR$/client/template/order/showOrder.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/payment/payment.html" afterPath="$PROJECT_DIR$/client/template/payment/payment.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/payment/payment.js" afterPath="$PROJECT_DIR$/client/template/payment/payment.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/hook/payment.js" afterPath="$PROJECT_DIR$/server/hook/payment.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/methods/orderDetail.js" afterPath="$PROJECT_DIR$/server/methods/orderDetail.js" />
     </list>
     <ignored path="beauty-shop.iws" />
@@ -32,31 +32,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="showOrder.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/template/order/showOrder.js">
+      <file leaf-file-name="itemOrder.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/template/order/itemOrder.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="45" column="30" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
+            <state relative-caret-position="202">
+              <caret line="48" column="48" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="showOrder.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/template/order/showOrder.html">
+      <file leaf-file-name="itemOrder.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/template/order/itemOrder.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="28" column="77" selection-start-line="28" selection-start-column="77" selection-end-line="28" selection-end-column="77" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="packages" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.meteor/packages">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
-              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="24" />
+            <state relative-caret-position="718">
+              <caret line="53" column="100" selection-start-line="53" selection-start-column="100" selection-end-line="53" selection-end-column="100" />
               <folding />
             </state>
           </provider>
@@ -108,19 +98,19 @@
         <option value="$PROJECT_DIR$/both/router.js" />
         <option value="$PROJECT_DIR$/client/template/order/searchItem.html" />
         <option value="$PROJECT_DIR$/server/methods/order.js" />
-        <option value="$PROJECT_DIR$/both/collection/order.js" />
         <option value="$PROJECT_DIR$/client/template/order/searchItem.js" />
-        <option value="$PROJECT_DIR$/client/template/order/itemOrder.js" />
-        <option value="$PROJECT_DIR$/client/template/order/itemOrder.html" />
         <option value="$PROJECT_DIR$/client/template/signup/signup.js" />
         <option value="$PROJECT_DIR$/client/template/login/login.js" />
         <option value="$PROJECT_DIR$/both/collection/payment.js" />
+        <option value="$PROJECT_DIR$/both/collection/order.js" />
         <option value="$PROJECT_DIR$/client/template/payment/payment.html" />
-        <option value="$PROJECT_DIR$/server/hook/payment.js" />
         <option value="$PROJECT_DIR$/client/template/payment/payment.js" />
+        <option value="$PROJECT_DIR$/server/hook/payment.js" />
         <option value="$PROJECT_DIR$/server/methods/orderDetail.js" />
-        <option value="$PROJECT_DIR$/client/template/order/showOrder.js" />
         <option value="$PROJECT_DIR$/client/template/order/showOrder.html" />
+        <option value="$PROJECT_DIR$/client/template/order/showOrder.js" />
+        <option value="$PROJECT_DIR$/client/template/order/itemOrder.js" />
+        <option value="$PROJECT_DIR$/client/template/order/itemOrder.html" />
       </list>
     </option>
   </component>
@@ -134,9 +124,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="-4" />
-    <option name="width" value="1535" />
-    <option name="height" value="904" />
+    <option name="y" value="24" />
+    <option name="width" value="1855" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -333,8 +323,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -576,18 +566,20 @@
       <workItem from="1472627567144" duration="8915000" />
       <workItem from="1472651304660" duration="1136000" />
       <workItem from="1472652464184" duration="8329000" />
-      <workItem from="1472691937921" duration="12945000" />
+      <workItem from="1472691937921" duration="13189000" />
+      <workItem from="1472715734019" duration="5953000" />
+      <workItem from="1472739645630" duration="6169000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="837975000" />
+    <option name="totallyTimeSpent" value="850341000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1535" height="904" extended-state="6" />
+    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18518518" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18504366" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -624,15 +616,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/template/layout/logout.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="11" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/checkUser/checkUser.js" />
-    <entry file="file://$PROJECT_DIR$/client/template/checkUser/checkUser.html" />
     <entry file="file://$PROJECT_DIR$/client/template/staff/addStaff.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -658,7 +641,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
           <caret line="20" column="38" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -673,7 +655,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="363">
           <caret line="61" column="24" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -688,7 +669,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
           <caret line="39" column="50" selection-start-line="39" selection-start-column="50" selection-end-line="39" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -746,13 +726,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="122">
           <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/reports/staffs/staffReport.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -823,7 +796,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="43" column="14" selection-start-line="43" selection-start-column="14" selection-end-line="43" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -831,13 +803,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="102" column="30" selection-start-line="102" selection-start-column="30" selection-end-line="102" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/both/collection/order.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -852,7 +817,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
           <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -867,7 +831,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="627">
           <caret line="36" column="21" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -883,7 +846,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="17" column="32" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -891,31 +853,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="422">
           <caret line="37" column="21" selection-start-line="37" selection-start-column="21" selection-end-line="37" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/methods/order.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/order/itemOrder.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1927">
-          <caret line="152" column="25" selection-start-line="152" selection-start-column="25" selection-end-line="152" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/order/itemOrder.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="39" column="62" selection-start-line="39" selection-start-column="41" selection-end-line="39" selection-end-column="62" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -927,58 +864,120 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/hook/payment.js">
+    <entry file="file://$PROJECT_DIR$/.meteor/packages">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="647">
-          <caret line="37" column="29" selection-start-line="37" selection-start-column="29" selection-end-line="37" selection-end-column="29" />
+        <state relative-caret-position="575">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/both/collection/order.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1375">
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/methods/order.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/payment/payment.js">
+    <entry file="file://$PROJECT_DIR$/server/hook/payment.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-342">
-          <caret line="51" column="45" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
+        <state relative-caret-position="300">
+          <caret line="12" column="71" selection-start-line="12" selection-start-column="71" selection-end-line="12" selection-end-column="71" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/template/payment/payment.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="13" column="74" selection-start-line="13" selection-start-column="69" selection-end-line="13" selection-end-column="74" />
+        <state relative-caret-position="350">
+          <caret line="14" column="55" selection-start-line="14" selection-start-column="55" selection-end-line="14" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/methods/orderReport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1348">
+          <caret line="74" column="12" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/methods/profitAndLossReport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="21" column="33" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/methods/journalEntryReport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="398" column="32" selection-start-line="398" selection-start-column="32" selection-end-line="398" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/payment/payment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="700">
+          <caret line="52" column="38" selection-start-line="52" selection-start-column="38" selection-end-line="52" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/methods/orderDetail.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="178" column="25" selection-start-line="178" selection-start-column="25" selection-end-line="178" selection-end-column="25" />
+        <state relative-caret-position="365">
+          <caret line="260" column="25" selection-start-line="260" selection-start-column="25" selection-end-line="260" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/reports/staffs/staffReport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="80" column="49" selection-start-line="80" selection-start-column="49" selection-end-line="80" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/template/order/showOrder.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="45" column="30" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.meteor/packages">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="24" />
+        <state relative-caret-position="350">
+          <caret line="14" column="53" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/template/order/showOrder.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="28" column="77" selection-start-line="28" selection-start-column="77" selection-end-line="28" selection-end-column="77" />
+        <state relative-caret-position="550">
+          <caret line="22" column="48" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/order/itemOrder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="48" column="48" selection-start-line="48" selection-start-column="48" selection-end-line="48" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/order/itemOrder.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="718">
+          <caret line="53" column="100" selection-start-line="53" selection-start-column="100" selection-end-line="53" selection-end-column="100" />
           <folding />
         </state>
       </provider>

@@ -260,15 +260,17 @@ Meteor.methods({
                             staff: '$orderDoc.staffDoc.name'
                         }
                     },
-                    payment: {
-                        $addToSet: {
-                            paymentDate: '$paymentDoc.paymentDate',
-                            dueAmount: '$paymentDoc.dueAmount',
-                            paidAmount: '$paymentDoc.paidAmount',
-                            balance: '$paymentDoc.balance',
-                            status: '$paymentDoc.status'
-                        }
-                    },
+                    paidAmount:{$last: '$paymentDoc.paidAmount'},
+                    balance: {$last:'$paymentDoc.balance'},
+                    // payment: {
+                    //     $addToSet: {
+                    //         paymentDate: '$paymentDoc.paymentDate',
+                    //         dueAmount: '$paymentDoc.dueAmount',
+                    //         paidAmount: '$paymentDoc.paidAmount',
+                    //         balance: '$paymentDoc.balance',
+                    //         status: '$paymentDoc.status'
+                    //     }
+                    // },
                     total: {
                         $sum: '$orderDoc.amount'
                     }

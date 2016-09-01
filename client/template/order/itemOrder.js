@@ -45,6 +45,11 @@ Template.itemOrder.rendered = function () {
 
 //helper
 Template.itemOrder.helpers({
+    checkStatus(){
+        if(Session.get('orderStatus') == 'active'){
+            return true
+        }
+    },
     order() {
         let order = Collection.Order.findOne(Router.current().params.orderId);
         try {

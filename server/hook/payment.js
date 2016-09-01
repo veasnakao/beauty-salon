@@ -1,7 +1,8 @@
 Collection.Payment.before.insert((userId, doc) => {
     let orderId = doc.orderId;
+    console.log(`orderId ${orderId}`);
     let prefix = orderId + '-';
-    doc._id = idGenerator.genWithPrefix(Collection.Payment, prefix, 3);
+
     doc.change = doc.balance;
     if (doc.paidAmount >= doc.dueAmount) {
         doc.status = 'close'
@@ -9,17 +10,7 @@ Collection.Payment.before.insert((userId, doc) => {
     } else {
         doc.status = 'partial'
     }
-
-
-    // if (doc.paidAmount >= doc.dueAmount) {
-    //     doc.status = 'closed';
-    //     doc.truelyPaid = doc.dueAmount
-    //     doc.balanceAmount = 0
-    // } else {
-    //     doc.status = 'partial';
-    //     doc.truelyPaid = doc.paidAmount;
-    // }
-
+    doc._id = idGenerator.genWithPrefix(Collection.Payment, prefix, 3);
 });
 
 Collection.Payment.after.insert((userId, doc) => {
@@ -27,18 +18,18 @@ Collection.Payment.after.insert((userId, doc) => {
         let orderId = doc.orderId;
         let status;
         let selector = {};
-        if (doc.balance==0) {
+        if (doc.balance == 0) {
             // status = doc.status = 'close'
-            selector={
-                $set:{
-                    status:'close'
+            selector = {
+                $set: {
+                    status: 'close'
                 }
             }
-        }else{
+        } else {
             // status=doc.status='partial'
-            selector={
-                $set:{
-                    status:'partial'
+            selector = {
+                $set: {
+                    status: 'partial'
                 }
             }
         }
