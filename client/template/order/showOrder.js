@@ -1,4 +1,27 @@
-
+//tracker
+Tracker.autorun(function () {
+    if (Session.get('orderStatus') == 'active') {
+        let status = Session.get('orderStatus');
+        Meteor.call('orderItemDetailByCustomer', status, (error, result)=> {
+            if (error) {
+                sAlert.error(error.message);
+            } else {
+                console.log('render here');
+                Session.set('orderByStaffResult', result);
+            }
+        });
+    }else if(Session.get('orderStatus')=='partial'){
+        let status = Session.get('orderStatus');
+        Meteor.call('orderItemDetailByCustomer', status, (error, result)=> {
+            if (error) {
+                sAlert.error(error.message);
+            } else {
+                console.log('render here');
+                Session.set('orderByStaffResult', result);
+            }
+        });
+    }
+});
 //oncreated
 Template.showOrder.created = function () {
     Session.set('orderDetailObj', {});
@@ -12,15 +35,6 @@ Template.showOrder.created = function () {
 
 //onrender
 Template.showOrder.rendered = function () {
-    Meteor.call('orderItemDetailByCustomer', function (error, result) {
-        if (error) {
-            sAlert.error(error.message);
-        } else {
-            console.log('render here');
-            Session.set('orderByStaffResult', result);
-        }
-    });
-
     try {
         this.autorun(() => {
             if (!this.subscription.ready()) {
@@ -29,6 +43,15 @@ Template.showOrder.rendered = function () {
                 IonLoading.hide();
             }
         })
+        let status = 'active';
+        Meteor.call('orderItemDetailByCustomer', status, (error, result)=> {
+            if (error) {
+                sAlert.error(error.message);
+            } else {
+                console.log('render here');
+                Session.set('orderByStaffResult', result);
+            }
+        });
     } catch (e) {
         console.log(e);
     }
@@ -51,13 +74,18 @@ Template.showOrder.helpers({
     }
 });
 
-//event
-Template.showOrder.onDestroyed(function(){
-    Session.set('querySaleOrder', undefined);
-    Session.set('orderByStaffResult', []);
-})
+
 Template.showOrder.events({
-    'click .add-order': function () {
+    'click .order-status'(e) {
+        if ($(e.currentTarget).prop('checked')) {
+            $('.check-status-label').text('Order');
+            Session.set('orderStatus', 'active');
+        } else {
+            $('.check-status-label').text('Paid');
+            Session.set('orderStatus', 'partial');
+        }
+    },
+    'click .add-order'() {
         Session.set('orderDetailObj', {});
         // let customerId = this._id;
         let selector = {};
@@ -77,7 +105,7 @@ Template.showOrder.events({
             }
         })
     },
-    'click .show-order-item': function () {
+    'click .show-order-item'() {
         let orderId = this._id;
         console.log(`orderId : ${orderId}`);
         let order = Collection.Order.findOne(orderId);
@@ -86,3 +114,9 @@ Template.showOrder.events({
         Router.go(`/itemOrder/orderId/${orderId}?staffId=${order.staffId}&customerId=${order.customerId}`);
     }
 });
+
+//event
+Template.showOrder.onDestroyed(function () {
+    Session.set('querySaleOrder', undefined);
+    Session.set('orderByStaffResult', []);
+})

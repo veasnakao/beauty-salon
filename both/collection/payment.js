@@ -34,12 +34,10 @@ Schema.Payment = new SimpleSchema({
         decimal: true,
         defaultValue: 0
     },
-    return: {
+    change: {
         type: Number,
-        label: "Return ($)",
         decimal: true,
-        optional: true,
-        defaultValue: 0
+        optional: true
     },
     status: {
         type: String,

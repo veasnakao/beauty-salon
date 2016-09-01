@@ -33,6 +33,8 @@
         <item url="file://$USER_HOME$/.meteor/packages/launch-screen/1.0.11/web.browser/default-behavior.js" />
         <item url="file://$USER_HOME$/.meteor/packages/launch-screen/1.0.11/web.browser/mobile-launch-screen.js" />
         <item url="file://$USER_HOME$/.meteor/packages/logging/1.0.12/web.browser/logging.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/ecwyne_mathjs/2.7.0/web.browser/export-mathjs.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/ecwyne_mathjs/2.7.0/web.browser/mathjs/dist/math.min.js" />
         <item url="file://$USER_HOME$/.meteor/packages/matb33_collection-hooks/0.8.1/web.browser/findone.js" />
         <item url="file://$USER_HOME$/.meteor/packages/matb33_collection-hooks/0.8.1/web.browser/upsert.js" />
         <item url="file://$USER_HOME$/.meteor/packages/matb33_collection-hooks/0.8.1/web.browser/users-compat.js" />
@@ -427,6 +429,8 @@
       <root url="file://$USER_HOME$/.meteor/packages/launch-screen/1.0.11/web.browser/default-behavior.js" />
       <root url="file://$USER_HOME$/.meteor/packages/launch-screen/1.0.11/web.browser/mobile-launch-screen.js" />
       <root url="file://$USER_HOME$/.meteor/packages/logging/1.0.12/web.browser/logging.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/ecwyne_mathjs/2.7.0/web.browser/export-mathjs.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/ecwyne_mathjs/2.7.0/web.browser/mathjs/dist/math.min.js" />
       <root url="file://$USER_HOME$/.meteor/packages/matb33_collection-hooks/0.8.1/web.browser/findone.js" />
       <root url="file://$USER_HOME$/.meteor/packages/matb33_collection-hooks/0.8.1/web.browser/upsert.js" />
       <root url="file://$USER_HOME$/.meteor/packages/matb33_collection-hooks/0.8.1/web.browser/users-compat.js" />
