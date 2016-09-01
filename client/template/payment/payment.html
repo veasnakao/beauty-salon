@@ -11,7 +11,7 @@
         {{#ionView}}
             {{#ionContent}}
                 <div class="card animated bounceInDown">
-                    {{#autoForm collection="Collection.Payment" id="payment" doc=order type="insert"}}
+                    {{#autoForm collection="Collection.Payment"  doc=order id="payment" type="insert"}}
                         {{> afQuickField name='orderId' type="hidden"}}
                         <div class="row">
                             <div class="col">
@@ -22,7 +22,6 @@
                         {{> afQuickField name='dueAmount' readonly=true class="js-dueAmount" style="background-color: #D8D8D7"}}
                         {{> afQuickField name='paidAmount' class="js-paidAmount"}}
                         {{> afQuickField name='balance' class="js-balance"}}
-                        {{> afQuickField name='return' readonly=true class="js-return"}}
                         <div class="row">
                             <div class="col">
                                 <button class="button button-round button-block button-positive js-payment">
