@@ -1,0 +1,13 @@
+<template name="chooseJournalType">
+    {{#ionModal customTemplate=true}}
+        <div class="content has-header overflow-scroll">
+            {{#ionList}}
+                    {{#ionRadio}}Expense{{/ionRadio}}
+                    {{#ionRadio}}Inocme{{/ionRadio}}
+            {{/ionList}}
+
+            {{> afQuickField name='name' placeholder="Item name"}}
+            {{> afQuickField name='price' placeholder="Item price"}}
+        </div>
+    {{/ionModal}}
+</template>
