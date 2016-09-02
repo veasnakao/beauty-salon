@@ -26,19 +26,24 @@
                                     <div class="col">
                                         {{username}}
                                     </div>
-
-                                    {{#if roles}}
-                                        <div class="col">
-                                            <i class="cursor-p ion-checkmark-circled positive"></i>
+                                    {{#if profile.approved}}
+                                        <div class="col" style="margin-top: -20px;">
+                                            <button class="button button-clear approved-toggle">
+                                                {{> ionIcon class="cursor-p ion-checkmark-circled positive"}}
+                                            </button>
                                         </div>
                                         <div class="col">
                                             {{roles}}
                                         </div>
                                     {{else}}
-                                        <div class="col">
-                                            <i class="cursor-p ion-minus-circled assertive"></i>
+                                        <div class="col" style="margin-top: -20px;">
+                                            <button class="button button-clear approved-toggle">
+                                                {{> ionIcon class="cursor-p ion-minus-circled assertive"}}
+                                            </button>
                                         </div>
-                                        <div class="col"></div>
+                                        <div class="col">
+                                            {{roles}}
+                                        </div>
                                     {{/if}}
 
                                     <div class="col">

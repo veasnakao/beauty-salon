@@ -14,6 +14,7 @@ Template.itemOrder.created = function () {
         this.subscription = Meteor.subscribe("customers");
         this.subscription = Meteor.subscribe("orderDetail", Router.current().params.orderId);
         this.subscription = Meteor.subscribe('order', Router.current().params.orderId);
+        this.subscription = Meteor.subscribe('payment', Router.current().params.orderId);
         // this.subscription = Meteor.subscribe('journalEntrys');
     }.bind(this));
 };
@@ -46,7 +47,7 @@ Template.itemOrder.rendered = function () {
 //helper
 Template.itemOrder.helpers({
     checkStatus(){
-        if(Session.get('orderStatus') == 'active'){
+        if (Session.get('orderStatus') == 'active') {
             return true
         }
     },
@@ -81,7 +82,7 @@ Template.itemOrder.helpers({
             return staff;
         }
     },
-    showOrderDetail: ()=> {
+    showOrderDetail(){
         let params = Router.current().params;
         let orderId = params.orderId;
         let orderDetail = Collection.OrderDetail.find({orderId: orderId});
@@ -101,16 +102,22 @@ Template.itemOrder.helpers({
     //     });
     //     // console.log(totalByItem);
     // },
-    totalOrder: ()=> {
+    totalOrder(){
         let params = Router.current().params;
         let orderId = params.orderId;
-        let orders = Collection.Order.find(orderId);
-        if (orders) {
-            let totalPaid = 0;
-            orders.forEach((objOrders)=> {
-                totalPaid = objOrders.total;
-            });
+        let order = Collection.Order.findOne(orderId);
+        if (order) {
+            let totalPaid = order.total;
             return totalPaid;
+        }
+    },
+    payment(){
+        let params = Router.current().params;
+        let orderId = params.orderId;
+        let payment = Collection.Payment.findOne({orderId: orderId}, {sort: {_id: -1}});
+        if (payment) {
+            console.log(payment);
+            return payment;
         }
     }
 });
@@ -347,8 +354,18 @@ Template.itemOrder.events({
                         sAlert.error(error.message);
                     } else {
                         Meteor.call('removeOrderDetailByOrder', orderId, (error, result)=> {
-                            Router.go('/showOrder');
-                            sAlert.success(`Order cancel success`);
+                            if (error) {
+                                sAlert.error(error.message);
+                            } else {
+                                Meteor.call('removePayment', orderId, (error, result)=> {
+                                    if (error) {
+                                        sAlert.error(error.message);
+                                    } else {
+                                        Router.go('/showOrder');
+                                        sAlert.success(`Order cancel success`);
+                                    }
+                                })
+                            }
                         });
                     }
                 });

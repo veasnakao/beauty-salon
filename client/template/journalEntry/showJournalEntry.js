@@ -62,7 +62,9 @@ Template.showJournalEntry.helpers({
 Template.showJournalEntry.events({
     'click .add-journalEntry'(){
         Router.go('addJournalEntry');
+    },
+    'click .edit-journalEntry'(){
+        console.log(this);
     }
-    
 });
 

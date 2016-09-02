@@ -83,7 +83,8 @@ Template.searchItem.events({
 
 //template _productItem events
 Template._productItem.events({
-    'click .insert-order': function () {
+    'click .insert-order'() {
+        $('this').css('background-color', '#00cc00');
         let params = Router.current().params;
         let customerId = $('.js-customer');
         let staffId = $('.js-staff');

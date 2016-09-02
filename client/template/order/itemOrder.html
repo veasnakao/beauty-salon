@@ -103,18 +103,43 @@
                         </div>
                     </div>
                 {{/each}}
-                <div class="card">
-                    <div class="item item-text-wrap button-balanced">
-                        <div class="row">
-                            <div class="col-75">
-                                <b>Total :</b>
-                            </div>
-                            <div class="col-25">
-                                <div style="float: right;">
-                                <!--{{#each totalOrderDetail}}-->
-                                    <b>{{numFormat totalOrder '0,0.00 $'}}</b>
-                                        <!--{{/each}}-->
+                <div class="row">
+                    <div class="col-offset-50 col-50">
+                        <div class="card">
+                            <div class="item item-text-wrap button-balanced">
+                                <div class="row">
+                                    <div class="col-75">
+                                        <b>Total :</b>
+                                    </div>
+                                    <div class="col-25">
+                                        <div style="float: right;">
+                                            {{numFormat totalOrder '0,0.00 $'}}
+                                        </div>
+                                    </div>
                                 </div>
+
+                                {{#with payment}}
+                                    <div class="row">
+                                        <div class="col-75">
+                                            <b>Paid Amount : </b>
+                                        </div>
+                                        <div class="col-25">
+                                            <div style="float: right;">
+                                                {{numFormat paidAmount '0,0.00 $'}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-75">
+                                            <b>Balance : </b>
+                                        </div>
+                                        <div class="col-25">
+                                            <div style="float: right;">
+                                                {{numFormat balance '0,0.00 $'}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{/with}}
                             </div>
                         </div>
                     </div>

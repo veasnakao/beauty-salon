@@ -2,28 +2,14 @@
     {{#contentFor "headerButtonLeft"}}
         {{>ionNavBackButton path="showJournalEntry"}}
     {{/contentFor}}
-
     {{#contentFor "headerTitle"}}
         <h1 class="title">Add New Journal Entry</h1>
     {{/contentFor}}
-
     {{#contentFor "headerButtonRight"}}
         <button class="button button-clear pull-left">
             {{> ionIcon icon="ion ion-paper-airplane"}}
         </button>
     {{/contentFor}}
-    <!--<div class="bar bar-header bar-positive nav-bar-block nav-bar-transition-ios nav-bar-direction-forward"-->
-         <!--data-navbar-container>-->
-        <!--<button class="button button-clear pull-left button-entering button-active js-back">-->
-            <!--<i class="icon ion-ios-arrow-back"></i>-->
-        <!--</button>-->
-        <!--&lt;!&ndash;{{>ionNavBackButton path="showJournalEntry"}}&ndash;&gt;-->
-        <!--<h1 class="title">Add New Journal Entry</h1>-->
-        <!--<button class="button button-clear button-icon add-journalEntry">-->
-            <!--{{> ionIcon icon="ion ion-paper-airplane"}}-->
-        <!--</button>-->
-    <!--</div>-->
-
     {{#ionView}}
         {{#ionContent}}
             {{#autoForm collection="Collection.JournalEntry" id="addJournalEntry" type="insert"}}
@@ -38,7 +24,6 @@
             {{/autoForm}}
         {{/ionContent}}
     {{/ionView}}
-
 </template>
 
 

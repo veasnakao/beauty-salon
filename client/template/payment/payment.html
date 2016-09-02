@@ -12,7 +12,7 @@
             {{#ionContent}}
                 <div class="card animated bounceInDown">
                     {{#autoForm collection="Collection.Payment"  doc=order id="payment" type="insert"}}
-                        {{> afQuickField name='orderId'}}
+                        {{> afQuickField name='orderId' type="hidden"}}
                         <div class="row">
                             <div class="col">
                                 {{> afQuickField name='paymentDate'}}

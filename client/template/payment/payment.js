@@ -112,13 +112,15 @@ Template.payment.events({
         selector.orderId = orderId;
         selector.typeOfJournal = "income";
         selector.journalEntryItem = [];
-        Meteor.call('addJournalEntryByOrder', selector, (error, result)=> {
-            if (error) {
-                sAlert.error(error.message);
-            } else {
-                IonLoading.hide();
-            }
-        });
+        Router.go('/showOrder');
+
+        // Meteor.call('addJournalEntryByOrder', selector, (error, result)=> {
+        //     if (error) {
+        //         sAlert.error(error.message);
+        //     } else {
+        //
+        //     }
+        // });
 
         // Meteor.call('updateOrderStatus', orderId, (error, result)=> {
         //     if (error) {

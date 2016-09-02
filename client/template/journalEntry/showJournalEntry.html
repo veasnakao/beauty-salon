@@ -5,7 +5,8 @@
                 <i class="icon ion-navicon"></i>
             </button>
             <h1 class="title">Journal Entry List</h1>
-            <button class="button button-clear button-icon icon ion-plus-circled add-journalEntry" data-ion-modal="addJournalEntry">
+            <!--add-journalEntry-->
+            <button class="button button-clear button-icon icon ion-plus-circled" data-ion-modal="chooseJournalType">
             </button>
         </div>
 
@@ -14,7 +15,7 @@
                 {{#if journalEntry}}
                     {{#each journalEntry.content}}
                         {{#if subTotalIsNotZero subTotal}}
-                            <div class="card">
+                            <div class="card edit-journalEntry">
                                 <div class="item item-divider">
                                     <div class="row">
                                         <div class="col">

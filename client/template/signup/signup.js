@@ -1,4 +1,3 @@
-
 //event
 Template.signup.events({
     "click .js-signup": function (event, template) {
@@ -7,8 +6,8 @@ Template.signup.events({
         let password = $('.js-password').val();
         let confirmPassword = $('.js-confirm-password').val();
         if (confirmPassword == password) {
-            let userObj={};
-            if(username=="super"){
+            let userObj = {};
+            if (username == "super") {
                 let approved = true;
                 userObj = {
                     username: username,
@@ -16,9 +15,10 @@ Template.signup.events({
                     profile: {
                         username: username,
                         approved: approved
-                    }
+                    },
+                    role: []
                 };
-            }else{
+            } else {
                 let approved = false;
                 userObj = {
                     username: username,
@@ -29,10 +29,10 @@ Template.signup.events({
                     }
                 };
             }
-            let createUser = Accounts.createUser(userObj,function (error) {
-                if(error){
+            let createUser = Accounts.createUser(userObj, function (error) {
+                if (error) {
                     sAlert.error(error.message);
-                }else{
+                } else {
                     Router.go(`/login`);
                 }
             });

@@ -6,6 +6,19 @@ Template._selectRole.helpers({
     }
 });
 
+Template.setRole.events({
+    'click .approved-toggle'(){
+        Meteor.call('approvedUser', this._id, this.profile.approved, (error, result) => {
+            if (error) {
+                console.log(error)
+            }
+            if (result) {
+                sAlert.success('update success');
+            }
+        });
+    }
+});
+
 AutoForm.hooks({
     selectRole: {
         onSubmit(doc) {
@@ -19,4 +32,4 @@ AutoForm.hooks({
             return false;
         }
     }
-})
+});

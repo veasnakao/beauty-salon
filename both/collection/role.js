@@ -8,8 +8,10 @@ Schema.Roles = new SimpleSchema({
             type: "select-checkbox",
             options: function () {
                 return [
-                    {label: "Staff", value: 'staff'},
-                    {label: "Setting", value: 'setting'}
+                    {label: "Cashier", value: 'cashier'},
+                    {label: "Setting", value: 'setting'},
+                    {label: "Seller", value: 'seller'},
+                    {label: "Super", value: 'super'},
                 ];
             }
         }
