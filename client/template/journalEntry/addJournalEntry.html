@@ -5,23 +5,27 @@
     {{#contentFor "headerTitle"}}
         <h1 class="title">Add New Journal Entry</h1>
     {{/contentFor}}
-    {{#contentFor "headerButtonRight"}}
-        <button class="button button-clear pull-left">
-            {{> ionIcon icon="ion ion-paper-airplane"}}
-        </button>
-    {{/contentFor}}
+        <!--{{#contentFor "headerButtonRight"}}-->
+    <!--<button class="button button-clear pull-left">-->
+    <!--{{> ionIcon icon="ion ion-paper-airplane"}}-->
+    <!--</button>-->
+        <!--{{/contentFor}}-->
     {{#ionView}}
         {{#ionContent}}
-            {{#autoForm collection="Collection.JournalEntry" id="addJournalEntry" type="insert"}}
-                <div class="content has-header overflow-scroll">
-                    {{> afQuickField name='date'}}
+            <div class="card animated bounceInDown">
+                {{#autoForm collection="Collection.JournalEntry" id="addJournalEntry" type="insert"}}
+                    <div class="row">
+                        <div class="col-50">
+                            {{> afQuickField name='date'}}
+                        </div>
+                    </div>
                     {{> afQuickField name='typeOfJournal'}}
-                    {{> afArrayField name="journalEntryItem"}}
-                    <button class="button button-block button-positive">
+                    {{> afQuickField name='journalEntryItem'}}
+                    <button class="button button-round button-block button-positive js-payment">
                         Add
                     </button>
-                </div>
-            {{/autoForm}}
+                {{/autoForm}}
+            </div>
         {{/ionContent}}
     {{/ionView}}
 </template>

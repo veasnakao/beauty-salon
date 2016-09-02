@@ -1,6 +1,7 @@
 Template.chooseJournalType.events({
-    "change [name='chooseJournal']"(){
-        let journalType = $('input[name=tcol1]:checked').val();
-        console.log(journalType);
+    'change .chooseJournal'(){
+        let journalType = $('input[name=chooseJournal]:checked').val();
+        Session.set('journalType', journalType);
+        Router.go('/addJournalEntry');
     }
 });

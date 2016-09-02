@@ -7,7 +7,7 @@ Template.addJournalEntry.created = function () {
 };
 
 //onrender
-Template.addJournalEntry.rendered = function() {
+Template.addJournalEntry.rendered = function () {
     try {
         this.autorun(() => {
             if (!this.subscription.ready()) {
@@ -15,14 +15,15 @@ Template.addJournalEntry.rendered = function() {
             } else {
                 IonLoading.hide();
             }
-        })
+        });
+        console.log($('.js-journalEntryItem').val());
     } catch (e) {
         console.log(e);
     }
 };
 
 AutoForm.hooks({
-    addJournalEntry: {//id autoform
+    addJournalEntry: {
         before: {
             insert: function (doc) {
                 let todayDate = moment().format('YYYYMMDD');

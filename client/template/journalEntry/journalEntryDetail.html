@@ -8,7 +8,8 @@
     {{/contentFor}}
 
     {{#contentFor "headerButtonRight"}}
-        <button class="button button-clear pull-left" data-ion-modal="" data-id="{{journalEntryDetail._id}}">
+        <button class="button button-clear pull-left" data-ion-modal="editJournalEntry"
+                data-id="{{journalEntryDetail._id}}">
             {{> ionIcon icon="ion ion-edit"}}
         </button>
     {{/contentFor}}
@@ -16,52 +17,92 @@
     {{#ionView}}
         {{#ionContent}}
             {{#ionList}}
-                {{#each totalDayExpense.content}}
-                    {{#ionItem}}
-                        <div class="row" style="background-color: #CDC9C9;">
-                            <div class="col col-50">
-                                <h2><b><u>Paid Date</u></b></h2>
-                            </div>
-                            <div class="col col-50">
-                                <h2><b> : <u>{{date}}</u></b></h2>
-                            </div>
-                        </div>
-                    {{/ionItem}}
-                {{/each}}
-                {{#ionItem}}
-                    <div class="row">
-                        <div class="col col-50">
-                            <h2><b><u>Expense Item</u></b></h2>
-                        </div>
-                        <div class="col col-50">
-                            <h2><b> : <u>Price ($)</u></b></h2>
-                        </div>
-                    </div>
-                {{/ionItem}}
-                {{#each dayExpenseDetail.content}}
-                    {{#ionItem}}
-                        <div class="row">
-                            <div class="col col-50">
-                                <h2>{{expenseItemName}}</h2>
-                            </div>
-                            <div class="col col-50">
-                                <h2> : {{numFormat price '0,0.00 $'}}</h2>
-                            </div>
-                        </div>
-                    {{/ionItem}}
-                {{/each}}
-                {{#each totalDayExpense.content}}
-                    {{#ionItem}}
-                        <div class="row" style="background-color: #CDC9C9;">
-                            <div class="col col-50">
-                                <h2><b>Total</b></h2>
-                            </div>
-                            <div class="col col-50">
-                                <h2><b> : {{numFormat totalPaid '0,0.00 $'}}</b></h2>
-                            </div>
-                        </div>
-                    {{/ionItem}}
-                {{/each}}
+                {{#if journalEntry}}
+                    {{#each journalEntry.content}}
+                        {{#if subTotalIsNotZero subTotal}}
+                            {{#ionItem path="journalEntryDetail" iconRight=true}}
+                                <div class="row">
+                                    <div class="col">
+                                        Date : {{moFormat date 'DD/MM/YYYY'}}
+                                    </div>
+                                    <div class="col">
+                                        Journal : {{typeOfJournal}}
+                                    </div>
+                                </div>
+                                <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
+                                <div class="row">
+                                    <div class="col">Item name</div>
+                                    <div class="col">Price</div>
+                                </div>
+                                {{#each journalEntryItem}}
+                                    <div class="row">
+                                        {{#with journalItemDoc}}
+                                            <div class="col">
+                                                {{journalItemName}}
+                                            </div>
+                                        {{/with}}
+                                        <div class="col">
+                                            {{numFormat journalItemPrice '0,0.00 $'}}
+                                        </div>
+                                    </div>
+                                {{/each}}
+                                <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
+                                <div class="row">
+                                    <div class="col">Total</div>
+                                    <div class="col">
+                                        {{numFormat subTotal '0,0.00 $'}}
+                                    </div>
+                                </div>
+                            {{/ionItem}}<br>
+                        {{/if}}
+                    {{/each}}
+                {{/if}}
+                <!--{{#each totalDayExpense.content}}-->
+                    <!--{{#ionItem}}-->
+                        <!--<div class="row" style="background-color: #CDC9C9;">-->
+                            <!--<div class="col col-50">-->
+                                <!--<h2><b><u>Paid Date</u></b></h2>-->
+                            <!--</div>-->
+                            <!--<div class="col col-50">-->
+                                <!--<h2><b> : <u>{{date}}</u></b></h2>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--{{/ionItem}}-->
+                <!--{{/each}}-->
+                <!--{{#ionItem}}-->
+                    <!--<div class="row">-->
+                        <!--<div class="col col-50">-->
+                            <!--<h2><b><u>Expense Item</u></b></h2>-->
+                        <!--</div>-->
+                        <!--<div class="col col-50">-->
+                            <!--<h2><b> : <u>Price ($)</u></b></h2>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--{{/ionItem}}-->
+                <!--{{#each dayExpenseDetail.content}}-->
+                    <!--{{#ionItem}}-->
+                        <!--<div class="row">-->
+                            <!--<div class="col col-50">-->
+                                <!--<h2>{{expenseItemName}}</h2>-->
+                            <!--</div>-->
+                            <!--<div class="col col-50">-->
+                                <!--<h2> : {{numFormat price '0,0.00 $'}}</h2>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--{{/ionItem}}-->
+                <!--{{/each}}-->
+                <!--{{#each totalDayExpense.content}}-->
+                    <!--{{#ionItem}}-->
+                        <!--<div class="row" style="background-color: #CDC9C9;">-->
+                            <!--<div class="col col-50">-->
+                                <!--<h2><b>Total</b></h2>-->
+                            <!--</div>-->
+                            <!--<div class="col col-50">-->
+                                <!--<h2><b> : {{numFormat totalPaid '0,0.00 $'}}</b></h2>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--{{/ionItem}}-->
+                <!--{{/each}}-->
             {{/ionList}}
         {{/ionContent}}
     {{/ionView}}

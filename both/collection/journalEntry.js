@@ -6,7 +6,7 @@ Schema.JournalEntry = new SimpleSchema({
     },
     typeOfJournal: {
         type: String,
-        label: "Type of Journal Item",
+        label: "Journal",
         autoform: {
             type: "select-radio",
             options: function () {
@@ -35,7 +35,6 @@ Schema.JournalEntry = new SimpleSchema({
                 if (typeOfJournal) {
                     let data = Collection.JournalItem.find({typeOfJournal: typeOfJournal});
                     if (data) {
-                        console.log(data);
                         let list = [];
                         data.forEach(function (obj) {
                             list.push({label: obj.journalItemName, value: obj._id});

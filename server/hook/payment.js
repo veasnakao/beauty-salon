@@ -26,7 +26,6 @@ Collection.Payment.after.insert((userId, doc) => {
                 }
             }
         } else {
-            // status=doc.status='partial'
             selector = {
                 $set: {
                     status: 'partial'

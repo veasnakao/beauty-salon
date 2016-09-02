@@ -30,3 +30,27 @@ Template.journalItemInfo.helpers({
         }
     }
 });
+
+Template.journalItemInfo.events({
+    'click .delete-journalItem'(){
+        let params = Router.current().params;
+        let itemId = params._id;
+        let item = Collection.JournalItem.findOne({_id: itemId});
+        IonPopup.confirm({
+            title: 'Are you sure to delete?',
+            template: `staff name : ${item.name}?`,
+            onOk: () => {
+                Meteor.call('removeJournalItem', item._id, (err, result) => {
+                    if (err) {
+                        sAlert.error(`Cancel ${item.journalItemName}`);
+                    } else {
+                        sAlert.success(`Delete ${item.journalItemName} success`);
+                        Router.go('/showJournalItem');
+                    }
+                });
+            },
+            onCancel: function () {
+            }
+        });
+    }
+});

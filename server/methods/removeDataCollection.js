@@ -6,6 +6,9 @@ Meteor.methods({
         Collection.Customer.remove(id);
     },
     removeOrderItem(id){
-        Collection.Item.remove(id)
+        Collection.Item.remove(id);
+    },
+    removeJournalItem(id){
+        Collection.JournalItem.remove(id);
     }
 });

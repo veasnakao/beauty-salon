@@ -117,7 +117,7 @@ Meteor.methods({
     //         return data;
     //     }
     // },
-    journalEntryIncomeFromOrder(fromDate,toDate){
+    journalEntryIncomeFromOrder(fromDate, toDate){
         // let journalEntry = Collection.JournalEntry.aggregate([
         //     {
         //         $match: {
@@ -347,7 +347,76 @@ Meteor.methods({
         let content = [];
         if (journalEntryIncome) {
             data.content = journalEntryIncome;
-            console.log(`journalEntryFromOrder ${data}`);
+            return data;
+        }
+    },
+    journalEntryDetail(id){
+        let journalEntryDetail = Collection.JournalEntry.aggregate([
+            {
+                $match: {
+                    _id: id
+                }
+            },
+            {
+                $project: {
+                    journalEntryItem: 1,
+                    _id: 1,
+                    typeOfJournal: 1,
+                    date: 1
+                }
+            },
+            {
+                $group: {
+                    _id: {
+                        journalEntryId: '$_id'
+                    },
+                    journalItem: {$last: '$journalEntryItem'},
+                    typeOfJournal: {$last: '$typeOfJournal'},
+                    date: {$last: '$date'}
+                }
+            },
+            {
+                $group: {
+                    _id: '$_id.journalEntryId',
+                    data: {
+                        $addToSet: '$$ROOT'
+                    }
+                }
+            },
+            {$unwind: {path: '$data'}},
+            {$unwind: {path: '$data.journalItem', preserveNullAndEmptyArrays: true}},
+            {
+                $lookup: {
+                    from: "journalItem",
+                    localField: "data.journalItem.journalItemId",
+                    foreignField: "_id",
+                    as: "data.journalItem.journalItemDoc"
+                }
+            },
+            {
+                $unwind: {path: '$data.journalItem.journalItemDoc', preserveNullAndEmptyArrays: true}
+            },
+            {
+                $group: {
+                    _id: '$_id',
+                    typeOfJournal: {$last: '$data.typeOfJournal'},
+                    date: {$last: '$data.date'},
+                    journalEntryItem: {
+                        $addToSet: '$data.journalItem'
+                    },
+                    subTotal: {
+                        $sum: '$data.journalItem.journalItemPrice'
+                    }
+                }
+            },
+            {
+                $sort: {_id: -1}
+            }
+        ]);
+        let data = {};
+        let content = [];
+        if (journalEntryDetail) {
+            data.content = journalEntryDetail;
             return data;
         }
     },
@@ -413,12 +482,10 @@ Meteor.methods({
         let content = [];
         if (allJournalEntry) {
             data.content = allJournalEntry;
-            console.log(typeof data.content);
-            console.log(data.content);
             return data;
         }
     },
-    journalEntryByJournalType(fromDate,toDate,typeOfJournal){
+    journalEntryByJournalType(fromDate, toDate, typeOfJournal){
         fromDate = moment(fromDate).toDate();
         toDate = moment(toDate).toDate();
         let journalEntry = Collection.JournalEntry.aggregate([
@@ -598,7 +665,6 @@ Meteor.methods({
         let content = [];
         if (journalEntry) {
             data.content = journalEntry;
-            console.log(data.content);
             return data;
         }
     }

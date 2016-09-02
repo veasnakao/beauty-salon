@@ -180,7 +180,10 @@ Meteor.methods({
         let orderItemDetail = Collection.Order.aggregate([
             {
                 $match: {
-                    status: status
+                    status: status,
+                    total: {
+                        $ne: 0
+                    }
                 }
             },
             {
@@ -260,8 +263,8 @@ Meteor.methods({
                             staff: '$orderDoc.staffDoc.name'
                         }
                     },
-                    paidAmount:{$last: '$paymentDoc.paidAmount'},
-                    balance: {$last:'$paymentDoc.balance'},
+                    paidAmount: {$last: '$paymentDoc.paidAmount'},
+                    balance: {$last: '$paymentDoc.balance'},
                     // payment: {
                     //     $addToSet: {
                     //         paymentDate: '$paymentDoc.paymentDate',
@@ -381,5 +384,5 @@ Meteor.methods({
             return data;
         }
     }
-    
+
 });

@@ -112,15 +112,14 @@ Template.payment.events({
         selector.orderId = orderId;
         selector.typeOfJournal = "income";
         selector.journalEntryItem = [];
-        Router.go('/showOrder');
 
-        // Meteor.call('addJournalEntryByOrder', selector, (error, result)=> {
-        //     if (error) {
-        //         sAlert.error(error.message);
-        //     } else {
-        //
-        //     }
-        // });
+        Meteor.call('addJournalEntryByOrder', selector, (error, result)=> {
+            if (error) {
+                sAlert.error(error.message);
+            } else {
+        
+            }
+        });
 
         // Meteor.call('updateOrderStatus', orderId, (error, result)=> {
         //     if (error) {
@@ -136,6 +135,7 @@ Template.payment.events({
 AutoForm.hooks({
     payment: {
         onSuccess(formType, id){
+            Router.go('/showOrder');
             sAlert.success('Payment success');
         },
         onError(formType, error){

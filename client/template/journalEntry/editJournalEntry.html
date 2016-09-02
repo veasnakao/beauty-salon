@@ -1,0 +1,26 @@
+<template name="editJournalEntry">
+    {{#ionModal customTemplate=true}}
+        {{#autoForm collection="Collection.JournalEntry" doc=journalEntryDetail id="editJournalEntry" type="update"}}
+            <div class="bar bar-header bar-stable" style="background-color: #387ef5;">
+
+                <h2 class="title" style="color: white;">Edit Journal Entry</h2>
+                <button data-dismiss="modal" type="button" class="button button-clear" style="color: white;">Cancel
+                </button>
+            </div>
+            <div class="content has-header overflow-scroll">
+                {{#if journalEntryDetail}}
+                    <div class="row">
+                        <div class="col-50">
+                            {{> afQuickField name='date'}}
+                        </div>
+                    </div>
+                    {{> afQuickField name='typeOfJournal'}}
+                    {{> afQuickField name='journalEntryItem'}}
+                {{/if}}
+                <button class="button button-block button-positive js-updateJournal">
+                    Update
+                </button>
+            </div>
+        {{/autoForm}}
+    {{/ionModal}}
+</template>

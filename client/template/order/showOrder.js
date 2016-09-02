@@ -22,8 +22,11 @@ Tracker.autorun(function () {
                 Session.set('orderByStaffResult', result);
             }
         });
+    }else{
+        Session.set('orderByStaffResult', undefined);
     }
 });
+
 //oncreated
 Template.showOrder.created = function () {
     Session.set('orderStatus', 'active');
@@ -45,7 +48,7 @@ Template.showOrder.rendered = function () {
             } else {
                 IonLoading.hide();
             }
-        })
+        });
         let status = Session.get('orderStatus');
         Meteor.call('orderItemDetailByCustomer', status, (error, result)=> {
             if (error) {

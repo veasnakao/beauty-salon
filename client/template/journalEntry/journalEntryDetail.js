@@ -1,3 +1,8 @@
+// Tracker.autorun(function () {
+//     if (Session.get('journalEntryById')) {
+//         Meteor.subscribe("journalEntrys");
+//     }
+// });
 //oncreated
 Template.journalEntryDetail.created = function () {
     this.autorun(function () {
@@ -14,7 +19,15 @@ Template.journalEntryDetail.rendered = function () {
             } else {
                 IonLoading.hide();
             }
-        })
+        });
+        // let journalEntryId = Router.current().params._id;
+        // Meteor.call('journalEntryDetail', journalEntryId, (error, result)=> {
+        //     if (error) {
+        //         sAlert.error(error.message);
+        //     } else {
+        //         Session.set('journalEntryById', result);
+        //     }
+        // });
     } catch (e) {
         console.log(e);
     }
@@ -22,34 +35,16 @@ Template.journalEntryDetail.rendered = function () {
 
 //helper
 Template.journalEntryDetail.helpers({
-    dayExpenseDetail: ()=> {
-        let data = {};
-        let content = [];
-        var list = Collection.DayExpense.find();
-        list.forEach((obj)=> {
-            for (let key in obj.expenseItem) {
-                content.push(obj.expenseItem[key]);
-            }
-        });
-        data.content = content;
-        return data;
+    subTotalIsNotZero(subTotal){
+        return subTotal != 0 && subTotal != null;
     },
-    totalDayExpense: ()=> {
-        let data = {};
-        let content = [];
-        let totalPaid = 0;
-        var list = Collection.DayExpense.find();
-        list.forEach((obj)=> {
-            let totalAmount = 0;
-            for (let key in obj.expenseItem) {
-                let getItemExpense = obj.expenseItem[key];
-                totalAmount += getItemExpense.price;
-            }
-            obj.totalPaid = totalAmount;
-            obj.date = moment(obj.date).format('DD/MM/YYYY');
-            content.push(obj);
-        });
-        data.content = content;
-        return data;
+    journalEntry(){
+        let journalEntryId = Router.current().params._id;
+        return ReactiveMethod.call("journalEntryDetail",journalEntryId);
+        // let journalEntryById = Session.get('journalEntryById');
+        // if (journalEntryById) {
+        //     console.log(journalEntryById);
+        //     return journalEntryById;
+        // }
     }
 });

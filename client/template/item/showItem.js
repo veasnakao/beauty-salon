@@ -6,7 +6,7 @@ Template.showItem.created = function () {
 };
 
 //onrender
-Template.showItem.rendered = function() {
+Template.showItem.rendered = function () {
     try {
         this.autorun(() => {
             if (!this.subscription.ready()) {
@@ -22,7 +22,7 @@ Template.showItem.rendered = function() {
 
 //helper
 Template.showItem.helpers({
-    showItem:()=>{
-        return Collection.Item.find({},{sort: {_id:1}});
+    showItem: ()=> {
+        return Collection.Item.find({}, {sort: {_id: 1}});
     }
 });

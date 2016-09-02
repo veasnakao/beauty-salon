@@ -23,7 +23,6 @@ Template.showJournalEntry.rendered = function () {
 
 //helper
 Template.showJournalEntry.helpers({
-
     subTotalIsNotZero(subTotal){
         return subTotal != 0 && subTotal != null;
     },
