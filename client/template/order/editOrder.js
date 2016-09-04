@@ -34,7 +34,6 @@ Template.editOrder.events({
     'click .editOrder'(){
         let params = Router.current().params;
         let orderId = params.orderId;
-        console.log(`orderId on edit order: ${orderId}`);
         Meteor.call('updateOrderDetail', orderId, (err, result)=> {
             if (err) {
                 sAlert.error(error.message);

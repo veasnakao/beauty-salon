@@ -4,6 +4,13 @@ Template.showJournalEntry.created = function () {
         this.subscription = Meteor.subscribe('journalEntrys');
         this.subscription = Meteor.subscribe('journalItems');
     }.bind(this));
+    Meteor.call('allJournalEntry', (error, result)=> {
+        if (error) {
+            sAlert.error(error.message);
+        } else {
+            Session.set('allJournalEntry', result);
+        }
+    });
 };
 
 //onrender
@@ -27,14 +34,6 @@ Template.showJournalEntry.helpers({
         return subTotal != 0 && subTotal != null;
     },
     journalEntry(){
-        // return ReactiveMethod.call("allJournalEntry");
-        Meteor.call('allJournalEntry', (error, result)=> {
-            if (error) {
-                sAlert.error(error.message);
-            } else {
-                Session.set('allJournalEntry', result);
-            }
-        });
         let allJournalEntry = Session.get('allJournalEntry');
         if (allJournalEntry) {
             return allJournalEntry;

@@ -38,6 +38,9 @@ Router.map(function () {
     this.route('journalEntryDetail', {
         path: '/journalEntryDetail/:_id'
     });
+    this.route('editJournalEntry', {
+        path: '/editJournalEntry/:_id'
+    });
     this.route('addJournalEntry');
 
     //order
@@ -48,15 +51,16 @@ Router.map(function () {
     this.route('itemOrder', {
         path: '/itemOrder/orderId/:orderId'
     });
-    this.route('payment',{
+    this.route('payment', {
         path: '/itemOrder/orderId/:orderId/payment'
     });
     this.route('printOrder', {
-        path:'/itemOrder/orderId/:orderId/print'
+        path: '/itemOrder/orderId/:orderId/print'
     });
 
     this.route('reports');
     this.route('staffReport');
+    this.route('staffSalaryReport');
     this.route('orderReport');
     this.route('journalEntryReport');
     this.route('profitAndLossReport');

@@ -1,11 +1,10 @@
-Tracker.autorun(function () {
-    if (Session.get('staffBaseSalary')) {
-        Meteor.subscribe("staffs");
-    }
-    if (Session.get('staffFee')) {
-        Meteor.subscribe("staffs");
-    }
-});
+// Tracker.autorun(function () {
+//     if (Session.get('allStaff') ){
+//         Meteor.subscribe("staffs");
+//     } Session.get('staffBaseSalary') || Session.get('staffFee')) {
+//         Meteor.subscribe("staffs");
+//     }
+// });
 
 //oncreated
 Template.staffReport.created = function () {
@@ -30,7 +29,19 @@ Template.staffReport.rendered = function () {
 };
 
 Template.staffReport.helpers({
-    staffBaseSalary: function () {
+    allStaff(){
+        let allStaffs = Collection.Staff.find();
+        if (allStaffs) {
+            return allStaffs;
+        }
+    },
+    countAllStaff(){
+        let countStaffs = Collection.Staff.find().count();
+        if (countStaffs) {
+            return countStaffs;
+        }
+    },
+    staffBaseSalary() {
         let staffBaseSalary = Collection.Staff.find({
             baseSalary: {
                 $gte: Session.get('staffBaseSalary')
@@ -40,7 +51,7 @@ Template.staffReport.helpers({
             return staffBaseSalary;
         }
     },
-    countStaffBaseSalary: function () {
+    countStaffBaseSalary() {
         let staffBaseSalary = Collection.Staff.find({
             baseSalary: {
                 $gte: Session.get('staffBaseSalary')
@@ -51,7 +62,7 @@ Template.staffReport.helpers({
             return staffBaseSalary;
         }
     },
-    staffFee: function () {
+    staffFee() {
         let staffFee = Collection.Staff.find({
             fee: {
                 $gte: Session.get('staffFee')
@@ -61,7 +72,7 @@ Template.staffReport.helpers({
             return staffFee;
         }
     },
-    countStaffFee: function () {
+    countStaffFee() {
         let staffFee = Collection.Staff.find({
             fee: {
                 $gte: Session.get('staffFee')
@@ -76,40 +87,41 @@ Template.staffReport.helpers({
 Template.staffReport.events({
     'click .js-staff-fee'(e){
         if ($(e.currentTarget).prop('checked')) {
-            $('.js-staff-base-salary').prop('checked', false);
-            $('.js-submit-report').show(500);
-            $('.list-staffBaseSalary').hide(500);
-            Session.set('staffBaseSalary', undefined);
-        } else {
-            $('.js-submit-report').hide(500);
-            $('.list-staffFee').hide(500);
-            Session.set('staffBaseSalary', undefined);
-            Session.set('staffFee', undefined);
+            // $('.js-staff-base-salary').prop('checked', false);
         }
     },
     'click .js-staff-base-salary'(e){
         if ($(e.currentTarget).prop('checked')) {
-            $('.js-staff-fee').prop('checked', false);
-            $('.js-submit-report').show(500);
-            $('.list-staffFee').hide(500);
-            Session.set('staffFee', undefined);
-        } else {
-            $('.js-submit-report').hide(500);
-            $('.list-staffBaseSalary').hide(500);
-            Session.set('staffBaseSalary', undefined);
-            Session.set('staffFee', undefined);
+            // $('.js-staff-fee').prop('checked', false);
         }
     },
-    'click .js-submit-report'(e){
-        if ($('.js-staff-fee').is(':checked')) {
+    'click .js-submit-report'(){
+        if (($('.js-staff-fee').is(':checked')) && ($('.js-staff-base-salary').is(':checked'))) {
+            $('.list-allStaff').show();
+            $('.list-staffFee').hide();
+            $('.list-staffBaseSalary').hide();
+            Session.set('staffFee', undefined);
+            Session.set('staffBaseSalary', undefined);
+        }
+        else if ($('.js-staff-fee').is(':checked')) {
             Session.set('staffFee', 1);
-            $('.list-staffFee').show(500);
-            $('.list-staffBaseSalary').hide(500);
+            Session.set('staffBaseSalary', undefined);
+            $('.list-staffFee').show();
+            $('.list-allStaff').hide();
+            $('.list-staffBaseSalary').hide();
         }
         else if ($('.js-staff-base-salary').is(':checked')) {
             Session.set('staffBaseSalary', 1);
-            $('.list-staffBaseSalary').show(500);
-            $('.list-staffFee').hide(500);
+            Session.set('staffFee', undefined);
+            $('.list-staffBaseSalary').show();
+            $('.list-allStaff').hide();
+            $('.list-staffFee').hide();
+        } else {
+            Session.set('staffFee', undefined);
+            Session.set('staffBaseSalary', undefined);
+            $('.list-allStaff').hide();
+            $('.list-staffFee').hide();
+            $('.list-staffBaseSalary').hide();
         }
     }
 });

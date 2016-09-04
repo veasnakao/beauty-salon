@@ -19,7 +19,6 @@ Tracker.autorun(function () {
 
 
 Template.orderReport.helpers({
- 
     staffName: function () {
         let staff = Collection.Staff.findOne(Session.get('staffId'));
         if (staff) {
@@ -41,10 +40,10 @@ Template.orderReport.helpers({
                         Session.set('orderByStaffResult', result);
                     }
                 });
-                let data=Session.get('orderByStaffResult');
-                if(data.content.length>0){
-                    return data;
-                }else{
+                // if (data.content.length > 0) {
+                if (Session.get('orderByStaffResult')) {
+                    return Session.get('orderByStaffResult');
+                } else {
                     return false;
                 }
             } else if (getAllStaffId) {
@@ -55,11 +54,14 @@ Template.orderReport.helpers({
                         Session.set('orderAllStaffResult', result);
                     }
                 });
-                console.log(Session.get('orderAllStaffResult'));
-                return Session.get('orderAllStaffResult');
+                if (Session.get('orderAllStaffResult')) {
+                    return Session.get('orderAllStaffResult');
+                }
             } else {
                 return false;
             }
+        } else {
+            return false;
         }
     }
 });
@@ -69,29 +71,19 @@ Template.orderReport.events({
         if ($(e.currentTarget).prop('checked')) {
             $('.js-by-staff').prop('checked', false);
             $('.show-staff').hide(500);
-            $('.js-submit-report').show(500);
             Session.set('allStaffId', {});
             Session.set('staffId', undefined);
-            Session.set('getStaffId', undefined);
-        } else {
-            $('.js-submit-report').hide(500);
-            Session.set('allStaffId', undefined);
-            Session.set('getAllStaffId', undefined);
         }
     },
     'click .js-by-staff'(e){
         if ($(e.currentTarget).prop('checked')) {
             $('.js-all-staff').prop('checked', false);
             $('.show-staff').show(500);
-            $('.js-submit-report').show(500);
-            Session.get('staffId');
             Session.set('allStaffId', undefined);
-            Session.set('getAllStaffId', undefined);
+
         } else {
             $('.show-staff').hide(500);
-            $('.js-submit-report').hide(500);
             Session.set('staffId', undefined);
-            Session.set('getStaffId', undefined);
         }
     },
     'click .js-submit-report'(){
@@ -110,6 +102,7 @@ Template.orderReport.events({
 
 //onDestroyed
 Template.orderReport.onDestroyed(function () {
+    Session.set('orderAllStaffResult', undefined);
     Session.set('staffId', undefined);
     Session.set('allStaffId', undefined);
     Session.set('getAllStaffId', undefined);

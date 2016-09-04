@@ -48,6 +48,7 @@ Template.itemOrder.rendered = function () {
 Template.itemOrder.helpers({
     checkStatus(){
         if (Session.get('orderStatus') == 'active') {
+            let check = Session.get('orderStatus');
             return true
         }
     },

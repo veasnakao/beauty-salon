@@ -35,28 +35,13 @@ Template.editJournalEntry.helpers({
     }
 });
 
-Template.editJournalEntry.events({
-    'click .js-updateJournal'(){
-        // let journalEntryId = Router.current().params._id;
-        // return ReactiveMethod.call("journalEntryDetail",journalEntryId);
-        // Meteor.call('journalEntryDetail', journalEntryId, (error, result)=> {
-        //     if (error) {
-        //         sAlert.error(error.message);
-        //     } else {
-        //         Session.set('journalEntryById', result);
-        //     }
-        // });
-        // let data = Session.get('journalEntryById');
-        // if (data) {
-        //     console.log(data);
-        // }
-    }
-});
-
 //autoform hook
 AutoForm.hooks({
     editJournalEntry: {
         onSuccess(formType, id){
+            let params = Router.current().params;
+            let journalEntryId = params._id;
+            Router.go(`/journalEntryDetail/${journalEntryId}`);
             sAlert.success('Journal Entry Edit Success');
         },
         onError(formType, error){

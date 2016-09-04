@@ -109,7 +109,7 @@
                             <div class="item item-text-wrap button-balanced">
                                 <div class="row">
                                     <div class="col-75">
-                                        <b>Total :</b>
+                                        Total :
                                     </div>
                                     <div class="col-25">
                                         <div style="float: right;">
@@ -117,11 +117,33 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                {{#with payment}}
+                                {{#if payment}}
+                                    {{#with payment}}
+                                        <div class="row">
+                                            <div class="col-75">
+                                                Paid Amount :
+                                            </div>
+                                            <div class="col-25">
+                                                <div style="float: right;">
+                                                    {{numFormat paidAmount '0,0.00 $'}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-75">
+                                                Balance :
+                                            </div>
+                                            <div class="col-25">
+                                                <div style="float: right;">
+                                                    {{numFormat balance '0,0.00 $'}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {{/with}}
+                                {{else}}
                                     <div class="row">
                                         <div class="col-75">
-                                            <b>Paid Amount : </b>
+                                            Paid Amount :
                                         </div>
                                         <div class="col-25">
                                             <div style="float: right;">
@@ -131,7 +153,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-75">
-                                            <b>Balance : </b>
+                                            Balance :
                                         </div>
                                         <div class="col-25">
                                             <div style="float: right;">
@@ -139,7 +161,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                {{/with}}
+                                {{/if}}
+
+
                             </div>
                         </div>
                     </div>

@@ -6,7 +6,7 @@ Template.showStaff.created = function () {
 };
 
 //onrender
-Template.showStaff.rendered = function() {
+Template.showStaff.rendered = function () {
     try {
         this.autorun(() => {
             if (!this.subscription.ready()) {
@@ -21,8 +21,15 @@ Template.showStaff.rendered = function() {
 };
 
 //helpers
-    Template.showStaff.helpers({
-        showStaff: ()=> {
-            return Collection.Staff.find({},{sort: {_id:1}});
-        }
-    });
+Template.showStaff.helpers({
+    checkSalary(salary){
+        console.log(salary);
+        return salary!=0 && salary!=null;
+    },
+    checkFee(fee){
+        return fee!=0 && fee!=null;
+    },
+    showStaff() {
+        return Collection.Staff.find({}, {sort: {_id: 1}});
+    }
+});

@@ -12,12 +12,15 @@ Template.profitAndLossReport.created = function () {
 
 Template.profitAndLossReport.helpers({
     totalIncome(incomeFromOrder, incomeFromJournal){
-        let val1 = incomeFromOrder.content[0].total;
-        let val2 = incomeFromJournal.content[0].total;
-        if (val1 && val2) {
-            let totalIncome = val1 + val2;
-            return numeral(totalIncome).format('0,0.00') + ' $';
+        let incomeOrder = incomeFromOrder.content[0].total;
+        let incomeJournal = incomeFromJournal.content[0].total;
+        if (incomeOrder == null || incomeOrder == "") {
+            incomeOrder = 0;
+        } else if (incomeJournal == null || incomeJournal == "") {
+            incomeJournal = 0;
         }
+        let totalIncome = incomeOrder + incomeJournal;
+        return numeral(totalIncome).format('0,0.00') + ' $';
     },
     calculateProfit(incomeFromOrder, incomeFromJournal, expenseFromJournal){
         let getIncomeFromOrder = incomeFromOrder.content[0].total;

@@ -40,11 +40,42 @@ Template.journalEntryDetail.helpers({
     },
     journalEntry(){
         let journalEntryId = Router.current().params._id;
-        return ReactiveMethod.call("journalEntryDetail",journalEntryId);
+        return ReactiveMethod.call("journalEntryDetail", journalEntryId);
         // let journalEntryById = Session.get('journalEntryById');
         // if (journalEntryById) {
         //     console.log(journalEntryById);
         //     return journalEntryById;
         // }
+    }
+});
+
+Template.journalEntryDetail.events({
+    'click .js-delete-journal'(){
+        let params = Router.current().params;
+        let journalEntryId = params._id;
+        let journalEntry = Collection.JournalEntry.findOne({_id: journalEntryId});
+        if(journalEntry){
+            IonPopup.confirm({
+                title: 'Are you sure to delete?',
+                template: `Journal : ${journalEntry._id}?`,
+                onOk: () => {
+                    Meteor.call('removeJournalEntry', journalEntry._id, (err, result) => {
+                        if (err) {
+                            sAlert.error(`Cancel ${journalEntry.name}`);
+                        } else {
+                            Router.go(`/showJournalEntry`);
+                            sAlert.success(`Journal delete success ${journalEntry._id}`);
+                        }
+                    });
+                },
+                onCancel: function () {
+                }
+            });
+        }
+    },
+    'click .js-update-journal'(){
+        let params = Router.current().params;
+        let journalEntryId = params._id;
+        Router.go(`/editJournalEntry/${journalEntryId}`);
     }
 });

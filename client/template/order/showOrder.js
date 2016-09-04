@@ -71,9 +71,12 @@ Template.showOrder.helpers({
             return true
         }
     },
+    checkPayment(){
+        if (Session.get('orderStatus') == 'partial') {
+            return true
+        }
+    },
     showCustomerOrder() {
-        // return ReactiveMethod.call("orderItemDetailByCustomer",);
-        //return ReactiveMethod.call('orderItemDetailByCustomer');
         let order = Session.get('orderByStaffResult');
         if (!_.isEmpty(order)) {
             if (order.content.length > 0) {

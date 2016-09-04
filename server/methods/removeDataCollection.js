@@ -10,5 +10,8 @@ Meteor.methods({
     },
     removeJournalItem(id){
         Collection.JournalItem.remove(id);
+    },
+    removeJournalEntry(id){
+        Collection.JournalEntry.remove(id);
     }
 });

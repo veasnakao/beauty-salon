@@ -28,11 +28,44 @@
                         </div>
                     </label>
                 </div>
-                <button class="button button-full button-balanced js-submit-report" style="display: none;">
+                <button class="button button-full button-positive js-submit-report">
                     OK
                 </button>
             </div>
 
+            {{#if allStaff}}
+                <div class="list list-allStaff" style="display: none;">
+                    <div class="item" style="padding: 5px; background-color: #EEEDED;">
+                        <div class="row">
+                            <div class="col">ID</div>
+                            <div class="col">Name</div>
+                            <div class="col">Gender</div>
+                            <div class="col">Fee</div>
+                            <div class="col">Base Salary ($)</div>
+                        </div>
+                    </div>
+                    {{#each allStaff}}
+                        <div class="item" style="padding: 5px;">
+                            <div class="row">
+                                <div class="col">{{_id}}</div>
+                                <div class="col">{{name}}</div>
+                                <div class="col">{{gender}}</div>
+                                <div class="col">{{fee}} %</div>
+                                <div class="col">{{numFormat baseSalary '0,0.00 $'}}</div>
+                            </div>
+                        </div>
+                    {{/each}}
+                    <div class="item" style="padding: 5px; background-color: #DAD9D9;">
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col"></div>
+                            <div class="col"></div>
+                            <div class="col">Total Staff</div>
+                            <div class="col">{{countAllStaff}}</div>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
 
             {{#if staffFee}}
                 <div class="list list-staffFee" style="display: none;">
