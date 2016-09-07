@@ -1,9 +1,8 @@
 Meteor.methods({
-    expense(fromDate, toDate){
+    profitAndLoss(fromDate, toDate){
         fromDate = moment(fromDate).toDate();
         toDate = moment(toDate).toDate();
-
-        let dayExpenseItems = Collection.DayExpense.aggregate([
+        let profitAndLoss = Collection.JournalEntry.aggregate([
             {
                 $match: {
                     date: {
@@ -12,91 +11,140 @@ Meteor.methods({
                 }
             },
             {
-                $unwind: '$expenseItem'
+                $unwind: { path: '$journalEntryItem', preserveNullAndEmptyArrays: true }
+            },
+            {
+                $lookup: {
+                    from: "journalItem",
+                    localField: "journalEntryItem.journalItemId",
+                    foreignField: "_id",
+                    as: "journalDoc"
+                }
+            },
+            {
+                $unwind: { path: '$journalDoc', preserveNullAndEmptyArrays: true }
+            },
+            {
+                $lookup: {
+                    from: "order",
+                    localField: "orderId",
+                    foreignField: "_id",
+                    as: "serviceDoc"
+                }
+            },
+            {
+                $unwind: {path:'$serviceDoc',preserveNullAndEmptyArrays:true}
             },
             {
                 $group: {
-                    _id: null,
-                    items: {
+                    _id: {
+                        journalType: '$typeOfJournal',
+                        journalItemId: '$journalEntryItem.journalItemId'
+                    },
+                    date:{
+                        $last: "$date"
+                    },
+                    journalType: {
+                        $last: "$typeOfJournal"
+                    },
+                    journalItem: {
                         $addToSet: {
-                            expenseItemName: '$expenseItem.expenseItemName',
-                            price: '$expenseItem.price'
+                            journalItemId:'$journalEntryItem.journalItemId',
+                            journalItemName: '$journalDoc.journalItemName',
+                            journalItemPrice: '$journalEntryItem.journalItemPrice'
                         }
                     },
-                    total: {
-                        $sum: '$expenseItem.price'
-                    }
-                }
-            }
-        ]);
-        let orders = Collection.Order.aggregate([
-            {
-                $match: {
-                    date: {
-                        $gte: fromDate, $lte: toDate
+                    journalTotalByItem: {
+                        $sum: '$journalEntryItem.journalItemPrice'
+                    },
+                    serviceTotal:{
+                        $sum:'$serviceDoc.total'
                     }
                 }
             },
             {
+                $unwind: { path: '$journalItem', preserveNullAndEmptyArrays: true }
+            },
+            {
                 $group: {
-                    _id: 'null',
-                    total: {
-                        $sum: '$total'
+                    _id:{
+                        journalType:'$journalType',
+                        journalItemId:'$journalItem.journalItemId'
+                    },
+                    date:{
+                        $last: "$date"
+                    },
+                    journalType:{
+                        $last: "$journalType"
+                    },
+                    journalItem:{
+                        $addToSet: {
+                            journalItemName:'$journalItem.journalItemName',
+                            journalTotalByItem:'$journalTotalByItem'
+                        }
+                    },
+                    serviceTotal:{
+                        $last: "$serviceTotal"
+                    }
+                }
+            },
+            {
+                $unwind: {path:'$journalItem',preserveNullAndEmptyArrays:true}
+            },
+            {
+                $group: {
+                    _id:'$journalType',
+                    date:{
+                        $last: "$date"
+                    },
+                    journalType:{
+                        $last: '$journalType'
+                    },
+                    journalItem:{
+                        $addToSet: {
+                            journalItemName:'$journalItem.journalItemName',
+                            journalTotalByItem:'$journalItem.journalTotalByItem'
+                        }
+                    },
+                    journalTotal:{
+                        $sum:'$journalItem.journalTotalByItem'
+                    },
+                    serviceTotal:{
+                        $last: "$serviceTotal"
+                    }
+                }
+            },
+            {
+                $project: {
+                    date:1,
+                    journalType:1,
+                    journalItem:1,
+                    journalTotal:1,
+                    serviceTotal:1,
+                    total:{
+                        $add: ["$journalTotal","$serviceTotal"]
                     }
                 }
             }
-            // {
-            //     $group: {
-            //         _id: {
-            //             year: {
-            //                 $year: '$date'
-            //             },
-            //             month: {
-            //                 $month: '$date'
-            //             },
-            //             day: {
-            //                 $dayOfMonth: '$date'
-            //             }
-            //         },
-            //         total: {
-            //             $sum: '$total'
-            //         }
-            //     }
-            // }
         ]);
-        let obj = {
-            dayExpenseItems: dayExpenseItems,
-            // orders: orders
-            orders: _.isEmpty(orders) ? 0 : orders[0].total //orders[0]
-        };
         let data = {};
-        data.content = [];
-        data.content.push(obj);
-        console.log(data);
-        return data;
-    },
-    // income(fromDate, toDate){
-    //     fromDate = moment(fromDate).toDate();
-    //     toDate = moment(toDate).toDate();
-    //     let orders = Collection.Order.aggregate([
-    //         {
-    //             $match: {
-    //                 date: {
-    //                     $gte: fromDate, $lte: toDate
-    //                 }
-    //             }
-    //         },
-    //         {
-    //             $group: {
-    //                 _id: 'null',
-    //                 total: {
-    //                     $sum: '$total'
-    //                 }
-    //             }
-    //         }
-    //     ]);
-    //     if (orders) {
-    //         return orders;
-    //     }
-    // }
+        let content = [];
+        if (profitAndLoss) {
+            let totalIncome = 0;
+            let totalExpense = 0;
+            data.content = profitAndLoss;
+            profitAndLoss.forEach(function (doc) {
+                if(doc.journalType == 'income') {
+                    totalIncome = doc.total;
+                }else{
+                    totalExpense = doc.total;
+                }
+            });
+            data.footer = {
+                total: numeral(totalIncome - totalExpense).format('0,0.00')
+            };
+            console.log(data.footer);
+            return data;
+        }
+    }
 });
