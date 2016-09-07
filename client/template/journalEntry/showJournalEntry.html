@@ -18,24 +18,29 @@
                     {{#if journalEntry}}
                         {{#each journalEntry.content}}
                             {{#if subTotalIsNotZero subTotal}}
-                                {{#ionItem path="journalEntryDetail" iconRight=true}}
-                                    <div class="row">
-                                        <div class="col">
-                                            Date : {{moFormat date 'DD/MM/YYYY'}}
+                                <div class="journalEntryDetail">
+                                    {{#ionItem path="journalEntryDetail" iconRight=true}}
+
+                                        <div class="row">
+                                            <div class="col">
+                                                Date : {{moFormat date 'DD/MM/YYYY'}}
+                                            </div>
+                                            <div class="col">
+                                                Journal : {{typeOfJournal}}
+                                            </div>
+                                            {{> ionIcon icon="ios-arrow-right"}}
                                         </div>
-                                        <div class="col">
-                                            Journal : {{typeOfJournal}}
+                                        <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
+                                        <div class="row">
+                                            <div class="col">Total</div>
+                                            <div class="col">
+                                                {{numFormat subTotal '0,0.00 $'}}
+                                            </div>
                                         </div>
-                                        {{> ionIcon icon="ios-arrow-right"}}
-                                    </div>
-                                    <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
-                                    <div class="row">
-                                        <div class="col">Total</div>
-                                        <div class="col">
-                                            {{numFormat subTotal '0,0.00 $'}}
-                                        </div>
-                                    </div>
-                                {{/ionItem}}<br>
+
+                                    {{/ionItem}}
+                                </div>
+                                <br>
                             {{/if}}
                         {{/each}}
                     {{/if}}

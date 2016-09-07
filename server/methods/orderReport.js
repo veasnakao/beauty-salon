@@ -8,71 +8,77 @@ Meteor.methods({
                 $match: {
                     date: {
                         $gte: fromDate, $lte: toDate
-                    }
+                    },
+                    // staffId: staffId
                 }
             },
-            {
-                $lookup: {
-                    from: "orderDetail",
-                    localField: "_id",
-                    foreignField: "orderId",
-                    as: "orderDoc"
-                }
-            },
-            {
-                $unwind: {path: '$orderDoc', preserveNullAndEmptyArrays: true}
-            },
-            {
-                $lookup: {
-                    from: "item",
-                    localField: "orderDoc.itemId",
-                    foreignField: "_id",
-                    as: "orderDoc.itemDoc"
-                }
-            },
-            {$unwind: {path: '$orderDoc.itemDoc', preserveNullAndEmptyArrays: true}},
-            {
-                $lookup: {
-                    from: "customer",
-                    localField: "customerId",
-                    foreignField: "_id",
-                    as: "customerDoc"
-                }
-            },
-            {$unwind: {path: '$customerDoc', preserveNullAndEmptyArrays: true}},
             {
                 $lookup: {
                     from: "staff",
                     localField: "staffId",
                     foreignField: "_id",
-                    as: "orderDoc.staffDoc"
+                    as: "staffDoc"
                 }
             },
             {
-                $unwind: {path: '$orderDoc.staffDoc', preserveNullAndEmptyArrays: true}
+                $unwind: {path: '$staffDoc', preserveNullAndEmptyArrays: true}
             },
             {
                 $group: {
-                    _id: 'null',
-                    items: {
-                        $addToSet: {
-                            itemName: '$orderDoc.itemDoc.name',
-                            price: '$orderDoc.price',
-                            qty: '$orderDoc.quantity',
-                            discount: '$orderDoc.discount',
-                            amount: '$orderDoc.amount',
-                            staff: '$orderDoc.staffDoc.name',
-                            date: '$date',
-                            customer: '$customerDoc.name'
-
-                        }
+                    _id: {
+                        staffId: '$staffId',
+                        month: {$month: "$date"},
+                        day: {$dayOfMonth: "$date"},
+                        year: {$year: "$date"}
                     },
-                    total: {
-                        $sum: '$orderDoc.amount'
+                    staffName: {
+                        $last: '$staffDoc.name'
+                    },
+                    staffId: {
+                        $last: "$staffId"
+                    },
+                    date: {
+                        $last: "$date"
+                    },
+                    totalService: {
+                        $sum: '$total'
                     }
                 }
             },
-            {$sort: {_id: 1}}
+            {
+                $group: {
+                    _id: '$staffId',
+                    staffName: {
+                        $last: "$staffName"
+                    },
+                    totalServiceByDate: {
+                        $addToSet: {
+                            date: '$date',
+                            totalService: '$totalService'
+                        }
+                    },
+                    totalService: {
+                        $addToSet: '$totalService'
+                    }
+                }
+            },
+            {
+                $unwind: {path: '$totalService', preserveNullAndEmptyArrays: true}
+            },
+            {
+                $group: {
+                    _id: null,
+                    data: {
+                        $addToSet: {
+                            name: '$staffName',
+                            totalServiceByDate: '$totalServiceByDate'
+                        }
+                    },
+                    total: {
+                        $sum: '$totalService'
+                    }
+                }
+            }
         ]);
         let data = {};
         let content = [];
@@ -94,70 +100,75 @@ Meteor.methods({
             },
             {
                 $lookup: {
-                    from: "orderDetail",
-                    localField: "_id",
-                    foreignField: "orderId",
-                    as: "orderDoc"
-                }
-            },
-            {
-                $unwind: {path: '$orderDoc', preserveNullAndEmptyArrays: true}
-            },
-            {
-                $lookup: {
-                    from: "item",
-                    localField: "orderDoc.itemId",
-                    foreignField: "_id",
-                    as: "orderDoc.itemDoc"
-                }
-            },
-            {$unwind: {path: '$orderDoc.itemDoc', preserveNullAndEmptyArrays: true}},
-            {
-                $lookup: {
-                    from: "customer",
-                    localField: "customerId",
-                    foreignField: "_id",
-                    as: "customerDoc"
-                }
-            },
-            {$unwind: {path: '$customerDoc', preserveNullAndEmptyArrays: true}},
-            {
-                $lookup: {
                     from: "staff",
                     localField: "staffId",
                     foreignField: "_id",
-                    as: "orderDoc.staffDoc"
+                    as: "staffDoc"
                 }
             },
             {
-                $unwind: {path: '$orderDoc.staffDoc', preserveNullAndEmptyArrays: true}
+                $unwind: {path: '$staffDoc', preserveNullAndEmptyArrays: true}
             },
             {
                 $group: {
-                    _id: '$staffDoc._id',
-                    items: {
-                        $addToSet: {
-                            itemName: '$orderDoc.itemDoc.name',
-                            price: '$orderDoc.price',
-                            qty: '$orderDoc.quantity',
-                            discount: '$orderDoc.discount',
-                            amount: '$orderDoc.amount',
-                            staff: '$orderDoc.staffDoc.name',
-                            date: '$date',
-                            customer: '$customerDoc.name'
-
-                        }
+                    _id: {
+                        staffId: '$staffId',
+                        month: {$month: "$date"},
+                        day: {$dayOfMonth: "$date"},
+                        year: {$year: "$date"}
                     },
-                    total: {
-                        $sum: '$orderDoc.amount'
+                    staffName: {
+                        $last: '$staffDoc.name'
+                    },
+                    staffId: {
+                        $last: "$staffId"
+                    },
+                    date: {
+                        $last: "$date"
+                    },
+                    totalService: {
+                        $sum: '$total'
                     }
                 }
             },
-            {$sort: {_id: 1}}
+            {
+                $group: {
+                    _id: '$staffId',
+                    staffName: {
+                        $last: "$staffName"
+                    },
+                    totalServiceByDate: {
+                        $addToSet: {
+                            date: '$date',
+                            totalService: '$totalService'
+                        }
+                    },
+                    totalService: {
+                        $addToSet: '$totalService'
+                    }
+                }
+            },
+            {
+                $unwind: {path: '$totalService', preserveNullAndEmptyArrays: true}
+            },
+            {
+                $group: {
+                    _id: null,
+                    data: {
+                        $addToSet: {
+                            name: '$staffName',
+                            totalServiceByDate: '$totalServiceByDate'
+                        }
+                    },
+                    total: {
+                        $sum: '$totalService'
+                    }
+                }
+            }
         ]);
         let data = {};
         let content = [];
-        if(orderByStaff){
+        if (orderByStaff) {
             data.content = orderByStaff;
             return data;
         }

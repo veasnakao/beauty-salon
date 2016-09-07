@@ -105,13 +105,16 @@ Template.payment.events({
         return !(charCode > 31 && (charCode < 48 || charCode > 57));
     },
     'click .js-payment'(){
+        debugger;
         let params = Router.current().params;
         let orderId = params.orderId;
+        let paymentDate = $('.js-paymentDate').val();
         let selector = {};
-        selector.date = new Date();
+        selector.date = paymentDate;
         selector.orderId = orderId;
         selector.typeOfJournal = "income";
         selector.journalEntryItem = [];
+        console.log(selector.date);
 
         Meteor.call('addJournalEntryByOrder', selector, (error, result)=> {
             if (error) {

@@ -6,10 +6,20 @@ Template.staffSalaryReport.created = function () {
 
 Template.staffSalaryReport.helpers({
     staffSalary(){
-        if(Session.get('staffSalary')){
+        if (Session.get('staffSalary')) {
             let staffSalary = Session.get('staffSalary');
             return staffSalary;
         }
+    },
+    date(){
+        let date = {};
+        let fromDate = $('.js-from-date').val();
+        let toDate = $('.js-to-date').val();
+        date = {
+            fromDate: fromDate,
+            toDate: toDate
+        }
+        return date;
     }
 });
 
@@ -23,7 +33,7 @@ Template.staffSalaryReport.events({
     'click .js-submit-report'(){
         let fromDate = $('.js-from-date').val();
         let toDate = $('.js-to-date').val();
-        if(fromDate&&toDate) {
+        if (fromDate && toDate) {
             Meteor.call('staffSalary', fromDate, toDate, (error, result)=> {
                 if (error) {
                     sAlert.error(error.message);
@@ -33,4 +43,9 @@ Template.staffSalaryReport.events({
             });
         }
     }
+});
+
+//onDestroyed
+Template.staffSalaryReport.onDestroyed(function () {
+    Session.set('staffSalary', undefined);
 });

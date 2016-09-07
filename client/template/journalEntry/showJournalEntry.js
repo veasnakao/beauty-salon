@@ -39,25 +39,10 @@ Template.showJournalEntry.helpers({
             return allJournalEntry;
         }
     }
-    // journalEntryIncomeFromOrder: ()=> {
-    //     Meteor.call('journalEntryIncomeFromOrder', (error, result)=> {
-    //         if (error) {
-    //             sAlert.error(error.message)
-    //         } else {
-    //             Session.set('journalEntryIncomeFromOrder', result);
-    //         }
-    //     });
-    //
-    //     let journalEntryIncomeReport = Session.get('journalEntryIncomeFromOrder');
-    //     if (journalEntryIncomeReport) {
-    //         console.log(journalEntryIncomeReport);
-    //         return journalEntryIncomeReport;
-    //     }
-    // },
-
 });
 
 Template.showJournalEntry.events({
+    
     'click .add-journalEntry'(){
         Router.go('addJournalEntry');
     },

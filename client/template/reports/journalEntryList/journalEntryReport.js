@@ -1,58 +1,28 @@
-Tracker.autorun(function () {
-    if (Session.get('fromDate') && Session.get('toDate')) {
+Template.journalEntryReport.helpers({
+    journalType(){
+        if (Session.get('journalType')) {
+            return Session.get('journalType');
+        }
+    },
+    journalDate(){
         let fromDate = Session.get('fromDate');
         let toDate = Session.get('toDate');
-        // let typeOfJournal = Session.get('typeOfJournal');
-        fromDate = moment(fromDate).toDate();
-        toDate = moment(toDate).toDate();
-        let selector = {
-            date: {
-                $gte: fromDate,
-                $lte: toDate
-            },
-            // typeOfJournal: 'typeOfJournal'
+        let data = {};
+        data = {
+            fromDate: fromDate,
+            toDate: toDate
         };
-        Meteor.subscribe("journalEntry", selector);
-    }
-});
-Template.journalEntryReport.rendered = function () {
-    try {
-        this.autorun(() => {
-            if (!this.subscription.ready()) {
-                IonLoading.show();
-            } else {
-                IonLoading.hide();
-            }
-        })
-    } catch (e) {
-        console.log(e);
-    }
-};
-
-Template.journalEntryReport.helpers({
-    subTotalIsNotZero(total){
-        return total!=0 && total!=null;
+        return data;
     },
-    journalEntryByExpense(){
-        let journalEntryByExpense = Session.get('journalEntryByExpense');
-        if (journalEntryByExpense) {
-            return journalEntryByExpense;
-        }
+    checkIsNotEmpty(total){
+        return total != 0 && total != null;
     },
-    journalEntryByIncome(){
-        let journalEntryByIncome = Session.get('journalEntryByIncome');
-        if (journalEntryByIncome) {
-            return journalEntryByIncome;
-        }
-    },
-    journalEntryIncomeFromOrder(){
-        let journalEntryIncomeFromOrder = Session.get('journalEntryIncomeFromOrder');
-        if (journalEntryIncomeFromOrder) {
-            return journalEntryIncomeFromOrder;
+    journalEntryReport(){
+        if (Session.get('journalEntry')) {
+            return Session.get('journalEntry');
         }
     }
 });
-
 
 
 Template.journalEntryReport.events({
@@ -75,53 +45,33 @@ Template.journalEntryReport.events({
     'click .js-journalEntry-report'(e, instance){
         let fromDate = instance.$('.js-from-date').val();
         let toDate = instance.$('.js-to-date').val();
-
+        Session.set('fromDate', fromDate);
+        Session.set('toDate', toDate);
         if ($('.js-expense').is(':checked')) {
-            let typeOfJournal = 'expense';
-            Meteor.call('journalEntryByJournalType', fromDate, toDate, typeOfJournal, (error, result)=> {
+            let journalType = 'expense';
+            Session.set('journalType', journalType);
+            Meteor.call('journalEntryReport', fromDate, toDate, journalType, (error, result)=> {
                 if (error) {
                     sAlert.error(error.message)
                 } else {
-                    Session.set('journalEntryIncomeFromOrder', undefined);
-                    Session.set('journalEntryByIncome', undefined);
-                    Session.set('journalEntryByExpense', result);
-
+                    Session.set('journalEntry', result);
                 }
             });
-
         } else if ($('.js-income').is(':checked')) {
-            
-            //journalEntryIncomeFromOrder
-            Meteor.call('journalEntryIncomeFromOrder', fromDate, toDate, (error, result)=> {
+            let journalType = 'income';
+            Session.set('journalType', journalType);
+            Meteor.call('journalEntryReport', fromDate, toDate, journalType, (error, result)=> {
                 if (error) {
-                    sAlert.error(error.message)
+                    sAlert.error(error.message);
                 } else {
-                    Session.set('journalEntryByExpense', undefined);
-                    Session.set('journalEntryIncomeFromOrder', result);
-
+                    Session.set('journalEntry', result);
                 }
             });
-            
-            //journalEntryByIncome
-            let typeOfJournal = 'income';
-            Meteor.call('journalEntryByJournalType', fromDate, toDate, typeOfJournal, (error, result)=> {
-                if (error) {
-                    sAlert.error(error.message)
-                } else {
-                    Session.set('journalEntryIncomeReport', undefined);
-                    Session.set('journalEntryByIncome', result);
-            
-                }
-            });
-        } else {
-            Session.set('journalEntryByExpense', undefined);
-            Session.set('journalEntryByIncome', undefined);
-            Session.set('journalEntryIncomeFromOrder', undefined);
         }
     }
 });
 Template.journalEntryReport.onDestroyed(function () {
-    Session.set('journalEntryByExpense', undefined);
-    Session.set('journalEntryByIncome', undefined);
-    Session.set('journalEntryIncomeFromOrder', undefined);
+    Session.set('journalEntry', undefined);
+    // Session.set('journalEntryByIncome', undefined);
+    // Session.set('journalEntryIncomeFromOrder', undefined);
 });

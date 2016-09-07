@@ -12,15 +12,6 @@ Meteor.methods({
             },
             {
                 $lookup: {
-                    from: "customer",
-                    localField: "customerId",
-                    foreignField: "_id",
-                    as: "customerDoc"
-                }
-            },
-            {$unwind: {path: '$customerDoc', preserveNullAndEmptyArrays: true}},
-            {
-                $lookup: {
                     from: "staff",
                     localField: "staffId",
                     foreignField: "_id",
@@ -31,63 +22,77 @@ Meteor.methods({
                 $unwind: {path: '$staffDoc', preserveNullAndEmptyArrays: true}
             },
             {
-                $project: {
-                    staffId: '$staffDoc._id',
-                    date: '$date',
-                    staffName: '$staffDoc.name',
-                    gender: '$staffDoc.gender',
-                    fee: '$staffDoc.fee',
-                    baseSalary: '$staffDoc.baseSalary',
-                    total: '$total',
-                    subTotalFee: {
-                        $multiply: [{$divide: ['$staffDoc.fee', 100]}, '$total']
+                $group: {
+                    _id: {
+                        staffId: '$staffId',
+                        month: {$month: "$date"},
+                        day: {$dayOfMonth: "$date"},
+                        year: {$year: "$date"}
+                    },
+                    staffName: {
+                        $last: '$staffDoc.name'
+                    },
+                    baseSalary: {
+                        $last: "$staffDoc.baseSalary"
+                    },
+                    fee: {
+                        $last: "$staffDoc.fee"
+                    },
+                    staffId: {
+                        $last: "$staffId"
+                    },
+                    date: {
+                        $last: "$date"
+                    },
+                    totalService: {
+                        $sum: '$total'
                     }
                 }
             },
             {
                 $group: {
                     _id: '$staffId',
-                    baseSalary: {
-                        $addToSet: '$baseSalary'
-                    },
-                    totalFee: {
-                        $sum: '$subTotalFee'
-                    },
                     staffName: {
-                        $addToSet: '$staffName'
-                    },
-                    gender: {
-                        $addToSet: '$gender'
+                        $last: "$staffName"
                     },
                     fee: {
-                        $addToSet: '$fee'
+                        $last: "$fee"
+                    },
+                    baseSalary: {
+                        $last: "$baseSalary"
+                    },
+                    totalService: {
+                        $sum: '$totalService'
                     }
                 }
-            },
-            {
-                $unwind: {path: '$baseSalary', preserveNullAndEmptyArrays: true}
-            },
-            {
-                $unwind: {path: '$staffName', preserveNullAndEmptyArrays: true}
-            },
-            {
-                $unwind: {path: '$gender', preserveNullAndEmptyArrays: true}
-            },
-            {
-                $unwind: {path: '$fee', preserveNullAndEmptyArrays: true}
             },
             {
                 $project: {
-                    _id: '$_id',
+                    staffId: '$staffId',
                     staffName: '$staffName',
-                    gender: '$gender',
-                    fee: '$fee',
                     baseSalary: '$baseSalary',
-                    totalFee: '$totalFee',
-                    totalSalary: {
-                        $add: ['$baseSalary', '$totalFee']
+                    totalService: '$totalService',
+                    fee: '$fee',
+                    totalFee: {
+                        $multiply: [{$divide: ['$fee', 100]}, '$totalService']
                     }
                 }
+            },
+            {
+                $project: {
+                    staffId: '$staffId',
+                    staffName: '$staffName',
+                    baseSalary: '$baseSalary',
+                    totalService: '$totalService',
+                    fee: '$fee',
+                    totalFee: '$totalFee',
+                    totalSalary: {
+                        $sum: ['$baseSalary', '$totalFee']
+                    }
+                }
+            },
+            {
+                $sort: {_id: -1}
             },
             {
                 $group: {
