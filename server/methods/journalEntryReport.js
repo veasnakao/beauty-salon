@@ -1,288 +1,10 @@
 Meteor.methods({
-    // journalEntryReport(fromDate, toDate, typeOfJournal){
-    //     fromDate = moment(fromDate).toDate();
-    //     toDate = moment(toDate).toDate();
-    //     let journalEntry = Collection.JournalEntry.aggregate([
-    //         {
-    //             $match: {
-    //                 typeOfJournal: typeOfJournal,
-    //                 date: {
-    //                     $gte: fromDate, $lte: toDate
-    //                 }
-    //             }
-    //         },
-    //         {
-    //             $lookup: {
-    //                 from: "order",
-    //                 localField: "orderId",
-    //                 foreignField: "_id",
-    //                 as: "orderDoc"
-    //             }
-    //         }, {
-    //             $unwind: {path: '$orderDoc', preserveNullAndEmptyArrays: true}
-    //         },
-    //         {
-    //             $lookup: {
-    //                 from: "orderDetail",
-    //                 localField: "orderDoc._id",
-    //                 foreignField: "orderId",
-    //                 as: "orderDetailDoc"
-    //             }
-    //         },
-    //         {$unwind: {path: '$orderDetailDoc', preserveNullAndEmptyArrays: true}},
-    //         {
-    //             $lookup: {
-    //                 from: "item",
-    //                 localField: "orderDetailDoc.itemId",
-    //                 foreignField: "_id",
-    //                 as: "orderDetailDoc.itemDoc"
-    //             }
-    //         },
-    //         {$unwind: {path: '$orderDetailDoc.itemDoc', preserveNullAndEmptyArrays: true}},
-    //         {
-    //             $project: {
-    //                 journalEntryItem: 1,
-    //                 _id: 1,
-    //                 orderDoc: {$ifNull: ["$orderDoc", []]},
-    //                 orderDetailDoc: 1,
-    //                 typeOfJournal: 1,
-    //                 date: 1
-    //             }
-    //         },
-    //         {
-    //             $group: {
-    //                 _id: {
-    //                     journalEntryId: '$_id',
-    //                     orderDocId: '$orderDoc._id'
-    //                 },
-    //                 journalItem: {$last: '$journalEntryItem'},
-    //                 typeOfJournal: {$last: '$typeOfJournal'},
-    //                 date: {$last: '$date'},
-    //                 orderDoc: {$last: '$orderDoc'},
-    //                 orderDetail: {
-    //                     $addToSet: {
-    //                         itemName: '$orderDetailDoc.itemDoc.name',
-    //                         price: '$orderDetailDoc.price',
-    //                         qty: '$orderDetailDoc.quantity',
-    //                         amount: '$orderDetailDoc.amount'
-    //                     }
-    //                 }
-    //             }
-    //         },
-    //         {
-    //             $group: {
-    //                 _id: '$_id.journalEntryId',
-    //                 data: {
-    //                     $addToSet: '$$ROOT'
-    //                 }
-    //             }
-    //         },
-    //         {$unwind: {path: '$data'}},
-    //         {$unwind: {path: '$data.journalItem', preserveNullAndEmptyArrays: true}},
-    //         {
-    //             $lookup: {
-    //                 from: "journalItem",
-    //                 localField: "data.journalItem.journalItemId",
-    //                 foreignField: "_id",
-    //                 as: "data.journalItem.journalItemDoc"
-    //             }
-    //         }, {
-    //             $unwind: {path: '$data.journalItem.journalItemDoc', preserveNullAndEmptyArrays: true}
-    //         },
-    //         {
-    //             $group: {
-    //                 _id: '$_id',
-    //                 typeOfJournal: {$last: '$data.typeOfJournal'},
-    //                 date: {$last: '$data.date'},
-    //                 orderDetailDoc: {
-    //                     $last: '$data.orderDetail'
-    //                 },
-    //                 orderDoc: {
-    //                     $last: '$data.orderDoc'
-    //                 },
-    //                 journalEntryItem: {
-    //                     $addToSet: '$data.journalItem'
-    //                 },
-    //                 totalJournalItem: {
-    //                     $sum: '$data.journalItem.journalItemPrice'
-    //                 }
-    //             }
-    //         }
-    //     ]);
-    //     let data = {};
-    //     let content = [];
-    //     if (journalEntry) {
-    //         data.content = journalEntry;
-    //         console.log(data.content);
-    //         return data;
-    //     }
-    // },
-    journalEntryIncomeFromOrder(fromDate, toDate){
-        // let journalEntry = Collection.JournalEntry.aggregate([
-        //     {
-        //         $match: {
-        //             typeOfJournal: 'income'
-        //         }
-        //     },
-        //     {
-        //         $lookup: {
-        //             from: "order",
-        //             localField: "orderId",
-        //             foreignField: "_id",
-        //             as: "orderDoc"
-        //         }
-        //     }, {
-        //         $unwind: {path: '$orderDoc', preserveNullAndEmptyArrays: true}
-        //     },
-        //     {
-        //         $lookup: {
-        //             from: "orderDetail",
-        //             localField: "orderDoc._id",
-        //             foreignField: "orderId",
-        //             as: "orderDetailDoc"
-        //         }
-        //     },
-        //     {$unwind: {path: '$orderDetailDoc', preserveNullAndEmptyArrays: true}},
-        //     {
-        //         $lookup: {
-        //             from: "item",
-        //             localField: "orderDetailDoc.itemId",
-        //             foreignField: "_id",
-        //             as: "orderDetailDoc.itemDoc"
-        //         }
-        //     },
-        //     {$unwind: {path: '$orderDetailDoc.itemDoc', preserveNullAndEmptyArrays: true}},
-        //     {
-        //         $project: {
-        //             journalEntryItem: 1,
-        //             _id: 1,
-        //             orderDoc: {$ifNull: ["$orderDoc", []]},
-        //             orderDetailDoc: 1,
-        //             typeOfJournal: 1,
-        //             date: 1
-        //         }
-        //     },
-        //     {
-        //         $group: {
-        //             _id: {
-        //                 journalEntryId: '$_id',
-        //                 orderDocId: '$orderDoc._id'
-        //             },
-        //             journalItem: {$last: '$journalEntryItem'},
-        //             typeOfJournal: {$last: '$typeOfJournal'},
-        //             date: {$last: '$date'},
-        //             orderDoc: {$last: '$orderDoc'},
-        //             orderDetail: {
-        //                 $addToSet: {
-        //                     itemName: '$orderDetailDoc.itemDoc.name',
-        //                     price: '$orderDetailDoc.price',
-        //                     qty: '$orderDetailDoc.quantity',
-        //                     amount: '$orderDetailDoc.amount'
-        //                 }
-        //             }
-        //         }
-        //     },
-        //     {
-        //         $group: {
-        //             _id: '$_id.journalEntryId',
-        //             data: {
-        //                 $addToSet: '$$ROOT'
-        //             }
-        //         }
-        //     },
-        //     {$unwind: {path: '$data'}},
-        //     {$unwind: {path: '$data.journalItem', preserveNullAndEmptyArrays: true}},
-        //     {
-        //         $lookup: {
-        //             from: "journalItem",
-        //             localField: "data.journalItem.journalItemId",
-        //             foreignField: "_id",
-        //             as: "data.journalItem.journalItemDoc"
-        //         }
-        //     }, {
-        //         $unwind: {path: '$data.journalItem.journalItemDoc', preserveNullAndEmptyArrays: true}
-        //     },
-        //     {
-        //         $group: {
-        //             _id: '$_id',
-        //             typeOfJournal: {$last: '$data.typeOfJournal'},
-        //             date: {$last: '$data.date'},
-        //             orderDetailDoc: {
-        //                 $last: '$data.orderDetail'
-        //             },
-        //             orderDoc: {
-        //                 $last: '$data.orderDoc'
-        //             },
-        //             journalEntryItem: {
-        //                 $addToSet: '$data.journalItem',
-        //             },
-        //             totalJournalItem: {
-        //                 $sum: '$data.journalItem.journalItemPrice'
-        //             }
-        //         }
-        //     }
-        // ]);
-        fromDate = moment(fromDate).toDate();
-        toDate = moment(toDate).toDate();
-        let journalEntryIncome = Collection.JournalEntry.aggregate([
-            {
-                $match: {
-                    typeOfJournal: 'income',
-                    date: {
-                        $gte: fromDate, $lte: toDate
-                    }
-                }
-            },
-            {
-                $lookup: {
-                    from: "order",
-                    localField: "orderId",
-                    foreignField: "_id",
-                    as: "orderDoc"
-                }
-            }, {
-                $unwind: {path: '$orderDoc', preserveNullAndEmptyArrays: true}
-            },
-            {
-                $lookup: {
-                    from: "orderDetail",
-                    localField: "orderDoc._id",
-                    foreignField: "orderId",
-                    as: "orderDetailDoc"
-                }
-            },
-            {$unwind: {path: '$orderDetailDoc', preserveNullAndEmptyArrays: true}},
-            {
-                $lookup: {
-                    from: "item",
-                    localField: "orderDetailDoc.itemId",
-                    foreignField: "_id",
-                    as: "orderDetailDoc.itemDoc"
-                }
-            },
-            {
-                $lookup: {
-                    from: "staff",
-                    localField: "orderDoc.staffId",
-                    foreignField: "_id",
-                    as: "orderDoc.staffDoc"
-                }
-            },
-            {
-                $lookup: {
-                    from: "customer",
-                    localField: "orderDoc.customerId",
-                    foreignField: "_id",
-                    as: "orderDoc.customerDoc"
-                }
-            },
-            {$unwind: {path: '$orderDetailDoc.itemDoc', preserveNullAndEmptyArrays: true}},
+    allJournalEntry(){
+        let allJournalEntry = Collection.JournalEntry.aggregate([
             {
                 $project: {
-                    // journalEntryItem: 1,
+                    journalEntryItem: 1,
                     _id: 1,
-                    orderDoc: {$ifNull: ["$orderDoc", []]},
-                    orderDetailDoc: 1,
                     typeOfJournal: 1,
                     date: 1
                 }
@@ -290,22 +12,11 @@ Meteor.methods({
             {
                 $group: {
                     _id: {
-                        journalEntryId: '$_id',
-                        orderDocId: '$orderDoc._id'
+                        journalEntryId: '$_id'
                     },
-                    // journalItem: {$last: '$journalEntryItem'},
+                    journalItem: {$last: '$journalEntryItem'},
                     typeOfJournal: {$last: '$typeOfJournal'},
-                    date: {$last: '$date'},
-                    orderDoc: {$last: '$orderDoc'},
-                    orderDetail: {
-                        $addToSet: {
-                            itemName: '$orderDetailDoc.itemDoc.name',
-                            price: '$orderDetailDoc.price',
-                            qty: '$orderDetailDoc.quantity',
-                            discount: '$orderDetailDoc.discount',
-                            amount: '$orderDetailDoc.amount'
-                        }
-                    }
+                    date: {$last: '$date'}
                 }
             },
             {
@@ -317,36 +28,257 @@ Meteor.methods({
                 }
             },
             {$unwind: {path: '$data'}},
-
+            {$unwind: {path: '$data.journalItem', preserveNullAndEmptyArrays: true}},
+            {
+                $lookup: {
+                    from: "journalItem",
+                    localField: "data.journalItem.journalItemId",
+                    foreignField: "_id",
+                    as: "data.journalItem.journalItemDoc"
+                }
+            },
+            {
+                $unwind: {path: '$data.journalItem.journalItemDoc', preserveNullAndEmptyArrays: true}
+            },
             {
                 $group: {
                     _id: '$_id',
                     typeOfJournal: {$last: '$data.typeOfJournal'},
                     date: {$last: '$data.date'},
-                    orderDetailDoc: {
-                        $last: '$data.orderDetail'
+                    journalEntryItem: {
+                        $addToSet: '$data.journalItem'
                     },
-                    orderDoc: {
-                        $last: '$data.orderDoc'
+                    subTotal: {
+                        $sum: '$data.journalItem.journalItemPrice'
+                    }
+                }
+            },
+            {
+                $sort: {_id: -1}
+            }
+        ]);
+        let data = {};
+        let content = [];
+        if (allJournalEntry) {
+            data.content = allJournalEntry;
+            return data;
+        }
+    },
+    journalEntryReport(fromDate, toDate, journalType){
+        fromDate = moment(fromDate).toDate();
+        toDate = moment(toDate).toDate();
+        let journalEntry = Collection.JournalEntry.aggregate([
+            {
+                $match: {
+                    date: {
+                        $gte: fromDate, $lte: toDate
+                    },
+                    typeOfJournal: journalType
+                }
+            },
+            {
+                $unwind: {path: '$journalEntryItem', preserveNullAndEmptyArrays: true}
+            },
+            {
+                $lookup: {
+                    from: "journalItem",
+                    localField: "journalEntryItem.journalItemId",
+                    foreignField: "_id",
+                    as: "journalItemDoc"
+                }
+            },
+            {
+                $unwind: {path: '$journalItemDoc', preserveNullAndEmptyArrays: true}
+            },
+            {
+                $lookup: {
+                    from: "order",
+                    localField: "orderId",
+                    foreignField: "_id",
+                    as: "serviceDoc"
+                }
+            },
+            {
+                $unwind: {path: '$serviceDoc', preserveNullAndEmptyArrays: true}
+            },
+            {
+                $project: {
+                    date: '$date',
+                    journalType: '$typeOfJournal',
+                    serviceSubTotal: '$serviceDoc.total',
+                    journalItemName: '$journalItemDoc.journalItemName',
+                    journalItemPrice: '$journalEntryItem.journalItemPrice'
+                }
+            },
+            {
+                $group: {
+                    _id: {
+                        month: {$month: "$date"},
+                        day: {$dayOfMonth: "$date"},
+                        year: {$year: "$date"},
+                        journalItemName: '$journalItemName',
+                        journaType: '$journalType'
+                    },
+                    date: {
+                        $last: "$date"
+                    },
+                    journalType: {
+                        $last: "$journalType"
+                    },
+                    journalItem: {
+                        $addToSet: {
+                            journalItemName: '$journalItemName',
+                            journalItemPrice: '$journalItemPrice',
+                        }
+                    },
+                    service: {
+                        $sum: '$serviceSubTotal'
+                    }
+                }
+            },
+            {
+                $unwind: {path: '$journalItem', preserveNullAndEmptyArrays: true}
+            },
+
+            {
+                $group: {
+                    _id: {
+                        month: {$month: "$date"},
+                        day: {$dayOfMonth: "$date"},
+                        year: {$year: "$date"},
+                        journaType: '$journalItem.journalItemName'
+                    },
+                    date: {
+                        $last: "$date"
+                    },
+                    journalType: {
+                        $last: "$journalType"
+                    },
+                    journalItemName: {
+                        $last: '$journalItem.journalItemName'
+                    },
+                    totalJournalByItem: {
+                        $sum: '$journalItem.journalItemPrice'
+                    },
+                    serviceTotal: {
+                        $sum: '$service'
                     }
                 }
             },
             {
                 $group: {
+                    _id: {
+                        month: {$month: "$date"},
+                        day: {$dayOfMonth: "$date"},
+                        year: {$year: "$date"},
+                    },
+                    date: {
+                        $last: "$date"
+                    },
+                    journalEntry: {
+                        $addToSet: {
+                            journalItemName: '$journalItemName',
+                            totalByItem: '$totalJournalByItem'
+                        }
+                    },
+                    serviceTotal: {
+                        $sum: '$serviceTotal'
+                    }
+                }
+            },
+            {
+                $unwind: {path: '$journalEntry', preserveNullAndEmptyArrays: true}
+            }, {
+                $group: {
+                    _id: {
+                        month: {$month: "$date"},
+                        day: {$dayOfMonth: "$date"},
+                        year: {$year: "$date"},
+                    },
+                    date: {
+                        $last: "$date"
+                    },
+                    journalEntry: {
+                        $addToSet: {
+                            journalItemName: '$journalEntry.journalItemName',
+                            totalByItem: '$journalEntry.totalByItem'
+                        }
+                    },
+                    journalTotal: {
+                        $sum: '$journalEntry.totalByItem'
+                    },
+                    serviceTotal: {
+                        $last: '$serviceTotal'
+                    }
+                }
+            },
+            {
+                $unwind: {path: '$journalEntry', preserveNullAndEmptyArrays: true}
+            },
+            {
+                $project: {
+                    date: '$date',
+                    journalItemName: '$journalEntry.journalItemName',
+                    totalByItem: '$journalEntry.totalByItem',
+                    serviceTotal: '$serviceTotal',
+                    journalEntryTotalByDate: {
+                        $add: ['$journalTotal', '$serviceTotal']
+                    }
+                }
+            },
+            {
+                $group: {
+                    _id: {
+                        month: {$month: "$date"},
+                        day: {$dayOfMonth: "$date"},
+                        year: {$year: "$date"},
+                    },
+                    date: {
+                        $last: "$date"
+                    },
+                    journalEntry: {
+                        $addToSet: {
+                            journalItemName: '$journalItemName',
+                            totalByItem: '$totalByItem'
+                        }
+                    },
+                    serviceTotal: {
+                        $addToSet: {
+                            serviceTotalByDate:'$serviceTotal'
+                        }
+                    },
+                    journalEntryTotalByDate: {
+                        $last: "$journalEntryTotalByDate"
+                    }
+                }
+            },
+            {
+                $project: {
+                    _id: {$concat: [{$dateToString: {format: "%Y-%m-%d", date: "$date"}}]},
+                    date: 1,
+                    journalEntry: 1,
+                    serviceTotal: 1,
+                    journalEntryTotalByDate: 1
+
+                }
+            },
+            {$sort: {_id: -1}},
+            {
+                $group: {
                     _id: null,
-                    data: {
+                    journalEntryData: {
                         $addToSet: '$$ROOT'
                     },
                     total: {
-                        $sum: '$orderDoc.total'
+                        $sum: "$journalEntryTotalByDate"
                     }
                 }
             }
         ]);
         let data = {};
         let content = [];
-        if (journalEntryIncome) {
-            data.content = journalEntryIncome;
+        if (journalEntry) {
+            data.content = journalEntry;
             return data;
         }
     },
@@ -485,187 +417,4 @@ Meteor.methods({
             return data;
         }
     },
-    journalEntryByJournalType(fromDate, toDate, typeOfJournal){
-        fromDate = moment(fromDate).toDate();
-        toDate = moment(toDate).toDate();
-        let journalEntry = Collection.JournalEntry.aggregate([
-            {
-                $match: {
-                    typeOfJournal: typeOfJournal,
-                    date: {
-                        $gte: fromDate, $lte: toDate
-                    }
-                }
-            },
-            {
-                $project: {
-                    journalEntryItem: 1,
-                    _id: 1,
-                    typeOfJournal: 1,
-                    date: 1
-                }
-            },
-            {
-                $group: {
-                    _id: {
-                        journalEntryId: '$_id'
-                    },
-                    journalItem: {$last: '$journalEntryItem'},
-                    typeOfJournal: {$last: '$typeOfJournal'},
-                    date: {$last: '$date'}
-                }
-            },
-            {
-                $group: {
-                    _id: '$_id.journalEntryId',
-                    data: {
-                        $addToSet: '$$ROOT'
-                    }
-                }
-            },
-            {$unwind: {path: '$data'}},
-            {$unwind: {path: '$data.journalItem', preserveNullAndEmptyArrays: true}},
-            {
-                $lookup: {
-                    from: "journalItem",
-                    localField: "data.journalItem.journalItemId",
-                    foreignField: "_id",
-                    as: "data.journalItem.journalItemDoc"
-                }
-            },
-            {
-                $unwind: {path: '$data.journalItem.journalItemDoc', preserveNullAndEmptyArrays: true}
-            },
-            {
-                $group: {
-                    _id: '$_id',
-                    typeOfJournal: {$last: '$data.typeOfJournal'},
-                    date: {$last: '$data.date'},
-                    journalEntryItem: {
-                        $addToSet: '$data.journalItem',
-                    },
-                    subTotal: {
-                        $sum: '$data.journalItem.journalItemPrice'
-                    }
-                }
-            },
-            {
-                $group: {
-                    _id: null,
-                    data: {
-                        $addToSet: '$$ROOT'
-                    },
-                    total: {
-                        $sum: '$subTotal'
-                    }
-                }
-            },
-            {
-                $sort: {_id: -1}
-            }
-            // {
-            //     $lookup: {
-            //         from: "order",
-            //         localField: "orderId",
-            //         foreignField: "_id",
-            //         as: "orderDoc"
-            //     }
-            // }, {
-            //     $unwind: {path: '$orderDoc', preserveNullAndEmptyArrays: true}
-            // },
-            // {
-            //     $lookup: {
-            //         from: "orderDetail",
-            //         localField: "orderDoc._id",
-            //         foreignField: "orderId",
-            //         as: "orderDetailDoc"
-            //     }
-            // },
-            // {$unwind: {path: '$orderDetailDoc', preserveNullAndEmptyArrays: true}},
-            // {
-            //     $lookup: {
-            //         from: "item",
-            //         localField: "orderDetailDoc.itemId",
-            //         foreignField: "_id",
-            //         as: "orderDetailDoc.itemDoc"
-            //     }
-            // },
-            // {$unwind: {path: '$orderDetailDoc.itemDoc', preserveNullAndEmptyArrays: true}},
-            // {
-            //     $project: {
-            //         journalEntryItem: 1,
-            //         _id: 1,
-            //         orderDoc: {$ifNull: ["$orderDoc", []]},
-            //         orderDetailDoc: 1,
-            //         typeOfJournal: 1,
-            //         date: 1
-            //     }
-            // },
-            // {
-            //     $group: {
-            //         _id: {
-            //             journalEntryId: '$_id',
-            //             orderDocId: '$orderDoc._id'
-            //         },
-            //         journalItem: {$last: '$journalEntryItem'},
-            //         typeOfJournal: {$last: '$typeOfJournal'},
-            //         date: {$last: '$date'},
-            //         orderDoc: {$last: '$orderDoc'},
-            //         orderDetail: {
-            //             $addToSet: {
-            //                 itemName: '$orderDetailDoc.itemDoc.name',
-            //                 price: '$orderDetailDoc.price',
-            //                 qty: '$orderDetailDoc.quantity',
-            //                 amount: '$orderDetailDoc.amount'
-            //             }
-            //         }
-            //     }
-            // },
-            // {
-            //     $group: {
-            //         _id: '$_id.journalEntryId',
-            //         data: {
-            //             $addToSet: '$$ROOT'
-            //         }
-            //     }
-            // },
-            // {$unwind: {path: '$data'}},
-            // {$unwind: {path: '$data.journalItem', preserveNullAndEmptyArrays: true}},
-            // {
-            //     $lookup: {
-            //         from: "journalItem",
-            //         localField: "data.journalItem.journalItemId",
-            //         foreignField: "_id",
-            //         as: "data.journalItem.journalItemDoc"
-            //     }
-            // }, {
-            //     $unwind: {path: '$data.journalItem.journalItemDoc', preserveNullAndEmptyArrays: true}
-            // },
-            // {
-            //     $group: {
-            //         _id: '$_id',
-            //         typeOfJournal: {$last: '$data.typeOfJournal'},
-            //         date: {$last: '$data.date'},
-            //         orderDetailDoc: {
-            //             $last: '$data.orderDetail'
-            //         },
-            //         orderDoc: {
-            //             $last: '$data.orderDoc'
-            //         },
-            //         journalEntryItem: {
-            //             $addToSet: '$data.journalItem',
-            //         },
-            //         totalJournalItem: {
-            //             $sum: '$data.journalItem.journalItemPrice'
-            //         }
-            //     }
-            // }
-        ]);
-        let data = {};
-        let content = [];
-        if (journalEntry) {
-            data.content = journalEntry;
-            return data;
-        }
-    }
 });
