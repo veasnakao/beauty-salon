@@ -16,7 +16,6 @@ Template.addJournalEntry.rendered = function () {
                 IonLoading.hide();
             }
         });
-        console.log($('.js-journalEntryItem').val());
     } catch (e) {
         console.log(e);
     }
@@ -26,8 +25,10 @@ AutoForm.hooks({
     addJournalEntry: {
         before: {
             insert: function (doc) {
-                let todayDate = moment().format('YYYYMMDD');
-                let prefix = todayDate + '-';
+                let date = doc.date;
+                console.log(date);
+                date = moment(date).format('YYYYMMDD');
+                let prefix = date + '-';
                 doc._id = idGenerator.genWithPrefix(Collection.JournalEntry, prefix, 4);
                 return doc;
             }

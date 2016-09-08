@@ -36,7 +36,10 @@ Router.map(function () {
     //journalEntry
     this.route('showJournalEntry');
     this.route('journalEntryDetail', {
-        path: '/journalEntryDetail/:_id'
+        path: '/journalEntryDetail/date/:date/journalType/:journalType'
+    });
+    this.route('journalEntryDetailById', {
+        path: '/journalEntryDetailById/:_id'
     });
     this.route('editJournalEntry', {
         path: '/editJournalEntry/:_id'

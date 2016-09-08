@@ -8,13 +8,14 @@
     {{/contentFor}}
     {{#ionView}}
         {{#ionContent}}
-            <div class="card animated bounceInDown">
+            <div class="card animated bounceInRight">
                 {{#autoForm collection="Collection.JournalEntry" doc=journalEntryDetail id="editJournalEntry" type="update"}}
                     {{#if journalEntryDetail}}
+                        {{typeOfJournal}}
                         <div class="col-50">
                             {{> afQuickField name='date'}}
                         </div>
-                        {{> afQuickField name='typeOfJournal' disabled=true}}
+                        {{> afQuickField name='typeOfJournal'}}
                         {{> afQuickField name='journalEntryItem'}}
                     {{/if}}
                     <button class="button button-block button-positive js-updateJournal">
@@ -22,6 +23,7 @@
                         Update
                     </button>
                 {{/autoForm}}
+
             </div>
         {{/ionContent}}
     {{/ionView}}

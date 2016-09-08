@@ -100,8 +100,6 @@ Template._productItem.events({
             discount: 0,
             amount: this.price * 1
         };
-
-        console.log(selector);
         if (selector) {
             Meteor.call('insertOrderDetail', selector, (error, result) => {
                 if (error) {
@@ -109,13 +107,16 @@ Template._productItem.events({
                     IonLoading.hide();
                 } else {
                     let orderId = params.orderId;
-                    console.log(`orderId : ${orderId}`);
                     if (orderId) {
                         Meteor.call('updateOrderTotal', orderId, (error, result)=> {
                             if (error) {
                                 sAlert.error(error.message);
                                 IonLoading.hide();
                             } else {
+                                overhang.notify({
+                                    type : "success",
+                                    message: "Added success"
+                                });
                                 IonLoading.hide();
                                 Session.set('orderId', result);
                             }

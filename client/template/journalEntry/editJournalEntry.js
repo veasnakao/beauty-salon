@@ -1,4 +1,4 @@
-//oncreate
+// //oncreate
 Template.editJournalEntry.created = function () {
     this.autorun(function () {
         let journalEntryId = Router.current().params._id;
@@ -22,6 +22,7 @@ Template.editJournalEntry.rendered = function () {
     }
 };
 
+
 //helper
 Template.editJournalEntry.helpers({
     journalEntryDetail() {
@@ -41,7 +42,7 @@ AutoForm.hooks({
         onSuccess(formType, id){
             let params = Router.current().params;
             let journalEntryId = params._id;
-            Router.go(`/journalEntryDetail/${journalEntryId}`);
+            Router.go(`/journalEntryDetailById/${journalEntryId}`);
             sAlert.success('Journal Entry Edit Success');
         },
         onError(formType, error){

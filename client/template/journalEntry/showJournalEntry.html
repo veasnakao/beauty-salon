@@ -6,8 +6,6 @@
                 <i class="icon ion-navicon"></i>
             </button>
             <h1 class="title">Journal Entry List</h1>
-            <!--add-journalEntry-->
-            <!--data-ion-modal="chooseJournalType"-->
             <button class="button button-clear button-icon icon ion-plus-circled add-journalEntry">
             </button>
         </div>
@@ -15,33 +13,37 @@
         {{#ionView}}
             {{#ionContent}}
                 {{#ionList}}
-                    {{#if journalEntry}}
-                        {{#each journalEntry.content}}
-                            {{#if subTotalIsNotZero subTotal}}
-                                <div class="journalEntryDetail">
-                                    {{#ionItem path="journalEntryDetail" iconRight=true}}
-
-                                        <div class="row">
-                                            <div class="col">
+                    {{#if showJournalEntry}}
+                        {{#each showJournalEntry.content}}
+                            {{#if subTotalIsNotZero journalTotal}}
+                                {{#ionItem iconRight=true }}
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="{{pathFor route='journalEntryDetail'}}">
                                                 Date : {{moFormat date 'DD/MM/YYYY'}}
-                                            </div>
-                                            <div class="col">
-                                                Journal : {{typeOfJournal}}
-                                            </div>
-                                            {{> ionIcon icon="ios-arrow-right"}}
+                                            </a>
                                         </div>
-                                        <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
-                                        <div class="row">
-                                            <div class="col">Total</div>
-                                            <div class="col">
-                                                {{numFormat subTotal '0,0.00 $'}}
-                                            </div>
+                                        <div class="col">{{numFormat journalTotal '0,0.00 $'}}</div>
+                                        <div class="col">
+                                            Journal : {{journalType}}
                                         </div>
-
-                                    {{/ionItem}}
-                                </div>
-                                <br>
+                                        {{> ionIcon icon="ios-arrow-right"}}
+                                    </div>
+                                    <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
+                                    {{#each journalEntry}}
+                                        {{#if subTotalIsNotZero journalTotalByItem}}
+                                            <div class="row">
+                                                <div class="col journalEntryById" style="cursor: pointer;color: blue;">
+                                                    Id : {{journalEntryId}}
+                                                </div>
+                                                <div class="col">{{numFormat journalTotalByItem '0,0.00 $'}}</div>
+                                                <div class="col"></div>
+                                            </div>
+                                        {{/if}}
+                                    {{/each}}
+                                {{/ionItem}}
                             {{/if}}
+                            <br>
                         {{/each}}
                     {{/if}}
                 {{/ionList}}

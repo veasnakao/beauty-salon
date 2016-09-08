@@ -240,7 +240,7 @@ Meteor.methods({
             {
                 $group: {
                     _id: '$_id',
-                    date: { $last: '$date' },
+                    date: {$last: '$date'},
                     items: {
                         $addToSet: {
                             itemName: '$orderDoc.itemDoc.name',

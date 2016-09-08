@@ -28,7 +28,6 @@ Template.payment.rendered = function () {
 Template.payment.helpers({
     order() {
         let orderId = Router.current().params.orderId;
-        console.log(`payment orderId ${orderId}`);
         let payment = Collection.Payment.findOne(
             {
                 orderId: orderId
@@ -59,34 +58,6 @@ Template.payment.helpers({
             }
         }
     }
-
-    // let payment = Collection.Payment.findOne({orderId: orderId});
-    // if (payment) {
-    //     console.log(`payment ${payment}`);
-    //     try {
-    //         let selector = {
-    //             orderId: payment._id,
-    //             dueAmount: numeral(payment.dueAmount).format('00.00'),
-    //             paidAmount: numeral(payment.dueAmount).format('00.00'),
-    //             balance: 0
-    //         };
-    //         return selector;
-    //     } catch (e) {
-    //     }
-    // }
-
-    // try {
-    //     let selector = {
-    //         orderId: order._id,
-    //         //dueAmount: (order.total).toFixed(2),
-    //         dueAmount: numeral(order.total).format('00.00'),
-    //         paidAmount: numeral(order.total).format('00.00'),
-    //         balance: 0
-    //     };
-    //     return selector;
-    // } catch (e) {
-    // }
-
 });
 
 //events
@@ -104,6 +75,33 @@ Template.payment.events({
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         return !(charCode > 31 && (charCode < 48 || charCode > 57));
     },
+    'click .js-delete-payment'(){
+        let params = Router.current().params;
+        let serviceId = params._id;
+        IonPopup.confirm({
+            title: 'Are you sure to delete?',
+            template: `Payment`,
+            onOk: () => {
+                Meteor.call('removePayment', serviceId, (error, result) => {
+                    if (error) {
+                        sAlert.error(`Cancel`);
+                    } else {
+                        overhang.notify({
+                            type : "success",
+                            message: "Delete success"
+                        });
+                        Router.go(`/showOrder`);
+                        overhang.notify({
+                            type : "success",
+                            message: "Delete success"
+                        });
+                    }
+                });
+            },
+            onCancel: function () {
+            }
+        });
+    },
     'click .js-payment'(){
         debugger;
         let params = Router.current().params;
@@ -114,24 +112,11 @@ Template.payment.events({
         selector.orderId = orderId;
         selector.typeOfJournal = "income";
         selector.journalEntryItem = [];
-        console.log(selector.date);
-
         Meteor.call('addJournalEntryByOrder', selector, (error, result)=> {
             if (error) {
                 sAlert.error(error.message);
-            } else {
-        
-            }
+            } 
         });
-
-        // Meteor.call('updateOrderStatus', orderId, (error, result)=> {
-        //     if (error) {
-        //         sAlert.error(error.message);
-        //         IonLoading.hide();
-        //     } else {
-        //         Router.go(`/showOrder`);
-        //     }
-        // });
     }
 });
 
