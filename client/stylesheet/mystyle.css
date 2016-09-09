@@ -125,6 +125,36 @@ img {
     border-right-style: none;
 }
 
+.service-report{
+    width: 360px;margin: 0 auto;
+    -webkit-box-shadow: 0px 1px 45px -9px rgba(191,191,191,1);
+    -moz-box-shadow: 0px 1px 45px -9px rgba(191,191,191,1);
+    box-shadow: 0px 1px 45px -9px rgba(191,191,191,1);
+}
+
+.service-rp-content{
+    font-size: 11px;
+}
+.report-content {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #000000;
+
+}
+.content-header th {
+    background-color: #d0d2d0;
+    padding: 3px;
+    font-size: 11px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #555555;
+}
+.content-body td {
+    padding: 3px;
+    font-size: 11px;
+    border: 1px solid #555555;
+}
+
 .login-container {
     /*opacity: 0.8;*/
     /*background: rgba(255, 255, 255, 0.5);*/

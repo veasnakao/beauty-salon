@@ -45,6 +45,5 @@ Collection.Payment.after.insert((userId, doc) => {
         return Collection.Order.update({
             _id: orderId
         }, selector);
-        // updateSale(doc);
     });
-})
+});

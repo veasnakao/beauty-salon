@@ -72,6 +72,5 @@ Template.journalEntryReport.events({
 });
 Template.journalEntryReport.onDestroyed(function () {
     Session.set('journalEntry', undefined);
-    // Session.set('journalEntryByIncome', undefined);
-    // Session.set('journalEntryIncomeFromOrder', undefined);
+    
 });

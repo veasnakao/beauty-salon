@@ -50,6 +50,15 @@ Template.itemOrder.helpers({
         if (Session.get('orderStatus') == 'active') {
             let check = Session.get('orderStatus');
             return true
+        } else {
+            let orderId = Router.current().params.orderId;
+            let order = Collection.Order.findOne({_id: orderId});
+            let status = order.status;
+            if (status == 'active') {
+                return true;
+            } else {
+                return false;
+            }
         }
     },
     order() {

@@ -26,6 +26,12 @@ Template.payment.rendered = function () {
 };
 
 Template.payment.helpers({
+    serviceReport(){
+        if(Session.get('serviceReport')){
+            console.log(Session.get('serviceReport'));
+            return Session.get('serviceReport');
+        }
+    },
     order() {
         let orderId = Router.current().params.orderId;
         let payment = Collection.Payment.findOne(
@@ -102,27 +108,36 @@ Template.payment.events({
             }
         });
     },
-    // 'click .js-payment'(){
-    //     let params = Router.current().params;
-    //     let orderId = params.orderId;
-    //     let paymentDate = $('.js-paymentDate').val();
-    //     let selector = {};
-    //     selector.date = paymentDate;
-    //     selector.orderId = orderId;
-    //     selector.typeOfJournal = "income";
-    //     selector.journalEntryItem = [];
-    //     Meteor.call('addJournalEntryByOrder', selector, (error, result)=> {
-    //         if (error) {
-    //             sAlert.error(error.message);
-    //         }
-    //     });
-    // }
+    'click .js-generate'(){
+        let params = Router.current().params;
+        let serviceId = params.orderId;
+        if(serviceId){
+            console.log(serviceId);
+            Meteor.call('serviceReport', serviceId, (error, result)=> {
+                if(error){
+                    overhang.notify({
+                        type : "error",
+                        message: error
+                    });
+                }else{
+                    Session.set('serviceReport', result);
+                }
+            });
+        }
+    },
+    'click #print'(){
+        var mode = 'iframe'; // popup
+        var close = mode == "popup";
+        var options = {mode: mode, popClose: close};
+        $("div.print").printArea(options);
+    }
 });
 
 AutoForm.hooks({
     payment: {
         onSuccess(formType, id){
-            Router.go('/showOrder');
+            // Router.go('/showOrder');
+            Session.set('orderStatus', undefined);
             overhang.notify({
                 type : "success",
                 message: "Payment success"
@@ -133,4 +148,8 @@ AutoForm.hooks({
             sAlert.error(error.message);
         }
     }
+});
+Template.payment.onDestroyed(function () {
+    Session.set('serviceReport', undefined);
+
 });
