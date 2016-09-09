@@ -85,6 +85,12 @@ Template.staffReport.helpers({
 });
 
 Template.staffReport.events({
+    'click #print'(){
+        var mode = 'iframe'; // popup
+        var close = mode == "popup";
+        var options = {mode: mode, popClose: close};
+        $("div.print").printArea(options);
+    },
     'click .js-staff-fee'(e){
         if ($(e.currentTarget).prop('checked')) {
             // $('.js-staff-base-salary').prop('checked', false);

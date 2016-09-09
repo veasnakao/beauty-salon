@@ -12,7 +12,7 @@ Router.map(function () {
     //staff
     this.route('showStaff');
     this.route('staffInfo', {
-        path: '/staffInfo/:_id'
+        path: '/staffInfo/:_id',
     });
 
     //item
@@ -30,7 +30,7 @@ Router.map(function () {
     //expenseItem
     this.route('showJournalItem');
     this.route('journalItemInfo', {
-        path: '/journalItemInfo/:_id',
+        path: '/journalItemInfo/:_id'
     });
 
     //journalEntry

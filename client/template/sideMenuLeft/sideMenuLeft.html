@@ -1,7 +1,11 @@
 <template name="sideMenuLeft">
-    {{#contentFor "headerButtonLeft"}}
-        <button class="button button-clear pull-left" data-ion-menu-toggle="left">
-            {{> ionIcon icon='navicon'}}
-        </button>
-    {{/contentFor}}
+    {{#if currentUser}}
+        {{#contentFor "headerButtonLeft"}}
+            <button class="button button-clear pull-left" data-ion-menu-toggle="left">
+                {{> ionIcon icon='navicon'}}
+            </button>
+        {{/contentFor}}
+    {{else}}
+        {{> login}}
+    {{/if}}
 </template>

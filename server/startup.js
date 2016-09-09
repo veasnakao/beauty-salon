@@ -10,7 +10,7 @@ Meteor.startup(function () {
     // }
     if (Meteor.users.find().count() <= 0) {
         let userObj = {};
-        let roles = ['super', 'setting'];
+        let roles = ['setting'];
         userObj = {
             username: 'super',
             password: 'super123',

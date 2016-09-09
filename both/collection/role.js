@@ -10,8 +10,6 @@ Schema.Roles = new SimpleSchema({
                 return [
                     {label: "Cashier", value: 'cashier'},
                     {label: "Setting", value: 'setting'},
-                    {label: "Seller", value: 'seller'},
-                    {label: "Super", value: 'super'},
                 ];
             }
         }

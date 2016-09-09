@@ -32,7 +32,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="print" style="margin: 0;padding: 0;">
+                <div class="print" style="margin: 0;padding: 0;width: 720px;height: auto;margin: 0 auto;">
                     {{#if profitAndLoss}}
                         <div style="margin:20px 10px;">
                             <h4 style="text-align: center;"><u>Profit and Loss Report</u></h4>
@@ -75,7 +75,7 @@
                                 {{/each}}
 
                                 {{#with profitAndLoss.footer}}
-                                    <div class="row" style="border-top:1px solid #DADADA;background-color: #FFFBAC;">
+                                    <div class="row" style="background-color: #FFFBAC;">
                                         <div class="col">Net Income</div>
                                         <div class="col">{{numFormat total '0,0.00 $'}}</div>
                                     </div>

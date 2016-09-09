@@ -32,97 +32,106 @@
                     OK
                 </button>
             </div>
+            <div class="card">
+                <div class="item item-text-wrap" style="float: right;">
+                    <button id="print" class="button button-small button-balanced ion-printer js-print">
+                        Print
+                    </button>
+                </div>
+            </div>
 
-            {{#if allStaff}}
-                <div style="margin:20px 10px;display: none;" class="list-allStaff">
-                    <h4 style="text-align: center;"><u>Staff Report</u></h4>
-                    <div style="border:1px solid #DADADA;">
-                        <div class="row" style="background-color:#f2f2f2;">
-                            <div class="col">ID</div>
-                            <div class="col">Name</div>
-                            <div class="col">Gender</div>
-                            <div class="col">Fee</div>
-                            <div class="col">Base Salary ($)</div>
-                        </div>
-                        {{#each allStaff}}
-                            <div class="item" style="padding: 5px;">
-                                <div class="row">
-                                    <div class="col">{{_id}}</div>
-                                    <div class="col">{{name}}</div>
-                                    <div class="col">{{gender}}</div>
-                                    <div class="col">{{fee}} %</div>
-                                    <div class="col">{{numFormat baseSalary '0,0.00 $'}}</div>
-                                </div>
+            <div class="print" style="margin: 0;padding: 0;width: 720px;height: auto;margin: 0 auto;">
+                {{#if allStaff}}
+                    <div style="margin:20px 10px;display: none;" class="list-allStaff">
+                        <h4 style="text-align: center;"><u>Staff Report</u></h4>
+                        <div style="border:1px solid #DADADA;">
+                            <div class="row" style="background-color:#f2f2f2;">
+                                <div class="col">ID</div>
+                                <div class="col">Name</div>
+                                <div class="col">Gender</div>
+                                <div class="col">Fee</div>
+                                <div class="col">Base Salary ($)</div>
                             </div>
-                        {{/each}}
-                        <div class="row">
-                            <div class="col"></div>
-                            <div class="col"></div>
-                            <div class="col"></div>
-                            <div class="col">Total Staff</div>
-                            <div class="col">{{countAllStaff}}</div>
+                            {{#each allStaff}}
+                                <div class="item" style="padding: 5px;">
+                                    <div class="row">
+                                        <div class="col">{{_id}}</div>
+                                        <div class="col">{{name}}</div>
+                                        <div class="col">{{gender}}</div>
+                                        <div class="col">{{fee}} %</div>
+                                        <div class="col">{{numFormat baseSalary '0,0.00 $'}}</div>
+                                    </div>
+                                </div>
+                            {{/each}}
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col"></div>
+                                <div class="col"></div>
+                                <div class="col">Total Staff</div>
+                                <div class="col">{{countAllStaff}}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {{/if}}
-            {{#if staffFee}}
-                <div style="margin:20px 10px;display: none;" class="list-staffFee">
-                    <h4 style="text-align: center;"><u>Staff Report</u></h4>
-                    <div style="border:1px solid #DADADA;">
-                        <div class="row" style="background-color:#f2f2f2;">
-                            <div class="col">ID</div>
-                            <div class="col">Name</div>
-                            <div class="col">Gender</div>
-                            <div class="col">Fee</div>
-                        </div>
-                        {{#each staffFee}}
-                            <div class="item" style="padding: 5px;">
-                                <div class="row">
-                                    <div class="col">{{_id}}</div>
-                                    <div class="col">{{name}}</div>
-                                    <div class="col">{{gender}}</div>
-                                    <div class="col">{{fee}} %</div>
-                                </div>
+                {{/if}}
+                {{#if staffFee}}
+                    <div style="margin:20px 10px;display: none;" class="list-staffFee">
+                        <h4 style="text-align: center;"><u>Staff Report</u></h4>
+                        <div style="border:1px solid #DADADA;">
+                            <div class="row" style="background-color:#f2f2f2;">
+                                <div class="col">ID</div>
+                                <div class="col">Name</div>
+                                <div class="col">Gender</div>
+                                <div class="col">Fee</div>
                             </div>
-                        {{/each}}
-                        <div class="row">
-                            <div class="col"></div>
-                            <div class="col"></div>
-                            <div class="col">Total Staff</div>
-                            <div class="col">{{countStaffFee}}</div>
+                            {{#each staffFee}}
+                                <div class="item" style="padding: 5px;">
+                                    <div class="row">
+                                        <div class="col">{{_id}}</div>
+                                        <div class="col">{{name}}</div>
+                                        <div class="col">{{gender}}</div>
+                                        <div class="col">{{fee}} %</div>
+                                    </div>
+                                </div>
+                            {{/each}}
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col"></div>
+                                <div class="col">Total Staff</div>
+                                <div class="col">{{countStaffFee}}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {{/if}}
-            {{#if staffBaseSalary}}
-                <div style="margin:20px 10px;display: none;" class="list-staffBaseSalary">
-                    <h4 style="text-align: center;"><u>Staff Report</u></h4>
-                    <div style="border:1px solid #DADADA;">
-                        <div class="row" style="background-color:#f2f2f2;">
-                            <div class="col">ID</div>
-                            <div class="col">Name</div>
-                            <div class="col">Gender</div>
-                            <div class="col">Base Salary ($)</div>
-                        </div>
-                        {{#each staffBaseSalary}}
-                            <div class="item" style="padding: 5px;">
-                                <div class="row">
-                                    <div class="col">{{_id}}</div>
-                                    <div class="col">{{name}}</div>
-                                    <div class="col">{{gender}}</div>
-                                    <div class="col">{{numFormat baseSalary '0,0.00 $'}}</div>
-                                </div>
+                {{/if}}
+                {{#if staffBaseSalary}}
+                    <div style="margin:20px 10px;display: none;" class="list-staffBaseSalary">
+                        <h4 style="text-align: center;"><u>Staff Report</u></h4>
+                        <div style="border:1px solid #DADADA;">
+                            <div class="row" style="background-color:#f2f2f2;">
+                                <div class="col">ID</div>
+                                <div class="col">Name</div>
+                                <div class="col">Gender</div>
+                                <div class="col">Base Salary ($)</div>
                             </div>
-                        {{/each}}
-                        <div class="row">
-                            <div class="col"></div>
-                            <div class="col"></div>
-                            <div class="col">Total Staff</div>
-                            <div class="col">{{countStaffBaseSalary}}</div>
+                            {{#each staffBaseSalary}}
+                                <div class="item" style="padding: 5px;">
+                                    <div class="row">
+                                        <div class="col">{{_id}}</div>
+                                        <div class="col">{{name}}</div>
+                                        <div class="col">{{gender}}</div>
+                                        <div class="col">{{numFormat baseSalary '0,0.00 $'}}</div>
+                                    </div>
+                                </div>
+                            {{/each}}
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col"></div>
+                                <div class="col">Total Staff</div>
+                                <div class="col">{{countStaffBaseSalary}}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {{/if}}
+                {{/if}}
+            </div>
         </div>
     {{else}}
         {{> login}}

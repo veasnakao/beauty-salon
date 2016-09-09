@@ -1,68 +1,72 @@
 <template name="journalEntryDetailById">
-    {{#contentFor "headerButtonLeft"}}
-        {{>ionNavBackButton path="showJournalEntry"}}
-    {{/contentFor}}
+    {{#if currentUser}}
+        {{#contentFor "headerButtonLeft"}}
+            {{>ionNavBackButton path="showJournalEntry"}}
+        {{/contentFor}}
 
-    {{#contentFor "headerTitle"}}
-        <h1 class="title">Journal Entry Detail</h1>
-    {{/contentFor}}
+        {{#contentFor "headerTitle"}}
+            <h1 class="title">Journal Entry Detail</h1>
+        {{/contentFor}}
 
-    {{#ionView}}
-        {{#ionContent}}
-            {{#ionList}}
-                {{#if journalEntryDetailById}}
-                    {{#each journalEntryDetailById.content}}
-                    <!--{{#if subTotalIsNotZero subTotal}}-->
-                        {{#ionItem path="journalEntryDetail" iconRight=true}}
-                            <div class="row">
-                                <div class="col">
-                                    Date : {{moFormat date 'DD/MM/YYYY'}}
-                                </div>
-                                <div class="col">
-                                    Journal : {{typeOfJournal}}
-                                </div>
-                            </div>
-                            <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
-                            <div class="row">
-                                <div class="col">Item name</div>
-                                <div class="col">Price</div>
-                            </div>
-                            {{#each journalEntryItem}}
+        {{#ionView}}
+            {{#ionContent}}
+                {{#ionList}}
+                    {{#if journalEntryDetailById}}
+                        {{#each journalEntryDetailById.content}}
+                        <!--{{#if subTotalIsNotZero subTotal}}-->
+                            {{#ionItem path="journalEntryDetail" iconRight=true}}
                                 <div class="row">
                                     <div class="col">
-                                        {{journalItemName}}
+                                        Date : {{moFormat date 'DD/MM/YYYY'}}
                                     </div>
                                     <div class="col">
-                                        {{numFormat journalItemPrice '0,0.00 $'}}
+                                        Journal : {{typeOfJournal}}
                                     </div>
                                 </div>
-                            {{/each}}
-                            <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
-                            <div class="row">
-                                <div class="col">Total</div>
-                                <div class="col">
-                                    {{numFormat subTotal '0,0.00 $'}}
+                                <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
+                                <div class="row">
+                                    <div class="col">Item name</div>
+                                    <div class="col">Price</div>
                                 </div>
+                                {{#each journalEntryItem}}
+                                    <div class="row">
+                                        <div class="col">
+                                            {{journalItemName}}
+                                        </div>
+                                        <div class="col">
+                                            {{numFormat journalItemPrice '0,0.00 $'}}
+                                        </div>
+                                    </div>
+                                {{/each}}
+                                <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
+                                <div class="row">
+                                    <div class="col">Total</div>
+                                    <div class="col">
+                                        {{numFormat subTotal '0,0.00 $'}}
+                                    </div>
+                                </div>
+                            {{/ionItem}}<br>
+                                <!--{{/if}}-->
+                        {{/each}}
+                        <div class="row">
+                            <div class="col">
+                                <button class="button button-block button-assertive js-delete-journal">
+                                    {{> ionIcon class="ion ion-ios-trash"}}
+                                    Delete
+                                </button>
                             </div>
-                        {{/ionItem}}<br>
-                            <!--{{/if}}-->
-                    {{/each}}
-                    <div class="row">
-                        <div class="col">
-                            <button class="button button-block button-assertive js-delete-journal">
-                                {{> ionIcon class="ion ion-ios-trash"}}
-                                Delete
-                            </button>
+                            <div class="col">
+                                <button class="button button-block button-positive js-update-journal">
+                                    {{> ionIcon class="ion ion-edit"}}
+                                    Update
+                                </button>
+                            </div>
                         </div>
-                        <div class="col">
-                            <button class="button button-block button-positive js-update-journal">
-                                {{> ionIcon class="ion ion-edit"}}
-                                Update
-                            </button>
-                        </div>
-                    </div>
-                {{/if}}
-            {{/ionList}}
-        {{/ionContent}}
-    {{/ionView}}
+                    {{/if}}
+                {{/ionList}}
+            {{/ionContent}}
+        {{/ionView}}
+    {{else}}
+        {{> login}}
+    {{/if}}
 </template>

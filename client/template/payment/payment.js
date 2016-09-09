@@ -102,29 +102,32 @@ Template.payment.events({
             }
         });
     },
-    'click .js-payment'(){
-        debugger;
-        let params = Router.current().params;
-        let orderId = params.orderId;
-        let paymentDate = $('.js-paymentDate').val();
-        let selector = {};
-        selector.date = paymentDate;
-        selector.orderId = orderId;
-        selector.typeOfJournal = "income";
-        selector.journalEntryItem = [];
-        Meteor.call('addJournalEntryByOrder', selector, (error, result)=> {
-            if (error) {
-                sAlert.error(error.message);
-            } 
-        });
-    }
+    // 'click .js-payment'(){
+    //     let params = Router.current().params;
+    //     let orderId = params.orderId;
+    //     let paymentDate = $('.js-paymentDate').val();
+    //     let selector = {};
+    //     selector.date = paymentDate;
+    //     selector.orderId = orderId;
+    //     selector.typeOfJournal = "income";
+    //     selector.journalEntryItem = [];
+    //     Meteor.call('addJournalEntryByOrder', selector, (error, result)=> {
+    //         if (error) {
+    //             sAlert.error(error.message);
+    //         }
+    //     });
+    // }
 });
 
 AutoForm.hooks({
     payment: {
         onSuccess(formType, id){
             Router.go('/showOrder');
-            sAlert.success('Payment success');
+            overhang.notify({
+                type : "success",
+                message: "Payment success"
+            });
+            // sAlert.success('Payment success');
         },
         onError(formType, error){
             sAlert.error(error.message);

@@ -65,7 +65,7 @@
                     </button>
                 </div>
             </div>
-            <div class="print">
+            <div class="print" style="width: 720px;height: auto;margin: 0 auto;">
                 {{#if staffOrderReport}}
                     <div style="margin:20px 10px;">
                         <h4 style="text-align: center;"><u>Service Report</u></h4>
@@ -81,31 +81,36 @@
                                 <div class="col">Total Service</div>
                             </div>
                             {{#each staffOrderReport.content}}
-                                {{#each data}}
-                                    <div class="row" style="margin-bottom: -40px;">
-                                        <div class="col">
-                                            {{name}}
-                                        </div>
-                                    </div>
-                                    <div style="border-bottom: 1px solid #DADADA;">
-                                        {{#each totalServiceByDate}}
-                                            <div class="row">
-                                                <div class="col"></div>
-                                                <div class="col">
-                                                    {{moFormat date 'DD/MM/YYYY'}}
-                                                </div>
-                                                <div class="col">
-                                                    {{numFormat totalService '0,0.00 $'}}
-                                                </div>
+                                {{#if checkIsNotEmpty total}}
+                                    {{#each data}}
+                                        <div class="row" style="margin-bottom: -40px;">
+                                            <div class="col">
+                                                {{name}}
                                             </div>
-                                        {{/each}}
+                                        </div>
+                                        <div style="border-bottom: 1px solid #DADADA;">
+                                            {{#each totalServiceByDate}}
+                                                <div class="row">
+                                                    <div class="col"></div>
+                                                    <div class="col">
+                                                        {{moFormat date 'DD/MM/YYYY'}}
+                                                    </div>
+                                                    <div class="col">
+                                                        {{numFormat totalService '0,0.00 $'}}
+                                                    </div>
+                                                </div>
+                                            {{/each}}
+                                        </div>
+                                    {{/each}}
+
+                                    <div class="row" style="background-color:#f2f2f2;">
+                                        <div class="col"></div>
+                                        <div class="col">Total</div>
+                                        <div class="col">{{numFormat total '0,0.00 $'}}</div>
                                     </div>
-                                {{/each}}
-                                <div class="row" style="background-color:#f2f2f2;">
-                                    <div class="col"></div>
-                                    <div class="col">Total</div>
-                                    <div class="col">{{numFormat total '0,0.00 $'}}</div>
-                                </div>
+                                {{else}}
+                                    No data available
+                                {{/if}}
                             {{/each}}
                         </div>
                     </div>

@@ -176,6 +176,128 @@ Meteor.methods({
 
 //orderItemDetailByCustomer
 Meteor.methods({
+    allOrderItemDetailByCustomer(limit, searchval){
+        let orderItemDetail = Collection.Order.aggregate([
+            {
+                $match: {
+                    _id: {$regex: searchval},
+                    total: {
+                        $ne: 0
+                    }
+                }
+            },
+            {
+                $lookup: {
+                    from: "orderDetail",
+                    localField: "_id",
+                    foreignField: "orderId",
+                    as: "orderDoc"
+                }
+            },
+            {
+                $unwind: {path: '$orderDoc', preserveNullAndEmptyArrays: true}
+            },
+            {
+                $lookup: {
+                    from: "item",
+                    localField: "orderDoc.itemId",
+                    foreignField: "_id",
+                    as: "orderDoc.itemDoc"
+                }
+            },
+            {$unwind: {path: '$orderDoc.itemDoc', preserveNullAndEmptyArrays: true}},
+            {
+                $lookup: {
+                    from: "customer",
+                    localField: "customerId",
+                    foreignField: "_id",
+                    as: "customerDoc"
+                }
+            },
+            {$unwind: {path: '$customerDoc', preserveNullAndEmptyArrays: true}},
+            {
+                $lookup: {
+                    from: "staff",
+                    localField: "staffId",
+                    foreignField: "_id",
+                    as: "orderDoc.staffDoc"
+                }
+            },
+            {
+                $unwind: {path: '$orderDoc.staffDoc', preserveNullAndEmptyArrays: true}
+            },
+            {
+                $lookup: {
+                    from: "payment",
+                    localField: "_id",
+                    foreignField: "orderId",
+                    as: "paymentDoc"
+                }
+            },
+            {
+                $unwind: {path: '$paymentDoc', preserveNullAndEmptyArrays: true}
+            },
+            {
+                $group: {
+                    _id: '$_id',
+                    date: {$last: '$date'},
+                    items: {
+                        $addToSet: {
+                            itemName: '$orderDoc.itemDoc.name',
+                            price: '$orderDoc.price',
+                            qty: '$orderDoc.quantity',
+                            discount: '$orderDoc.discount',
+                            amount: '$orderDoc.amount',
+                            staff: '$orderDoc.staffDoc.name',
+                            date: '$date',
+                            customer: '$customerDoc.name'
+
+                        }
+                    },
+                    customer: {
+                        $addToSet: {
+                            customer: '$customerDoc.name',
+                        }
+                    },
+                    staff: {
+                        $last: "$orderDoc.staffDoc.name"
+                        // $addToSet: {
+                        //     staff: '$orderDoc.staffDoc.name'
+                        // }
+                    },
+                    paidAmount: {$last: '$paymentDoc.paidAmount'},
+                    balance: {$last: '$paymentDoc.balance'},
+                    // payment: {
+                    //     $addToSet: {
+                    //         paymentDate: '$paymentDoc.paymentDate',
+                    //         dueAmount: '$paymentDoc.dueAmount',
+                    //         paidAmount: '$paymentDoc.paidAmount',
+                    //         balance: '$paymentDoc.balance',
+                    //         status: '$paymentDoc.status'
+                    //     }
+                    // },
+                    total: {
+                        $sum: '$orderDoc.amount'
+                    }
+                }
+            },
+            {
+                $sort: {
+                    _id: -1
+                }
+            },
+            {
+                $limit: limit
+            },
+        ]);
+        let data = {};
+        let content = [];
+        if (orderItemDetail) {
+            data.content = orderItemDetail;
+            console.log(data);
+            return data;
+        }
+    },
     orderItemDetailByCustomer(status){
         let orderItemDetail = Collection.Order.aggregate([
             {

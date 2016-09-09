@@ -23,16 +23,16 @@
                         </div>
                     </label>
                 </div>
-                <!--{{#if checkPayment}}-->
-                    <!--<div class="show-order-item animated bounceInLeft">-->
-                        <!--<div class="list list-inset">-->
-                            <!--<label class="item item-input">-->
-                                <!--<i class="icon ion-search placeholder-icon"></i>-->
-                                <!--<input type="text" placeholder="Search">-->
-                            <!--</label>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--{{/if}}-->
+                {{#if checkPayment}}
+                    <div class="show-order-item animated bounceInLeft">
+                        <div class="list list-inset">
+                            <label class="item item-input">
+                                <i class="icon ion-search placeholder-icon"></i>
+                                <input type="text" placeholder="Search" name="search">
+                            </label>
+                        </div>
+                    </div>
+                {{/if}}
                 <br>
                 {{#ionList}}
                     {{#if showCustomerOrder}}
@@ -40,14 +40,12 @@
                             <div class="show-order-item animated bounceInLeft">
                                 {{#ionItem iconRight=true}}
                                     Date : {{moFormat date 'DD/MM/YYYY'}} |
-                                    OrderId : {{_id}}
+                                    ServiceId : {{_id}}
                                     <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
                                     {{#each customer}}
                                         Customer : {{customer}}
                                     {{/each}} |
-                                    {{#each staff}}
-                                        Staff : {{staff}}
-                                    {{/each}}
+                                    Staff : {{staff}}
                                     <br>
                                     {{#each items}}
                                         {{itemName}} : {{numFormat amount '0,0.00$'}}  |
@@ -62,6 +60,10 @@
                             </div>
                             <br>
                         {{/each}}
+                        <button class="button button-block button-positive js-load-more">
+                            {{> ionIcon class="ion ion-refresh"}}
+                            Load More
+                        </button>
                     {{else}}
                         <div class="card">
                             <h4 style="text-align: center;">No data</h4>

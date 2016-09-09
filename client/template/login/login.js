@@ -23,7 +23,14 @@ Template.login.events({
             template.find(".js-password").value,
             function (error) {
                 if (error) {
-                    sAlert.error(error.message);
+                    swal({
+                        title: "Login",
+                        imageUrl: "/sad_face.png",
+                        text:error,
+                        timer: 3000,
+                        showConfirmButton: true
+                    });
+                    // sAlert.error(error.message);
                 } else {
                     if(!Meteor.user().profile.approved){
                         swal({

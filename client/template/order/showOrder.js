@@ -2,7 +2,6 @@
 Tracker.autorun(function () {
     if (Session.get('orderStatus') == 'active') {
         let status = Session.get('orderStatus');
-        console.log(status);
         Meteor.call('orderItemDetailByCustomer', status, (error, result)=> {
             if (error) {
                 sAlert.error(error.message);
@@ -12,9 +11,13 @@ Tracker.autorun(function () {
             }
         });
     } else if (Session.get('orderStatus') == 'partial') {
-        let status = Session.get('orderStatus');
-        console.log(status);
-        Meteor.call('orderItemDetailByCustomer', status, (error, result)=> {
+        let searchVal = "";
+        if (Session.get('serviceId')) {
+            searchVal = Session.get('serviceId');
+        } else {
+            searchVal = "";
+        }
+        Meteor.call('allOrderItemDetailByCustomer', Session.get('activeSaleLimit'), searchVal, (error, result)=> {
             if (error) {
                 sAlert.error(error.message);
             } else {
@@ -22,13 +25,14 @@ Tracker.autorun(function () {
                 Session.set('orderByStaffResult', result);
             }
         });
-    }else{
+    } else {
         Session.set('orderByStaffResult', undefined);
     }
 });
 
-//oncreated
+// //oncreated
 Template.showOrder.created = function () {
+    Session.set('activeSaleLimit', 5);
     Session.set('orderStatus', 'active');
     Session.set('orderDetailObj', {});
     this.autorun(function () {
@@ -38,8 +42,8 @@ Template.showOrder.created = function () {
         this.subscription = Meteor.subscribe('orderDetails');
     }.bind(this));
 };
-
-//onrender
+//
+// //onrender
 Template.showOrder.rendered = function () {
     try {
         this.autorun(() => {
@@ -90,6 +94,14 @@ Template.showOrder.helpers({
 
 
 Template.showOrder.events({
+    'keyup [name="search"]'(){
+        let serviceId = $("[name='search']").val();
+        Session.set('serviceId', serviceId);
+    },
+    'click .js-load-more'(){
+        let limit = Session.get('activeSaleLimit') + 5;
+        Session.set('activeSaleLimit', limit);
+    },
     'click .order-status'(e) {
         if ($(e.currentTarget).prop('checked')) {
             $('.check-status-label').text('Order');
@@ -101,12 +113,8 @@ Template.showOrder.events({
     },
     'click .add-order'() {
         Session.set('orderDetailObj', {});
-        // let customerId = this._id;
         let selector = {};
-        // selector.date = new Date();
-        // selector.customerId = customerId;
         selector.status = "active";
-
         Meteor.call('insertOrder', selector, (error, result) => {
             if (error) {
                 sAlert.error(error.message);
@@ -114,17 +122,13 @@ Template.showOrder.events({
             } else {
                 IonLoading.hide();
                 Session.set('orderId', result);
-                // Router.go(`/itemOrder/customerId/${customerId}/orderId/${result}`);
                 Router.go(`/itemOrder/orderId/${result}`);
             }
         })
     },
     'click .show-order-item'() {
         let orderId = this._id;
-        console.log(`orderId : ${orderId}`);
         let order = Collection.Order.findOne(orderId);
-        console.log(`customer : ${order.customerId}`);
-        console.log(`staff : ${order.staffId}`);
         Router.go(`/itemOrder/orderId/${orderId}?staffId=${order.staffId}&customerId=${order.customerId}`);
     }
 });
@@ -133,4 +137,4 @@ Template.showOrder.events({
 Template.showOrder.onDestroyed(function () {
     Session.set('querySaleOrder', undefined);
     Session.set('orderByStaffResult', []);
-})
+});
