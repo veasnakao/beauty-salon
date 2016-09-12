@@ -2,6 +2,21 @@
   <library name="meteor-packages-auto-import-browser" type="javaScript">
     <properties>
       <sourceFilesUrls>
+        <item url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/password_tests_setup.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/email_tests.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/email_templates.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/email_tests_setup.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/stevezhu_lodash/4.15.0/web.browser/client.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/password_client.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/stevezhu_lodash/4.15.0/web.browser/lodash.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/password_tests.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/route_controller.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/password_server.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/router.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/plugins.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/helpers.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/http_methods.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/current_options.js" />
         <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/route_controller_client.js" />
         <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/router_client.js" />
         <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/hooks.js" />
@@ -380,24 +395,24 @@
         <item url="file://$USER_HOME$/.meteor/packages/accounts-base/1.2.7/web.browser/accounts_server.js" />
         <item url="file://$USER_HOME$/.meteor/packages/iron_middleware-stack/1.0.11/web.browser/lib/middleware_stack.js" />
         <item url="file://$USER_HOME$/.meteor/packages/iron_middleware-stack/1.0.11/web.browser/lib/handler.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/password_tests_setup.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/email_tests.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/email_templates.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/email_tests_setup.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/stevezhu_lodash/4.15.0/web.browser/client.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/password_client.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/stevezhu_lodash/4.15.0/web.browser/lodash.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/password_tests.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/route_controller.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/password_server.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/router.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/plugins.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/helpers.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/http_methods.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/current_options.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
+      <root url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/password_tests_setup.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/email_tests.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/email_templates.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/email_tests_setup.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/stevezhu_lodash/4.15.0/web.browser/client.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/password_client.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/stevezhu_lodash/4.15.0/web.browser/lodash.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/password_tests.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/route_controller.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/password_server.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/router.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/plugins.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/helpers.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/http_methods.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/current_options.js" />
       <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/route_controller_client.js" />
       <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/router_client.js" />
       <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/hooks.js" />
@@ -776,21 +791,6 @@
       <root url="file://$USER_HOME$/.meteor/packages/accounts-base/1.2.7/web.browser/accounts_server.js" />
       <root url="file://$USER_HOME$/.meteor/packages/iron_middleware-stack/1.0.11/web.browser/lib/middleware_stack.js" />
       <root url="file://$USER_HOME$/.meteor/packages/iron_middleware-stack/1.0.11/web.browser/lib/handler.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/password_tests_setup.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/email_tests.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/email_templates.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/email_tests_setup.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/stevezhu_lodash/4.15.0/web.browser/client.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/password_client.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/stevezhu_lodash/4.15.0/web.browser/lodash.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/password_tests.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/route_controller.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.8/web.browser/password_server.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/router.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/plugins.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/helpers.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/http_methods.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/current_options.js" />
     </CLASSES>
     <SOURCES />
   </library>

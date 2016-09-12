@@ -42,9 +42,7 @@
                                     Date : {{moFormat date 'DD/MM/YYYY'}} |
                                     ServiceId : {{_id}}
                                     <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
-                                    {{#each customer}}
-                                        Customer : {{customer}}
-                                    {{/each}} |
+                                    Customer : {{customer}} |
                                     Staff : {{staff}}
                                     <br>
                                     {{#each items}}
@@ -60,10 +58,12 @@
                             </div>
                             <br>
                         {{/each}}
-                        <button class="button button-block button-positive js-load-more">
-                            {{> ionIcon class="ion ion-refresh"}}
-                            Load More
-                        </button>
+                        {{#if checkPayment}}
+                            <button class="button button-block button-positive js-load-more">
+                                {{> ionIcon class="ion ion-refresh"}}
+                                Load More
+                            </button>
+                        {{/if}}
                     {{else}}
                         <div class="card">
                             <h4 style="text-align: center;">No data</h4>

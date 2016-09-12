@@ -27,7 +27,7 @@ Template.payment.rendered = function () {
 
 Template.payment.helpers({
     serviceReport(){
-        if(Session.get('serviceReport')){
+        if (Session.get('serviceReport')) {
             console.log(Session.get('serviceReport'));
             return Session.get('serviceReport');
         }
@@ -83,7 +83,7 @@ Template.payment.events({
     },
     'click .js-delete-payment'(){
         let params = Router.current().params;
-        let serviceId = params._id;
+        let serviceId = params.orderId;
         IonPopup.confirm({
             title: 'Are you sure to delete?',
             template: `Payment`,
@@ -92,13 +92,18 @@ Template.payment.events({
                     if (error) {
                         sAlert.error(`Cancel`);
                     } else {
-                        overhang.notify({
-                            type : "success",
-                            message: "Delete success"
+                        let status = 'active';
+                        Meteor.call('updateOrderStatus', serviceId, status, (error, result)=> {
+                            if (error) {
+                                overhang.notify({
+                                    type: "error",
+                                    message: error
+                                });
+                            }
                         });
-                        Router.go(`/showOrder`);
+                        // Router.go(`/showOrder`);
                         overhang.notify({
-                            type : "success",
+                            type: "success",
                             message: "Delete success"
                         });
                     }
@@ -111,15 +116,15 @@ Template.payment.events({
     'click .js-generate'(){
         let params = Router.current().params;
         let serviceId = params.orderId;
-        if(serviceId){
+        if (serviceId) {
             console.log(serviceId);
             Meteor.call('serviceReport', serviceId, (error, result)=> {
-                if(error){
+                if (error) {
                     overhang.notify({
-                        type : "error",
+                        type: "error",
                         message: error
                     });
-                }else{
+                } else {
                     Session.set('serviceReport', result);
                 }
             });
@@ -139,10 +144,9 @@ AutoForm.hooks({
             // Router.go('/showOrder');
             Session.set('orderStatus', undefined);
             overhang.notify({
-                type : "success",
+                type: "success",
                 message: "Payment success"
             });
-            // sAlert.success('Payment success');
         },
         onError(formType, error){
             sAlert.error(error.message);
@@ -151,5 +155,4 @@ AutoForm.hooks({
 });
 Template.payment.onDestroyed(function () {
     Session.set('serviceReport', undefined);
-
 });

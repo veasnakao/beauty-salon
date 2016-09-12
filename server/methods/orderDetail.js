@@ -255,15 +255,10 @@ Meteor.methods({
                         }
                     },
                     customer: {
-                        $addToSet: {
-                            customer: '$customerDoc.name',
-                        }
+                        $last: "$customerDoc.name"
                     },
                     staff: {
                         $last: "$orderDoc.staffDoc.name"
-                        // $addToSet: {
-                        //     staff: '$orderDoc.staffDoc.name'
-                        // }
                     },
                     paidAmount: {$last: '$paymentDoc.paidAmount'},
                     balance: {$last: '$paymentDoc.balance'},
@@ -377,14 +372,10 @@ Meteor.methods({
                         }
                     },
                     customer: {
-                        $addToSet: {
-                            customer: '$customerDoc.name',
-                        }
+                        $last: "$customerDoc.name"
                     },
                     staff: {
-                        $addToSet: {
-                            staff: '$orderDoc.staffDoc.name'
-                        }
+                        $last: "$orderDoc.staffDoc.name"
                     },
                     paidAmount: {$last: '$paymentDoc.paidAmount'},
                     balance: {$last: '$paymentDoc.balance'},

@@ -13,8 +13,8 @@ Template.staffSalaryReport.helpers({
     },
     date(){
         let date = {};
-        let fromDate = $('.js-from-date').val();
-        let toDate = $('.js-to-date').val();
+        let fromDate = Session.get('fromDate');
+        let toDate = Session.get('toDate');
         date = {
             fromDate: fromDate,
             toDate: toDate
@@ -34,6 +34,8 @@ Template.staffSalaryReport.events({
         let fromDate = $('.js-from-date').val();
         let toDate = $('.js-to-date').val();
         if (fromDate && toDate) {
+            Session.set('fromDate', fromDate);
+            Session.set('toDate', toDate);
             Meteor.call('staffSalary', fromDate, toDate, (error, result)=> {
                 if (error) {
                     sAlert.error(error.message);

@@ -1,20 +1,16 @@
 <template name="layout">
-    <!--{{#if currentUser}}-->
-        {{#ionBody}}
-            {{#ionSideMenuContainer}}
-                {{> sideMenu}}
-                {{#ionSideMenuContent}}
-                    {{> ionNavBar class="bar-positive"}}
-                    {{#ionNavView}}
-                        {{> sAlert}}
-                        {{> yield}}
-                    {{/ionNavView}}
-                {{/ionSideMenuContent}}
-            {{/ionSideMenuContainer}}
-        {{/ionBody}}
-    <!--{{else}}-->
-        <!--{{> login}}-->
-    <!--{{/if}}-->
+    {{#ionBody}}
+        {{#ionSideMenuContainer}}
+            {{> sideMenu}}
+            {{#ionSideMenuContent}}
+                {{> ionNavBar class="bar-positive"}}
+                {{#ionNavView}}
+                    {{> sAlert}}
+                    {{> yield}}
+                {{/ionNavView}}
+            {{/ionSideMenuContent}}
+        {{/ionSideMenuContainer}}
+    {{/ionBody}}
 </template>
 
 

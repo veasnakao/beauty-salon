@@ -65,6 +65,7 @@ Router.map(function () {
     this.route('staffReport');
     this.route('staffSalaryReport');
     this.route('orderReport');
+    this.route('orderDetailReport');
     this.route('journalEntryReport');
     this.route('profitAndLossReport');
     this.route('setting');

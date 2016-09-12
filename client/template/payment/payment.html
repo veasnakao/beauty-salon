@@ -47,7 +47,8 @@
                             {{> ionIcon class="ion ion-refresh"}}
                             Generate Report
                         </button>
-                        <button id="print" class="button button-small button-positive js-generate" style="float: right;">
+                        <button id="print" class="button button-small button-positive js-generate"
+                                style="float: right;">
                             {{> ionIcon class="ion ion-printer"}}
                             Print Report
                         </button>
@@ -55,7 +56,7 @@
                 </div>
 
                 <div class="service-report" style="margin-bottom: 100px;">
-                    <div class="print" style="width: 360px;margin: 0 auto;padding-top: 15px;padding-bottom: 15px;">
+                    <div class="print" style="width: 260px;margin: 0 auto;padding-top: 15px;padding-bottom: 15px;">
                         {{#if serviceReport}}
                             {{#each serviceReport.content}}
                                 <h4 style="text-align: center;"><u>Invoice</u></h4>
@@ -99,24 +100,26 @@
                                     {{/each}}
                                 </table>
                                 <div class="row">
-                                    <div class="col-offset-50 col-25 service-rp-content">Total :</div>
-                                    <div class="col-25 service-rp-content">{{numFormat total '0,0.00 $'}}</div>
+                                    <div class="col-offset-33 col-33 service-rp-content">Total :</div>
+                                    <div style="text-align: right" class="col-25 service-rp-content">{{numFormat total '0,0.00 $'}}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-offset-50 col-25 service-rp-content">Due Amount :</div>
-                                    <div class="col-25 service-rp-content">{{numFormat dueAmount '0,0.00 $'}}</div>
+                                    <div class="col-offset-33 col-33 service-rp-content">Due Amount :</div>
+                                    <div style="text-align: right" class="col-25 service-rp-content">{{numFormat dueAmount '0,0.00 $'}}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-offset-50 col-25 service-rp-content">Paid Amount :</div>
-                                    <div class="col-25 service-rp-content">{{numFormat paidAmount '0,0.00 $'}}</div>
+                                    <div class="col-offset-33 col-33 service-rp-content">Paid Amount :</div>
+                                    <div style="text-align: right" class="col-25 service-rp-content">{{numFormat paidAmount '0,0.00 $'}}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-offset-50 col-25 service-rp-content">Balance :</div>
-                                    <div class="col-25 service-rp-content">{{numFormat balance '0,0.00 $'}}</div>
+                                    <div class="col-offset-33 col-33 service-rp-content">Balance :</div>
+                                    <div style="text-align: right" class="col-25 service-rp-content">{{numFormat balance '0,0.00 $'}}</div>
                                 </div>
                                 <hr style="border-top: 1px dashed #8c8b8b;">
                                 <div class="service-rp-content" style="text-align: center;">Thank you!</div>
-                                <div class="service-rp-content" style="text-align: center;">Powered by Rabbit IT Solution</div>
+                                <div class="service-rp-content" style="text-align: center;">Powered by Rabbit IT
+                                    Solution
+                                </div>
                             {{/each}}
                         {{/if}}
                     </div>

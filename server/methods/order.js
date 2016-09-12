@@ -3,7 +3,7 @@ Meteor.methods({
         var todayDate = moment().format('YYYYMMDD');
         var prefix = todayDate + '-';
         selector._id = idGenerator.genWithPrefix(Collection.Order, prefix, 4);
-        selector.total=0;
+        selector.total = 0;
         let orderId = Collection.Order.insert(selector);
         return orderId;
     },
@@ -35,20 +35,19 @@ Meteor.methods({
             }
         })
     },
-    updateOrderStatus(orderId){
+    updateOrderStatus(orderId, status){
         let order = Collection.Order.findOne(orderId);
         if (order) {
-            console.log(order);
             Collection.Order.update(orderId, {
                 $set: {
-                    status: 'closed'
+                    status: status
                 }
             });
         }
     },
     deleteOrder(orderId){
         let deleteOrder = Collection.Order.remove(orderId);
-        if(deleteOrder) {
+        if (deleteOrder) {
             return deleteOrder;
         }
     }

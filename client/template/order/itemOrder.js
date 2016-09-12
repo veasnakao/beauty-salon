@@ -52,7 +52,7 @@ Template.itemOrder.helpers({
             return true
         } else {
             let orderId = Router.current().params.orderId;
-            let order = Collection.Order.findOne({_id: orderId});
+            let order = Collection.Order.findOne(orderId);
             let status = order.status;
             if (status == 'active') {
                 return true;
@@ -62,36 +62,37 @@ Template.itemOrder.helpers({
         }
     },
     order() {
-        let order = Collection.Order.findOne(Router.current().params.orderId);
-        try {
+        let params = Router.current().params;
+        let orderId = params.orderId;
+        console.log(`itemOrder : ${orderId}`);
+        let order = Collection.Order.findOne(orderId);
+        if (orderId) {
             let selector = {
                 customerId: order.customerId,
                 staffId: order.staffId,
                 date: order.date
             };
             return selector;
-        } catch (e) {
-
         }
     },
-    listCustomers(){
-        let customers = Collection.Customer.find();
-        if (customers) {
-            return customers;
-        }
-    },
-    showCustomer(){
-        let customer = Collection.Customer.find();
-        if (customer) {
-            return customer;
-        }
-    },
-    showStaff(){
-        let staff = Collection.Staff.find();
-        if (staff) {
-            return staff;
-        }
-    },
+    // listCustomers(){
+    //     let customers = Collection.Customer.find();
+    //     if (customers) {
+    //         return customers;
+    //     }
+    // },
+    // showCustomer(){
+    //     let customer = Collection.Customer.find();
+    //     if (customer) {
+    //         return customer;
+    //     }
+    // },
+    // showStaff(){
+    //     let staff = Collection.Staff.find();
+    //     if (staff) {
+    //         return staff;
+    //     }
+    // },
     showOrderDetail(){
         let params = Router.current().params;
         let orderId = params.orderId;
