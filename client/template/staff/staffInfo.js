@@ -6,7 +6,7 @@ Template.staffInfo.created = function () {
 };
 
 //onrender
-Template.staffInfo.rendered = function() {
+Template.staffInfo.rendered = function () {
     try {
         this.autorun(() => {
             if (!this.subscription.ready()) {
@@ -33,20 +33,33 @@ Template.staffInfo.events({
         let params = Router.current().params;
         let staffId = params._id;
         let staff = Collection.Staff.findOne({_id: staffId});
-        IonPopup.confirm({
-            title: 'Are you sure to delete?',
-            template: `staff name : ${staff.name}?`,
-            onOk: () => {
-                Meteor.call('removeStaff', staff._id, (err, result) => {
-                    if (err) {
-                        sAlert.error(`Cancel ${staff.name}`);
+        swal({
+            title: "Are you sure?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#5591DF",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plx!",
+            closeOnConfirm: false, closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                Meteor.call('removeStaff', staff._id, (error, result) => {
+                    if (error) {
+                        swal({
+                            title: "Error",
+                            text: error,
+                            type: "error"
+                        });
                     } else {
                         Router.go('/showStaff');
-                        sAlert.success(`Item delete success ${staff.name}`);
+                        swal("Deleted!", "Your staff has been deleted.", "success");
                     }
                 });
-            },
-            onCancel: function () {
+            } else {
+                swal({
+                    title: "Cancelled",
+                    type: "error"
+                });
             }
         });
     }

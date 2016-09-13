@@ -65,7 +65,6 @@ Meteor.methods({
                 // customerName: selector[k].customerName
             });
         }
-        console.log(orderDetails);
         let order = Collection.Order.findOne(orderDetails[0].orderId);
         if (_.isUndefined(order)) {
             Meteor.defer(() => {
@@ -146,7 +145,6 @@ Meteor.methods({
         if (orderDetail) {
             orderDetail.forEach((objOrderDetail)=> {
                 subTotal += objOrderDetail.amount;
-                console.log(`subTotal : ${subTotal}`);
             });
         }
         Collection.Order.update(orderId, {
@@ -176,11 +174,12 @@ Meteor.methods({
 
 //orderItemDetailByCustomer
 Meteor.methods({
-    allOrderItemDetailByCustomer(limit, searchval){
+    allOrderItemDetailByCustomer(status, limit, searchval){
         let orderItemDetail = Collection.Order.aggregate([
             {
                 $match: {
                     _id: {$regex: searchval},
+                    status: 'close',
                     total: {
                         $ne: 0
                     }
@@ -262,17 +261,8 @@ Meteor.methods({
                     },
                     paidAmount: {$last: '$paymentDoc.paidAmount'},
                     balance: {$last: '$paymentDoc.balance'},
-                    // payment: {
-                    //     $addToSet: {
-                    //         paymentDate: '$paymentDoc.paymentDate',
-                    //         dueAmount: '$paymentDoc.dueAmount',
-                    //         paidAmount: '$paymentDoc.paidAmount',
-                    //         balance: '$paymentDoc.balance',
-                    //         status: '$paymentDoc.status'
-                    //     }
-                    // },
                     total: {
-                        $sum: '$orderDoc.amount'
+                        $last: '$total'
                     }
                 }
             },
@@ -379,17 +369,8 @@ Meteor.methods({
                     },
                     paidAmount: {$last: '$paymentDoc.paidAmount'},
                     balance: {$last: '$paymentDoc.balance'},
-                    // payment: {
-                    //     $addToSet: {
-                    //         paymentDate: '$paymentDoc.paymentDate',
-                    //         dueAmount: '$paymentDoc.dueAmount',
-                    //         paidAmount: '$paymentDoc.paidAmount',
-                    //         balance: '$paymentDoc.balance',
-                    //         status: '$paymentDoc.status'
-                    //     }
-                    // },
                     total: {
-                        $sum: '$orderDoc.amount'
+                        $last: '$total'
                     }
                 }
             }

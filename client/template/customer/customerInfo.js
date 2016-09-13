@@ -33,20 +33,33 @@ Template.customerInfo.events({
         let params = Router.current().params;
         let customerId = params._id;
         let customer = Collection.Customer.findOne({_id: customerId});
-        IonPopup.confirm({
-            title: 'Are you sure to delete?',
-            template: `staff name : ${customer.name}?`,
-            onOk: () => {
-                Meteor.call('removeCustomer', customer._id, (err, result) => {
-                    if (err) {
-                        sAlert.error(`Cancel ${customer.name}`);
+        swal({
+            title: "Are you sure?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#5591DF",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plx!",
+            closeOnConfirm: false, closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                Meteor.call('removeCustomer', customer._id, (error, result) => {
+                    if (error) {
+                        swal({
+                            title: "Error",
+                            text: error,
+                            type: "error"
+                        });
                     } else {
-                        sAlert.success(`Customer delete success ${customer.name}`);
                         Router.go('/showCustomer');
+                        swal("Deleted!", "Your customer has been deleted.", "success");
                     }
                 });
-            },
-            onCancel: function () {
+            } else {
+                swal({
+                    title: "Cancelled",
+                    type: "error"
+                });
             }
         });
     }

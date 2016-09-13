@@ -11,14 +11,15 @@ Tracker.autorun(function () {
                 Session.set('orderByStaffResult', result);
             }
         });
-    } else if (Session.get('orderStatus') == 'partial') {
+    } else if (Session.get('orderStatus') == 'close') {
         let searchVal = "";
         if (Session.get('serviceId')) {
             searchVal = Session.get('serviceId');
         } else {
             searchVal = "";
         }
-        Meteor.call('allOrderItemDetailByCustomer', Session.get('activeSaleLimit'), searchVal, (error, result)=> {
+        let status = Session.get('orderStatus');
+        Meteor.call('allOrderItemDetailByCustomer', status, Session.get('activeSaleLimit'), searchVal, (error, result)=> {
             if (error) {
                 sAlert.error(error.message);
             } else {
@@ -76,7 +77,7 @@ Template.showOrder.helpers({
         }
     },
     checkPayment(){
-        if (Session.get('orderStatus') == 'partial') {
+        if (Session.get('orderStatus') == 'close') {
             return true
         }
     },
@@ -108,7 +109,7 @@ Template.showOrder.events({
             Session.set('orderStatus', 'active');
         } else {
             $('.check-status-label').text('Paid');
-            Session.set('orderStatus', 'partial');
+            Session.set('orderStatus', 'close');
         }
     },
     'click .add-order'() {

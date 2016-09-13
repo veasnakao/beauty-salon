@@ -33,12 +33,6 @@ Template.editItem.helpers({
 //autoform hook
 AutoForm.hooks({
     editItem: {
-        before: {
-            insert: function (doc) {
-                doc._id = idGenerator.gen(Collection.Item, 4);
-                return doc;
-            }
-        },
         onSuccess(formType, id){
             sAlert.success('Staff Edit Success');
         },

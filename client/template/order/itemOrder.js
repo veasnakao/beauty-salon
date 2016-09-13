@@ -15,7 +15,6 @@ Template.itemOrder.created = function () {
         this.subscription = Meteor.subscribe("orderDetail", Router.current().params.orderId);
         this.subscription = Meteor.subscribe('order', Router.current().params.orderId);
         this.subscription = Meteor.subscribe('payment', Router.current().params.orderId);
-        // this.subscription = Meteor.subscribe('journalEntrys');
     }.bind(this));
 };
 
@@ -43,7 +42,6 @@ Template.itemOrder.rendered = function () {
     }
 };
 
-
 //helper
 Template.itemOrder.helpers({
     checkStatus(){
@@ -64,7 +62,6 @@ Template.itemOrder.helpers({
     order() {
         let params = Router.current().params;
         let orderId = params.orderId;
-        console.log(`itemOrder : ${orderId}`);
         let order = Collection.Order.findOne(orderId);
         if (orderId) {
             let selector = {
@@ -75,24 +72,6 @@ Template.itemOrder.helpers({
             return selector;
         }
     },
-    // listCustomers(){
-    //     let customers = Collection.Customer.find();
-    //     if (customers) {
-    //         return customers;
-    //     }
-    // },
-    // showCustomer(){
-    //     let customer = Collection.Customer.find();
-    //     if (customer) {
-    //         return customer;
-    //     }
-    // },
-    // showStaff(){
-    //     let staff = Collection.Staff.find();
-    //     if (staff) {
-    //         return staff;
-    //     }
-    // },
     showOrderDetail(){
         let params = Router.current().params;
         let orderId = params.orderId;
@@ -101,25 +80,12 @@ Template.itemOrder.helpers({
             return orderDetail;
         }
     },
-    // totalByItem: ()=> {
-    //     let params = Router.current().params;
-    //     let orderId = params.orderId;
-    //     console.log(`orderId : ${orderId}`);
-    //     let orderDetail = Collection.OrderDetail.find({orderId: orderId});
-    //     let totalByItem = 0;
-    //     orderDetail.forEach((obj)=> {
-    //         totalByItem = obj.price * obj.quantity;
-    //         console.log(totalByItem);
-    //     });
-    //     // console.log(totalByItem);
-    // },
-    totalOrder(){
+    showOrder(){
         let params = Router.current().params;
         let orderId = params.orderId;
         let order = Collection.Order.findOne(orderId);
         if (order) {
-            let totalPaid = order.total;
-            return totalPaid;
+            return order;
         }
     },
     payment(){
@@ -127,8 +93,12 @@ Template.itemOrder.helpers({
         let orderId = params.orderId;
         let payment = Collection.Payment.findOne({orderId: orderId}, {sort: {_id: -1}});
         if (payment) {
-            console.log(payment);
             return payment;
+        }
+    },
+    checkDiscountType(discountType){
+        if(discountType=='c'){
+            return true;
         }
     }
 });
@@ -146,7 +116,6 @@ Template.itemOrder.events({
             $('.search-item').show(300);
         }
         let updateObj = {};
-
         if (orderDate && orderId) {
             updateObj.date = orderDate;
             Meteor.call('updateOrder', orderId, updateObj, (error)=> {
@@ -273,7 +242,6 @@ Template.itemOrder.events({
                         });
                     }
                 });
-
             }
         }
     },
@@ -328,17 +296,13 @@ Template.itemOrder.events({
                     if (error) {
                         sAlert.error(error.message);
                     } else {
-                        IonLoading.hide();
-                    }
-                });
-
-
-                Meteor.call('updateOrderStatus', orderId, (error, result)=> {
-                    if (error) {
-                        sAlert.error(error.message);
-                        IonLoading.hide();
-                    } else {
-                        Router.go(`/showOrder`);
+                        Meteor.call('updateOrderStatus', orderId, (error, result)=> {
+                            if (error) {
+                                sAlert.error(error.message);
+                            } else {
+                                Router.go(`/showOrder`);
+                            }
+                        });
                     }
                 });
             },
@@ -356,34 +320,85 @@ Template.itemOrder.events({
     'click .js-cancelOrder'(){
         let params = Router.current().params;
         let orderId = params.orderId;
-        IonPopup.confirm({
-            title: 'Are you sure to cancel order?',
-            template: `Order Id : ${orderId}?`,
-            onOk: () => {
+
+        swal({
+            title: "Are you sure?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#5591DF",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plx!",
+            closeOnConfirm: false, closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
                 Meteor.call('deleteOrder', orderId, (error, result) => {
                     if (error) {
-                        sAlert.error(error.message);
+                        swal({
+                            title: "Error",
+                            text: error,
+                            type: "error"
+                        });
                     } else {
                         Meteor.call('removeOrderDetailByOrder', orderId, (error, result)=> {
-                            if (error) {
-                                sAlert.error(error.message);
-                            } else {
+                            if(error) {
+                                swal({
+                                    title: "Error",
+                                    text: error,
+                                    type: "error"
+                                });
+                            }else{
                                 Meteor.call('removePayment', orderId, (error, result)=> {
-                                    if (error) {
-                                        sAlert.error(error.message);
-                                    } else {
+                                    if(error) {
+                                        swal({
+                                            title: "Error",
+                                            text: error,
+                                            type: "error"
+                                        });
+                                    }else{
                                         Router.go('/showOrder');
-                                        sAlert.success(`Order cancel success`);
+                                        swal("Deleted!", "Your journal item has been deleted.", "success");
                                     }
-                                })
+                                });
                             }
                         });
                     }
                 });
-            },
-            onCancel: function () {
+            } else {
+                swal({
+                    title: "Cancelled",
+                    type: "error"
+                });
             }
         });
+
+        // IonPopup.confirm({
+        //     title: 'Are you sure to cancel order?',
+        //     template: `Order Id : ${orderId}?`,
+        //     onOk: () => {
+        //         Meteor.call('deleteOrder', orderId, (error, result) => {
+        //             if (error) {
+        //                 sAlert.error(error.message);
+        //             } else {
+        //                 Meteor.call('removeOrderDetailByOrder', orderId, (error, result)=> {
+        //                     if (error) {
+        //                         sAlert.error(error.message);
+        //                     } else {
+        //                         Meteor.call('removePayment', orderId, (error, result)=> {
+        //                             if (error) {
+        //                                 sAlert.error(error.message);
+        //                             } else {
+        //                                 Router.go('/showOrder');
+        //                                 sAlert.success(`Order cancel success`);
+        //                             }
+        //                         })
+        //                     }
+        //                 });
+        //             }
+        //         });
+        //     },
+        //     onCancel: function () {
+        //     }
+        // });
     }
 });
 

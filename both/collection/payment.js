@@ -8,14 +8,6 @@ Schema.Payment = new SimpleSchema({
         type: Date,
         label: "Payment Date"
     },
-    discount: {
-        type: Number,
-        label: "Discount (%)",
-        decimal: true,
-        optional: true,
-        defaultValue: 0,
-        min: 0
-    },
     dueAmount: {
         type: Number,
         label: "Due Amount ($)",

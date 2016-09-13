@@ -9,7 +9,7 @@ Schema.Order = new SimpleSchema({
         type: String,
         label: "Customer",
         optional: true,
-        defaultValue:"0001",
+        defaultValue: "0001",
         autoform: {
             type: "select",
             options: function () {
@@ -49,16 +49,49 @@ Schema.Order = new SimpleSchema({
         decimal: true,
         optional: true
     },
-    paidAmount: {
-        type: Number,
-        decimal: true,
-        optional: true
+    discountType: {
+        type: String,
+        label: "Discount Type",
+        optional: true,
+        autoform: {
+            type: "select-radio",
+            options: function () {
+                return [
+                    {label: 'Cash', value: 'c'},
+                    {label: 'Percentage', value: 'p'}
+                ];
+            }
+        },
 
     },
-    balanceAmount: {
+    discountVal: {
         type: Number,
+        label: "Discount",
         decimal: true,
-        optional: true
+        optional: true,
+        defaultValue: 0
     },
+    discountAmount: {
+        type: Number,
+        label: "Discount Amount",
+        decimal: true,
+        optional: true,
+        defaultValue: 0
+    },
+    grandTotal: {
+        type: Number,
+        label: "Grand Total",
+        decimal: true,
+        optional: true,
+        autoform: {
+            value: function () {
+                let discountVal = AutoForm.getFieldValue('discountVal');
+                let total = AutoForm.getFieldValue('total');
+                if (discountVal == 0) {
+                    return total;
+                }
+            }
+        }
+    }
 });
 Collection.Order.attachSchema(Schema.Order);

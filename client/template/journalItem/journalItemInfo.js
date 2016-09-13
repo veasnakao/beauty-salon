@@ -36,20 +36,33 @@ Template.journalItemInfo.events({
         let params = Router.current().params;
         let itemId = params._id;
         let item = Collection.JournalItem.findOne({_id: itemId});
-        IonPopup.confirm({
-            title: 'Are you sure to delete?',
-            template: `staff name : ${item.name}?`,
-            onOk: () => {
-                Meteor.call('removeJournalItem', item._id, (err, result) => {
-                    if (err) {
-                        sAlert.error(`Cancel ${item.journalItemName}`);
+        swal({
+            title: "Are you sure?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#5591DF",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plx!",
+            closeOnConfirm: false, closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                Meteor.call('removeJournalItem', item._id, (error, result) => {
+                    if (error) {
+                        swal({
+                            title: "Error",
+                            text: error,
+                            type: "error"
+                        });
                     } else {
-                        sAlert.success(`Delete ${item.journalItemName} success`);
                         Router.go('/showJournalItem');
+                        swal("Deleted!", "Your journal item has been deleted.", "success");
                     }
                 });
-            },
-            onCancel: function () {
+            } else {
+                swal({
+                    title: "Cancelled",
+                    type: "error"
+                });
             }
         });
     }

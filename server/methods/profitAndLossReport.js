@@ -11,7 +11,7 @@ Meteor.methods({
                 }
             },
             {
-                $unwind: { path: '$journalEntryItem', preserveNullAndEmptyArrays: true }
+                $unwind: {path: '$journalEntryItem', preserveNullAndEmptyArrays: true}
             },
             {
                 $lookup: {
@@ -22,7 +22,7 @@ Meteor.methods({
                 }
             },
             {
-                $unwind: { path: '$journalDoc', preserveNullAndEmptyArrays: true }
+                $unwind: {path: '$journalDoc', preserveNullAndEmptyArrays: true}
             },
             {
                 $lookup: {
@@ -33,7 +33,7 @@ Meteor.methods({
                 }
             },
             {
-                $unwind: {path:'$serviceDoc',preserveNullAndEmptyArrays:true}
+                $unwind: {path: '$serviceDoc', preserveNullAndEmptyArrays: true}
             },
             {
                 $group: {
@@ -41,7 +41,7 @@ Meteor.methods({
                         journalType: '$typeOfJournal',
                         journalItemId: '$journalEntryItem.journalItemId'
                     },
-                    date:{
+                    date: {
                         $last: "$date"
                     },
                     journalType: {
@@ -49,7 +49,7 @@ Meteor.methods({
                     },
                     journalItem: {
                         $addToSet: {
-                            journalItemId:'$journalEntryItem.journalItemId',
+                            journalItemId: '$journalEntryItem.journalItemId',
                             journalItemName: '$journalDoc.journalItemName',
                             journalItemPrice: '$journalEntryItem.journalItemPrice'
                         }
@@ -57,72 +57,72 @@ Meteor.methods({
                     journalTotalByItem: {
                         $sum: '$journalEntryItem.journalItemPrice'
                     },
-                    serviceTotal:{
-                        $sum:'$serviceDoc.total'
+                    serviceTotal: {
+                        $sum: '$serviceDoc.total'
                     }
                 }
             },
             {
-                $unwind: { path: '$journalItem', preserveNullAndEmptyArrays: true }
+                $unwind: {path: '$journalItem', preserveNullAndEmptyArrays: true}
             },
             {
                 $group: {
-                    _id:{
-                        journalType:'$journalType',
-                        journalItemId:'$journalItem.journalItemId'
+                    _id: {
+                        journalType: '$journalType',
+                        journalItemId: '$journalItem.journalItemId'
                     },
-                    date:{
+                    date: {
                         $last: "$date"
                     },
-                    journalType:{
+                    journalType: {
                         $last: "$journalType"
                     },
-                    journalItem:{
+                    journalItem: {
                         $addToSet: {
-                            journalItemName:'$journalItem.journalItemName',
-                            journalTotalByItem:'$journalTotalByItem'
+                            journalItemName: '$journalItem.journalItemName',
+                            journalTotalByItem: '$journalTotalByItem'
                         }
                     },
-                    serviceTotal:{
+                    serviceTotal: {
                         $last: "$serviceTotal"
                     }
                 }
             },
             {
-                $unwind: {path:'$journalItem',preserveNullAndEmptyArrays:true}
+                $unwind: {path: '$journalItem', preserveNullAndEmptyArrays: true}
             },
             {
                 $group: {
-                    _id:'$journalType',
-                    date:{
+                    _id: '$journalType',
+                    date: {
                         $last: "$date"
                     },
-                    journalType:{
+                    journalType: {
                         $last: '$journalType'
                     },
-                    journalItem:{
+                    journalItem: {
                         $addToSet: {
-                            journalItemName:'$journalItem.journalItemName',
-                            journalTotalByItem:'$journalItem.journalTotalByItem'
+                            journalItemName: '$journalItem.journalItemName',
+                            journalTotalByItem: '$journalItem.journalTotalByItem'
                         }
                     },
-                    journalTotal:{
-                        $sum:'$journalItem.journalTotalByItem'
+                    journalTotal: {
+                        $sum: '$journalItem.journalTotalByItem'
                     },
-                    serviceTotal:{
+                    serviceTotal: {
                         $last: "$serviceTotal"
                     }
                 }
             },
             {
                 $project: {
-                    date:1,
-                    journalType:1,
-                    journalItem:1,
-                    journalTotal:1,
-                    serviceTotal:1,
-                    total:{
-                        $add: ["$journalTotal","$serviceTotal"]
+                    date: 1,
+                    journalType: 1,
+                    journalItem: 1,
+                    journalTotal: 1,
+                    serviceTotal: 1,
+                    total: {
+                        $add: ["$journalTotal", "$serviceTotal"]
                     }
                 }
             }
@@ -134,9 +134,9 @@ Meteor.methods({
             let totalExpense = 0;
             data.content = profitAndLoss;
             profitAndLoss.forEach(function (doc) {
-                if(doc.journalType == 'income') {
+                if (doc.journalType == 'income') {
                     totalIncome = doc.total;
-                }else{
+                } else {
                     totalExpense = doc.total;
                 }
             });

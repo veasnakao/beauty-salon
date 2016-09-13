@@ -6,7 +6,7 @@ Template.itemInfo.created = function () {
 };
 
 //onrender
-Template.itemInfo.rendered = function() {
+Template.itemInfo.rendered = function () {
     try {
         this.autorun(() => {
             if (!this.subscription.ready()) {
@@ -34,20 +34,33 @@ Template.itemInfo.events({
         let params = Router.current().params;
         let itemId = params._id;
         let item = Collection.Item.findOne({_id: itemId});
-        IonPopup.confirm({
-            title: 'Are you sure to delete?',
-            template: `item name : ${item.name}?`,
-            onOk: () => {
-                Meteor.call('removeOrderItem', item._id, (err, result) => {
-                    if (err) {
-                        sAlert.error(`Cancel ${item.name}`);
+        swal({
+            title: "Are you sure?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#5591DF",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plx!",
+            closeOnConfirm: false, closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                Meteor.call('removeOrderItem', item._id, (error, result) => {
+                    if (error) {
+                        swal({
+                            title: "Error",
+                            text: error,
+                            type: "error"
+                        });
                     } else {
                         Router.go('/showItem');
-                        sAlert.success(`Item delete success ${item.name}`);
+                        swal("Deleted!", "Your service has been deleted.", "success");
                     }
                 });
-            },
-            onCancel: function () {
+            } else {
+                swal({
+                    title: "Cancelled",
+                    type: "error"
+                });
             }
         });
     }

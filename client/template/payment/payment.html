@@ -20,25 +20,29 @@
                             <div class="col"></div>
                         </div>
                         {{> afQuickField name='dueAmount' readonly=true class="js-dueAmount" style="background-color: #D8D8D7"}}
-                        {{> afQuickField name='paidAmount' class="js-paidAmount"}}
+                        {{> afQuickField name='paidAmount' class="js-paidAmount" readonly=true style="background-color: #D8D8D7"}}
                         {{> afQuickField name='balance' class="js-balance"}}
+                        {{#if checkStatus}}
+                            <div class="row">
+                                <div class="col">
+                                    <button class="button button-round button-block button-positive js-payment">
+                                        {{> ionIcon class="ion ion-cash"}}
+                                        Payment
+                                    </button>
+                                </div>
+                            </div>
+                        {{/if}}
+                    {{/autoForm}}
+                    {{#if checkPayment}}
                         <div class="row">
                             <div class="col">
-                                <button class="button button-round button-block button-positive js-payment">
-                                    {{> ionIcon class="ion ion-cash"}}
-                                    Payment
+                                <button class="button button-round button-block button-assertive js-delete-payment">
+                                    {{> ionIcon class="ion ion-ios-trash"}}
+                                    Delete Payment
                                 </button>
                             </div>
                         </div>
-                    {{/autoForm}}
-                    <div class="row">
-                        <div class="col">
-                            <button class="button button-round button-block button-assertive js-delete-payment">
-                                {{> ionIcon class="ion ion-ios-trash"}}
-                                Delete Payment
-                            </button>
-                        </div>
-                    </div>
+                    {{/if}}
                 </div>
 
                 <div class="card">
@@ -101,19 +105,23 @@
                                 </table>
                                 <div class="row">
                                     <div class="col-offset-33 col-33 service-rp-content">Total :</div>
-                                    <div style="text-align: right" class="col-25 service-rp-content">{{numFormat total '0,0.00 $'}}</div>
+                                    <div style="text-align: right" class="col-25 service-rp-content">{{numFormat total
+                                                                                                                 '0,0.00 $'}}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-offset-33 col-33 service-rp-content">Due Amount :</div>
-                                    <div style="text-align: right" class="col-25 service-rp-content">{{numFormat dueAmount '0,0.00 $'}}</div>
+                                    <div style="text-align: right" class="col-25 service-rp-content">{{numFormat
+                                            dueAmount '0,0.00 $'}}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-offset-33 col-33 service-rp-content">Paid Amount :</div>
-                                    <div style="text-align: right" class="col-25 service-rp-content">{{numFormat paidAmount '0,0.00 $'}}</div>
+                                    <div style="text-align: right" class="col-25 service-rp-content">{{numFormat
+                                            paidAmount '0,0.00 $'}}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-offset-33 col-33 service-rp-content">Balance :</div>
-                                    <div style="text-align: right" class="col-25 service-rp-content">{{numFormat balance '0,0.00 $'}}</div>
+                                    <div style="text-align: right" class="col-25 service-rp-content">{{numFormat balance
+                                                                                                                 '0,0.00 $'}}</div>
                                 </div>
                                 <hr style="border-top: 1px dashed #8c8b8b;">
                                 <div class="service-rp-content" style="text-align: center;">Thank you!</div>

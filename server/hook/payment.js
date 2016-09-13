@@ -3,9 +3,9 @@ Collection.Payment.before.insert((userId, doc) => {
     let prefix = orderId + '-';
 
     doc.change = doc.balance;
-    if (doc.paidAmount >= doc.dueAmount) {
+    if (doc.paidAmount == doc.dueAmount) {
         doc.status = 'close';
-        doc.balance = 0
+        // doc.balance = 0
     } else {
         doc.status = 'partial'
     }

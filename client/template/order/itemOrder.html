@@ -19,23 +19,22 @@
         {{#ionView}}
             {{#ionContent}}
                 {{#if checkStatus}}
+
                     <div class="card animated bounceInDown">
                         {{#autoForm collection="Collection.Order" id="orderList" doc=order}}
-                            <div class="row">
-                                <div class="col">
+                            <div class="row responsive-sm">
+                                <div class="col-33">
                                     {{> afQuickField name='date' class="js-orderDate"}}
                                 </div>
-                                <div class="col"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
+                                <div class="col-33">
                                     {{> afQuickField name='customerId' class="js-customer"}}
                                 </div>
-                                <div class="col">
+                                <div class="col-33">
                                     {{> afQuickField name='staffId' class="js-staff"}}
                                 </div>
                             </div>
                         {{/autoForm}}
+
                     </div>
                 {{else}}
                     <div class="card animated bounceInDown">
@@ -103,39 +102,72 @@
                         </div>
                     </div>
                 {{/each}}
-                <div class="row">
+                <div class="row responsive-sm">
                     <div class="col-offset-50 col-50">
                         <div class="card">
                             <div class="item item-text-wrap button-balanced">
-                                <div class="row">
-                                    <div class="col-50">Total :</div>
-                                    <div class="col-25">
-                                        <div style="float: right;">
-                                            {{numFormat totalOrder '0,0.00 $'}}
+                                {{#with showOrder}}
+                                    <div class="row">
+                                        <div class="col-50">Total :</div>
+                                        <div class="col-33">
+                                            <div style="float: right;">
+                                                {{numFormat total '0,0.00 $'}}
+                                            </div>
+                                        </div>
+                                        <div class="col-10"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-50">Discount :</div>
+                                        <div class="col-33">
+                                            <div style="float: right;">
+                                                {{#if checkDiscountType discountType}}
+                                                    {{numFormat discountVal '0,0.00 $'}}
+                                                {{else}}
+                                                    {{discountVal}} %
+                                                {{/if}}
+                                            </div>
+                                        </div>
+                                        <div class="col-10">
+                                            <button class="button button-positive button-small"
+                                                    data-ion-modal="addDiscount"
+                                                    style="margin-top: -8px;margin-left:10px;">
+                                                {{> ionIcon class="ion ion-edit"}}
+                                            </button>
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="row">
+                                        <div class="col-50">Grand Total :</div>
+                                        <div class="col-33">
+                                            <div style="float: right;">
+                                                {{numFormat grandTotal '0,0.00 $'}}
+                                            </div>
+                                        </div>
+                                        <div class="col-10"></div>
+                                    </div>
+                                {{/with}}
                                 {{#if payment}}
                                     {{#with payment}}
                                         <div class="row">
                                             <div class="col-50">
                                                 Paid Amount :
                                             </div>
-                                            <div class="col-25">
+                                            <div class="col-33">
                                                 <div style="float: right;">
                                                     {{numFormat paidAmount '0,0.00 $'}}
                                                 </div>
                                             </div>
+                                            <div class="col-10"></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-50">
                                                 Balance :
                                             </div>
-                                            <div class="col-25">
+                                            <div class="col-33">
                                                 <div style="float: right;">
                                                     {{numFormat balance '0,0.00 $'}}
                                                 </div>
                                             </div>
+                                            <div class="col-10"></div>
                                         </div>
                                     {{/with}}
                                 {{else}}
@@ -143,21 +175,23 @@
                                         <div class="col-50">
                                             Paid Amount :
                                         </div>
-                                        <div class="col-25">
+                                        <div class="col-33">
                                             <div style="float: right;">
                                                 {{numFormat paidAmount '0,0.00 $'}}
                                             </div>
                                         </div>
+                                        <div class="col-10"></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-50">
                                             Balance :
                                         </div>
-                                        <div class="col-25">
+                                        <div class="col-33">
                                             <div style="float: right;">
                                                 {{numFormat balance '0,0.00 $'}}
                                             </div>
                                         </div>
+                                        <div class="col-10"></div>
                                     </div>
                                 {{/if}}
                             </div>

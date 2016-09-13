@@ -28,7 +28,6 @@ Template.payment.rendered = function () {
 Template.payment.helpers({
     serviceReport(){
         if (Session.get('serviceReport')) {
-            console.log(Session.get('serviceReport'));
             return Session.get('serviceReport');
         }
     },
@@ -63,7 +62,17 @@ Template.payment.helpers({
                 return selector;
             }
         }
-    }
+    },
+    checkPayment(){
+        if (Session.get('orderStatus') == 'close') {
+            return true
+        }
+    },
+    checkStatus(){
+        if (Session.get('orderStatus') == 'active') {
+            return true
+        }
+    },
 });
 
 //events
@@ -73,9 +82,6 @@ Template.payment.events({
         let paidAmount = $('.js-paidAmount').val();
         let balance = dueAmount - paidAmount;
         $('.js-balance').val(numeral(balance).format('00.00'));
-        if ($('.js-balance') < 0 || $('.js-balance') == 0) {
-
-        }
     },
     'keypress .js-paidAmount'(evt){
         var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -99,12 +105,22 @@ Template.payment.events({
                                     type: "error",
                                     message: error
                                 });
+                            }else{
+                                Meteor.call('removeJournalEntryByOrder', serviceId, (error, result)=> {
+                                    if(error){
+                                        overhang.notify({
+                                            type: "error",
+                                            message: error
+                                        });
+                                    }else{
+                                        Router.go(`/showOrder`);
+                                        overhang.notify({
+                                            type: "success",
+                                            message: "Delete success"
+                                        });
+                                    }
+                                });
                             }
-                        });
-                        // Router.go(`/showOrder`);
-                        overhang.notify({
-                            type: "success",
-                            message: "Delete success"
                         });
                     }
                 });
