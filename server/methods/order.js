@@ -4,6 +4,7 @@ Meteor.methods({
         var prefix = todayDate + '-';
         selector._id = idGenerator.genWithPrefix(Collection.Order, prefix, 4);
         selector.total = 0;
+        selector.date = new Date();
         let orderId = Collection.Order.insert(selector);
         return orderId;
     },

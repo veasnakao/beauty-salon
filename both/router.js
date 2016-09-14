@@ -51,16 +51,30 @@ Router.map(function () {
     this.route('orderDetail', {
         path: '/orderDetail/:_id'
     });
+
+    //itemOrder
     this.route('itemOrder', {
         path: '/itemOrder/orderId/:orderId'
     });
+
+    //payment
     this.route('payment', {
-        path: '/itemOrder/orderId/:orderId/payment'
+        // path: '/itemOrder/orderId/:orderId/payment'
+        path: '/itemOrder/orderId/:orderId/staffId/:staffId/customerId/:customerId/payment'
     });
+
+    //printOrder
     this.route('printOrder', {
         path: '/itemOrder/orderId/:orderId/print'
     });
 
+    this.route('setting');
+    this.route('setRole');
+    this.route('login');
+    this.route('signup');
+
+
+    //report
     this.route('reports');
     this.route('staffReport');
     this.route('staffSalaryReport');
@@ -68,8 +82,4 @@ Router.map(function () {
     this.route('orderDetailReport');
     this.route('journalEntryReport');
     this.route('profitAndLossReport');
-    this.route('setting');
-    this.route('setRole');
-    this.route('login');
-    this.route('signup');
 });

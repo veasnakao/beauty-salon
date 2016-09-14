@@ -83,15 +83,15 @@ Schema.Order = new SimpleSchema({
         label: "Grand Total",
         decimal: true,
         optional: true,
-        autoform: {
-            value: function () {
-                let discountVal = AutoForm.getFieldValue('discountVal');
-                let total = AutoForm.getFieldValue('total');
-                if (discountVal == 0) {
-                    return total;
-                }
-            }
-        }
+        // autoform: {
+        //     value: function () {
+        //         let discountVal = AutoForm.getFieldValue('discountVal');
+        //         let total = AutoForm.getFieldValue('total');
+        //         if (discountVal == 0) {
+        //             return total;
+        //         }
+        //     }
+        // }
     }
 });
 Collection.Order.attachSchema(Schema.Order);

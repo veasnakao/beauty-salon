@@ -153,9 +153,39 @@ Meteor.methods({
             }
         })
     },
-    // let updateObj={customerId:'001',staffId:'001'};
-    // updateOrderCustomer('001',null,'003')
-    //update orderCustomerId
+    updateGrandTotal(orderId){
+        let grandTotal = 0;
+        let discountAmount = 0;
+        let order = Collection.Order.findOne({_id: orderId});
+        if (order) {
+            let total = order.total;
+            let discountType = order.discountType;
+            let discountVal = order.discountVal;
+            discountAmount = order.discountAmount;
+            if (discountType == 'c') {
+                discountAmount = discountVal;
+                grandTotal = total - discountAmount;
+            } else if (discountType == 'p') {
+                discountAmount = (discountVal / 100) * total;
+                grandTotal = total - discountAmount;
+            } else {
+                grandTotal = total;
+            }
+        }
+        Collection.Order.update(orderId, {
+            $set: {
+                discountAmount: discountAmount,
+                grandTotal: grandTotal
+            }
+        })
+    },
+    deleteDiscount(orderId){
+        Collection.Order.update(orderId, {
+            $set: {
+                discountVal: 0
+            }
+        })
+    },
     updateOrder(orderId, updateObj){
         Collection.Order.update(orderId, {
             $set: updateObj

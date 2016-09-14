@@ -10,7 +10,6 @@ Schema.Item = new SimpleSchema({
         type: Number,
         label: "Price ($)",
         decimal: true,
-        optional: true
     }
 });
 Collection.Item.attachSchema(Schema.Item);

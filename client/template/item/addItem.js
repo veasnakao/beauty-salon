@@ -1,7 +1,6 @@
 Template.addItem.rendered = function () {
 };
-Template.addItem.events({
-});
+Template.addItem.events({});
 
 AutoForm.hooks({
     addItem: {//id autoform
@@ -12,17 +11,23 @@ AutoForm.hooks({
             }
         },
         onSuccess(formType, id){
-            overhang.notify({
-                type : "success",
-                message: "Item is added success"
-            });
+            swal({
+                title: "Success",
+                text: "Service item add success",
+                type: "success",
+                timer: 1000,
+                confirmButtonColor: "#45B1FC",
+                showConfirmButton: true
+            })
         },
         onError(formType, error){
-            // overhang.notify({
-            //     type : "error",
-            //     message: 'error'
-            // });
-            sAlert.error(error.message);
+            swal({
+                title: "Error",
+                text:error,
+                type:"error",
+                timer: 3000,
+                showConfirmButton: true
+            })
         }
     }
 });

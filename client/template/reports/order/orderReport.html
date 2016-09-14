@@ -5,7 +5,7 @@
         {{/contentFor}}
 
         {{#contentFor "headerTitle"}}
-            <h1 class="title">Order Report</h1>
+            <h1 class="title">Service Report</h1>
         {{/contentFor}}
 
         <div class="content has-header overflow-scroll">
@@ -68,7 +68,8 @@
             <div class="print" style="width: 720px;height: auto;margin: 0 auto;">
                 {{#if staffOrderReport}}
                     <div style="margin:20px 10px;">
-                        <h4 style="text-align: center;"><u>Service Report</u></h4>
+                        <h4 style="text-align: center;"><u>Service Report By Staff</u></h4>
+                        <hr style="border-top: 1px solid #8c8b8b;">
                         <h5 style="margin-left: 10px;">
                             {{#with serviceDate}}
                                 Date : {{moFormat fromDate 'DD/MM/YYYY'}} - {{moFormat toDate 'DD/MM/YYYY'}}
@@ -79,13 +80,15 @@
                                 <div class="col">Staff</div>
                                 <div class="col">Date</div>
                                 <div class="col">Total Service</div>
+                                <div class="col">Discount Amount</div>
+                                <div class="col">Grand Total</div>
                             </div>
                             {{#each staffOrderReport.content}}
                                 {{#if checkIsNotEmpty total}}
                                     {{#each data}}
                                         <div class="row" style="margin-bottom: -40px;">
                                             <div class="col">
-                                                {{name}}
+                                                {{staff}}
                                             </div>
                                         </div>
                                         <div style="border-bottom: 1px solid #DADADA;">
@@ -98,15 +101,33 @@
                                                     <div class="col">
                                                         {{numFormat totalService '0,0.00 $'}}
                                                     </div>
+                                                    <div class="col">
+                                                        {{numFormat totalDiscountAmount '0,0.00 $'}}
+                                                    </div>
+                                                    <div class="col">
+                                                        {{numFormat totalGrandTotal '0,0.00 $'}}
+                                                    </div>
                                                 </div>
                                             {{/each}}
                                         </div>
+                                        <div style="border-bottom: 1px solid #DADADA;">
+                                            <div class="row" style="background-color: #CCF3FF;">
+                                                <div class="col"></div>
+                                                <div class="col">Sub Total</div>
+                                                <div class="col">{{numFormat subTotalServiceByDate '0,0.00 $'}}
+                                                </div>
+                                                <div class="col">{{numFormat subTotalDiscountByDate '0,0.00 $'}}
+                                                </div>
+                                                <div class="col">{{numFormat subTotalGrandTotalByDate '0,0.00 $'}}</div>
+                                            </div>
+                                        </div>
                                     {{/each}}
-
-                                    <div class="row" style="background-color:#f2f2f2;">
+                                    <div class="row" style="background-color:#FFFBAC;">
                                         <div class="col"></div>
                                         <div class="col">Total</div>
                                         <div class="col">{{numFormat total '0,0.00 $'}}</div>
+                                        <div class="col">{{numFormat totalDiscountAmount '0,0.00 $'}}</div>
+                                        <div class="col">{{numFormat totalGrandTotal '0,0.00 $'}}</div>
                                     </div>
                                 {{else}}
                                     No data available

@@ -28,11 +28,23 @@ AutoForm.hooks({
             }
         },
         onSuccess(formType, id){
-            sAlert.success('Add Journal Item Success');
+            swal({
+                title: "Success",
+                text: "Joural item add success",
+                type: "success",
+                timer: 1000,
+                confirmButtonColor: "#45B1FC",
+                showConfirmButton: true
+            })
         },
         onError(formType, error){
-            console.log(error);
-            sAlert.error(error.message);
+            swal({
+                title: "Error",
+                text:error,
+                type:"error",
+                timer: 3000,
+                showConfirmButton: true
+            })
         }
     }
 });

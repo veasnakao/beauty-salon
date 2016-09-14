@@ -21,7 +21,7 @@ Template.payment.rendered = function () {
             }
         });
     } catch (e) {
-        console.log(e);
+        // console.log(e);
     }
 };
 
@@ -30,6 +30,9 @@ Template.payment.helpers({
         if (Session.get('serviceReport')) {
             return Session.get('serviceReport');
         }
+    },
+    dueAmount(){
+
     },
     order() {
         let orderId = Router.current().params.orderId;
@@ -44,8 +47,9 @@ Template.payment.helpers({
         if (payment) {
             let selector = {
                 orderId: payment.orderId,
-                dueAmount: numeral(payment.balance).format('00.00'),
-                paidAmount: numeral(payment.balance).format('00.00'),
+                paymentDate: payment.paymentDate,
+                dueAmount: numeral(payment.paidAmount).format('00.00'),
+                paidAmount: numeral(payment.paidAmount).format('00.00'),
                 balance: 0
             };
             return selector;
@@ -55,8 +59,9 @@ Template.payment.helpers({
             if (order) {
                 let selector = {
                     orderId: order._id,
-                    dueAmount: numeral(order.total).format('00.00'),
-                    paidAmount: numeral(order.total).format('00.00'),
+                    paymentDate: order.date,
+                    dueAmount: numeral(order.grandTotal).format('00.00'),
+                    paidAmount: numeral(order.grandTotal).format('00.00'),
                     balance: 0
                 };
                 return selector;
@@ -73,27 +78,39 @@ Template.payment.helpers({
             return true
         }
     },
+    checkDiscountType(type){
+        if(type=='c'){
+            return true;
+        }
+    }
 });
 
 //events
 Template.payment.events({
-    'keyup .js-paidAmount'(){
+    'keyup [name="paidAmount"]'(){
         let dueAmount = $('.js-dueAmount').val();
         let paidAmount = $('.js-paidAmount').val();
         let balance = dueAmount - paidAmount;
         $('.js-balance').val(numeral(balance).format('00.00'));
     },
-    'keypress .js-paidAmount'(evt){
+    'keypress [name="paidAmount"]'(evt){
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         return !(charCode > 31 && (charCode < 48 || charCode > 57));
     },
     'click .js-delete-payment'(){
         let params = Router.current().params;
         let serviceId = params.orderId;
-        IonPopup.confirm({
-            title: 'Are you sure to delete?',
-            template: `Payment`,
-            onOk: () => {
+
+        swal({
+            title: "Are you sure?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#5591DF",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plx!",
+            closeOnConfirm: false, closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
                 Meteor.call('removePayment', serviceId, (error, result) => {
                     if (error) {
                         sAlert.error(`Cancel`);
@@ -101,31 +118,46 @@ Template.payment.events({
                         let status = 'active';
                         Meteor.call('updateOrderStatus', serviceId, status, (error, result)=> {
                             if (error) {
-                                overhang.notify({
+                                swal({
+                                    title: "Error",
+                                    text: error,
                                     type: "error",
-                                    message: error
-                                });
-                            }else{
+                                    timer: 2000,
+                                    confirmButtonColor: "#DD6B55",
+                                    showConfirmButton: true
+                                })
+                            } else {
                                 Meteor.call('removeJournalEntryByOrder', serviceId, (error, result)=> {
-                                    if(error){
-                                        overhang.notify({
+                                    if (error) {
+                                        swal({
+                                            title: "Error",
+                                            text: error,
                                             type: "error",
-                                            message: error
-                                        });
-                                    }else{
+                                            timer: 2000,
+                                            confirmButtonColor: "#DD6B55",
+                                            showConfirmButton: true
+                                        })
+                                    } else {
                                         Router.go(`/showOrder`);
-                                        overhang.notify({
+                                        swal({
+                                            title: "Success",
+                                            text: "Delete payment success",
                                             type: "success",
-                                            message: "Delete success"
-                                        });
+                                            timer: 2000,
+                                            confirmButtonColor: "#45B1FC",
+                                            showConfirmButton: true
+                                        })
                                     }
                                 });
                             }
                         });
                     }
                 });
-            },
-            onCancel: function () {
+            } else {
+                swal({
+                    title: "Cancelled",
+                    type: "error"
+                });
             }
         });
     },
@@ -136,10 +168,14 @@ Template.payment.events({
             console.log(serviceId);
             Meteor.call('serviceReport', serviceId, (error, result)=> {
                 if (error) {
-                    overhang.notify({
+                    swal({
+                        title: "Error",
+                        text: error,
                         type: "error",
-                        message: error
-                    });
+                        timer: 2000,
+                        confirmButtonColor: "#DD6B55",
+                        showConfirmButton: true
+                    })
                 } else {
                     Session.set('serviceReport', result);
                 }
@@ -157,15 +193,26 @@ Template.payment.events({
 AutoForm.hooks({
     payment: {
         onSuccess(formType, id){
-            // Router.go('/showOrder');
-            Session.set('orderStatus', undefined);
-            overhang.notify({
+            Session.set('orderStatus', 'close');
+            Router.go('/showOrder');
+            swal({
+                title: "Success",
+                text: "Payment success",
                 type: "success",
-                message: "Payment success"
-            });
+                timer: 2000,
+                confirmButtonColor: "#45B1FC",
+                showConfirmButton: true
+            })
         },
         onError(formType, error){
-            sAlert.error(error.message);
+            swal({
+                title: "Error",
+                text: error,
+                type: "error",
+                timer: 2000,
+                confirmButtonColor: "#DD6B55",
+                showConfirmButton: true
+            })
         }
     }
 });

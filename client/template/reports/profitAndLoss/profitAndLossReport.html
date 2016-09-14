@@ -32,60 +32,51 @@
                         </button>
                     </div>
                 </div>
-                <div class="print" style="margin: 0;padding: 0;width: 720px;height: auto;margin: 0 auto;">
+                <div class="print" style="padding: 0;width: 720px;height: auto;margin: 0 auto;margin-bottom: 50px;">
                     {{#if profitAndLoss}}
-                        <div style="margin:20px 10px;">
-                            <h4 style="text-align: center;"><u>Profit and Loss Report</u></h4>
-                            <h5 style="margin-left: 10px;">
-                                {{#with profitAndLossDate}}
-                                    Date : {{moFormat fromDate 'DD/MM/YYYY'}} - {{moFormat toDate 'DD/MM/YYYY'}}
-                                {{/with}}
-                            </h5>
-                            <div style="border:1px solid #DADADA;">
-                                <div class="row" style="background-color:#f2f2f2;">
-                                    <div class="col">Journal Item</div>
-                                    <div class="col">Amount</div>
-                                </div>
-                                {{#each profitAndLoss.content}}
-                                    <div class="row" style="border-bottom:1px solid #DADADA;margin-top: 10px;">
-                                        <div class="col">{{journalType}}</div>
-                                        <div class="col"></div>
-                                    </div>
-                                    <div style="padding: 5px;border-bottom:1px solid #DADADA;">
-                                        {{#if checkIsNotEmpty serviceTotal}}
-                                            <div class="row">
-                                                <div class="col">Service</div>
-                                                <div class="col">{{numFormat serviceTotal '0,0.00 $'}}</div>
-                                            </div>
-                                        {{/if}}
-                                        {{#each journalItem}}
-                                            {{#if checkIsNotEmpty journalTotalByItem}}
-                                                <div class="row">
-                                                    <div class="col">{{journalItemName}}</div>
-                                                    <div class="col">{{numFormat journalTotalByItem '0,0.00 $'}}</div>
-                                                </div>
-                                            {{/if}}
-                                        {{/each}}
-                                        <div class="row"
-                                             style="border-top:1px solid #DADADA;background-color: #CCF3FF;">
-                                            <div class="col">Sub Total</div>
-                                            <div class="col">{{numFormat total '0,0.00 $'}}</div>
-                                        </div>
-                                    </div>
+                        <h4 style="text-align: center;"><u>Profit and Loss Report</u></h4>
+                        <h5 style="margin-left: 10px;">
+                            {{#with profitAndLossDate}}
+                                Date : {{moFormat fromDate 'DD/MM/YYYY'}} - {{moFormat toDate 'DD/MM/YYYY'}}
+                            {{/with}}
+                        </h5>
+                        <table style="border: 1px solid #ddd;" class="report-content">
+                            <tr class="profit" style="background-color: #d0d2d0;">
+                                <td colspan="2" style="padding: 10px;">Journal Item</td>
+                                <td style="padding: 10px;">Amount</td>
+                            </tr>
+                            {{#each profitAndLoss.content}}
+                                <tr style="border: 1px solid #ddd;">
+                                    <td colspan="2" style="padding: 10px;">{{journalType}}</td>
+                                    <td style="padding: 10px;"></td>
+                                </tr>
+                                {{#if checkIsNotEmpty serviceTotal}}
+                                    <tr style="border: 1px solid #ddd;">
+                                        <td colspan="2" style="padding: 10px;padding-left: 50px;">Service</td>
+                                        <td style="padding: 10px;">{{numFormat serviceTotal '0,0.00 $'}}</td>
+                                    </tr>
+                                {{/if}}
+                                {{#each journalItem}}
+                                    {{#if checkIsNotEmpty journalTotalByItem}}
+                                        <tr style="border: 1px solid #ddd;">
+                                            <td colspan="2"
+                                                style="padding: 10px;padding-left: 50px;">{{journalItemName}}</td>
+                                            <td style="padding: 10px;">{{numFormat journalTotalByItem '0,0.00 $'}}</td>
+                                        </tr>
+                                    {{/if}}
                                 {{/each}}
-
-                                {{#with profitAndLoss.footer}}
-                                    <div class="row" style="background-color: #FFFBAC;">
-                                        <div class="col">Net Income</div>
-                                        <div class="col">{{numFormat total '0,0.00 $'}}</div>
-                                    </div>
-                                {{/with}}
-                            </div>
-                        </div>
-                    {{else}}
-                        <div class="card">
-                            <h4 style="text-align: center;">No data available</h4>
-                        </div>
+                                <tr style="border: 1px solid #ddd;">
+                                    <td colspan="2" style="padding: 10px;padding-left: 50px;">Sub Total</td>
+                                    <td style="padding: 10px;"><u>{{numFormat total '0,0.00 $'}}</u></td>
+                                </tr>
+                            {{/each}}
+                            {{#with profitAndLoss.footer}}
+                                <tr style="border: 1px solid #ddd;background-color: #FFFBAC;">
+                                    <td colspan="2" style="padding: 10px;">Net Income</td>
+                                    <td style="padding: 10px;">{{numFormat total '0,0.00 $'}}</td>
+                                </tr>
+                            {{/with}}
+                        </table>
                     {{/if}}
                 </div>
             </div>

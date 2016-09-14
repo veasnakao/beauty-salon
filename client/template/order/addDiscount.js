@@ -54,6 +54,7 @@ function discountTotal() {
         $("input[name=grandTotal]").val(grandTotal);
     } else if (discountType == 'p') {
         let discountAmount = (discountVal / 100) * total;
+        discountAmount=numeral(discountAmount).format('00.00');
         $("input[name=discountAmount]").val(discountAmount);
         let grandTotal = total - discountAmount;
         $("input[name=grandTotal]").val(grandTotal);

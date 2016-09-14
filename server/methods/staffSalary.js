@@ -19,15 +19,15 @@ Meteor.methods({
                 }
             },
             {
-                $unwind: {path: '$staffDoc', preserveNullAndEmptyArrays: true}
+                $unwind: { path: '$staffDoc', preserveNullAndEmptyArrays: true }
             },
             {
                 $group: {
                     _id: {
                         staffId: '$staffId',
-                        month: {$month: "$date"},
-                        day: {$dayOfMonth: "$date"},
-                        year: {$year: "$date"}
+                        month: { $month: "$date" },
+                        day: { $dayOfMonth: "$date" },
+                        year: { $year: "$date" }
                     },
                     staffName: {
                         $last: '$staffDoc.name'
@@ -46,6 +46,12 @@ Meteor.methods({
                     },
                     totalService: {
                         $sum: '$total'
+                    },
+                    totalDiscountAmount:{
+                        $sum:'$discountAmount'
+                    },
+                    totalGrandTotal:{
+                        $sum:'$grandTotal'
                     }
                 }
             },
@@ -62,7 +68,13 @@ Meteor.methods({
                         $last: "$baseSalary"
                     },
                     totalService: {
-                        $sum: '$totalService'
+                        $last: '$totalService'
+                    },
+                    totalDiscountAmount:{
+                        $last: "$totalDiscountAmount"
+                    },
+                    totalGrandTotal:{
+                        $last: "$totalGrandTotal"
                     }
                 }
             },
@@ -72,9 +84,11 @@ Meteor.methods({
                     staffName: '$staffName',
                     baseSalary: '$baseSalary',
                     totalService: '$totalService',
+                    totalDiscountAmount:'$totalDiscountAmount',
+                    totalGrandTotal:'$totalGrandTotal',
                     fee: '$fee',
                     totalFee: {
-                        $multiply: [{$divide: ['$fee', 100]}, '$totalService']
+                        $multiply: [{ $divide: ['$fee', 100] }, '$totalGrandTotal']
                     }
                 }
             },
@@ -84,6 +98,8 @@ Meteor.methods({
                     staffName: '$staffName',
                     baseSalary: '$baseSalary',
                     totalService: '$totalService',
+                    totalDiscountAmount:'$totalDiscountAmount',
+                    totalGrandTotal:'$totalGrandTotal',
                     fee: '$fee',
                     totalFee: '$totalFee',
                     totalSalary: {
@@ -92,7 +108,7 @@ Meteor.methods({
                 }
             },
             {
-                $sort: {_id: -1}
+                $sort: { _id: -1 }
             },
             {
                 $group: {
@@ -100,7 +116,19 @@ Meteor.methods({
                     data: {
                         $addToSet: '$$ROOT'
                     },
-                    total: {
+                    totalBaseSalary:{
+                        $sum:'$baseSalary'
+                    },
+                    totalFee:{
+                        $sum:'$totalFee'
+                    },
+                    totalDiscountAmount:{
+                        $sum: '$totalDiscountAmount'
+                    },
+                    totalGrandTotal:{
+                        $sum:'$totalGrandTotal'
+                    },
+                    totalSalary: {
                         $sum: '$totalSalary'
                     }
                 }

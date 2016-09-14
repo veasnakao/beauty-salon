@@ -41,12 +41,6 @@ Template.editCustomer.events({
 });
 AutoForm.hooks({
     editCustomer: {
-        // before: {
-        //     insert: function (doc) {
-        //         doc._id = idGenerator.gen(Collection.Customer, 4);
-        //         return doc;
-        //     }
-        // },
         onSuccess(formType, id){
             sAlert.success('Customer Edit Success');
         },

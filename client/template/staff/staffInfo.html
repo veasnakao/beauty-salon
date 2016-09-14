@@ -38,6 +38,15 @@
                         {{/ionItem}}
                         {{#ionItem}}
                             <div class="row">
+                                <div class="col col-33 col-offset-10"><h2>Work Date</h2></div>
+                                <div class="col"><h2>:</h2></div>
+                                <div class="col col-80">
+                                    <h2>{{moFormat workDate 'MM/DD/YYYY'}}</h2>
+                                </div>
+                            </div>
+                        {{/ionItem}}
+                        {{#ionItem}}
+                            <div class="row">
                                 <div class="col col-33 col-offset-10"><h2>Fee (%)</h2></div>
                                 <div class="col"><h2>:</h2></div>
                                 <div class="col col-80">
@@ -51,6 +60,15 @@
                                 <div class="col"><h2>:</h2></div>
                                 <div class="col col-80">
                                     <h2>{{numFormat baseSalary '0,0.00 $'}}</h2>
+                                </div>
+                            </div>
+                        {{/ionItem}}
+                        {{#ionItem}}
+                            <div class="row">
+                                <div class="col col-33 col-offset-10"><h2>Status</h2></div>
+                                <div class="col"><h2>:</h2></div>
+                                <div class="col col-80">
+                                    <h2>{{status}}</h2>
                                 </div>
                             </div>
                         {{/ionItem}}

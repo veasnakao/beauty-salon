@@ -29,7 +29,7 @@ AutoForm.hooks({
                 console.log(date);
                 date = moment(date).format('YYYYMMDD');
                 let prefix = date + '-';
-                doc._id = idGenerator.genWithPrefix(Collection.JournalEntry, prefix, 4);
+                doc._id = idGenerator.genWithPrefix(Collection.JournalEntry, '001-', 7);
                 return doc;
             }
         },

@@ -19,6 +19,10 @@ Schema.Staff = new SimpleSchema({
             }
         }
     },
+    workDate: {
+        type:Date,
+        label:"Word Date"
+    },
     fee: {
         type: Number,
         label: "Fee (%)",
@@ -30,6 +34,19 @@ Schema.Staff = new SimpleSchema({
         label: "Base Salary ($)",
         decimal: true,
         optional: true
+    },
+    status:{
+        type: String,
+        label: "Status",
+        autoform: {
+            type: "select",
+            options: function () {
+                return [
+                    {label: 'Close', value: 'close'},
+                    {label: 'Active', value: 'active'}
+                ];
+            }
+        }
     },
     tel: {
         type: String,

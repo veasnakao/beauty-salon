@@ -37,6 +37,7 @@
                 {{#if staffSalary}}
                     <div style="margin:20px 10px;">
                         <h4 style="text-align: center;"><u>Staff Salary Report</u></h4>
+                        <div style="border-bottom: 1px solid #C4C4C4;"></div>
                         <h5 style="margin-left: 10px;">
                             {{#with date}}
                                 Date : {{moFormat fromDate 'DD/MM/YYYY'}} - {{moFormat toDate 'DD/MM/YYYY'}}
@@ -47,10 +48,10 @@
                                 <div class="row" style="background-color:#f2f2f2;">
                                     <div class="col">ID</div>
                                     <div class="col">Name</div>
-                                    <div class="col">Base Salary</div>
                                     <div class="col">Fee</div>
                                     <div class="col">Total Service</div>
                                     <div class="col">Total Fee</div>
+                                    <div class="col">Base Salary</div>
                                     <div class="col">Total Salary</div>
                                 </div>
                                 {{#each data}}
@@ -58,22 +59,22 @@
                                         <div class="row">
                                             <div class="col">{{_id}}</div>
                                             <div class="col">{{staffName}}</div>
-                                            <div class="col">{{numFormat baseSalary '0,0.00 $'}}</div>
                                             <div class="col">{{fee}} %</div>
-                                            <div class="col">{{numFormat totalService '0,0.00 $'}}</div>
+                                            <div class="col">{{numFormat totalGrandTotal '0,0.00 $'}}</div>
                                             <div class="col">{{numFormat totalFee '0,0.00 $'}}</div>
+                                            <div class="col">{{numFormat baseSalary '0,0.00 $'}}</div>
                                             <div class="col">{{numFormat totalSalary '0,0.00 $'}}</div>
                                         </div>
                                     </div>
                                 {{/each}}
-                                <div class="row">
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
+                                <div class="row" style="background-color: #FFFBAC;">
                                     <div class="col"></div>
                                     <div class="col"></div>
                                     <div class="col">Total</div>
-                                    <div class="col">{{numFormat total '0,0.00 $'}}</div>
+                                    <div class="col">{{numFormat totalGrandTotal '0,0.00 $'}}</div>
+                                    <div class="col">{{numFormat totalFee '0,0.00 $'}}</div>
+                                    <div class="col">{{numFormat totalBaseSalary '0,0.00 $'}}</div>
+                                    <div class="col">{{numFormat totalSalary '0,0.00 $'}}</div>
                                 </div>
                             {{/each}}
                         </div>

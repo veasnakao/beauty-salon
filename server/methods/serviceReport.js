@@ -82,19 +82,28 @@ Meteor.methods({
                             amount:'$orderDetailDoc.amount'
                         }
                     },
-                    total:{
+                    total: {
                         $last: "$total"
                     },
-                    paymentDate:{
+                    discountType:{
+                        $last: "$discountType"
+                    },
+                    discount:{
+                        $last: "$discountVal"
+                    },
+                    grandTotal:{
+                        $last: "$grandTotal"
+                    },
+                    paymentDate: {
                         $last: "$paymentDoc.paymentDate"
                     },
-                    dueAmount:{
+                    dueAmount: {
                         $last: "$paymentDoc.dueAmount"
                     },
-                    paidAmount:{
+                    paidAmount: {
                         $last: "$paymentDoc.paidAmount"
                     },
-                    balance:{
+                    balance: {
                         $last: "$paymentDoc.balance"
                     }
                 }

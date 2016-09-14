@@ -58,7 +58,7 @@ Meteor.methods({
                         $sum: '$journalEntryItem.journalItemPrice'
                     },
                     serviceTotal: {
-                        $sum: '$serviceDoc.total'
+                        $sum: '$serviceDoc.grandTotal'
                     }
                 }
             },
@@ -110,7 +110,7 @@ Meteor.methods({
                         $sum: '$journalItem.journalTotalByItem'
                     },
                     serviceTotal: {
-                        $last: "$serviceTotal"
+                        $sum: "$serviceTotal"
                     }
                 }
             },
@@ -124,6 +124,11 @@ Meteor.methods({
                     total: {
                         $add: ["$journalTotal", "$serviceTotal"]
                     }
+                }
+            },
+            {
+                $sort: {
+                    journalType:-1
                 }
             }
         ]);

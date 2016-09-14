@@ -21,15 +21,15 @@ Meteor.methods({
                 }
             },
             {
-                $unwind: {path: '$staffDoc', preserveNullAndEmptyArrays: true}
+                $unwind: { path: '$staffDoc', preserveNullAndEmptyArrays: true }
             },
             {
                 $group: {
                     _id: {
                         staffId: '$staffId',
-                        month: {$month: "$date"},
-                        day: {$dayOfMonth: "$date"},
-                        year: {$year: "$date"}
+                        month: { $month: "$date" },
+                        day: { $dayOfMonth: "$date" },
+                        year: { $year: "$date" }
                     },
                     staffName: {
                         $last: '$staffDoc.name'
@@ -42,6 +42,12 @@ Meteor.methods({
                     },
                     totalService: {
                         $sum: '$total'
+                    },
+                    totalDiscountAmount: {
+                        $sum: '$discountAmount'
+                    },
+                    totalGrandTotal: {
+                        $sum: '$grandTotal'
                     }
                 }
             },
@@ -54,28 +60,42 @@ Meteor.methods({
                     totalServiceByDate: {
                         $addToSet: {
                             date: '$date',
-                            totalService: '$totalService'
+                            totalService: '$totalService',
+                            totalDiscountAmount: '$totalDiscountAmount',
+                            totalGrandTotal: '$totalGrandTotal'
                         }
                     },
                     totalService: {
-                        $addToSet: '$totalService'
+                        $sum: '$totalService'
+                    },
+                    totalDiscountAmount: {
+                        $sum: "$totalDiscountAmount"
+                    },
+                    totalGrandTotal: {
+                        $sum: "$totalGrandTotal"
                     }
                 }
-            },
-            {
-                $unwind: {path: '$totalService', preserveNullAndEmptyArrays: true}
             },
             {
                 $group: {
                     _id: null,
                     data: {
                         $addToSet: {
-                            name: '$staffName',
-                            totalServiceByDate: '$totalServiceByDate'
+                            staff: '$staffName',
+                            totalServiceByDate: '$totalServiceByDate',
+                            subTotalServiceByDate:'$totalService',
+                            subTotalDiscountByDate:'$totalDiscountAmount',
+                            subTotalGrandTotalByDate:'$totalGrandTotal'
                         }
                     },
                     total: {
                         $sum: '$totalService'
+                    },
+                    totalDiscountAmount: {
+                        $sum: '$totalDiscountAmount'
+                    },
+                    totalGrandTotal: {
+                        $sum: '$totalGrandTotal'
                     }
                 }
             }
@@ -107,15 +127,15 @@ Meteor.methods({
                 }
             },
             {
-                $unwind: {path: '$staffDoc', preserveNullAndEmptyArrays: true}
+                $unwind: { path: '$staffDoc', preserveNullAndEmptyArrays: true }
             },
             {
                 $group: {
                     _id: {
                         staffId: '$staffId',
-                        month: {$month: "$date"},
-                        day: {$dayOfMonth: "$date"},
-                        year: {$year: "$date"}
+                        month: { $month: "$date" },
+                        day: { $dayOfMonth: "$date" },
+                        year: { $year: "$date" }
                     },
                     staffName: {
                         $last: '$staffDoc.name'
@@ -128,6 +148,12 @@ Meteor.methods({
                     },
                     totalService: {
                         $sum: '$total'
+                    },
+                    totalDiscountAmount: {
+                        $sum: '$discountAmount'
+                    },
+                    totalGrandTotal: {
+                        $sum: '$grandTotal'
                     }
                 }
             },
@@ -140,28 +166,42 @@ Meteor.methods({
                     totalServiceByDate: {
                         $addToSet: {
                             date: '$date',
-                            totalService: '$totalService'
+                            totalService: '$totalService',
+                            totalDiscountAmount: '$totalDiscountAmount',
+                            totalGrandTotal: '$totalGrandTotal'
                         }
                     },
                     totalService: {
-                        $addToSet: '$totalService'
+                        $sum: '$totalService'
+                    },
+                    totalDiscountAmount: {
+                        $sum: "$totalDiscountAmount"
+                    },
+                    totalGrandTotal: {
+                        $sum: "$totalGrandTotal"
                     }
                 }
-            },
-            {
-                $unwind: {path: '$totalService', preserveNullAndEmptyArrays: true}
             },
             {
                 $group: {
                     _id: null,
                     data: {
                         $addToSet: {
-                            name: '$staffName',
-                            totalServiceByDate: '$totalServiceByDate'
+                            staff: '$staffName',
+                            totalServiceByDate: '$totalServiceByDate',
+                            subTotalServiceByDate:'$totalService',
+                            subTotalDiscountByDate:'$totalDiscountAmount',
+                            subTotalGrandTotalByDate:'$totalGrandTotal'
                         }
                     },
                     total: {
                         $sum: '$totalService'
+                    },
+                    totalDiscountAmount: {
+                        $sum: '$totalDiscountAmount'
+                    },
+                    totalGrandTotal: {
+                        $sum: '$totalGrandTotal'
                     }
                 }
             }

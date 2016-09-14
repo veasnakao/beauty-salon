@@ -78,6 +78,18 @@ Meteor.methods({
                     },
                     subTotal:{
                         $last: "$total"
+                    },
+                    discountType:{
+                        $last: "$discountType"
+                    },
+                    discountVal:{
+                        $last: "$discountVal"
+                    },
+                    discountAmount:{
+                        $last: "$discountAmount"
+                    },
+                    grandTotal:{
+                        $last: "$grandTotal"
                     }
                 }
             },

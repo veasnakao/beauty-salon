@@ -6,7 +6,7 @@ Template.editItem.created = function () {
 };
 
 //onrender
-Template.editItem.rendered = function() {
+Template.editItem.rendered = function () {
     try {
         this.autorun(() => {
             if (!this.subscription.ready()) {
@@ -34,10 +34,23 @@ Template.editItem.helpers({
 AutoForm.hooks({
     editItem: {
         onSuccess(formType, id){
-            sAlert.success('Staff Edit Success');
+            swal({
+                title: "Success",
+                text: "Service item update success",
+                type: "success",
+                timer: 1000,
+                confirmButtonColor: "#45B1FC",
+                showConfirmButton: true
+            })
         },
         onError(formType, error){
-            sAlert.error(error.message);
+            swal({
+                title: "Error",
+                text: error,
+                type: "error",
+                timer: 3000,
+                showConfirmButton: true
+            })
         }
     }
 });

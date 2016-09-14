@@ -19,7 +19,6 @@
         {{#ionView}}
             {{#ionContent}}
                 {{#if checkStatus}}
-
                     <div class="card animated bounceInDown">
                         {{#autoForm collection="Collection.Order" id="orderList" doc=order}}
                             <div class="row responsive-sm">
@@ -34,27 +33,28 @@
                                 </div>
                             </div>
                         {{/autoForm}}
-
                     </div>
                 {{else}}
-                    <div class="card animated bounceInDown">
-                        {{#autoForm collection="Collection.Order" id="orderList" doc=order}}
-                            <div class="row">
-                                <div class="col">
-                                    {{> afQuickField name='date' class="js-orderDate" readonly=true}}
+                    {{#if order}}
+                        <div class="card animated bounceInDown">
+                            {{#autoForm collection="Collection.Order" id="orderList" doc=order}}
+                                <div class="row">
+                                    <div class="col">
+                                        {{> afQuickField name='date' class="js-orderDate" readonly=true}}
+                                    </div>
+                                    <div class="col"></div>
                                 </div>
-                                <div class="col"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    {{> afQuickField name='customerId' class="js-customer" disabled="true"}}
+                                <div class="row">
+                                    <div class="col">
+                                        {{> afQuickField name='customerId' class="js-customer" disabled="true"}}
+                                    </div>
+                                    <div class="col">
+                                        {{> afQuickField name='staffId' class="js-staff" disabled="true"}}
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    {{> afQuickField name='staffId' class="js-staff" disabled="true"}}
-                                </div>
-                            </div>
-                        {{/autoForm}}
-                    </div>
+                            {{/autoForm}}
+                        </div>
+                    {{/if}}
                 {{/if}}
                 {{#each showOrderDetail}}
                     <div class="card">
@@ -127,14 +127,22 @@
                                                 {{/if}}
                                             </div>
                                         </div>
-                                        <div class="col-10">
-                                            <button class="button button-positive button-small"
-                                                    data-ion-modal="addDiscount"
-                                                    style="margin-top: -8px;margin-left:10px;">
-                                                {{> ionIcon class="ion ion-edit"}}
-                                            </button>
-                                        </div>
+                                        {{#if checkStatus}}
+                                            <div class="col-25">
+                                                <button class="button button-positive button-small"
+                                                        data-ion-modal="addDiscount"
+                                                        style="margin-top: -8px;margin-left:10px;">
+                                                    {{> ionIcon class="ion ion-edit"}}
+                                                </button>
+                                                <button class="button button-assertive button-small"
+                                                        style="margin-top: -8px;margin-left:10px;"
+                                                        name="delete-discount">
+                                                    {{> ionIcon class="ion ion-trash-a"}}
+                                                </button>
+                                            </div>
+                                        {{/if}}
                                     </div>
+
                                     <div class="row">
                                         <div class="col-50">Grand Total :</div>
                                         <div class="col-33">
@@ -203,7 +211,7 @@
                     <div class="col">
                         <button class="button button-round button-block button-assertive js-cancelOrder">
                             {{> ionIcon class="ion ion-trash-a"}}
-                            Cancel Order
+                            Delete Order
                         </button>
                     </div>
                     <div class="col">

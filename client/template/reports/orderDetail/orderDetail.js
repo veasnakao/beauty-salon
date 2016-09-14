@@ -23,6 +23,11 @@ Template.orderDetailReport.helpers({
     checkIsNotEmpty(total){
         return total != 0 && total != null;
     },
+    checkDiscountType(type){
+        if (type == 'c') {
+            return true;
+        }
+    }
 });
 
 Template.orderDetailReport.events({

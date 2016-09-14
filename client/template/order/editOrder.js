@@ -16,7 +16,7 @@ Template.editOrder.rendered = function () {
             }
         })
     } catch (e) {
-        console.log(e);
+        // console.log(e);
     }
 };
 

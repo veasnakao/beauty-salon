@@ -113,12 +113,18 @@ Template._productItem.events({
                                 sAlert.error(error.message);
                                 IonLoading.hide();
                             } else {
-                                overhang.notify({
-                                    type : "success",
-                                    message: "Added success"
+                                Meteor.call('updateGrandTotal', orderId, (error, result)=> {
+                                    if (error) {
+                                        sAlert.error(error.message);
+                                    } else {
+                                        overhang.notify({
+                                            type: "success",
+                                            message: "Added success"
+                                        });
+                                        IonLoading.hide();
+                                        Session.set('orderId', result);
+                                    }
                                 });
-                                IonLoading.hide();
-                                Session.set('orderId', result);
                             }
                         });
                     }

@@ -34,10 +34,23 @@ Template.editJournalItem.helpers({
 AutoForm.hooks({
     editJournalItem: {
         onSuccess(formType, id){
-            sAlert.success('Journal Item Edit Success');
+            swal({
+                title: "Success",
+                text: "Joural item edit success",
+                type: "success",
+                timer: 1000,
+                confirmButtonColor: "#45B1FC",
+                showConfirmButton: true
+            })
         },
         onError(formType, error){
-            sAlert.error(error.message);
+            swal({
+                title: "Error",
+                text:error,
+                type:"error",
+                timer: 3000,
+                showConfirmButton: true
+            })
         }
     }
 });
