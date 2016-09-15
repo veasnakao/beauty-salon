@@ -25,7 +25,6 @@ Template.journalItemInfo.helpers({
     journalItemInfo: function () {
         let journalItemInfo = Collection.JournalItem.findOne({_id: Router.current().params._id});
         if (journalItemInfo) {
-            console.log(journalItemInfo);
             return journalItemInfo;
         }
     }

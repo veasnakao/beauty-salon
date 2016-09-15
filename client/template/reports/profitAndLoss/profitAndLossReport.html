@@ -35,9 +35,10 @@
                 <div class="print" style="padding: 0;width: 720px;height: auto;margin: 0 auto;margin-bottom: 50px;">
                     {{#if profitAndLoss}}
                         <h4 style="text-align: center;"><u>Profit and Loss Report</u></h4>
+                        <div style="border-bottom: 1px solid #C4C4C4;"></div>
                         <h5 style="margin-left: 10px;">
                             {{#with profitAndLossDate}}
-                                Date : {{moFormat fromDate 'DD/MM/YYYY'}} - {{moFormat toDate 'DD/MM/YYYY'}}
+                                Date : {{moFormat fromDate 'MM/DD/YYYY'}} - {{moFormat toDate 'MM/DD/YYYY'}}
                             {{/with}}
                         </h5>
                         <table style="border: 1px solid #ddd;" class="report-content">

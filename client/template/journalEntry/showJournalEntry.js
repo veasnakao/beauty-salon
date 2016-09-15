@@ -2,7 +2,13 @@
 Template.showJournalEntry.created = function () {
     Meteor.call('showJournalEntry', (error, result)=> {
         if (error) {
-            sAlert.error(error.message);
+            swal({
+                title: "Error",
+                text:error,
+                type:"error",
+                timer: 3000,
+                showConfirmButton: true
+            })
         } else {
             Session.set('showJournalEntry', result);
         }
@@ -16,7 +22,6 @@ Template.showJournalEntry.helpers({
     },
     showJournalEntry(){
         if (Session.get('showJournalEntry')) {
-            console.log(Session.get('showJournalEntry'));
             return Session.get('showJournalEntry');
         }
     }
@@ -25,16 +30,12 @@ Template.showJournalEntry.helpers({
 Template.showJournalEntry.events({
     'click .journalEntryById'(){
         let id = this.journalEntryId;
-        console.log(this);
         // Router.go(`/journalEntryDetail/orderId/${orderId}?staffId=${order.staffId}&customerId=${order.customerId}`);
         Router.go(`/journalEntryDetailById/${id}`);
 
     },
     'click .add-journalEntry'(){
         Router.go('addJournalEntry');
-    },
-    'click .edit-journalEntry'(){
-        console.log(this);
     }
 });
 

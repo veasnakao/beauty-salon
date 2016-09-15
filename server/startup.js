@@ -23,7 +23,13 @@ Meteor.startup(function () {
         console.log(superId);
         Roles.addUsersToRoles(superId, ['cashier', 'setting', 'seller', 'super'])
     }
-    
-
+    if (Collection.Company.find().count() == 0) {
+        let company = {
+            companyName: "Rabbit TC",
+            address: "Battambang",
+            tel: "096753432"
+        };
+        Collection.Company.insert(company);
+    }
 });
 

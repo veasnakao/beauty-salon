@@ -57,9 +57,12 @@ Template.customerInfo.events({
                 });
             } else {
                 swal({
-                    title: "Cancelled",
-                    type: "error"
-                });
+                    title: "Error",
+                    text: error,
+                    type: "error",
+                    timer: 3000,
+                    showConfirmButton: true
+                })
             }
         });
     }

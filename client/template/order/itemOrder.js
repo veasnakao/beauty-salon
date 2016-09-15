@@ -118,9 +118,15 @@ Template.itemOrder.events({
         let updateObj = {};
         if (orderDate && orderId) {
             updateObj.date = orderDate;
-            Meteor.call('updateOrder', orderId, updateObj, (error,result)=> {
+            Meteor.call('updateOrder', orderId, updateObj, (error, result)=> {
                 if (error) {
-                    sAlert.error(error.message);
+                    swal({
+                        title: "Error",
+                        text: error,
+                        type: "error",
+                        timer: 3000,
+                        showConfirmButton: true
+                    })
                     IonLoading.hide();
                 }
             });
@@ -134,9 +140,15 @@ Template.itemOrder.events({
 
         if (customerId && orderId) {
             updateObj.customerId = customerId;
-            Meteor.call('updateOrder', orderId, updateObj, (error,result)=> {
+            Meteor.call('updateOrder', orderId, updateObj, (error, result)=> {
                 if (error) {
-                    sAlert.error(error.message);
+                    swal({
+                        title: "Error",
+                        text: error,
+                        type: "error",
+                        timer: 3000,
+                        showConfirmButton: true
+                    })
                     IonLoading.hide();
                 }
             });
@@ -156,9 +168,15 @@ Template.itemOrder.events({
 
         if (staffId && orderId) {
             updateObj.staffId = staffId;
-            Meteor.call('updateOrder', orderId, updateObj, (error,result)=> {
+            Meteor.call('updateOrder', orderId, updateObj, (error, result)=> {
                 if (error) {
-                    sAlert.error(error.message);
+                    swal({
+                        title: "Error",
+                        text: error,
+                        type: "error",
+                        timer: 3000,
+                        showConfirmButton: true
+                    })
                     IonLoading.hide();
                 }
             });
@@ -180,24 +198,46 @@ Template.itemOrder.events({
             quantity: 1,
             discount: 0
         };
-        Meteor.call('insertOrderDetail', selector, (err, result) => {
-            if (err) {
-                sAlert.error(error.message);
+        Meteor.call('insertOrderDetail', selector, (error, result) => {
+            if (error) {
+                swal({
+                    title: "Error",
+                    text: error,
+                    type: "error",
+                    timer: 3000,
+                    showConfirmButton: true
+                })
                 IonLoading.hide();
             } else {
                 let orderId = params.orderId;
-                Meteor.call('updateOrderTotal', orderId, (err, result)=> {
-                    if (err) {
-                        sAlert.error(error.message);
+                Meteor.call('updateOrderTotal', orderId, (error, result)=> {
+                    if (error) {
+                        swal({
+                            title: "Error",
+                            text: error,
+                            type: "error",
+                            timer: 3000,
+                            showConfirmButton: true
+                        })
                         IonLoading.hide();
                     } else {
                         Meteor.call('updateGrandTotal', orderId, (error, result)=> {
                             if (error) {
-                                sAlert.error(error.message);
+                                swal({
+                                    title: "Error",
+                                    text: error,
+                                    type: "error",
+                                    timer: 3000,
+                                    showConfirmButton: true
+                                })
                             } else {
-                                overhang.notify({
+                                swal({
+                                    title: "Success",
+                                    text: "Added success",
                                     type: "success",
-                                    message: "Added success"
+                                    timer: 800,
+                                    confirmButtonColor: "#45B1FC",
+                                    showConfirmButton: true
                                 });
                                 IonLoading.hide();
                                 Session.set('orderId', result);
@@ -241,19 +281,35 @@ Template.itemOrder.events({
                         IonLoading.hide();
                     } else {
                         let orderId = params.orderId;
-                        Meteor.call('updateOrderTotal', orderId, (err, result)=> {
-                            if (err) {
-                                sAlert.error(error.message);
+                        Meteor.call('updateOrderTotal', orderId, (error, result)=> {
+                            if (error) {
+                                swal({
+                                    title: "Error",
+                                    text: error,
+                                    type: "error",
+                                    timer: 3000,
+                                    showConfirmButton: true
+                                })
                                 IonLoading.hide();
                             } else {
                                 Meteor.call('updateGrandTotal', orderId, (error, result)=> {
                                     if (error) {
-                                        sAlert.error(error.message);
+                                        swal({
+                                            title: "Error",
+                                            text: error,
+                                            type: "error",
+                                            timer: 3000,
+                                            showConfirmButton: true
+                                        })
                                     } else {
-                                        overhang.notify({
+                                        swal({
+                                            title: "Success",
+                                            text: "Decrease quantity success",
                                             type: "success",
-                                            message: "Added success"
-                                        });
+                                            timer: 900,
+                                            confirmButtonColor: "#45B1FC",
+                                            showConfirmButton: true
+                                        })
                                         IonLoading.hide();
                                         Session.set('orderId', result);
                                     }
@@ -271,52 +327,96 @@ Template.itemOrder.events({
         let params = Router.current().params;
         let itemId = this.itemId;
         let orderDetail = Collection.OrderDetail.findOne({itemId: itemId});
-        IonPopup.confirm({
-            title: 'Are you sure to delete?',
-            template: `Item name : ${orderDetail.itemName}?`,
-            onOk: () => {
-                Meteor.call('removeOrderDetail', orderDetail._id, (err, result) => {
-                    if (err) {
-                        sAlert.error(`Cancel ${orderDetail.itemName}`);
-                    } else {
-                        let orderId = params.orderId;
-                        Meteor.call('updateOrderTotal', orderId, (err, result)=> {
-                            if (err) {
-                                sAlert.error(error.message);
-                                IonLoading.hide();
-                            } else {
-                                Meteor.call('updateGrandTotal', orderId, (error, result)=> {
-                                    if (error) {
-                                        sAlert.error(error.message);
-                                    } else {
-                                        overhang.notify({
-                                            type: "success",
-                                            message: "Added success"
-                                        });
-                                        IonLoading.hide();
-                                        Session.set('orderId', result);
-                                    }
-                                });
-                            }
-                        });
-                        sAlert.success(`Item delete success ${orderDetail.itemName}`);
-                    }
-                });
-            },
-            onCancel: function () {
-            }
-        });
+        if (orderDetail) {
+            swal({
+                title: "Are you sure?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#5591DF",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel plx!",
+                closeOnConfirm: false, closeOnCancel: false
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    Meteor.call('removeOrderDetail', orderDetail._id, (error, result) => {
+                        if (error) {
+                            swal({
+                                title: "Error",
+                                text: error,
+                                type: "error",
+                                timer: 3000,
+                                showConfirmButton: true
+                            })
+                        } else {
+                            let orderId = params.orderId;
+                            Meteor.call('updateOrderTotal', orderId, (error, result)=> {
+                                if (error) {
+                                    swal({
+                                        title: "Error",
+                                        text: error,
+                                        type: "error",
+                                        timer: 3000,
+                                        showConfirmButton: true
+                                    });
+                                    IonLoading.hide();
+                                } else {
+                                    Meteor.call('updateGrandTotal', orderId, (error, result)=> {
+                                        if (error) {
+                                            swal({
+                                                title: "Error",
+                                                text: error,
+                                                type: "error",
+                                                timer: 3000,
+                                                showConfirmButton: true
+                                            })
+                                        } else {
+                                            swal({
+                                                title: "Success",
+                                                text: "Service item delete success",
+                                                type: "success",
+                                                timer: 1000,
+                                                confirmButtonColor: "#45B1FC",
+                                                showConfirmButton: true
+                                            });
+                                            IonLoading.hide();
+                                            Session.set('orderId', result);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    swal({
+                        title: "Cancelled",
+                        type: "error"
+                    });
+                }
+            });
+        }
     },
     'click [name="delete-discount"]'(){
         let params = Router.current().params;
         let orderId = params.orderId;
         Meteor.call('deleteDiscount', orderId, (error, result)=> {
             if (error) {
-                sAlert.error(error.message);
+                swal({
+                    title: "Error",
+                    text:error,
+                    type:"error",
+                    timer: 3000,
+                    showConfirmButton: true
+                })
             } else {
                 Meteor.call('updateGrandTotal', orderId, (error, result)=> {
                     if (error) {
-                        sAlert.error(error.message);
+                        swal({
+                            title: "Error",
+                            text:error,
+                            type:"error",
+                            timer: 3000,
+                            showConfirmButton: true
+                        })
                     }
                 });
             }
@@ -339,11 +439,23 @@ Template.itemOrder.events({
                 selector.journalEntryItem = [];
                 Meteor.call('addJournalEntryByOrder', selector, (error, result)=> {
                     if (error) {
-                        sAlert.error(error.message);
+                        swal({
+                            title: "Error",
+                            text:error,
+                            type:"error",
+                            timer: 3000,
+                            showConfirmButton: true
+                        })
                     } else {
                         Meteor.call('updateOrderStatus', orderId, (error, result)=> {
                             if (error) {
-                                sAlert.error(error.message);
+                                swal({
+                                    title: "Error",
+                                    text:error,
+                                    type:"error",
+                                    timer: 3000,
+                                    showConfirmButton: true
+                                })
                             } else {
                                 Router.go(`/showOrder`);
                             }
@@ -360,9 +472,9 @@ Template.itemOrder.events({
         let params = Router.current().params;
         let orderId = params.orderId;
         let order = Collection.Order.findOne(orderId);
-        if(order){
+        if (order) {
             let customerId = order.customerId;
-            let staffId= order.staffId;
+            let staffId = order.staffId;
             Router.go(`/itemOrder/orderId/${orderId}/staffId/${staffId}/customerId/${customerId}/payment`);
         }
     },
@@ -419,35 +531,6 @@ Template.itemOrder.events({
                 });
             }
         });
-
-        // IonPopup.confirm({
-        //     title: 'Are you sure to cancel order?',
-        //     template: `Order Id : ${orderId}?`,
-        //     onOk: () => {
-        //         Meteor.call('deleteOrder', orderId, (error, result) => {
-        //             if (error) {
-        //                 sAlert.error(error.message);
-        //             } else {
-        //                 Meteor.call('removeOrderDetailByOrder', orderId, (error, result)=> {
-        //                     if (error) {
-        //                         sAlert.error(error.message);
-        //                     } else {
-        //                         Meteor.call('removePayment', orderId, (error, result)=> {
-        //                             if (error) {
-        //                                 sAlert.error(error.message);
-        //                             } else {
-        //                                 Router.go('/showOrder');
-        //                                 sAlert.success(`Order cancel success`);
-        //                             }
-        //                         })
-        //                     }
-        //                 });
-        //             }
-        //         });
-        //     },
-        //     onCancel: function () {
-        //     }
-        // });
     }
 });
 
@@ -456,7 +539,13 @@ Template.itemOrder.onDestroyed(function () {
     if (!_.isUndefined(orderId)) {
         Meteor.call('removeSaleIfNoSaleDetailExist', orderId, function (error, result) {
             if (error) {
-                sAlert.error(error.message);
+                swal({
+                    title: "Error",
+                    text:error,
+                    type:"error",
+                    timer: 3000,
+                    showConfirmButton: true
+                })
             }
         });
     }

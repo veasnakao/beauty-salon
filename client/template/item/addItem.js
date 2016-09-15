@@ -6,7 +6,7 @@ AutoForm.hooks({
     addItem: {//id autoform
         before: {
             insert: function (doc) {
-                doc._id = idGenerator.gen(Collection.Item, 4);
+                doc._id = idGenerator.genWithPrefix(Collection.Item, '001-', 7);
                 return doc;
             }
         },

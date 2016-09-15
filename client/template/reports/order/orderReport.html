@@ -72,7 +72,7 @@
                         <hr style="border-top: 1px solid #8c8b8b;">
                         <h5 style="margin-left: 10px;">
                             {{#with serviceDate}}
-                                Date : {{moFormat fromDate 'DD/MM/YYYY'}} - {{moFormat toDate 'DD/MM/YYYY'}}
+                                Date : {{moFormat fromDate 'MM/DD/YYYY'}} - {{moFormat toDate 'MM/DD/YYYY'}}
                             {{/with}}
                         </h5>
                         <div style="border:1px solid #DADADA;">
@@ -96,7 +96,7 @@
                                                 <div class="row">
                                                     <div class="col"></div>
                                                     <div class="col">
-                                                        {{moFormat date 'DD/MM/YYYY'}}
+                                                        {{moFormat date 'MM/DD/YYYY'}}
                                                     </div>
                                                     <div class="col">
                                                         {{numFormat totalService '0,0.00 $'}}

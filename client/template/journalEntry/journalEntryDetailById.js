@@ -4,11 +4,16 @@ Template.journalEntryDetailById.created = function () {
     this.autorun(function () {
         let journalEntryId = Router.current().params._id;
         this.subscription = Meteor.subscribe('journalEntry', id);
-        // this.subscription = Meteor.subscribe('journalItems');
     }.bind(this));
     Meteor.call('journalEntryDetailById', id, (error, result)=> {
         if (error) {
-            sAlert.error(error.message);
+            swal({
+                title: "Error",
+                text:error,
+                type:"error",
+                timer: 3000,
+                showConfirmButton: true
+            })
         } else {
             Session.set('journalEntryDetailById', result);
         }
@@ -22,7 +27,6 @@ Template.journalEntryDetailById.helpers({
     },
     journalEntryDetailById(){
         if (Session.get('journalEntryDetailById')) {
-            console.log(Session.get('journalEntryDetailById'));
             return Session.get('journalEntryDetailById');
         }
     }
@@ -32,27 +36,35 @@ Template.journalEntryDetailById.events({
     'click .js-delete-journal'(){
         let params = Router.current().params;
         let journalEntryId = params._id;
-        console.log(journalEntryId);
         let journalEntry = Collection.JournalEntry.findOne({_id: journalEntryId});
         if (journalEntry) {
-            IonPopup.confirm({
-                title: 'Are you sure to delete?',
-                template: `Journal : ${journalEntry._id}?`,
-                onOk: () => {
-                    Meteor.call('removeJournalEntry', journalEntry._id, (err, result) => {
-                        if (err) {
-                            sAlert.error(`Cancel ${journalEntry.name}`);
-                        } else {
-                            overhang.notify({
-                                type : "success",
-                                message: "Delete success"
+            swal({
+                title: "Are you sure?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#5591DF",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel plx!",
+                closeOnConfirm: false, closeOnCancel: false
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    Meteor.call('removeJournalEntry', journalEntry._id, (error, result) => {
+                        if (error) {
+                            swal({
+                                title: "Error",
+                                text: error,
+                                type: "error"
                             });
+                        } else {
+                            swal("Deleted!", "Your journal entry has been deleted.", "success");
                             Router.go(`/showJournalEntry`);
-                            sAlert.success(`Journal delete success ${journalEntry._id}`);
                         }
                     });
-                },
-                onCancel: function () {
+                } else {
+                    swal({
+                        title: "Cancelled",
+                        type: "error"
+                    });
                 }
             });
         }

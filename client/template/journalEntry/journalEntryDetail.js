@@ -4,7 +4,13 @@ Template.journalEntryDetail.created = function () {
     let journalType = params.journalType;
     Meteor.call('journalEntryDetail', date, journalType, (error, result)=> {
         if (error) {
-            sAlert.error(error.message);
+            swal({
+                title: "Error",
+                text:error,
+                type:"error",
+                timer: 3000,
+                showConfirmButton: true
+            })
         } else {
             Session.set('journalEntryDetail', result);
         }
@@ -18,7 +24,6 @@ Template.journalEntryDetail.helpers({
     },
     journalEntryDetail(){
         if (Session.get('journalEntryDetail')) {
-            console.log(Session.get('journalEntryDetail'));
             return Session.get('journalEntryDetail');
         }
     }

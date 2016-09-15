@@ -79,7 +79,7 @@ Template.payment.helpers({
         }
     },
     checkDiscountType(type){
-        if(type=='c'){
+        if (type == 'c') {
             return true;
         }
     }
@@ -100,7 +100,6 @@ Template.payment.events({
     'click .js-delete-payment'(){
         let params = Router.current().params;
         let serviceId = params.orderId;
-
         swal({
             title: "Are you sure?",
             type: "warning",
@@ -113,7 +112,13 @@ Template.payment.events({
             if (isConfirm) {
                 Meteor.call('removePayment', serviceId, (error, result) => {
                     if (error) {
-                        sAlert.error(`Cancel`);
+                        swal({
+                            title: "Error",
+                            text:error,
+                            type:"error",
+                            timer: 3000,
+                            showConfirmButton: true
+                        })
                     } else {
                         let status = 'active';
                         Meteor.call('updateOrderStatus', serviceId, status, (error, result)=> {

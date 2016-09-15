@@ -34,9 +34,15 @@ Template.editOrder.events({
     'click .editOrder'(){
         let params = Router.current().params;
         let orderId = params.orderId;
-        Meteor.call('updateOrderDetail', orderId, (err, result)=> {
-            if (err) {
-                sAlert.error(error.message);
+        Meteor.call('updateOrderDetail', orderId, (error, result)=> {
+            if (error) {
+                swal({
+                    title: "Error",
+                    text:error,
+                    type:"error",
+                    timer: 3000,
+                    showConfirmButton: true
+                })
                 IonLoading.hide();
             } else {
                 IonLoading.hide();
@@ -73,10 +79,23 @@ Template.editOrder.events({
 AutoForm.hooks({
     editOrder: {
         onSuccess(formType, id){
-            sAlert.success('Order Edit Success');
+            swal({
+                title: "Success",
+                text: "Order update success",
+                type: "success",
+                timer: 1000,
+                confirmButtonColor: "#45B1FC",
+                showConfirmButton: true
+            })
         },
         onError(formType, error){
-            sAlert.error(error.message);
+            swal({
+                title: "Error",
+                text:error,
+                type:"error",
+                timer: 3000,
+                showConfirmButton: true
+            })
         }
     }
 });

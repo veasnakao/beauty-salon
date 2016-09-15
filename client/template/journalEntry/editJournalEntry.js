@@ -43,10 +43,23 @@ AutoForm.hooks({
             let params = Router.current().params;
             let journalEntryId = params._id;
             Router.go(`/journalEntryDetailById/${journalEntryId}`);
-            sAlert.success('Journal Entry Edit Success');
+            swal({
+                title: "Success",
+                text: "Journal entry update success",
+                type: "success",
+                timer: 1000,
+                confirmButtonColor: "#45B1FC",
+                showConfirmButton: true
+            })
         },
         onError(formType, error){
-            sAlert.error(error.message);
+            swal({
+                title: "Error",
+                text: error,
+                type: "error",
+                timer: 3000,
+                showConfirmButton: true
+            })
         }
     }
 });

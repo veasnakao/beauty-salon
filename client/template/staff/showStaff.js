@@ -23,7 +23,6 @@ Template.showStaff.rendered = function () {
 //helpers
 Template.showStaff.helpers({
     checkSalary(salary){
-        console.log(salary);
         return salary!=0 && salary!=null;
     },
     checkFee(fee){

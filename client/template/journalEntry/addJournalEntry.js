@@ -26,18 +26,30 @@ AutoForm.hooks({
         before: {
             insert: function (doc) {
                 let date = doc.date;
-                console.log(date);
                 date = moment(date).format('YYYYMMDD');
                 let prefix = date + '-';
-                doc._id = idGenerator.genWithPrefix(Collection.JournalEntry, '001-', 7);
+                doc._id = idGenerator.genWithPrefix(Collection.JournalEntry, prefix, 4);
                 return doc;
             }
         },
         onSuccess(formType, id){
-            sAlert.success('Add Journal Entry Success');
+            swal({
+                title: "Success",
+                text: "Journal entry add success",
+                type: "success",
+                timer: 1000,
+                confirmButtonColor: "#45B1FC",
+                showConfirmButton: true
+            })
         },
         onError(formType, error){
-            sAlert.error(error.message);
+            swal({
+                title: "Error",
+                text: error,
+                type: "error",
+                timer: 3000,
+                showConfirmButton: true
+            })
         }
     }
 });

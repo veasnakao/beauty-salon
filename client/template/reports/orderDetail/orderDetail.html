@@ -37,6 +37,7 @@
                 {{#if orderDetailReport}}
                     <div style="margin:20px 10px;">
                         <h4 style="text-align: center;"><u>Service Detail Report</u></h4>
+                        <div style="border-bottom: 1px solid #C4C4C4;"></div>
                         <h5 style="margin-left: 10px;">
                             {{#with serviceDate}}
                                 Date : {{moFormat fromDate 'MM/DD/YYYY'}} - {{moFormat toDate 'MM/DD/YYYY'}}
@@ -60,7 +61,7 @@
                                 {{#each data}}
                                     <tr style="border: 1px solid #ddd;">
                                         <td style="padding: 5px;">{{_id}}</td>
-                                        <td style="padding: 5px;">{{moFormat date 'DD/MM/YYYY'}}</td>
+                                        <td style="padding: 5px;">{{moFormat date 'MM/DD/YYYY'}}</td>
                                         <td style="padding: 5px;">{{staff}}</td>
                                         <td style="padding: 5px;" colspan="6">{{customer}}</td>
                                     </tr>

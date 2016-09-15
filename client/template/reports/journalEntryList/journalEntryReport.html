@@ -1,7 +1,7 @@
 <template name="journalEntryReport">
     {{#if currentUser}}
         {{#contentFor "headerButtonLeft"}}
-            {{>ionNavBackButton path="index"}}
+            {{>ionNavBackButton path="report"}}
         {{/contentFor}}
 
         {{#contentFor "headerTitle"}}
@@ -67,9 +67,10 @@
                     {{#if journalEntryReport}}
                         <div style="margin:20px 10px;">
                             <h4 style="text-align: center;"><u>Journal Entry Report</u></h4>
+                            <div style="border-bottom: 1px solid #C4C4C4;"></div>
                             <h5 style="margin-left: 10px;">
                                 {{#with journalDate}}
-                                    Date : {{moFormat fromDate 'DD/MM/YYYY'}} - {{moFormat toDate 'DD/MM/YYYY'}}
+                                    Date : {{moFormat fromDate 'MM/DD/YYYY'}} - {{moFormat toDate 'MM/DD/YYYY'}}
                                 {{/with}}
                             </h5>
                             <h5 style="margin-left: 10px;">Journal Type : {{journalType}}</h5>
@@ -83,7 +84,7 @@
                                     {{#each journalEntryData}}
                                         <div style="padding: 5px;border-bottom:1px solid #DADADA;">
                                             <div class="row">
-                                                <div class="col">{{moFormat date 'DD/MM/YYYY'}}</div>
+                                                <div class="col">{{moFormat date 'MM/DD/YYYY'}}</div>
                                                 <div class="col"></div>
                                                 <div class="col"></div>
                                             </div>
@@ -110,13 +111,13 @@
                                             <div style="border-top:1px solid #DADADA;">
                                                 <div class="row">
                                                     <div class="col"></div>
-                                                    <div class="col">Sub Total</div>
-                                                    <div class="col">{{numFormat journalEntryTotalByDate '0,0.00 $'}}</div>
+                                                    <div class="col"><u>Sub Total</u></div>
+                                                    <div class="col"><u>{{numFormat journalEntryTotalByDate '0,0.00 $'}}</u></div>
                                                 </div>
                                             </div>
                                         </div>
                                     {{/each}}
-                                    <div class="row">
+                                    <div class="row" style="background: #FAFC6A;">
                                         <div class="col"></div>
                                         <div class="col">Total</div>
                                         <div class="col">{{numFormat total '0,0.00 $'}}</div>

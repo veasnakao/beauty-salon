@@ -24,10 +24,6 @@ Template.searchItem.rendered = function () {
 Template.searchItem.events({
     'keyup .js-search-item': (event, template)=> {
         Session.set('searchQueryItem', event.target.value);
-    },
-    'click .close-modal': ()=> {
-        // Session.set('searchQueryStaff', undefined);
-        // Session.set('searchQueryItem', undefined);
     }
 });
 
@@ -53,33 +49,6 @@ Template.searchItem.helpers({
     }
 });
 
-Template.searchItem.events({
-    // 'click .js-staff'(e){
-    //     if ($(e.currentTarget).prop('checked')) {
-    //         $('.js-item').prop('checked', false);
-    //         $('.js-query-staff').show(500);
-    //         $('.js-query-item').hide(500);
-    //         Session.set('searchQueryItem', undefined);
-    //     } else {
-    //         $('.js-query-staff').hide(500);
-    //         Session.set('searchQueryStaff', undefined);
-    //         Session.set('searchQueryItem', undefined);
-    //     }
-    // },
-    // 'click .js-item'(e){
-    //     if ($(e.currentTarget).prop('checked')) {
-    //         $('.js-staff').prop('checked', false);
-    //         $('.js-query-item').show(500);
-    //         $('.js-query-staff').hide(500);
-    //         Session.set('searchQueryStaff', undefined);
-    //     } else {
-    //         $('.js-query-item').hide(500);
-    //         Session.set('searchQueryStaff', undefined);
-    //         Session.set('searchQueryItem', undefined);
-    //     }
-    // }
-});
-
 
 //template _productItem events
 Template._productItem.events({
@@ -89,7 +58,6 @@ Template._productItem.events({
         let customerId = $('.js-customer');
         let staffId = $('.js-staff');
         let orderDate = Session.get('orderDate');
-
         let selector = Session.get('orderDetailObj');
         selector[this._id] = {
             orderId: params.orderId,
@@ -103,23 +71,45 @@ Template._productItem.events({
         if (selector) {
             Meteor.call('insertOrderDetail', selector, (error, result) => {
                 if (error) {
-                    sAlert.error(error.message);
+                    swal({
+                        title: "Error",
+                        text:error,
+                        type:"error",
+                        timer: 3000,
+                        showConfirmButton: true
+                    });
                     IonLoading.hide();
                 } else {
                     let orderId = params.orderId;
                     if (orderId) {
                         Meteor.call('updateOrderTotal', orderId, (error, result)=> {
                             if (error) {
-                                sAlert.error(error.message);
+                                swal({
+                                    title: "Error",
+                                    text:error,
+                                    type:"error",
+                                    timer: 3000,
+                                    showConfirmButton: true
+                                });
                                 IonLoading.hide();
                             } else {
                                 Meteor.call('updateGrandTotal', orderId, (error, result)=> {
                                     if (error) {
-                                        sAlert.error(error.message);
+                                        swal({
+                                            title: "Error",
+                                            text:error,
+                                            type:"error",
+                                            timer: 3000,
+                                            showConfirmButton: true
+                                        })
                                     } else {
-                                        overhang.notify({
+                                        swal({
+                                            title: "Success",
+                                            text: "Service item add success",
                                             type: "success",
-                                            message: "Added success"
+                                            timer: 800,
+                                            confirmButtonColor: "#45B1FC",
+                                            showConfirmButton: true
                                         });
                                         IonLoading.hide();
                                         Session.set('orderId', result);

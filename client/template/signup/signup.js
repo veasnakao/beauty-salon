@@ -31,13 +31,25 @@ Template.signup.events({
             }
             let createUser = Accounts.createUser(userObj, function (error) {
                 if (error) {
-                    sAlert.error(error.message);
+                    swal({
+                        title: "Error",
+                        text: error,
+                        type: "error",
+                        timer: 3000,
+                        showConfirmButton: true
+                    })
                 } else {
                     Router.go(`/login`);
                 }
             });
         } else {
-            sAlert.error(`Password mismatch`);
+            swal({
+                title: "Error",
+                text: "Password mismatch",
+                type: "error",
+                timer: 3000,
+                showConfirmButton: true
+            })
             $('.js-username').val(null);
             $('.js-password').val(null);
             $('.js-confirm-password').val(null);

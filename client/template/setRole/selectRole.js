@@ -10,10 +10,23 @@ Template.setRole.events({
     'click .approved-toggle'(){
         Meteor.call('approvedUser', this._id, this.profile.approved, (error, result) => {
             if (error) {
-                console.log(error)
+                swal({
+                    title: "Error",
+                    text:error,
+                    type:"error",
+                    timer: 3000,
+                    showConfirmButton: true
+                })
             }
             if (result) {
-                sAlert.success('update success');
+                swal({
+                    title: "Success",
+                    text: "Update success",
+                    type: "success",
+                    timer: 1000,
+                    confirmButtonColor: "#45B1FC",
+                    showConfirmButton: true
+                })
             }
         });
     }
@@ -24,9 +37,22 @@ AutoForm.hooks({
         onSubmit(doc) {
             Meteor.call('updateUserRole', doc._id, doc.roles, (err, result) => {
                 if (err) {
-                    sAlert.error(err.message);
+                    swal({
+                        title: "Error",
+                        text:error,
+                        type:"error",
+                        timer: 3000,
+                        showConfirmButton: true
+                    })
                 } else {
-                    sAlert.success('Role update success');
+                    swal({
+                        title: "Success",
+                        text: "Role update success",
+                        type: "success",
+                        timer: 1000,
+                        confirmButtonColor: "#45B1FC",
+                        showConfirmButton: true
+                    })
                 }
             });
             return false;

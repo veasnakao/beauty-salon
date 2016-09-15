@@ -5,9 +5,14 @@ Tracker.autorun(function () {
         // orderItemDetailByCustomer
         Meteor.call('orderItemDetailByCustomer', status, (error, result)=> {
             if (error) {
-                sAlert.error(error.message);
+                swal({
+                    title: "Error",
+                    text:error,
+                    type:"error",
+                    timer: 3000,
+                    showConfirmButton: true
+                })
             } else {
-                console.log('render here');
                 Session.set('orderByStaffResult', result);
             }
         });
@@ -21,7 +26,13 @@ Tracker.autorun(function () {
         let status = Session.get('orderStatus');
         Meteor.call('allOrderItemDetailByCustomer', status, Session.get('activeSaleLimit'), searchVal, (error, result)=> {
             if (error) {
-                sAlert.error(error.message);
+                swal({
+                    title: "Error",
+                    text:error,
+                    type:"error",
+                    timer: 3000,
+                    showConfirmButton: true
+                })
             } else {
                 Session.set('orderByStaffResult', result);
             }
@@ -57,9 +68,14 @@ Template.showOrder.rendered = function () {
         let status = Session.get('orderStatus');
         Meteor.call('orderItemDetailByCustomer', status, (error, result)=> {
             if (error) {
-                sAlert.error(error.message);
+                swal({
+                    title: "Error",
+                    text:error,
+                    type:"error",
+                    timer: 3000,
+                    showConfirmButton: true
+                })
             } else {
-                console.log('render here');
                 Session.set('orderByStaffResult', result);
             }
         });
@@ -118,7 +134,13 @@ Template.showOrder.events({
         selector.status = "active";
         Meteor.call('insertOrder', selector, (error, result) => {
             if (error) {
-                sAlert.error(error.message);
+                swal({
+                    title: "Error",
+                    text:error,
+                    type:"error",
+                    timer: 3000,
+                    showConfirmButton: true
+                })
                 IonLoading.hide();
             } else {
                 IonLoading.hide();
