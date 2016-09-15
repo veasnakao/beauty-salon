@@ -1,50 +1,54 @@
 <template name="journalItemInfo">
     {{#if currentUser}}
-        {{#contentFor "headerButtonLeft"}}
-            {{>ionNavBackButton path="showJournalItem"}}
-        {{/contentFor}}
+        {{#if isInRole 'setting'}}
+            {{#contentFor "headerButtonLeft"}}
+                {{>ionNavBackButton path="showJournalItem"}}
+            {{/contentFor}}
 
-        {{#contentFor "headerTitle"}}
-            <h1 class="title">Expense Item Info</h1>
-        {{/contentFor}}
+            {{#contentFor "headerTitle"}}
+                <h1 class="title">Expense Item Info</h1>
+            {{/contentFor}}
 
-        {{#contentFor "headerButtonRight"}}
-            <button class="button button-clear pull-left" data-ion-modal="editJournalItem"
-                    data-id="{{journalItemInfo._id}}">
-                {{> ionIcon icon="ion ion-edit"}}
-            </button>
-        {{/contentFor}}
-
-        {{#ionView}}
-            {{#ionContent}}
-                {{#ionList}}
-                    {{#with journalItemInfo}}
-                        {{#ionItem}}
-                            <div class="row">
-                                <div class="col col-33 col-offset-10"><h2>Type of Journal</h2></div>
-                                <div class="col"><h2>:</h2></div>
-                                <div class="col col-80">
-                                    <h2>{{typeOfJournal}}</h2>
-                                </div>
-                            </div>
-                        {{/ionItem}}
-                        {{#ionItem}}
-                            <div class="row">
-                                <div class="col col-33 col-offset-10"><h2>Journal Item Name</h2></div>
-                                <div class="col"><h2>:</h2></div>
-                                <div class="col col-80">
-                                    <h2>{{journalItemName}}</h2>
-                                </div>
-                            </div>
-                        {{/ionItem}}
-                    {{/with}}
-                {{/ionList}}
-                <button class="button button-block button-assertive ion-trash-a delete-journalItem">
-                    Delete
+            {{#contentFor "headerButtonRight"}}
+                <button class="button button-clear pull-left" data-ion-modal="editJournalItem"
+                        data-id="{{journalItemInfo._id}}">
+                    {{> ionIcon icon="ion ion-edit"}}
                 </button>
-            {{/ionContent}}
-        {{/ionView}}
+            {{/contentFor}}
+
+            {{#ionView}}
+                {{#ionContent}}
+                    {{#ionList}}
+                        {{#with journalItemInfo}}
+                            {{#ionItem}}
+                                <div class="row">
+                                    <div class="col col-33 col-offset-10"><h2>Type of Journal</h2></div>
+                                    <div class="col"><h2>:</h2></div>
+                                    <div class="col col-80">
+                                        <h2>{{typeOfJournal}}</h2>
+                                    </div>
+                                </div>
+                            {{/ionItem}}
+                            {{#ionItem}}
+                                <div class="row">
+                                    <div class="col col-33 col-offset-10"><h2>Journal Item Name</h2></div>
+                                    <div class="col"><h2>:</h2></div>
+                                    <div class="col col-80">
+                                        <h2>{{journalItemName}}</h2>
+                                    </div>
+                                </div>
+                            {{/ionItem}}
+                        {{/with}}
+                    {{/ionList}}
+                    <button class="button button-block button-assertive ion-trash-a delete-journalItem">
+                        Delete
+                    </button>
+                {{/ionContent}}
+            {{/ionView}}
+        {{else}}
+            {{> checkRoleUser}}
+        {{/if}}
     {{else}}
-        {{> login}}
+        {{> checkRoleUser}}
     {{/if}}
 </template>

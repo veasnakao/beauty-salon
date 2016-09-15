@@ -1,27 +1,33 @@
 <template name="showJournalItem">
     {{#if currentUser}}
-        <div class="bar bar-header bar-positive nav-bar-block nav-bar-transition-ios nav-bar-direction-forward" data-navbar-container>
-            <button class="button button-clear pull-left button-entering button-active">
-                {{>ionNavBackButton path="setting"}}
-            </button>
-            <h1 class="title">Journal Item</h1>
-            <button class="button button-clear add-order button-icon icon ion-plus-circled" data-ion-modal="addJournalItem">
-            </button>
-        </div>
+        {{#if isInRole 'setting'}}
+            <div class="bar bar-header bar-positive nav-bar-block nav-bar-transition-ios nav-bar-direction-forward"
+                 data-navbar-container>
+                <button class="button button-clear pull-left button-entering button-active">
+                    {{>ionNavBackButton path="setting"}}
+                </button>
+                <h1 class="title">Journal Item</h1>
+                <button class="button button-clear add-order button-icon icon ion-plus-circled"
+                        data-ion-modal="addJournalItem">
+                </button>
+            </div>
 
-        {{#ionView}}
-            {{#ionContent}}
-                {{#ionList}}
-                    {{#each showJournalItem}}
-                        {{#ionItem path="journalItemInfo" iconRight=true}}
-                            <h2>{{_id}} | {{journalItemName}}</h2>
-                            <h2>Type : {{typeOfJournal}}</h2>
-                            {{> ionIcon icon="ios-arrow-right"}}
-                        {{/ionItem}}
-                    {{/each}}
-                {{/ionList}}
-            {{/ionContent}}
-        {{/ionView}}
+            {{#ionView}}
+                {{#ionContent}}
+                    {{#ionList}}
+                        {{#each showJournalItem}}
+                            {{#ionItem path="journalItemInfo" iconRight=true}}
+                                <h2>{{_id}} | {{journalItemName}}</h2>
+                                <h2>Type : {{typeOfJournal}}</h2>
+                                {{> ionIcon icon="ios-arrow-right"}}
+                            {{/ionItem}}
+                        {{/each}}
+                    {{/ionList}}
+                {{/ionContent}}
+            {{/ionView}}
+        {{else}}
+            {{> checkRoleUser}}
+        {{/if}}
     {{else}}
         {{> login}}
     {{/if}}

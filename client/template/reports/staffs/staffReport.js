@@ -81,7 +81,13 @@ Template.staffReport.helpers({
         if (staffFee) {
             return staffFee;
         }
-    }
+    },
+    company(){
+        let company = Collection.Company.find();
+        if (company) {
+            return company;
+        }
+    },
 });
 
 Template.staffReport.events({
@@ -93,12 +99,10 @@ Template.staffReport.events({
     },
     'click .js-staff-fee'(e){
         if ($(e.currentTarget).prop('checked')) {
-            // $('.js-staff-base-salary').prop('checked', false);
         }
     },
     'click .js-staff-base-salary'(e){
         if ($(e.currentTarget).prop('checked')) {
-            // $('.js-staff-fee').prop('checked', false);
         }
     },
     'click .js-submit-report'(){

@@ -170,7 +170,6 @@ Template.payment.events({
         let params = Router.current().params;
         let serviceId = params.orderId;
         if (serviceId) {
-            console.log(serviceId);
             Meteor.call('serviceReport', serviceId, (error, result)=> {
                 if (error) {
                     swal({
@@ -204,7 +203,7 @@ AutoForm.hooks({
                 title: "Success",
                 text: "Payment success",
                 type: "success",
-                timer: 2000,
+                timer: 1000,
                 confirmButtonColor: "#45B1FC",
                 showConfirmButton: true
             })

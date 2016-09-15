@@ -1,0 +1,57 @@
+<template name="company">
+    {{#if currentUser}}
+        {{#if isInRole 'setting'}}
+            {{#contentFor "headerButtonLeft"}}
+                {{>ionNavBackButton path="setting"}}
+            {{/contentFor}}
+
+            {{#contentFor "headerTitle"}}
+                <h1 class="title">Company</h1>
+            {{/contentFor}}
+            {{#ionView}}
+                {{#ionContent}}
+                    {{#ionList}}
+                        <div class="card">
+                            <div class="item item-text-wrap">
+                                <div class="row">
+                                    <div class="col">Company name</div>
+                                    <div class="col">Address</div>
+                                    <div class="col">Tel</div>
+                                    <div class="col"></div>
+                                </div>
+                            </div>
+
+                            {{#each company}}
+                                <div class="item item-text-wrap">
+                                    <div class="row">
+                                        <div class="col">
+                                            {{companyName}}
+                                        </div>
+                                        <div class="col">
+                                            {{address}}
+                                        </div>
+                                        <div class="col">
+                                            {{tel}}
+                                        </div>
+
+                                        <div class="col">
+                                            <button class="button button-small button-clear button-icon icon ion-edit set-role"
+                                                    data-ion-modal="updateCompany"
+                                                    data-id="{{_id}}" style="color: #387ef5">
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            {{/each}}
+                        </div>
+                    {{/ionList}}
+                {{/ionContent}}
+            {{/ionView}}
+        {{else}}
+            {{> checkRoleUser}}
+        {{/if}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>

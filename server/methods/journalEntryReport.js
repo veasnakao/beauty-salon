@@ -230,7 +230,6 @@ Meteor.methods({
         let content = [];
         if (journalEntryDetail) {
             data.content = journalEntryDetail;
-            console.log(data);
             return data;
         }
     },

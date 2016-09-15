@@ -27,6 +27,12 @@ Template.orderDetailReport.helpers({
         if (type == 'c') {
             return true;
         }
+    },
+    company(){
+        let company = Collection.Company.find();
+        if(company) {
+            return company;
+        }
     }
 });
 
@@ -56,6 +62,7 @@ Template.orderDetailReport.events({
 
 //onDestroyed
 Template.orderDetailReport.onDestroyed(function () {
+    Session.set('orderDetailReport', undefined);
     Session.set('orderAllStaffResult', undefined);
     Session.set('staffId', undefined);
     Session.set('allStaffId', undefined);

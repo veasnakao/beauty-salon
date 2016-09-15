@@ -1,93 +1,97 @@
 <template name="staffInfo">
     {{#if currentUser}}
-        {{#contentFor "headerButtonLeft"}}
-            {{>ionNavBackButton path="showStaff"}}
-        {{/contentFor}}
+        {{#if isInRole 'setting'}}
+            {{#contentFor "headerButtonLeft"}}
+                {{>ionNavBackButton path="showStaff"}}
+            {{/contentFor}}
 
-        {{#contentFor "headerTitle"}}
-            <h1 class="title">Staff Info</h1>
-        {{/contentFor}}
+            {{#contentFor "headerTitle"}}
+                <h1 class="title">Staff Info</h1>
+            {{/contentFor}}
 
-        {{#contentFor "headerButtonRight"}}
-            <button class="button button-clear pull-left" data-ion-modal="editStaff" data-id="{{staffInfo._id}}">
-                {{> ionIcon icon="ion ion-edit"}}
-            </button>
-        {{/contentFor}}
-
-        {{#ionView}}
-            {{#ionContent}}
-                {{#ionList}}
-                    {{#with staffInfo}}
-                        {{#ionItem}}
-                            <div class="row">
-                                <div class="col col-33 col-offset-10"><h2>Name</h2></div>
-                                <div class="col"><h2>:</h2></div>
-                                <div class="col col-80">
-                                    <h2>{{name}}</h2>
-                                </div>
-                            </div>
-                        {{/ionItem}}
-                        {{#ionItem}}
-                            <div class="row">
-                                <div class="col col-33 col-offset-10"><h2>Gender</h2></div>
-                                <div class="col"><h2>:</h2></div>
-                                <div class="col col-80">
-                                    <h2>{{gender}}</h2>
-                                </div>
-                            </div>
-                        {{/ionItem}}
-                        {{#ionItem}}
-                            <div class="row">
-                                <div class="col col-33 col-offset-10"><h2>Work Date</h2></div>
-                                <div class="col"><h2>:</h2></div>
-                                <div class="col col-80">
-                                    <h2>{{moFormat workDate 'MM/DD/YYYY'}}</h2>
-                                </div>
-                            </div>
-                        {{/ionItem}}
-                        {{#ionItem}}
-                            <div class="row">
-                                <div class="col col-33 col-offset-10"><h2>Fee (%)</h2></div>
-                                <div class="col"><h2>:</h2></div>
-                                <div class="col col-80">
-                                    <h2>{{fee}} %</h2>
-                                </div>
-                            </div>
-                        {{/ionItem}}
-                        {{#ionItem}}
-                            <div class="row">
-                                <div class="col col-33 col-offset-10"><h2>Base Salary ($)</h2></div>
-                                <div class="col"><h2>:</h2></div>
-                                <div class="col col-80">
-                                    <h2>{{numFormat baseSalary '0,0.00 $'}}</h2>
-                                </div>
-                            </div>
-                        {{/ionItem}}
-                        {{#ionItem}}
-                            <div class="row">
-                                <div class="col col-33 col-offset-10"><h2>Status</h2></div>
-                                <div class="col"><h2>:</h2></div>
-                                <div class="col col-80">
-                                    <h2>{{status}}</h2>
-                                </div>
-                            </div>
-                        {{/ionItem}}
-                        {{#ionItem}}
-                            <div class="row">
-                                <div class="col col-33 col-offset-10"><h2>Tel</h2></div>
-                                <div class="col"><h2>:</h2></div>
-                                <div class="col col-80">
-                                    <h2>{{tel}}</h2>
-                                </div>
-                            </div>
-                        {{/ionItem}}
-                    {{/with}}
-                {{/ionList}}
-                <button class="button button-block button-assertive ion-trash-a delete-staff">
-                    Delete
+            {{#contentFor "headerButtonRight"}}
+                <button class="button button-clear pull-left" data-ion-modal="editStaff" data-id="{{staffInfo._id}}">
+                    {{> ionIcon icon="ion ion-edit"}}
                 </button>
-            {{/ionContent}}
-        {{/ionView}}
+            {{/contentFor}}
+
+            {{#ionView}}
+                {{#ionContent}}
+                    {{#ionList}}
+                        {{#with staffInfo}}
+                            {{#ionItem}}
+                                <div class="row">
+                                    <div class="col col-33 col-offset-10"><h2>Name</h2></div>
+                                    <div class="col"><h2>:</h2></div>
+                                    <div class="col col-80">
+                                        <h2>{{name}}</h2>
+                                    </div>
+                                </div>
+                            {{/ionItem}}
+                            {{#ionItem}}
+                                <div class="row">
+                                    <div class="col col-33 col-offset-10"><h2>Gender</h2></div>
+                                    <div class="col"><h2>:</h2></div>
+                                    <div class="col col-80">
+                                        <h2>{{gender}}</h2>
+                                    </div>
+                                </div>
+                            {{/ionItem}}
+                            {{#ionItem}}
+                                <div class="row">
+                                    <div class="col col-33 col-offset-10"><h2>Work Date</h2></div>
+                                    <div class="col"><h2>:</h2></div>
+                                    <div class="col col-80">
+                                        <h2>{{moFormat workDate 'MM/DD/YYYY'}}</h2>
+                                    </div>
+                                </div>
+                            {{/ionItem}}
+                            {{#ionItem}}
+                                <div class="row">
+                                    <div class="col col-33 col-offset-10"><h2>Fee (%)</h2></div>
+                                    <div class="col"><h2>:</h2></div>
+                                    <div class="col col-80">
+                                        <h2>{{fee}} %</h2>
+                                    </div>
+                                </div>
+                            {{/ionItem}}
+                            {{#ionItem}}
+                                <div class="row">
+                                    <div class="col col-33 col-offset-10"><h2>Base Salary ($)</h2></div>
+                                    <div class="col"><h2>:</h2></div>
+                                    <div class="col col-80">
+                                        <h2>{{numFormat baseSalary '0,0.00 $'}}</h2>
+                                    </div>
+                                </div>
+                            {{/ionItem}}
+                            {{#ionItem}}
+                                <div class="row">
+                                    <div class="col col-33 col-offset-10"><h2>Status</h2></div>
+                                    <div class="col"><h2>:</h2></div>
+                                    <div class="col col-80">
+                                        <h2>{{status}}</h2>
+                                    </div>
+                                </div>
+                            {{/ionItem}}
+                            {{#ionItem}}
+                                <div class="row">
+                                    <div class="col col-33 col-offset-10"><h2>Tel</h2></div>
+                                    <div class="col"><h2>:</h2></div>
+                                    <div class="col col-80">
+                                        <h2>{{tel}}</h2>
+                                    </div>
+                                </div>
+                            {{/ionItem}}
+                        {{/with}}
+                    {{/ionList}}
+                    <button class="button button-block button-assertive ion-trash-a delete-staff">
+                        Delete
+                    </button>
+                {{/ionContent}}
+            {{/ionView}}
+        {{else}}
+            {{> checkRoleUser}}
+        {{/if}}
     {{else}}
         {{> login}}
     {{/if}}

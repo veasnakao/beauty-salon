@@ -1,7 +1,7 @@
 Tracker.autorun(function () {
-    if (Session.get('OrderId')) {
-        Meteor.subscribe("journalEntrys");
-    }
+    // if (Session.get('OrderId')) {
+    //     Meteor.subscribe("journalEntrys");
+    // }
 });
 
 //oncreated
@@ -29,13 +29,15 @@ Template.itemOrder.rendered = function () {
         });
 
         let params = Router.current().params;
-        let staffId = params.query.staffId;
-        $('.js-staff').val(staffId);
-        let checkStaffId = $('.js-staff').val();
-        if (checkStaffId == null || checkStaffId == "") {
-            $('.search-item').hide();
-        } else {
-            $('.search-item').show();
+        let orderId = params.orderId;
+        let order = Collection.Order.findOne(orderId);
+        if(order) {
+            let staffId = order.staffId;
+            if(staffId){
+                $('.search-item').show();
+            }else{
+                $('.search-item').hide();
+            }
         }
     } catch (e) {
         // console.log(e);
@@ -126,7 +128,7 @@ Template.itemOrder.events({
                         type: "error",
                         timer: 3000,
                         showConfirmButton: true
-                    })
+                    });
                     IonLoading.hide();
                 }
             });
@@ -137,7 +139,6 @@ Template.itemOrder.events({
         let customerId = $('.js-customer').val();
         let orderId = params.orderId;
         let updateObj = {};
-
         if (customerId && orderId) {
             updateObj.customerId = customerId;
             Meteor.call('updateOrder', orderId, updateObj, (error, result)=> {
@@ -177,7 +178,6 @@ Template.itemOrder.events({
                         timer: 3000,
                         showConfirmButton: true
                     })
-                    IonLoading.hide();
                 }
             });
         }
@@ -268,7 +268,6 @@ Template.itemOrder.events({
                 discount: 0
             };
             orderDetailQuantity = orderDetail.quantity;
-            console.log(`qty : ${orderDetailQuantity}`);
             if (orderDetailQuantity === 1) {
                 IonPopup.alert({
                     title: 'Quantity order.',
@@ -402,8 +401,8 @@ Template.itemOrder.events({
             if (error) {
                 swal({
                     title: "Error",
-                    text:error,
-                    type:"error",
+                    text: error,
+                    type: "error",
                     timer: 3000,
                     showConfirmButton: true
                 })
@@ -412,8 +411,8 @@ Template.itemOrder.events({
                     if (error) {
                         swal({
                             title: "Error",
-                            text:error,
-                            type:"error",
+                            text: error,
+                            type: "error",
                             timer: 3000,
                             showConfirmButton: true
                         })
@@ -441,8 +440,8 @@ Template.itemOrder.events({
                     if (error) {
                         swal({
                             title: "Error",
-                            text:error,
-                            type:"error",
+                            text: error,
+                            type: "error",
                             timer: 3000,
                             showConfirmButton: true
                         })
@@ -451,8 +450,8 @@ Template.itemOrder.events({
                             if (error) {
                                 swal({
                                     title: "Error",
-                                    text:error,
-                                    type:"error",
+                                    text: error,
+                                    type: "error",
                                     timer: 3000,
                                     showConfirmButton: true
                                 })
@@ -541,8 +540,8 @@ Template.itemOrder.onDestroyed(function () {
             if (error) {
                 swal({
                     title: "Error",
-                    text:error,
-                    type:"error",
+                    text: error,
+                    type: "error",
                     timer: 3000,
                     showConfirmButton: true
                 })

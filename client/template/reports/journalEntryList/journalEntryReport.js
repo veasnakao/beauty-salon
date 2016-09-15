@@ -21,6 +21,12 @@ Template.journalEntryReport.helpers({
         if (Session.get('journalEntry')) {
             return Session.get('journalEntry');
         }
+    },
+    company(){
+        let company = Collection.Company.find();
+        if(company) {
+            return company;
+        }
     }
 });
 

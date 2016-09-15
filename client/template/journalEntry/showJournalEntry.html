@@ -1,56 +1,67 @@
 <template name="showJournalEntry">
     {{#if currentUser}}
-        <div class="bar bar-header bar-positive nav-bar-block nav-bar-transition-ios nav-bar-direction-forward"
-             data-navbar-container>
-            <button class="button button-clear pull-left button-entering button-active" data-ion-menu-toggle="left">
-                <i class="icon ion-navicon"></i>
-            </button>
-            <h1 class="title">Journal Entry List</h1>
-            <button class="button button-clear button-icon icon ion-plus-circled add-journalEntry">
-            </button>
-        </div>
-        {{#ionView}}
-            {{#ionContent}}
-                {{#ionList}}
-                    {{#if showJournalEntry}}
-                        {{#each showJournalEntry.content}}
-                            {{#if subTotalIsNotZero journalTotal}}
-                                {{#ionItem iconRight=true }}
-                                    <div class="row">
-                                        <div class="col">
-                                            <a href="{{pathFor route='journalEntryDetail'}}">
-                                                Date : {{moFormat date 'DD/MM/YYYY'}}
-                                            </a>
-                                        </div>
-                                        <div class="col">{{numFormat journalTotal '0,0.00 $'}}</div>
-                                        <div class="col">
-                                            Journal : {{journalType}}
-                                        </div>
-                                        {{> ionIcon icon="ios-arrow-right"}}
-                                    </div>
-                                    <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
-                                    {{#each journalEntry}}
-                                        {{#if subTotalIsNotZero journalTotalByItem}}
+        {{#if isInRole 'setting'}}
+            <div class="bar bar-header bar-positive nav-bar-block nav-bar-transition-ios nav-bar-direction-forward"
+                 data-navbar-container>
+                <button class="button button-clear pull-left button-entering button-active" data-ion-menu-toggle="left">
+                    <i class="icon ion-navicon"></i>
+                </button>
+                <h1 class="title">Journal Entry List</h1>
+                <button class="button button-clear button-icon icon ion-plus-circled add-journalEntry">
+                </button>
+            </div>
+            {{#ionView}}
+                {{#ionContent}}
+                    {{#ionList}}
+                        {{#if showJournalEntry}}
+                            {{#each showJournalEntry.content}}
+                                {{#each data}}
+                                    {{#if subTotalIsNotZero journalTotal}}
+                                        {{#ionItem iconRight=true }}
                                             <div class="row">
-                                                <div class="col journalEntryById" style="cursor: pointer;color: blue;">
-                                                    Id : {{journalEntryId}}
+                                                <div class="col">
+                                                    <a href="{{pathFor route='journalEntryDetail'}}">
+                                                        Date : {{moFormat date 'DD/MM/YYYY'}}
+                                                    </a>
                                                 </div>
-                                                <div class="col">{{numFormat journalTotalByItem '0,0.00 $'}}</div>
-                                                <div class="col"></div>
+                                                <div class="col">{{numFormat journalTotal '0,0.00 $'}}</div>
+                                                <div class="col">
+                                                    Journal : {{journalType}}
+                                                </div>
+                                                {{> ionIcon icon="ios-arrow-right"}}
                                             </div>
-                                        {{/if}}
-                                    {{/each}}
-                                {{/ionItem}}
-                            {{/if}}
-                            <br>
-                        {{/each}}
-                    {{/if}}
-                {{/ionList}}
-                <!--<button class="button button-block button-positive ion-refresh">-->
-                <!--Load More-->
-                <!--</button>-->
-            {{/ionContent}}
-        {{/ionView}}
+                                            <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
+                                            {{#each journalEntry}}
+                                                {{#if subTotalIsNotZero journalTotalByItem}}
+                                                    <div class="row">
+                                                        <div class="col journalEntryById"
+                                                             style="cursor: pointer;color: blue;">
+                                                            Id : {{journalEntryId}}
+                                                        </div>
+                                                        <div class="col">{{numFormat journalTotalByItem
+                                                                                     '0,0.00 $'}}</div>
+                                                        <div class="col"></div>
+                                                    </div>
+                                                {{/if}}
+                                            {{/each}}
+                                        {{/ionItem}}
+                                        <br>
+                                    {{/if}}
+                                {{/each}}
+                                {{#if countJournalEntry count}}
+                                    <button class="button button-block button-positive js-load-more">
+                                        {{> ionIcon class="ion ion-refresh"}}
+                                        Load More
+                                    </button>
+                                {{/if}}
+                            {{/each}}
+                        {{/if}}
+                    {{/ionList}}
+                {{/ionContent}}
+            {{/ionView}}
+        {{else}}
+            {{> checkRoleUser}}
+        {{/if}}
     {{else}}
         {{> login}}
     {{/if}}

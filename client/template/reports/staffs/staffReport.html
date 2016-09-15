@@ -1,139 +1,148 @@
 <template name="staffReport">
     {{#if currentUser}}
-        {{#contentFor "headerButtonLeft"}}
-            {{>ionNavBackButton path="reports"}}
-        {{/contentFor}}
+        {{#if isInRole 'setting'}}
+            {{#contentFor "headerButtonLeft"}}
+                {{>ionNavBackButton path="reports"}}
+            {{/contentFor}}
 
-        {{#contentFor "headerTitle"}}
-            <h1 class="title">Staff Report</h1>
-        {{/contentFor}}
+            {{#contentFor "headerTitle"}}
+                <h1 class="title">Staff Report</h1>
+            {{/contentFor}}
 
-        <div class="content has-header overflow-scroll">
-            <div class="list">
-                <div class="item item-toggle">
-                    Staff Fee
-                    <label class="toggle toggle-balanced">
-                        <input type="checkbox" class="js-staff-fee">
-                        <div class="track">
-                            <div class="handle"></div>
-                        </div>
-                    </label>
-                </div>
-                <div class="item item-toggle">
-                    Staff Base Salary
-                    <label class="toggle toggle-balanced">
-                        <input type="checkbox" class="js-staff-base-salary">
-                        <div class="track">
-                            <div class="handle"></div>
-                        </div>
-                    </label>
-                </div>
-                <button class="button button-full button-positive js-submit-report">
-                    OK
-                </button>
-            </div>
-            <div class="card">
-                <div class="item item-text-wrap" style="float: right;">
-                    <button id="print" class="button button-small button-balanced ion-printer js-print">
-                        Print
+            <div class="content has-header overflow-scroll">
+                <div class="list">
+                    <div class="item item-toggle">
+                        Staff Fee
+                        <label class="toggle toggle-balanced">
+                            <input type="checkbox" class="js-staff-fee">
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="item item-toggle">
+                        Staff Base Salary
+                        <label class="toggle toggle-balanced">
+                            <input type="checkbox" class="js-staff-base-salary">
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </div>
+                    <button class="button button-full button-positive js-submit-report">
+                        OK
                     </button>
                 </div>
-            </div>
+                <div class="card">
+                    <div class="item item-text-wrap" style="float: right;">
+                        <button id="print" class="button button-small button-balanced ion-printer js-print">
+                            Print
+                        </button>
+                    </div>
+                </div>
 
-            <div class="print" style="margin: 0;padding: 0;width: 720px;height: auto;margin: 0 auto;">
-                {{#if allStaff}}
-                    <div style="margin:20px 10px;display: none;" class="list-allStaff">
-                        <h4 style="text-align: center;"><u>Staff Report</u></h4>
-                        <div style="border-bottom: 1px solid #C4C4C4;"></div>
-                        <div style="border:1px solid #DADADA;">
-                            <div class="row" style="background-color:#f2f2f2;">
-                                <div class="col">ID</div>
-                                <div class="col">Name</div>
-                                <div class="col">Gender</div>
-                                <div class="col">Fee</div>
-                                <div class="col">Base Salary ($)</div>
-                            </div>
-                            {{#each allStaff}}
-                                <div class="item" style="padding: 5px;">
-                                    <div class="row">
-                                        <div class="col">{{_id}}</div>
-                                        <div class="col">{{name}}</div>
-                                        <div class="col">{{gender}}</div>
-                                        <div class="col">{{fee}} %</div>
-                                        <div class="col">{{numFormat baseSalary '0,0.00 $'}}</div>
-                                    </div>
-                                </div>
-                            {{/each}}
-                            <div class="row">
-                                <div class="col"></div>
-                                <div class="col"></div>
-                                <div class="col"></div>
-                                <div class="col">Total Staff</div>
-                                <div class="col">{{countAllStaff}}</div>
-                            </div>
+                <div class="print" style="margin: 0;padding: 0;width: 720px;height: auto;margin: 0 auto;">
+                    {{#if allStaff}}
+                        <div style="margin:20px 10px;display: none;" class="list-allStaff">
+                            {{#if company}}
+                                {{#each company}}
+                                    <h4 style="text-align: center;">{{companyName}}</h4>
+                                    <h4 style="text-align: center;">{{address}}</h4>
+                                {{/each}}
+                            {{/if}}
+                            <h5 style="text-align: center;"><u>Staff Report</u></h5>
+                            <table style="border: 1px solid #797979;" class="report-content">
+                                <tr class="profit" style="background-color: #E6E6E6;">
+                                    <td style="padding: 10px;">ID</td>
+                                    <td style="padding: 10px;">Name</td>
+                                    <td style="padding: 10px;">Gender</td>
+                                    <td style="padding: 10px;">Fee</td>
+                                    <td style="padding: 10px;">Base Salary</td>
+                                </tr>
+                                {{#each allStaff}}
+                                    <tr style="border: 1px solid #797979;">
+                                        <td style="padding: 10px;">{{_id}}</td>
+                                        <td style="padding: 10px;">{{name}}</td>
+                                        <td style="padding: 10px;">{{gender}}</td>
+                                        <td style="padding: 10px;">{{fee}}</td>
+                                        <td style="padding: 10px;">{{numFormat baseSalary '0,0.00 $'}}</td>
+                                    </tr>
+                                {{/each}}
+                                <tr>
+                                    <td colspan="4" style="padding: 10px;">Total Staff</td>
+                                    <td style="padding: 10px;">{{countAllStaff}}</td>
+                                </tr>
+                            </table>
                         </div>
-                    </div>
-                {{/if}}
-                {{#if staffFee}}
-                    <div style="margin:20px 10px;display: none;" class="list-staffFee">
-                        <h4 style="text-align: center;"><u>Staff Report</u></h4>
-                        <div style="border:1px solid #DADADA;">
-                            <div class="row" style="background-color:#f2f2f2;">
-                                <div class="col">ID</div>
-                                <div class="col">Name</div>
-                                <div class="col">Gender</div>
-                                <div class="col">Fee</div>
-                            </div>
-                            {{#each staffFee}}
-                                <div class="item" style="padding: 5px;">
-                                    <div class="row">
-                                        <div class="col">{{_id}}</div>
-                                        <div class="col">{{name}}</div>
-                                        <div class="col">{{gender}}</div>
-                                        <div class="col">{{fee}} %</div>
-                                    </div>
-                                </div>
-                            {{/each}}
-                            <div class="row">
-                                <div class="col"></div>
-                                <div class="col"></div>
-                                <div class="col">Total Staff</div>
-                                <div class="col">{{countStaffFee}}</div>
-                            </div>
+                    {{/if}}
+                    {{#if staffFee}}
+                        <div style="margin:20px 10px;display: none;" class="list-staffFee">
+                            {{#if company}}
+                                {{#each company}}
+                                    <h4 style="text-align: center;">{{companyName}}</h4>
+                                    <h4 style="text-align: center;">{{address}}</h4>
+                                {{/each}}
+                            {{/if}}
+                            <h5 style="text-align: center;"><u>Staff Report</u></h5>
+                            <table style="border: 1px solid #797979;" class="report-content">
+                                <tr class="profit" style="background-color: #E6E6E6;">
+                                    <td style="padding: 10px;">ID</td>
+                                    <td style="padding: 10px;">Name</td>
+                                    <td style="padding: 10px;">Gender</td>
+                                    <td style="padding: 10px;">Fee</td>
+                                </tr>
+                                {{#each staffFee}}
+                                    <tr style="border: 1px solid #797979;">
+                                        <td style="padding: 10px;">{{_id}}</td>
+                                        <td style="padding: 10px;">{{name}}</td>
+                                        <td style="padding: 10px;">{{gender}}</td>
+                                        <td style="padding: 10px;">{{fee}}</td>
+                                    </tr>
+                                {{/each}}
+                                <tr>
+                                    <td colspan="3" style="padding: 10px;">Total Staff</td>
+                                    <td style="padding: 10px;">{{countStaffFee}}</td>
+                                </tr>
+                            </table>
                         </div>
-                    </div>
-                {{/if}}
-                {{#if staffBaseSalary}}
-                    <div style="margin:20px 10px;display: none;" class="list-staffBaseSalary">
-                        <h4 style="text-align: center;"><u>Staff Report</u></h4>
-                        <div style="border:1px solid #DADADA;">
-                            <div class="row" style="background-color:#f2f2f2;">
-                                <div class="col">ID</div>
-                                <div class="col">Name</div>
-                                <div class="col">Gender</div>
-                                <div class="col">Base Salary ($)</div>
-                            </div>
-                            {{#each staffBaseSalary}}
-                                <div class="item" style="padding: 5px;">
-                                    <div class="row">
-                                        <div class="col">{{_id}}</div>
-                                        <div class="col">{{name}}</div>
-                                        <div class="col">{{gender}}</div>
-                                        <div class="col">{{numFormat baseSalary '0,0.00 $'}}</div>
-                                    </div>
-                                </div>
-                            {{/each}}
-                            <div class="row">
-                                <div class="col"></div>
-                                <div class="col"></div>
-                                <div class="col">Total Staff</div>
-                                <div class="col">{{countStaffBaseSalary}}</div>
-                            </div>
+                    {{/if}}
+                    {{#if staffBaseSalary}}
+                        <div style="margin:20px 10px;display: none;" class="list-staffBaseSalary">
+                            {{#if company}}
+                                {{#each company}}
+                                    <h4 style="text-align: center;">{{companyName}}</h4>
+                                    <h4 style="text-align: center;">{{address}}</h4>
+                                {{/each}}
+                            {{/if}}
+                            <h5 style="text-align: center;"><u>Staff Report</u></h5>
+
+                            <table style="border: 1px solid #797979;" class="report-content">
+                                <tr class="profit" style="background-color: #E6E6E6;">
+                                    <td style="padding: 10px;">ID</td>
+                                    <td style="padding: 10px;">Name</td>
+                                    <td style="padding: 10px;">Gender</td>
+                                    <td style="padding: 10px;">Base Salary</td>
+                                </tr>
+                                {{#each allStaff}}
+                                    <tr style="border: 1px solid #797979;">
+                                        <td style="padding: 10px;">{{_id}}</td>
+                                        <td style="padding: 10px;">{{name}}</td>
+                                        <td style="padding: 10px;">{{gender}}</td>
+                                        <td style="padding: 10px;">{{numFormat baseSalary '0,0.00 $'}}</td>
+                                    </tr>
+                                {{/each}}
+                                <tr>
+                                    <td colspan="3" style="padding: 10px;">Total Staff</td>
+                                    <td style="padding: 10px;">{{countStaffBaseSalary}}</td>
+                                </tr>
+                            </table>
                         </div>
-                    </div>
-                {{/if}}
+                    {{/if}}
+                </div>
             </div>
-        </div>
+        {{else}}
+            {{> checkRoleUser}}
+        {{/if}}
     {{else}}
         {{> login}}
     {{/if}}

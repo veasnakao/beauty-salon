@@ -16,8 +16,13 @@ Template.profitAndLossReport.helpers({
     },
     profitAndLoss(){
         if(Session.get('profitAndLoss')){
-            console.log(Session.get('profitAndLoss'));
             return Session.get('profitAndLoss');
+        }
+    },
+    company(){
+        let company = Collection.Company.find();
+        if(company) {
+            return company;
         }
     }
 });

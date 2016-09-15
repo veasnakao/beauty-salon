@@ -20,7 +20,13 @@ Template.staffSalaryReport.helpers({
             toDate: toDate
         }
         return date;
-    }
+    },
+    company(){
+        let company = Collection.Company.find();
+        if (company) {
+            return company;
+        }
+    },
 });
 
 Template.staffSalaryReport.events({
@@ -50,4 +56,6 @@ Template.staffSalaryReport.events({
 //onDestroyed
 Template.staffSalaryReport.onDestroyed(function () {
     Session.set('staffSalary', undefined);
+    Session.set('fromDate', undefined);
+    Session.set('toDate', undefined);
 });

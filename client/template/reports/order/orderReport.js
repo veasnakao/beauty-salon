@@ -26,6 +26,12 @@ Template.orderReport.helpers({
     checkIsNotEmpty(total){
         return total != 0 && total != null;
     },
+    company(){
+        let company = Collection.Company.find();
+        if(company) {
+            return company;
+        }
+    }
 });
 
 Template.orderReport.events({
@@ -58,7 +64,6 @@ Template.orderReport.events({
             Session.set('toDate', getToDate);
             if (Session.get('staffId')) {
                 let staffId = Session.get('staffId');
-                console.log(staffId);
                 Meteor.call('orderByStaff', getFromDate, getToDate, staffId, function (error, result) {
                     if (error) {
                         sAlert.error(error.message);

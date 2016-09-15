@@ -1,27 +1,45 @@
 Tracker.autorun(function () {
-    if (Session.get('paramsOrderId')) {
-        Meteor.subscribe("order", Session.get('paramsOrderId'));
+    // if (Session.get('paramsOrderId')) {
+    //     Meteor.subscribe("order", Session.get('paramsOrderId'));
+    // }
+    if (Session.get('limit')) {
+        return Session.get('limit');
     }
 });
 
 Template.searchItem.created = function () {
     let orderId = Router.current().params.orderId;
-    // Session.set('limit', 10);
+    Session.set('limit', 10);
     this.autorun(() => {
         this.subscribe = Meteor.subscribe("staffs");
         this.subscribe = Meteor.subscribe("order", orderId);
         this.subscribe = Meteor.subscribe("customers");
+        this.subscribe = Meteor.subscribe("items");
         this.subscribe = Meteor.subscribe("orderDetail", Router.current().params.orderId);
     });
 };
 
 //onRender
 Template.searchItem.rendered = function () {
-    // Session.set('limit', 10);
+    try {
+        this.autorun(() => {
+            if (!this.subscription.ready()) {
+                IonLoading.show();
+            } else {
+                IonLoading.hide();
+            }
+        });
+    } catch (e) {
+        console.log(e);
+    }
 };
 
 //event
 Template.searchItem.events({
+    'click .js-load-more'(){
+        let limit = Session.get('limit') + 5;
+        Session.set('limit', limit);
+    },
     'keyup .js-search-item': (event, template)=> {
         Session.set('searchQueryItem', event.target.value);
     }
@@ -30,7 +48,7 @@ Template.searchItem.events({
 //helper
 Template.searchItem.helpers({
     items: function () {
-        let items = Collection.Item.search(Session.get('searchQueryItem'));//, Session.get('limit')
+        let items = Collection.Item.search(Session.get('searchQueryItem'), Session.get('limit'));
         if (items) {
             return items;
         }
@@ -38,15 +56,15 @@ Template.searchItem.helpers({
     searchQueryItem: function () {
         return Session.get('searchQueryItem');
     },
-    staffs: function () {
-        let staffs = Collection.Staff.search(Session.get('searchQueryStaff'), Session.get('limit'));
-        if (staffs) {
-            return staffs;
-        }
-    },
-    searchQueryStaff: function () {
-        return Session.get('searchQueryStaff');
-    }
+    // staffs: function () {
+    //     let staffs = Collection.Staff.search(Session.get('searchQueryStaff'), Session.get('limit'));
+    //     if (staffs) {
+    //         return staffs;
+    //     }
+    // },
+    // searchQueryStaff: function () {
+    //     return Session.get('searchQueryStaff');
+    // }
 });
 
 
@@ -73,8 +91,8 @@ Template._productItem.events({
                 if (error) {
                     swal({
                         title: "Error",
-                        text:error,
-                        type:"error",
+                        text: error,
+                        type: "error",
                         timer: 3000,
                         showConfirmButton: true
                     });
@@ -86,8 +104,8 @@ Template._productItem.events({
                             if (error) {
                                 swal({
                                     title: "Error",
-                                    text:error,
-                                    type:"error",
+                                    text: error,
+                                    type: "error",
                                     timer: 3000,
                                     showConfirmButton: true
                                 });
@@ -97,8 +115,8 @@ Template._productItem.events({
                                     if (error) {
                                         swal({
                                             title: "Error",
-                                            text:error,
-                                            type:"error",
+                                            text: error,
+                                            type: "error",
                                             timer: 3000,
                                             showConfirmButton: true
                                         })

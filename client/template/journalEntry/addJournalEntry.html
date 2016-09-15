@@ -1,29 +1,33 @@
 <template name="addJournalEntry">
     {{#if currentUser}}
-        {{#contentFor "headerButtonLeft"}}
-            {{>ionNavBackButton path="showJournalEntry"}}
-        {{/contentFor}}
-        {{#contentFor "headerTitle"}}
-            <h1 class="title">Add New Journal Entry</h1>
-        {{/contentFor}}
-        {{#ionView}}
-            {{#ionContent}}
-                <div class="card animated bounceInDown">
-                    {{#autoForm collection="Collection.JournalEntry" id="addJournalEntry" type="insert"}}
-                        <div class="row">
-                            <div class="col-50">
-                                {{> afQuickField name='date'}}
+        {{#if isInRole 'setting'}}
+            {{#contentFor "headerButtonLeft"}}
+                {{>ionNavBackButton path="showJournalEntry"}}
+            {{/contentFor}}
+            {{#contentFor "headerTitle"}}
+                <h1 class="title">Add New Journal Entry</h1>
+            {{/contentFor}}
+            {{#ionView}}
+                {{#ionContent}}
+                    <div class="card animated bounceInDown">
+                        {{#autoForm collection="Collection.JournalEntry" id="addJournalEntry" type="insert"}}
+                            <div class="row">
+                                <div class="col-50">
+                                    {{> afQuickField name='date'}}
+                                </div>
                             </div>
-                        </div>
-                        {{> afQuickField name='typeOfJournal'}}
-                        {{> afQuickField name='journalEntryItem'}}
-                        <button class="button button-round button-block button-positive js-payment">
-                            Add
-                        </button>
-                    {{/autoForm}}
-                </div>
-            {{/ionContent}}
-        {{/ionView}}
+                            {{> afQuickField name='typeOfJournal'}}
+                            {{> afQuickField name='journalEntryItem'}}
+                            <button class="button button-round button-block button-positive js-payment">
+                                Add
+                            </button>
+                        {{/autoForm}}
+                    </div>
+                {{/ionContent}}
+            {{/ionView}}
+        {{else}}
+            {{> checkRoleUser}}
+        {{/if}}
     {{else}}
         {{> login}}
     {{/if}}

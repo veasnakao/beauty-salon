@@ -2,7 +2,6 @@
 Tracker.autorun(function () {
     if (Session.get('orderStatus') == 'active') {
         let status = Session.get('orderStatus');
-        // orderItemDetailByCustomer
         Meteor.call('orderItemDetailByCustomer', status, (error, result)=> {
             if (error) {
                 swal({

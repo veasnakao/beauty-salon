@@ -21,7 +21,7 @@ Meteor.startup(function () {
         };
         let superId = Accounts.createUser(userObj);
         console.log(superId);
-        Roles.addUsersToRoles(superId, ['cashier', 'setting', 'seller', 'super'])
+        Roles.addUsersToRoles(superId, ['cashier', 'setting','super'])
     }
     if (Collection.Company.find().count() == 0) {
         let company = {

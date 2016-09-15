@@ -148,7 +148,6 @@ Meteor.methods({
             data.footer = {
                 total: numeral(totalIncome - totalExpense).format('0,0.00')
             };
-            console.log(data.footer);
             return data;
         }
     }

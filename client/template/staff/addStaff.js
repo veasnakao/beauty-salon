@@ -1,5 +1,4 @@
-Template.addStaff.rendered = function () {
-};
+
 Template.addStaff.events({
     'click .js-addStaff': ()=> {
         if ($(".js-fee").val().length == 0) {

@@ -11,7 +11,6 @@ Template.serviceItemReport.created = function () {
         } else {
             Session.set('serviceItemReport', result);
         }
-        console.log(Session.get('serviceItemReport'));
     })
 };
 
@@ -19,6 +18,12 @@ Template.serviceItemReport.helpers({
     serviceItem(){
         if (Session.get('serviceItemReport')) {
             return Session.get('serviceItemReport');
+        }
+    },
+    company(){
+        let company = Collection.Company.find();
+        if(company) {
+            return company;
         }
     }
 });

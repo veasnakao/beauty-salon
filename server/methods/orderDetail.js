@@ -409,7 +409,6 @@ Meteor.methods({
         let content = [];
         if (orderItemDetail) {
             data.content = orderItemDetail;
-            console.log(data);
             return data;
         }
     },
@@ -505,7 +504,6 @@ Meteor.methods({
         let content = [];
         if (orderItemDetail) {
             data.content = orderItemDetail;
-            console.log(data);
             return data;
         }
     }

@@ -6,7 +6,6 @@ Meteor.methods({
         selector._id = idGenerator.genWithPrefix(Collection.JournalEntry, prefix, 4);
         let journalEntry = Collection.JournalEntry.insert(selector);
         if (journalEntry) {
-            console.log(journalEntry);
             return journalEntry;
         }
     }

@@ -97,6 +97,14 @@ Meteor.publish('staffSearch', function (query, limit) {
     return staff;
 });
 
+//company
+Meteor.publish('company', function () {
+    let company = Collection.Company.find();
+    if (company) {
+        return company;
+    }
+})
+
 //user
 Meteor.publish('allUser', function () {
     return Meteor.users.find();

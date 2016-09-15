@@ -14,7 +14,6 @@ Meteor.methods({
             let orderDetail = Collection.OrderDetail.find({
                 orderId: orderId
             });
-            console.log(orderId);
             if (orderDetail.count() <= 0) {
                 Collection.Order.remove(orderId);
             }
@@ -29,7 +28,6 @@ Meteor.methods({
         staffs.forEach((objStaffs)=> {
             staffId = objStaffs._id;
         });
-        console.log(`staffId : ${staffId}`);
         Collection.Order.update(orderId, {
             $set: {
                 staffId: staffId

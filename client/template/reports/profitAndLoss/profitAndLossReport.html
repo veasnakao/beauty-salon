@@ -1,87 +1,98 @@
 <template name="profitAndLossReport">
     {{#if currentUser}}
-        {{#contentFor "headerButtonLeft"}}
-            {{>ionNavBackButton path="reports"}}
-        {{/contentFor}}
+        {{#if isInRole 'setting'}}
+            {{#contentFor "headerButtonLeft"}}
+                {{>ionNavBackButton path="reports"}}
+            {{/contentFor}}
 
-        {{#contentFor "headerTitle"}}
-            <h1 class="title">Profit and Loss Report</h1>
-        {{/contentFor}}
+            {{#contentFor "headerTitle"}}
+                <h1 class="title">Profit and Loss Report</h1>
+            {{/contentFor}}
 
-        <div class="content has-header overflow-scroll">
-            <div class="list">
-                <label class="item item-input">
-                    <span class="input-label">From Date</span>
-                    <div class="col-25">
-                        <input type="date" class="js-from-date">
+            <div class="content has-header overflow-scroll">
+                <div class="list">
+                    <label class="item item-input">
+                        <span class="input-label">From Date</span>
+                        <div class="col-25">
+                            <input type="date" class="js-from-date">
+                        </div>
+                    </label>
+                    <label class="item item-input">
+                        <span class="input-label">To Date</span>
+                        <div class="col-25">
+                            <input type="date" class="js-to-date">
+                        </div>
+                    </label>
+                    <button class="button button-full button-positive js-submit-report">
+                        OK
+                    </button>
+                    <div class="card">
+                        <div class="item item-text-wrap" style="float: right;">
+                            <button id="print" class="button button-small button-balanced ion-printer js-print">
+                                Print
+                            </button>
+                        </div>
                     </div>
-                </label>
-                <label class="item item-input">
-                    <span class="input-label">To Date</span>
-                    <div class="col-25">
-                        <input type="date" class="js-to-date">
-                    </div>
-                </label>
-                <button class="button button-full button-positive js-submit-report">
-                    OK
-                </button>
-                <div class="card">
-                    <div class="item item-text-wrap" style="float: right;">
-                        <button id="print" class="button button-small button-balanced ion-printer js-print">
-                            Print
-                        </button>
-                    </div>
-                </div>
-                <div class="print" style="padding: 0;width: 720px;height: auto;margin: 0 auto;margin-bottom: 50px;">
-                    {{#if profitAndLoss}}
-                        <h4 style="text-align: center;"><u>Profit and Loss Report</u></h4>
-                        <div style="border-bottom: 1px solid #C4C4C4;"></div>
-                        <h5 style="margin-left: 10px;">
-                            {{#with profitAndLossDate}}
-                                Date : {{moFormat fromDate 'MM/DD/YYYY'}} - {{moFormat toDate 'MM/DD/YYYY'}}
-                            {{/with}}
-                        </h5>
-                        <table style="border: 1px solid #ddd;" class="report-content">
-                            <tr class="profit" style="background-color: #d0d2d0;">
-                                <td colspan="2" style="padding: 10px;">Journal Item</td>
-                                <td style="padding: 10px;">Amount</td>
-                            </tr>
-                            {{#each profitAndLoss.content}}
-                                <tr style="border: 1px solid #ddd;">
-                                    <td colspan="2" style="padding: 10px;">{{journalType}}</td>
-                                    <td style="padding: 10px;"></td>
+                    <div class="print" style="padding: 0;width: 720px;height: auto;margin: 0 auto;margin-bottom: 50px;">
+                        {{#if profitAndLoss}}
+                            {{#if company}}
+                                {{#each company}}
+                                    <h4 style="text-align: center;">{{companyName}}</h4>
+                                    <h4 style="text-align: center;">{{address}}</h4>
+                                {{/each}}
+                            {{/if}}
+                            <h5 style="text-align: center;"><u>Profit and Loss Report</u></h5>
+                            <div style="border-bottom: 1px solid #797979;"></div>
+                            <h5 style="margin-left: 10px;">
+                                {{#with profitAndLossDate}}
+                                    Date : {{moFormat fromDate 'MM/DD/YYYY'}} - {{moFormat toDate 'MM/DD/YYYY'}}
+                                {{/with}}
+                            </h5>
+                            <table style="border: 1px solid #797979;" class="report-content">
+                                <tr class="profit" style="background-color: #E6E6E6;">
+                                    <td colspan="2" style="padding: 10px;">Journal Item</td>
+                                    <td style="padding: 10px;">Amount</td>
                                 </tr>
-                                {{#if checkIsNotEmpty serviceTotal}}
-                                    <tr style="border: 1px solid #ddd;">
-                                        <td colspan="2" style="padding: 10px;padding-left: 50px;">Service</td>
-                                        <td style="padding: 10px;">{{numFormat serviceTotal '0,0.00 $'}}</td>
+                                {{#each profitAndLoss.content}}
+                                    <tr style="border: 1px solid #797979;">
+                                        <td colspan="2" style="padding: 10px;">{{journalType}}</td>
+                                        <td style="padding: 10px;"></td>
                                     </tr>
-                                {{/if}}
-                                {{#each journalItem}}
-                                    {{#if checkIsNotEmpty journalTotalByItem}}
-                                        <tr style="border: 1px solid #ddd;">
-                                            <td colspan="2"
-                                                style="padding: 10px;padding-left: 50px;">{{journalItemName}}</td>
-                                            <td style="padding: 10px;">{{numFormat journalTotalByItem '0,0.00 $'}}</td>
+                                    {{#if checkIsNotEmpty serviceTotal}}
+                                        <tr style="border: 1px solid #797979;">
+                                            <td colspan="2" style="padding: 10px;padding-left: 50px;">Service</td>
+                                            <td style="padding: 10px;">{{numFormat serviceTotal '0,0.00 $'}}</td>
                                         </tr>
                                     {{/if}}
+                                    {{#each journalItem}}
+                                        {{#if checkIsNotEmpty journalTotalByItem}}
+                                            <tr style="border: 1px solid #797979;">
+                                                <td colspan="2"
+                                                    style="padding: 10px;padding-left: 50px;">{{journalItemName}}</td>
+                                                <td style="padding: 10px;">{{numFormat journalTotalByItem
+                                                                                       '0,0.00 $'}}</td>
+                                            </tr>
+                                        {{/if}}
+                                    {{/each}}
+                                    <tr style="border: 1px solid #797979;">
+                                        <td colspan="2" style="padding: 10px;padding-left: 50px;">Sub Total</td>
+                                        <td style="padding: 10px;"><u>{{numFormat total '0,0.00 $'}}</u></td>
+                                    </tr>
                                 {{/each}}
-                                <tr style="border: 1px solid #ddd;">
-                                    <td colspan="2" style="padding: 10px;padding-left: 50px;">Sub Total</td>
-                                    <td style="padding: 10px;"><u>{{numFormat total '0,0.00 $'}}</u></td>
-                                </tr>
-                            {{/each}}
-                            {{#with profitAndLoss.footer}}
-                                <tr style="border: 1px solid #ddd;background-color: #FFFBAC;">
-                                    <td colspan="2" style="padding: 10px;">Net Income</td>
-                                    <td style="padding: 10px;">{{numFormat total '0,0.00 $'}}</td>
-                                </tr>
-                            {{/with}}
-                        </table>
-                    {{/if}}
+                                {{#with profitAndLoss.footer}}
+                                    <tr style="border: 1px solid #797979;background-color: #FFFBAC;">
+                                        <td colspan="2" style="padding: 10px;">Net Income</td>
+                                        <td style="padding: 10px;">{{numFormat total '0,0.00 $'}}</td>
+                                    </tr>
+                                {{/with}}
+                            </table>
+                        {{/if}}
+                    </div>
                 </div>
             </div>
-        </div>
+        {{else}}
+            {{> checkRoleUser}}
+        {{/if}}
     {{else}}
         {{> login}}
     {{/if}}

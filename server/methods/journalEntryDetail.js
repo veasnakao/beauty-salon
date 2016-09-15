@@ -14,10 +14,10 @@
 // });
 
 Meteor.methods({
-    showJournalEntry(){
+    showJournalEntry(limit){
         let showJournalEntry = Collection.JournalEntry.aggregate([
             {
-                $unwind: { path: '$journalEntryItem', preserveNullAndEmptyArrays: true }
+                $unwind: {path: '$journalEntryItem', preserveNullAndEmptyArrays: true}
             },
             {
                 $lookup: {
@@ -28,14 +28,14 @@ Meteor.methods({
                 }
             },
             {
-                $unwind: { path: '$journalItemDoc', preserveNullAndEmptyArrays: true }
+                $unwind: {path: '$journalItemDoc', preserveNullAndEmptyArrays: true}
             },
             {
                 $group: {
                     _id: {
-                        month: { $month: "$date" },
-                        day: { $dayOfMonth: "$date" },
-                        year: { $year: "$date" },
+                        month: {$month: "$date"},
+                        day: {$dayOfMonth: "$date"},
+                        year: {$year: "$date"},
                         journaType: '$typeOfJournal',
                         journalEntryId: '$_id'
                     },
@@ -60,10 +60,10 @@ Meteor.methods({
                 }
             },
             {
-                $unwind: { path: '$journalEntryId', preserveNullAndEmptyArrays: true }
+                $unwind: {path: '$journalEntryId', preserveNullAndEmptyArrays: true}
             },
             {
-                $unwind: { path: '$journalItem', preserveNullAndEmptyArrays: true }
+                $unwind: {path: '$journalItem', preserveNullAndEmptyArrays: true}
             },
             {
                 $project: {
@@ -77,9 +77,9 @@ Meteor.methods({
             {
                 $group: {
                     _id: {
-                        month: { $month: "$date" },
-                        day: { $dayOfMonth: "$date" },
-                        year: { $year: "$date" },
+                        month: {$month: "$date"},
+                        day: {$dayOfMonth: "$date"},
+                        year: {$year: "$date"},
                         journaType: '$journalType',
                     },
                     date: {
@@ -97,29 +97,29 @@ Meteor.methods({
                 }
             },
             {
-                $unwind: { path: '$journalEntry', preserveNullAndEmptyArrays: true }
+                $unwind: {path: '$journalEntry', preserveNullAndEmptyArrays: true}
             },
             {
                 $project: {
                     date: '$date',
                     journalType: '$journalType',
                     journalEntry: '$journalEntry',
-                    journalEntryId:'$journalEntry.journalEntryId',
+                    journalEntryId: '$journalEntry.journalEntryId',
                     journalTotal: '$journalTotal'
                 }
             },
             {
                 $sort: {
-                    date:1,
-                    journalEntryId:-1
+                    date: 1,
+                    journalEntryId: -1
                 }
             },
             {
                 $group: {
                     _id: {
-                        month: { $month: "$date" },
-                        day: { $dayOfMonth: "$date" },
-                        year: { $year: "$date" },
+                        month: {$month: "$date"},
+                        day: {$dayOfMonth: "$date"},
+                        year: {$year: "$date"},
                         journaType: '$journalType',
                     },
                     date: {
@@ -144,13 +144,26 @@ Meteor.methods({
                     journalEntry: 1,
                     journalTotal: 1
                 }
-            }
+            },
+            {
+                $limit:limit
+            },
+            {
+                $group: {
+                    _id: null,
+                    data: {
+                        $addToSet: '$$ROOT'
+                    },
+                    count: {$sum: 1}
+
+                }
+            },
+
         ]);
         let data = {};
         let content = [];
         if (showJournalEntry) {
             data.content = showJournalEntry;
-            console.log(data);
             return data;
         }
     },
@@ -206,9 +219,9 @@ Meteor.methods({
                     typeOfJournal: {$last: '$data.typeOfJournal'},
                     date: {$last: '$data.date'},
                     journalEntryItem: {
-                        $addToSet:{
-                            journalItemName:'$data.journalItem.journalItemDoc.journalItemName',
-                            journalItemPrice:'$data.journalItem.journalItemPrice'
+                        $addToSet: {
+                            journalItemName: '$data.journalItem.journalItemDoc.journalItemName',
+                            journalItemPrice: '$data.journalItem.journalItemPrice'
                         }
                     },
                     subTotal: {

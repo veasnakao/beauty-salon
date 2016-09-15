@@ -24,6 +24,10 @@
                             {{> _productItem}}
                         {{/each}}
                     </ul>
+                    <button class="button button-block button-positive js-load-more">
+                        {{> ionIcon class="ion ion-refresh"}}
+                        Load More
+                    </button>
                 {{/if}}
             </div>
         </div>
@@ -33,7 +37,7 @@
 <template name="_productItem">
     <div class="card insert-order" style="cursor: pointer;">
         <div class="item item-text-wrap item-bg">
-            <h2>{{_id}} | {{name}}</h2>
+            <h2>{{name}}</h2>
             <p>{{numFormat price '0,0.00 $'}}</p>
         </div>
     </div>

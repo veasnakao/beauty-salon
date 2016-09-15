@@ -113,7 +113,6 @@ Meteor.methods({
         let content = [];
         if (service) {
             data.content = service;
-            console.log(data);
             return data;
         }
     }

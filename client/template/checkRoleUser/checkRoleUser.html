@@ -1,0 +1,20 @@
+<template name="checkRoleUser">
+    <div class="bar bar-header bar-positive nav-bar-block nav-bar-transition-ios nav-bar-direction-forward"
+         data-navbar-container>
+        <button class="button button-clear pull-left button-entering button-active" data-ion-menu-toggle="left">
+            <i class="icon ion-navicon"></i>
+        </button>
+    </div>
+    {{#contentFor "headerTitle"}}
+        <h1 class="title">Setting</h1>
+    {{/contentFor}}
+    {{#ionView}}
+        {{#ionContent}}
+            {{#ionList}}
+                <div class="card">
+                    <h3 style="text-align: center;">Please ask permission from admin.</h3>
+                </div>
+            {{/ionList}}
+        {{/ionContent}}
+    {{/ionView}}
+</template>

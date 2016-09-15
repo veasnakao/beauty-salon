@@ -100,7 +100,7 @@ Meteor.methods({
                         $addToSet: '$$ROOT'
                     },
                     total:{
-                        $sum: '$subTotal'
+                        $sum: '$grandTotal'
                     }
                 }
             }

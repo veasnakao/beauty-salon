@@ -68,6 +68,9 @@ Router.map(function () {
         path: '/itemOrder/orderId/:orderId/print'
     });
 
+    //company
+    this.route('company');
+
     this.route('setting');
     this.route('setRole');
     this.route('login');

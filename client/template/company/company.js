@@ -1,12 +1,12 @@
 //oncreated
-Template.setRole.created = function () {
+Template.company.created = function () {
     this.autorun(function () {
-        this.subscription = Meteor.subscribe('allUser');
+        this.subscription = Meteor.subscribe('company');
     }.bind(this));
 };
 
 //onrender
-Template.setRole.rendered = function () {
+Template.company.rendered = function () {
     try {
         this.autorun(() => {
             if (!this.subscription.ready()) {
@@ -21,13 +21,11 @@ Template.setRole.rendered = function () {
 };
 
 //helper
-Template.setRole.helpers({
-    showUser: ()=> {
-        return Meteor.users.find();
-    },
-    checkUsername(username){
-        if (username == "super") {
-            return true;
+Template.company.helpers({
+    company() {
+        let company = Collection.Company.find();
+        if (company) {
+            return company;
         }
     }
 });

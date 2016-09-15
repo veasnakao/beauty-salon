@@ -1,5 +1,5 @@
 
-Template.addOrder.events({
+// Template.addOrder.events({
     // 'click .js-customerId': ()=> {
     //     if ($(".js-customerId").val() === "vip") {
     //         $(".js-customerName").show();
@@ -7,7 +7,7 @@ Template.addOrder.events({
     //         $(".js-customerName").hide();
     //     }
     // }
-});
+// });
 
 // AutoForm.hooks({
 //     addOrder: {//id autoform
