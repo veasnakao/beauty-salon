@@ -118,7 +118,7 @@ Meteor.methods({
         let journalEntryDetail = Collection.JournalEntry.aggregate([
             {
                 $match: {
-                    date: {$gte: date},
+                    date: date,
                     typeOfJournal: journalType
                 }
             },

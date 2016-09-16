@@ -9,8 +9,8 @@ Template.journalEntryDetailById.created = function () {
         if (error) {
             swal({
                 title: "Error",
-                text:error,
-                type:"error",
+                text: error,
+                type: "error",
                 timer: 3000,
                 showConfirmButton: true
             })
@@ -22,6 +22,21 @@ Template.journalEntryDetailById.created = function () {
 
 //helper
 Template.journalEntryDetailById.helpers({
+    checkDate(){
+        let params = Router.current().params;
+        let id = params._id;
+        let journalEntry = Collection.JournalEntry.findOne(id);
+        if (journalEntry) {
+            let journalDate = journalEntry.date;
+            let today = new Date();
+            let tomorrow = today.setDate(today.getDate() + 1);
+            if (journalDate < tomorrow) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    },
     subTotalIsNotZero(subTotal){
         return subTotal != 0 && subTotal != null;
     },

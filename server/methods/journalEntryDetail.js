@@ -109,12 +109,6 @@ Meteor.methods({
                 }
             },
             {
-                $sort: {
-                    date: 1,
-                    journalEntryId: -1
-                }
-            },
-            {
                 $group: {
                     _id: {
                         month: {$month: "$date"},
@@ -146,7 +140,12 @@ Meteor.methods({
                 }
             },
             {
-                $limit:limit
+                $sort: {
+                    date: 1
+                }
+            },
+            {
+                $limit: limit
             },
             {
                 $group: {
@@ -155,10 +154,8 @@ Meteor.methods({
                         $addToSet: '$$ROOT'
                     },
                     count: {$sum: 1}
-
                 }
-            },
-
+            }
         ]);
         let data = {};
         let content = [];

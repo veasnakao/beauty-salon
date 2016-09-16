@@ -1,17 +1,19 @@
 Tracker.autorun(function () {
-    Meteor.call('showJournalEntry', Session.get('limitJournal'), (error, result)=> {
-        if (error) {
-            swal({
-                title: "Error",
-                text: error,
-                type: "error",
-                timer: 3000,
-                showConfirmButton: true
-            })
-        } else {
-            Session.set('showJournalEntry', result);
-        }
-    });
+    if (Session.get('limitJournal')) {
+        Meteor.call('showJournalEntry', Session.get('limitJournal'), (error, result)=> {
+            if (error) {
+                swal({
+                    title: "Error",
+                    text: error,
+                    type: "error",
+                    timer: 3000,
+                    showConfirmButton: true
+                })
+            } else {
+                Session.set('showJournalEntry', result);
+            }
+        });
+    }
 });
 //oncreated
 Template.showJournalEntry.created = function () {
@@ -19,20 +21,22 @@ Template.showJournalEntry.created = function () {
 };
 
 Template.showJournalEntry.rendered = function () {
-    Meteor.call('showJournalEntry', Session.get('limitJournal'), (error, result)=> {
-        if (error) {
-            swal({
-                title: "Error",
-                text: error,
-                type: "error",
-                timer: 3000,
-                showConfirmButton: true
-            })
-        } else {
-            Session.set('showJournalEntry', result);
-        }
-    });
-}
+    if (Session.get('limitJournal')) {
+        Meteor.call('showJournalEntry', Session.get('limitJournal'), (error, result)=> {
+            if (error) {
+                swal({
+                    title: "Error",
+                    text: error,
+                    type: "error",
+                    timer: 3000,
+                    showConfirmButton: true
+                })
+            } else {
+                Session.set('showJournalEntry', result);
+            }
+        });
+    }
+};
 
 //helper
 Template.showJournalEntry.helpers({
@@ -68,5 +72,5 @@ Template.showJournalEntry.events({
 });
 
 Template.showJournalEntry.onDestroyed(function () {
-
+    Session.set('showJournalEntry', undefined);
 });

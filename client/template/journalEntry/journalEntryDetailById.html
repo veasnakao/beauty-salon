@@ -56,12 +56,14 @@
                                         Delete
                                     </button>
                                 </div>
-                                <div class="col">
-                                    <button class="button button-block button-positive js-update-journal">
-                                        {{> ionIcon class="ion ion-edit"}}
-                                        Update
-                                    </button>
-                                </div>
+                                {{#if checkDate}}
+                                    <div class="col">
+                                        <button class="button button-block button-positive js-update-journal">
+                                            {{> ionIcon class="ion ion-edit"}}
+                                            Update
+                                        </button>
+                                    </div>
+                                {{/if}}
                             </div>
                         {{/if}}
                     {{/ionList}}
