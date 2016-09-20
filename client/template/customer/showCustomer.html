@@ -1,27 +1,33 @@
 <template name="showCustomer">
     {{#if currentUser}}
-        <div class="bar bar-header bar-positive nav-bar-block nav-bar-transition-ios nav-bar-direction-forward" data-navbar-container>
-            <button class="button button-clear pull-left button-entering button-active" data-ion-menu-toggle="left">
-                <i class="icon ion-navicon"></i>
-            </button>
-            <h1 class="title">Customer List</h1>
-            <button class="button button-clear add-order button-icon icon ion-plus-circled" data-ion-modal="addCustomer">
-            </button>
-        </div>
+        {{#if isInRole 'cashier'}}
+            <div class="bar bar-header bar-positive nav-bar-block nav-bar-transition-ios nav-bar-direction-forward"
+                 data-navbar-container>
+                <button class="button button-clear pull-left button-entering button-active" data-ion-menu-toggle="left">
+                    <i class="icon ion-navicon"></i>
+                </button>
+                <h1 class="title">Customer List</h1>
+                <button class="button button-clear add-order button-icon icon ion-plus-circled"
+                        data-ion-modal="addCustomer">
+                </button>
+            </div>
 
-        {{#ionView}}
-            {{#ionContent}}
-                {{#ionList}}
-                    {{#each showCustomer}}
-                        {{#ionItem path="customerInfo" iconRight=true}}
-                            <h2>{{name}}</h2>
-                            <p>{{tel}}</p>
-                            {{> ionIcon icon="ios-arrow-right"}}
-                        {{/ionItem}}
-                    {{/each}}
-                {{/ionList}}
-            {{/ionContent}}
-        {{/ionView}}
+            {{#ionView}}
+                {{#ionContent}}
+                    {{#ionList}}
+                        {{#each showCustomer}}
+                            {{#ionItem path="customerInfo" iconRight=true}}
+                                <h2>{{name}}</h2>
+                                <p>{{tel}}</p>
+                                {{> ionIcon icon="ios-arrow-right"}}
+                            {{/ionItem}}
+                        {{/each}}
+                    {{/ionList}}
+                {{/ionContent}}
+            {{/ionView}}
+        {{else}}
+            {{> checkRoleUser}}
+        {{/if}}
     {{else}}
         {{> login}}
     {{/if}}

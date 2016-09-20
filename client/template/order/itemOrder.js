@@ -7,9 +7,12 @@ Tracker.autorun(function () {
 //oncreated
 Template.itemOrder.created = function () {
     Session.set('orderDetailObj', {});
+    let selector = {
+        status: 'active'
+    };
     this.autorun(function () {
         this.subscription = Meteor.subscribe('items');
-        this.subscription = Meteor.subscribe('staffs');
+        this.subscription = Meteor.subscribe('staffActive',selector);
         this.subscription = Meteor.subscribe("customers");
         this.subscription = Meteor.subscribe("orderDetail", Router.current().params.orderId);
         this.subscription = Meteor.subscribe('order', Router.current().params.orderId);

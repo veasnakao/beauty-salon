@@ -16,5 +16,8 @@ Meteor.methods({
     },
     removeJournalEntryByOrder(orderId){
         Collection.JournalEntry.remove({orderId: orderId});
+    },
+    removeUser(userId){
+        Meteor.users.remove(userId);
     }
 });

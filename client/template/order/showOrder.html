@@ -1,76 +1,80 @@
 <template name="showOrder">
     {{#if currentUser}}
-        <div class="bar bar-header bar-positive nav-bar-block nav-bar-transition-ios nav-bar-direction-forward"
-             data-navbar-container>
-            <button class="button button-clear pull-left button-entering button-active" data-ion-menu-toggle="left">
-                <i class="icon ion-navicon"></i>
-            </button>
-            <h1 class="title">Service List</h1>
-            {{#if checkStatus}}
-                <button class="button button-clear add-order button-icon icon ion-plus-circled">
+        {{#if isInRole 'cashier'}}
+            <div class="bar bar-header bar-positive nav-bar-block nav-bar-transition-ios nav-bar-direction-forward"
+                 data-navbar-container>
+                <button class="button button-clear pull-left button-entering button-active" data-ion-menu-toggle="left">
+                    <i class="icon ion-navicon"></i>
                 </button>
-            {{/if}}
-        </div>
-
-        {{#ionView}}
-            {{#ionContent}}
-                <div class="item item-toggle">
-                    <span class="check-status-label">Order</span>
-                    <label class="toggle toggle-balanced">
-                        <input type="checkbox" class="order-status" checked="true">
-                        <div class="track">
-                            <div class="handle"></div>
-                        </div>
-                    </label>
-                </div>
-                {{#if checkPayment}}
-                    <div class="show-order-item animated bounceInLeft">
-                        <div class="list list-inset">
-                            <label class="item item-input">
-                                <i class="icon ion-search placeholder-icon"></i>
-                                <input type="text" placeholder="Search" name="search">
-                            </label>
-                        </div>
-                    </div>
+                <h1 class="title">Service List</h1>
+                {{#if checkStatus}}
+                    <button class="button button-clear add-order button-icon icon ion-plus-circled">
+                    </button>
                 {{/if}}
-                <br>
-                {{#ionList}}
-                    {{#if showCustomerOrder}}
-                        {{#each showCustomerOrder.content}}
-                            <div class="show-order-item animated bounceInLeft">
-                                {{#ionItem iconRight=true}}
-                                    Date : {{moFormat date 'DD/MM/YYYY'}} |
-                                    ServiceId : {{_id}}
-                                    <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
-                                    Customer : {{customer}} |
-                                    Staff : {{staff}}
-                                    <br>
-                                    {{#each items}}
-                                        {{itemName}} : {{numFormat amount '0,0.00$'}}  |
-                                    {{/each}}
-                                    <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
-                                    Total : {{numFormat total '0,0.00 $'}} |
-                                    Paid Amount : {{numFormat paidAmount '0,0.00 $'}} |
-                                    Balance : {{numFormat balance '0,0.00 $'}}
-                                    {{> ionIcon icon="ios-arrow-right"}}
-                                {{/ionItem}}
+            </div>
+
+            {{#ionView}}
+                {{#ionContent}}
+                    <div class="item item-toggle">
+                        <span class="check-status-label">Order</span>
+                        <label class="toggle toggle-balanced">
+                            <input type="checkbox" class="order-status" checked="true">
+                            <div class="track">
+                                <div class="handle"></div>
                             </div>
-                            <br>
-                        {{/each}}
-                        {{#if checkPayment}}
-                            <button class="button button-block button-positive js-load-more">
-                                {{> ionIcon class="ion ion-refresh"}}
-                                Load More
-                            </button>
-                        {{/if}}
-                    {{else}}
-                        <div class="card">
-                            <h4 style="text-align: center;">No data</h4>
+                        </label>
+                    </div>
+                    {{#if checkPayment}}
+                        <div class="show-order-item animated bounceInLeft">
+                            <div class="list list-inset">
+                                <label class="item item-input">
+                                    <i class="icon ion-search placeholder-icon"></i>
+                                    <input type="text" placeholder="Search" name="search">
+                                </label>
+                            </div>
                         </div>
                     {{/if}}
-                {{/ionList}}
-            {{/ionContent}}
-        {{/ionView}}
+                    <br>
+                    {{#ionList}}
+                        {{#if showCustomerOrder}}
+                            {{#each showCustomerOrder.content}}
+                                <div class="show-order-item animated bounceInLeft">
+                                    {{#ionItem iconRight=true}}
+                                        Date : {{moFormat date 'DD/MM/YYYY'}} |
+                                        ServiceId : {{_id}}
+                                        <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
+                                        Customer : {{customer}} |
+                                        Staff : {{staff}}
+                                        <br>
+                                        {{#each items}}
+                                            {{itemName}} : {{numFormat amount '0,0.00$'}}  |
+                                        {{/each}}
+                                        <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
+                                        Total : {{numFormat total '0,0.00 $'}} |
+                                        Paid Amount : {{numFormat paidAmount '0,0.00 $'}} |
+                                        Balance : {{numFormat balance '0,0.00 $'}}
+                                        {{> ionIcon icon="ios-arrow-right"}}
+                                    {{/ionItem}}
+                                </div>
+                                <br>
+                            {{/each}}
+                            {{#if checkPayment}}
+                                <button class="button button-block button-positive js-load-more">
+                                    {{> ionIcon class="ion ion-refresh"}}
+                                    Load More
+                                </button>
+                            {{/if}}
+                        {{else}}
+                            <div class="card">
+                                <h4 style="text-align: center;">No data</h4>
+                            </div>
+                        {{/if}}
+                    {{/ionList}}
+                {{/ionContent}}
+            {{/ionView}}
+        {{else}}
+            {{> checkRoleUser}}
+        {{/if}}
     {{else}}
         {{> login}}
     {{/if}}

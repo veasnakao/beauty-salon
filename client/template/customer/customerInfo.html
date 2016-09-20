@@ -1,66 +1,71 @@
 <template name="customerInfo">
     {{#if currentUser}}
-        {{#contentFor "headerButtonLeft"}}
-            {{>ionNavBackButton path="showCustomer"}}
-        {{/contentFor}}
+        {{#if isInRole 'cashier'}}
+            {{#contentFor "headerButtonLeft"}}
+                {{>ionNavBackButton path="showCustomer"}}
+            {{/contentFor}}
 
-        {{#contentFor "headerTitle"}}
-            <h1 class="title">Customer Info</h1>
-        {{/contentFor}}
+            {{#contentFor "headerTitle"}}
+                <h1 class="title">Customer Info</h1>
+            {{/contentFor}}
 
-        {{#contentFor "headerButtonRight"}}
-            <button class="button button-clear pull-left" data-ion-modal="editCustomer" data-id="{{customerInfo._id}}">
-                {{> ionIcon icon="ion ion-edit"}}
-            </button>
-        {{/contentFor}}
-
-        {{#ionView}}
-            {{#ionContent}}
-                {{#ionList}}
-                    {{#with customerInfo}}
-                        {{#ionItem}}
-                            <div class="row">
-                                <div class="col col-33 col-offset-10"><h2>Name</h2></div>
-                                <div class="col"><h2>:</h2></div>
-                                <div class="col col-80">
-                                    <h2>{{name}}</h2>
-                                </div>
-                            </div>
-                        {{/ionItem}}
-                        {{#ionItem}}
-                            <div class="row">
-                                <div class="col col-33 col-offset-10"><h2>Gender</h2></div>
-                                <div class="col"><h2>:</h2></div>
-                                <div class="col col-80">
-                                    <h2>{{gender}}</h2>
-                                </div>
-                            </div>
-                        {{/ionItem}}
-                        {{#ionItem}}
-                            <div class="row">
-                                <div class="col col-33 col-offset-10"><h2>Customer Type</h2></div>
-                                <div class="col"><h2>:</h2></div>
-                                <div class="col col-80">
-                                    <h2>{{customerType}}</h2>
-                                </div>
-                            </div>
-                        {{/ionItem}}
-                        {{#ionItem}}
-                            <div class="row">
-                                <div class="col col-33 col-offset-10"><h2>Tel</h2></div>
-                                <div class="col"><h2>:</h2></div>
-                                <div class="col col-80">
-                                    <h2>{{tel}}</h2>
-                                </div>
-                            </div>
-                        {{/ionItem}}
-                    {{/with}}
-                {{/ionList}}
-                <button class="button button-block button-assertive ion-trash-a delete-customer">
-                    Delete
+            {{#contentFor "headerButtonRight"}}
+                <button class="button button-clear pull-left" data-ion-modal="editCustomer"
+                        data-id="{{customerInfo._id}}">
+                    {{> ionIcon icon="ion ion-edit"}}
                 </button>
-            {{/ionContent}}
-        {{/ionView}}
+            {{/contentFor}}
+
+            {{#ionView}}
+                {{#ionContent}}
+                    {{#ionList}}
+                        {{#with customerInfo}}
+                            {{#ionItem}}
+                                <div class="row">
+                                    <div class="col col-33 col-offset-10"><h2>Name</h2></div>
+                                    <div class="col"><h2>:</h2></div>
+                                    <div class="col col-80">
+                                        <h2>{{name}}</h2>
+                                    </div>
+                                </div>
+                            {{/ionItem}}
+                            {{#ionItem}}
+                                <div class="row">
+                                    <div class="col col-33 col-offset-10"><h2>Gender</h2></div>
+                                    <div class="col"><h2>:</h2></div>
+                                    <div class="col col-80">
+                                        <h2>{{gender}}</h2>
+                                    </div>
+                                </div>
+                            {{/ionItem}}
+                            {{#ionItem}}
+                                <div class="row">
+                                    <div class="col col-33 col-offset-10"><h2>Customer Type</h2></div>
+                                    <div class="col"><h2>:</h2></div>
+                                    <div class="col col-80">
+                                        <h2>{{customerType}}</h2>
+                                    </div>
+                                </div>
+                            {{/ionItem}}
+                            {{#ionItem}}
+                                <div class="row">
+                                    <div class="col col-33 col-offset-10"><h2>Tel</h2></div>
+                                    <div class="col"><h2>:</h2></div>
+                                    <div class="col col-80">
+                                        <h2>{{tel}}</h2>
+                                    </div>
+                                </div>
+                            {{/ionItem}}
+                        {{/with}}
+                    {{/ionList}}
+                    <button class="button button-block button-assertive ion-trash-a delete-customer">
+                        Delete
+                    </button>
+                {{/ionContent}}
+            {{/ionView}}
+        {{else}}
+            {{> checkRoleUser}}
+        {{/if}}
     {{else}}
         {{> login}}
     {{/if}}

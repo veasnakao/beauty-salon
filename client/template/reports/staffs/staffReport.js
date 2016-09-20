@@ -8,8 +8,11 @@
 
 //oncreated
 Template.staffReport.created = function () {
+    let selector = {
+        status: 'active'
+    };
     this.autorun(function () {
-        this.subscription = Meteor.subscribe('staffs');
+        this.subscription = Meteor.subscribe('staffActive',selector);
     }.bind(this));
 };
 

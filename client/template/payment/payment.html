@@ -1,146 +1,157 @@
 <template name="payment">
     {{#if currentUser}}
-        {{#contentFor "headerButtonLeft"}}
-            {{>ionNavBackButton path="itemOrder"}}
-        {{/contentFor}}
+        {{#if isInRole 'cashier'}}
+            {{#contentFor "headerButtonLeft"}}
+                {{>ionNavBackButton path="itemOrder"}}
+            {{/contentFor}}
 
-        {{#contentFor "headerTitle"}}
-            <h1 class="title">Payment</h1>
-        {{/contentFor}}
+            {{#contentFor "headerTitle"}}
+                <h1 class="title">Payment</h1>
+            {{/contentFor}}
 
-        {{#ionView}}
-            {{#ionContent}}
-                <div class="card animated bounceInDown">
-                    {{#autoForm collection="Collection.Payment"  doc=order id="payment" type="insert"}}
-                        {{> afQuickField name='orderId' type="hidden"}}
-                        <div class="row">
-                            <div class="col">
-                                {{> afQuickField name='paymentDate' class='js-paymentDate'}}
+            {{#ionView}}
+                {{#ionContent}}
+                    <div class="card animated bounceInDown">
+                        {{#autoForm collection="Collection.Payment"  doc=order id="payment" type="insert"}}
+                            {{> afQuickField name='orderId' type="hidden"}}
+                            <div class="row">
+                                {{#if checkPayment}}
+                                    <div class="col">
+                                        {{> afQuickField name='paymentDate' class='js-paymentDate' readonly=true}}
+                                    </div>
+                                {{else}}
+                                    <div class="col">
+                                        {{> afQuickField name='paymentDate' class='js-paymentDate'}}
+                                    </div>
+                                {{/if}}
+                                <div class="col"></div>
                             </div>
-                            <div class="col"></div>
-                        </div>
-                        {{> afQuickField name='dueAmount' value=dueAmount readonly=true style="background-color: #D8D8D7"}}
-                        {{> afQuickField name='paidAmount' readonly=true style="background-color: #D8D8D7"}}
-                        {{> afQuickField name='balance'}}
-                        {{#if checkStatus}}
+                            {{> afQuickField name='dueAmount' value=dueAmount readonly=true style="background-color: #D8D8D7"}}
+                            {{> afQuickField name='paidAmount' readonly=true style="background-color: #D8D8D7"}}
+                            {{> afQuickField name='balance'}}
+                            {{#if checkStatus}}
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="button button-round button-block button-positive js-payment">
+                                            {{> ionIcon class="ion ion-cash"}}
+                                            Payment
+                                        </button>
+                                    </div>
+                                </div>
+                            {{/if}}
+                        {{/autoForm}}
+                        {{#if checkPayment}}
                             <div class="row">
                                 <div class="col">
-                                    <button class="button button-round button-block button-positive js-payment">
-                                        {{> ionIcon class="ion ion-cash"}}
-                                        Payment
+                                    <button class="button button-round button-block button-assertive js-delete-payment">
+                                        {{> ionIcon class="ion ion-ios-trash"}}
+                                        Delete Payment
                                     </button>
                                 </div>
                             </div>
                         {{/if}}
-                    {{/autoForm}}
-                    {{#if checkPayment}}
-                        <div class="row">
-                            <div class="col">
-                                <button class="button button-round button-block button-assertive js-delete-payment">
-                                    {{> ionIcon class="ion ion-ios-trash"}}
-                                    Delete Payment
-                                </button>
-                            </div>
-                        </div>
-                    {{/if}}
-                </div>
-
-                <div class="card">
-                    <div class="col">
-                        <button class="button button-small button-balanced js-generate">
-                            {{> ionIcon class="ion ion-refresh"}}
-                            Generate Report
-                        </button>
-                        <button id="print" class="button button-small button-positive js-generate"
-                                style="float: right;">
-                            {{> ionIcon class="ion ion-printer"}}
-                            Print Report
-                        </button>
                     </div>
-                </div>
 
-                <div class="service-report" style="margin-bottom: 100px;">
-                    <div class="print" style="width: 260px;margin: 0 auto;padding-top: 15px;padding-bottom: 15px;">
-                        {{#if serviceReport}}
-                            {{#each serviceReport.content}}
-                                <h4 style="text-align: center;"><u>Invoice</u></h4>
-                                <hr style="border-top: 1px dashed #8c8b8b;">
-                                <div class="row">
-                                    <div class="col service-rp-content"># : {{_id}}</div>
-                                    <div class="col service-rp-content" style="text-align: right;">Staff
-                                        : {{staff}}</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col service-rp-content">Date
-                                        : {{moFormat serviceDate 'DD/MM/YYYY'}}</div>
-                                    <div class="col service-rp-content" style="text-align: right;">Customer
-                                        : {{customer}}</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col service-rp-content">Paid Date
-                                        : {{moFormat paymentDate 'DD/MM/YYYY'}}</div>
-                                </div>
+                    <!--<div class="card">-->
+                    <!--<div class="col">-->
+                    <!--<button class="button button-small button-balanced js-generate">-->
+                    <!--{{> ionIcon class="ion ion-refresh"}}-->
+                    <!--Generate Report-->
+                    <!--</button>-->
+                    <!--<button id="print" class="button button-small button-positive js-generate"-->
+                    <!--style="float: right;">-->
+                    <!--{{> ionIcon class="ion ion-printer"}}-->
+                    <!--Print Report-->
+                    <!--</button>-->
+                    <!--</div>-->
+                    <!--</div>-->
 
-                                <table class="report-content">
-                                    <thead class="content-header">
-                                    <tr>
-                                        <th>ServiceItem</th>
-                                        <th>Qty</th>
-                                        <th>Price</th>
-                                        <th>Dis</th>
-                                        <th>Amount</th>
-                                    </tr>
-                                    </thead>
-                                    {{#each serviceDetail}}
-                                        <tbody class="content-body">
-                                        <tr>
-                                            <td>{{itemName}}</td>
-                                            <td>{{qty}}</td>
-                                            <td>{{numFormat price '0,0.00 $'}}</td>
-                                            <td>{{discount}}%</td>
-                                            <td>{{numFormat amount '0,0.00 $'}}</td>
-                                        </tr>
-                                        </tbody>
-                                    {{/each}}
-                                </table>
-                                <div class="row">
-                                    <div class="col-offset-33 col-33 service-rp-content">Total :</div>
-                                    <div style="text-align: right" class="col-25 service-rp-content">{{numFormat total
-                                                                                                                 '0,0.00 $'}}</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-offset-33 col-33 service-rp-content">Discount :</div>
-                                    {{#if checkDiscountType discountType}}
-                                        <div style="text-align: right"
-                                             class="col-25 service-rp-content">{{numFormat discount '0,0.00 $'}}
-                                        </div>
-                                    {{else}}
-                                        <div style="text-align: right"
-                                             class="col-25 service-rp-content">{{discount}} %
-                                        </div>
-                                    {{/if}}
-                                </div>
-                                <div class="row">
-                                    <div class="col-offset-33 col-33 service-rp-content">Grand Total :</div>
-                                    <div style="text-align: right" class="col-25 service-rp-content">{{numFormat
-                                            grandTotal '0,0.00 $'}}</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-offset-33 col-33 service-rp-content">Paid Amount :</div>
-                                    <div style="text-align: right" class="col-25 service-rp-content">{{numFormat
-                                            paidAmount '0,0.00 $'}}</div>
-                                </div>
-                                <hr style="border-top: 1px dashed #8c8b8b;">
-                                <div class="service-rp-content" style="text-align: center;">Thank you!</div>
-                                <div class="service-rp-content" style="text-align: center;">Powered by Rabbit IT
-                                    Solution
-                                </div>
-                            {{/each}}
-                        {{/if}}
-                    </div>
-                </div>
-            {{/ionContent}}
-        {{/ionView}}
+                    <!--<div class="service-report" style="margin-bottom: 100px;">-->
+                        <!--<div class="print" style="width: 260px;margin: 0 auto;padding-top: 15px;padding-bottom: 15px;">-->
+                            <!--{{#if serviceReport}}-->
+                                <!--{{#each serviceReport.content}}-->
+                                    <!--<h4 style="text-align: center;"><u>Invoice</u></h4>-->
+                                    <!--<hr style="border-top: 1px dashed #8c8b8b;">-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col service-rp-content"># : {{_id}}</div>-->
+                                        <!--<div class="col service-rp-content" style="text-align: right;">Staff-->
+                                            <!--: {{staff}}</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col service-rp-content">Date-->
+                                            <!--: {{moFormat serviceDate 'DD/MM/YYYY'}}</div>-->
+                                        <!--<div class="col service-rp-content" style="text-align: right;">Customer-->
+                                            <!--: {{customer}}</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col service-rp-content">Paid Date-->
+                                            <!--: {{moFormat paymentDate 'DD/MM/YYYY'}}</div>-->
+                                    <!--</div>-->
+
+                                    <!--<table class="report-content">-->
+                                        <!--<thead class="content-header">-->
+                                        <!--<tr>-->
+                                            <!--<th>ServiceItem</th>-->
+                                            <!--<th>Qty</th>-->
+                                            <!--<th>Price</th>-->
+                                            <!--<th>Dis</th>-->
+                                            <!--<th>Amount</th>-->
+                                        <!--</tr>-->
+                                        <!--</thead>-->
+                                        <!--{{#each serviceDetail}}-->
+                                            <!--<tbody class="content-body">-->
+                                            <!--<tr>-->
+                                                <!--<td>{{itemName}}</td>-->
+                                                <!--<td>{{qty}}</td>-->
+                                                <!--<td>{{numFormat price '0,0.00 $'}}</td>-->
+                                                <!--<td>{{discount}}%</td>-->
+                                                <!--<td>{{numFormat amount '0,0.00 $'}}</td>-->
+                                            <!--</tr>-->
+                                            <!--</tbody>-->
+                                        <!--{{/each}}-->
+                                    <!--</table>-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-offset-33 col-33 service-rp-content">Total :</div>-->
+                                        <!--<div style="text-align: right" class="col-25 service-rp-content">{{numFormat-->
+                                                <!--total-->
+                                                <!--'0,0.00 $'}}</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-offset-33 col-33 service-rp-content">Discount :</div>-->
+                                        <!--{{#if checkDiscountType discountType}}-->
+                                            <!--<div style="text-align: right"-->
+                                                 <!--class="col-25 service-rp-content">{{numFormat discount '0,0.00 $'}}-->
+                                            <!--</div>-->
+                                        <!--{{else}}-->
+                                            <!--<div style="text-align: right"-->
+                                                 <!--class="col-25 service-rp-content">{{discount}} %-->
+                                            <!--</div>-->
+                                        <!--{{/if}}-->
+                                    <!--</div>-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-offset-33 col-33 service-rp-content">Grand Total :</div>-->
+                                        <!--<div style="text-align: right" class="col-25 service-rp-content">{{numFormat-->
+                                                <!--grandTotal '0,0.00 $'}}</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-offset-33 col-33 service-rp-content">Paid Amount :</div>-->
+                                        <!--<div style="text-align: right" class="col-25 service-rp-content">{{numFormat-->
+                                                <!--paidAmount '0,0.00 $'}}</div>-->
+                                    <!--</div>-->
+                                    <!--<hr style="border-top: 1px dashed #8c8b8b;">-->
+                                    <!--<div class="service-rp-content" style="text-align: center;">Thank you!</div>-->
+                                    <!--<div class="service-rp-content" style="text-align: center;">Powered by Rabbit IT-->
+                                        <!--Solution-->
+                                    <!--</div>-->
+                                <!--{{/each}}-->
+                            <!--{{/if}}-->
+                        <!--</div>-->
+                    <!--</div>-->
+                {{/ionContent}}
+            {{/ionView}}
+        {{else}}
+            {{> checkRoleUser}}
+        {{/if}}
     {{else}}
         {{> login}}
     {{/if}}

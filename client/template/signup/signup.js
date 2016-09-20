@@ -39,6 +39,14 @@ Template.signup.events({
                         showConfirmButton: true
                     })
                 } else {
+                    swal({
+                        title: "Success",
+                        text: "Register success",
+                        type: "success",
+                        timer: 1000,
+                        confirmButtonColor: "#45B1FC",
+                        showConfirmButton: true
+                    });
                     Router.go(`/login`);
                 }
             });

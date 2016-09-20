@@ -21,13 +21,13 @@ Meteor.startup(function () {
         };
         let superId = Accounts.createUser(userObj);
         console.log(superId);
-        Roles.addUsersToRoles(superId, ['cashier', 'setting','super'])
+        Roles.addUsersToRoles(superId, ['cashier', 'setting'])
     }
     if (Collection.Company.find().count() == 0) {
         let company = {
             companyName: "Rabbit TC",
             address: "Battambang",
-            tel: "096753432"
+            tel: "053 50 66 777"
         };
         Collection.Company.insert(company);
     }

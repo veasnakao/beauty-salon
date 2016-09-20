@@ -5,6 +5,9 @@ Meteor.publish('staffs', function () {
 Meteor.publish('staff', function (_id) {
     return Collection.Staff.find({_id: _id});
 });
+Meteor.publish('staffActive',function (selector) {
+    return Collection.Staff.find(selector);
+});
 
 //publish customer
 Meteor.publish('customers', function () {

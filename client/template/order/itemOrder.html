@@ -1,160 +1,185 @@
 <template name="itemOrder">
     {{#if currentUser}}
-        {{#contentFor "headerButtonLeft"}}
-            {{>ionNavBackButton path="showOrder"}}
-        {{/contentFor}}
+        {{#if isInRole 'cashier'}}
+            {{#contentFor "headerButtonLeft"}}
+                {{>ionNavBackButton path="showOrder"}}
+            {{/contentFor}}
 
-        {{#contentFor "headerTitle"}}
-            <h1 class="title">Service List</h1>
-        {{/contentFor}}
+            {{#contentFor "headerTitle"}}
+                <h1 class="title">Service List</h1>
+            {{/contentFor}}
 
-        {{#contentFor "headerButtonRight"}}
-            {{#if checkStatus}}
-                <button data-ion-modal="searchItem" class="button button-clear pull-left search-item">
-                    {{> ionIcon icon="ion ion-ios-search-strong"}}
-                </button>
-            {{/if}}
-        {{/contentFor}}
-
-        {{#ionView}}
-            {{#ionContent}}
+            {{#contentFor "headerButtonRight"}}
                 {{#if checkStatus}}
-                    <div class="card animated bounceInDown">
-                        {{#autoForm collection="Collection.Order" id="orderList" doc=order}}
-                            <div class="row responsive-sm">
-                                <div class="col-33">
-                                    {{> afQuickField name='date' class="js-orderDate"}}
-                                </div>
-                                <div class="col-33">
-                                    {{> afQuickField name='customerId' class="js-customer"}}
-                                </div>
-                                <div class="col-33">
-                                    {{> afQuickField name='staffId' class="js-staff"}}
-                                </div>
-                            </div>
-                        {{/autoForm}}
-                    </div>
-                {{else}}
-                    {{#if order}}
+                    <button data-ion-modal="searchItem" class="button button-clear pull-left search-item">
+                        {{> ionIcon icon="ion ion-ios-search-strong"}}
+                    </button>
+                {{/if}}
+            {{/contentFor}}
+
+            {{#ionView}}
+                {{#ionContent}}
+                    {{#if checkStatus}}
                         <div class="card animated bounceInDown">
                             {{#autoForm collection="Collection.Order" id="orderList" doc=order}}
-                                <div class="row">
-                                    <div class="col">
-                                        {{> afQuickField name='date' class="js-orderDate" readonly=true}}
+                                <div class="row responsive-sm">
+                                    <div class="col-33">
+                                        {{> afQuickField name='date' class="js-orderDate"}}
                                     </div>
-                                    <div class="col"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        {{> afQuickField name='customerId' class="js-customer" disabled="true"}}
+                                    <div class="col-33">
+                                        {{> afQuickField name='customerId' class="js-customer"}}
                                     </div>
-                                    <div class="col">
-                                        {{> afQuickField name='staffId' class="js-staff" disabled="true"}}
+                                    <div class="col-33">
+                                        {{> afQuickField name='staffId' class="js-staff"}}
                                     </div>
                                 </div>
                             {{/autoForm}}
                         </div>
-                    {{/if}}
-                {{/if}}
-                {{#each showOrderDetail}}
-                    <div class="card">
-                        <div class="item animated bounceInDown item-text-wrap">
-                            <div class="row">
-                                <div class="col">
-                                    {{itemName}}
-                                </div>
-                                <div class="col" style="color: #0c60ee;">
-                                    {{numFormat price '0,0.00 $'}}
-                                </div>
-                                <div class="col">
-                                    x{{quantity}}
-                                </div>
-                                <div class="col">
-                                    {{discount}} %
-                                </div>
-                                <div class="col">
-                                    {{numFormat amount '0,0.00 $'}}
-                                </div>
+                    {{else}}
+                        {{#if order}}
+                            <div class="card animated bounceInDown">
+                                {{#autoForm collection="Collection.Order" id="orderList" doc=order}}
+                                    <div class="row">
+                                        <div class="col">
+                                            {{> afQuickField name='date' class="js-orderDate" readonly=true}}
+                                        </div>
+                                        <div class="col"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{> afQuickField name='customerId' class="js-customer" disabled="true"}}
+                                        </div>
+                                        <div class="col">
+                                            {{> afQuickField name='staffId' class="js-staff" disabled="true"}}
+                                        </div>
+                                    </div>
+                                {{/autoForm}}
                             </div>
-                            {{#if checkStatus}}
+                        {{/if}}
+                    {{/if}}
+                    {{#each showOrderDetail}}
+                        <div class="card">
+                            <div class="item animated bounceInDown item-text-wrap">
                                 <div class="row">
                                     <div class="col">
-                                        <div style="float: right">
-                                            <button class="button button-balanced increase-quantity"
-                                                    data-action="fake">
-                                                {{> ionIcon class="ion ion-plus-round"}}
-                                            </button>
-                                            <button class="button button-assertive decrease-quantity">
-                                                {{> ionIcon class="ion ion-minus-round"}}
-                                            </button>
-                                            <button class="button button-positive edit-order"
-                                                    data-ion-modal="editOrder" data-id="{{_id}}"
-                                                    data-qty="{{quantity}}">
-                                                {{> ionIcon class="ion-edit"}}
-                                            </button>
-                                            <button class="button button-assertive delete-item-order">
-                                                {{> ionIcon class="ion ion-trash-a"}}
-                                            </button>
-                                        </div>
+                                        {{itemName}}
+                                    </div>
+                                    <div class="col" style="color: #0c60ee;">
+                                        {{numFormat price '0,0.00 $'}}
+                                    </div>
+                                    <div class="col">
+                                        x{{quantity}}
+                                    </div>
+                                    <div class="col">
+                                        {{discount}} %
+                                    </div>
+                                    <div class="col">
+                                        {{numFormat amount '0,0.00 $'}}
                                     </div>
                                 </div>
-                            {{/if}}
-                        </div>
-                    </div>
-                {{/each}}
-                <div class="row responsive-sm">
-                    <div class="col-offset-50 col-50">
-                        <div class="card">
-                            <div class="item item-text-wrap button-balanced">
-                                {{#with showOrder}}
+                                {{#if checkStatus}}
                                     <div class="row">
-                                        <div class="col-50">Total :</div>
-                                        <div class="col-33">
-                                            <div style="float: right;">
-                                                {{numFormat total '0,0.00 $'}}
-                                            </div>
-                                        </div>
-                                        <div class="col-10"></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-50">Discount :</div>
-                                        <div class="col-33">
-                                            <div style="float: right;">
-                                                {{#if checkDiscountType discountType}}
-                                                    {{numFormat discountVal '0,0.00 $'}}
-                                                {{else}}
-                                                    {{discountVal}} %
-                                                {{/if}}
-                                            </div>
-                                        </div>
-                                        {{#if checkStatus}}
-                                            <div class="col-25">
-                                                <button class="button button-positive button-small"
-                                                        data-ion-modal="addDiscount"
-                                                        style="margin-top: -8px;margin-left:10px;">
-                                                    {{> ionIcon class="ion ion-edit"}}
+                                        <div class="col">
+                                            <div style="float: right">
+                                                <button class="button button-balanced increase-quantity"
+                                                        data-action="fake">
+                                                    {{> ionIcon class="ion ion-plus-round"}}
                                                 </button>
-                                                <button class="button button-assertive button-small"
-                                                        style="margin-top: -8px;margin-left:10px;"
-                                                        name="delete-discount">
+                                                <button class="button button-assertive decrease-quantity">
+                                                    {{> ionIcon class="ion ion-minus-round"}}
+                                                </button>
+                                                <button class="button button-positive edit-order"
+                                                        data-ion-modal="editOrder" data-id="{{_id}}"
+                                                        data-qty="{{quantity}}">
+                                                    {{> ionIcon class="ion-edit"}}
+                                                </button>
+                                                <button class="button button-assertive delete-item-order">
                                                     {{> ionIcon class="ion ion-trash-a"}}
                                                 </button>
                                             </div>
-                                        {{/if}}
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-50">Grand Total :</div>
-                                        <div class="col-33">
-                                            <div style="float: right;">
-                                                {{numFormat grandTotal '0,0.00 $'}}
-                                            </div>
                                         </div>
-                                        <div class="col-10"></div>
                                     </div>
-                                {{/with}}
-                                {{#if payment}}
-                                    {{#with payment}}
+                                {{/if}}
+                            </div>
+                        </div>
+                    {{/each}}
+                    <div class="row responsive-sm">
+                        <div class="col-offset-50 col-50">
+                            <div class="card">
+                                <div class="item item-text-wrap button-balanced">
+                                    {{#with showOrder}}
+                                        <div class="row">
+                                            <div class="col-50">Total :</div>
+                                            <div class="col-33">
+                                                <div style="float: right;">
+                                                    {{numFormat total '0,0.00 $'}}
+                                                </div>
+                                            </div>
+                                            <div class="col-10"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-50">Discount :</div>
+                                            <div class="col-33">
+                                                <div style="float: right;">
+                                                    {{#if checkDiscountType discountType}}
+                                                        {{numFormat discountVal '0,0.00 $'}}
+                                                    {{else}}
+                                                        {{discountVal}} %
+                                                    {{/if}}
+                                                </div>
+                                            </div>
+                                            {{#if checkStatus}}
+                                                <div class="col-25">
+                                                    <button class="button button-positive button-small"
+                                                            data-ion-modal="addDiscount"
+                                                            style="margin-top: -8px;margin-left:10px;">
+                                                        {{> ionIcon class="ion ion-edit"}}
+                                                    </button>
+                                                    <button class="button button-assertive button-small"
+                                                            style="margin-top: -8px;margin-left:10px;"
+                                                            name="delete-discount">
+                                                        {{> ionIcon class="ion ion-trash-a"}}
+                                                    </button>
+                                                </div>
+                                            {{/if}}
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-50">Grand Total :</div>
+                                            <div class="col-33">
+                                                <div style="float: right;">
+                                                    {{numFormat grandTotal '0,0.00 $'}}
+                                                </div>
+                                            </div>
+                                            <div class="col-10"></div>
+                                        </div>
+                                    {{/with}}
+                                    {{#if payment}}
+                                        {{#with payment}}
+                                            <div class="row">
+                                                <div class="col-50">
+                                                    Paid Amount :
+                                                </div>
+                                                <div class="col-33">
+                                                    <div style="float: right;">
+                                                        {{numFormat paidAmount '0,0.00 $'}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-10"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-50">
+                                                    Balance :
+                                                </div>
+                                                <div class="col-33">
+                                                    <div style="float: right;">
+                                                        {{numFormat balance '0,0.00 $'}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-10"></div>
+                                            </div>
+                                        {{/with}}
+                                    {{else}}
                                         <div class="row">
                                             <div class="col-50">
                                                 Paid Amount :
@@ -177,53 +202,32 @@
                                             </div>
                                             <div class="col-10"></div>
                                         </div>
-                                    {{/with}}
-                                {{else}}
-                                    <div class="row">
-                                        <div class="col-50">
-                                            Paid Amount :
-                                        </div>
-                                        <div class="col-33">
-                                            <div style="float: right;">
-                                                {{numFormat paidAmount '0,0.00 $'}}
-                                            </div>
-                                        </div>
-                                        <div class="col-10"></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-50">
-                                            Balance :
-                                        </div>
-                                        <div class="col-33">
-                                            <div style="float: right;">
-                                                {{numFormat balance '0,0.00 $'}}
-                                            </div>
-                                        </div>
-                                        <div class="col-10"></div>
-                                    </div>
-                                {{/if}}
+                                    {{/if}}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--js-paid-->
-                <div class="row">
-                    <div class="col">
-                        <button class="button button-round button-block button-assertive js-cancelOrder">
-                            {{> ionIcon class="ion ion-trash-a"}}
-                            Delete Order
-                        </button>
+                    <!--js-paid-->
+                    <div class="row">
+                        <div class="col">
+                            <button class="button button-round button-block button-assertive js-cancelOrder">
+                                {{> ionIcon class="ion ion-trash-a"}}
+                                Delete Order
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button class="button button-round button-block button-positive js-payment">
+                                {{> ionIcon class="ion ion-cash"}}
+                                Payment
+                            </button>
+                        </div>
                     </div>
-                    <div class="col">
-                        <button class="button button-round button-block button-positive js-payment">
-                            {{> ionIcon class="ion ion-cash"}}
-                            Payment
-                        </button>
-                    </div>
-                </div>
 
-            {{/ionContent}}
-        {{/ionView}}
+                {{/ionContent}}
+            {{/ionView}}
+        {{else}}
+            {{> checkRoleUser}}
+        {{/if}}
     {{else}}
         {{> login}}
     {{/if}}

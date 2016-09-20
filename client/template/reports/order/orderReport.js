@@ -44,16 +44,20 @@ Template.orderReport.events({
     'click .js-all-staff'(e){
         if ($(e.currentTarget).prop('checked')) {
             Session.set('staffId', undefined);
+            Session.set('allStaff',1);
             $('.js-by-staff').prop('checked', false);
-            // $('.show-staff').hide(500);
+            $('.show-staff').hide(500);
+        }else{
+            Session.set('allStaff',undefined);
         }
     },
     'click .js-by-staff'(e){
         if ($(e.currentTarget).prop('checked')) {
             $('.js-all-staff').prop('checked', false);
             $('.show-staff').show(500);
-        } else {
-            // $('.show-staff').hide(500);
+            Session.set('allStaff',undefined);
+        }else{
+            Session.set('staffId', undefined);
         }
     },
     'click .js-submit-report'(){
@@ -72,7 +76,7 @@ Template.orderReport.events({
                         Session.set('orderByStaffResult', result);
                     }
                 });
-            } else {
+            } else if(Session.get('allStaff')){
                 Meteor.call('orderAllStaff', getFromDate, getToDate, function (error, result) {
                     if (error) {
                         sAlert.error(error.message);
@@ -81,6 +85,9 @@ Template.orderReport.events({
                         Session.set('orderAllStaffResult', result);
                     }
                 });
+            }else{
+                Session.set('orderAllStaffResult', undefined);
+                Session.set('orderByStaffResult', undefined);
             }
         }
     }
@@ -89,8 +96,9 @@ Template.orderReport.events({
 //onDestroyed
 Template.orderReport.onDestroyed(function () {
     Session.set('orderAllStaffResult', undefined);
+    Session.set('orderByStaffResult', undefined);
     Session.set('staffId', undefined);
-    Session.set('allStaffId', undefined);
+    Session.set('allStaff', undefined);
     Session.set('getAllStaffId', undefined);
     Session.set('getStaffId', undefined);
     Session.set('fromDate', undefined);

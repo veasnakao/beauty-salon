@@ -31,3 +31,37 @@ Template.setRole.helpers({
         }
     }
 });
+
+Template.setRole.events({
+    'click .delete-user'(){
+        let userId = this._id;
+        swal({
+            title: "Are you sure?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#5591DF",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plx!",
+            closeOnConfirm: false, closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                Meteor.call('removeUser', userId, (error, result)=> {
+                    if (error) {
+                        swal({
+                            title: "Error",
+                            text: error,
+                            type: "error"
+                        });
+                    } else {
+                        swal("Deleted!", "Your user has been deleted.", "success");
+                    }
+                });
+            } else {
+                swal({
+                    title: "Cancelled",
+                    type: "error"
+                });
+            }
+        });
+    }
+});

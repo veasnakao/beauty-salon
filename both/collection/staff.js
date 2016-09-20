@@ -21,7 +21,7 @@ Schema.Staff = new SimpleSchema({
     },
     workDate: {
         type:Date,
-        label:"Word Date"
+        label:"Work Date"
     },
     fee: {
         type: Number,
