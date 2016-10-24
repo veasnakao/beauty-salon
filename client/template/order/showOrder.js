@@ -120,7 +120,7 @@ Template.showOrder.events({
     },
     'click .order-status'(e) {
         if ($(e.currentTarget).prop('checked')) {
-            $('.check-status-label').text('Order');
+            $('.check-status-label').text('Service');
             Session.set('orderStatus', 'active');
         } else {
             $('.check-status-label').text('Paid');

@@ -35,7 +35,7 @@ Template.searchStaff.helpers({
 
 //onDestroyed
 Template.searchStaff.onDestroyed(function () {
-    Session.set('searchQueryStaff', undefined);
+    // Session.set('searchQueryStaff', undefined);
 });
 
 
@@ -49,8 +49,6 @@ Template._showStaffs.helpers({
 //template _staffs events
 Template._showStaffs.events({
     'click .insert-staff': function () {
-        // $(this).hide();
-
         let staffId = this._id;
         if (staffId) {
             Session.set('staffId', staffId);
