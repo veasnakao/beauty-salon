@@ -10,7 +10,7 @@ Schema.JournalItem = new SimpleSchema({
         type: String,
         label: "Type of Journal Item",
         autoform: {
-            type: "select-radio",
+            type: "select",
             options: function () {
                 return [
                     {label: "Income", value: 'income'},

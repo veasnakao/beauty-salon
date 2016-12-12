@@ -51,18 +51,19 @@ Template.itemOrder.rendered = function () {
 Template.itemOrder.helpers({
     checkStatus(){
         if (Session.get('orderStatus') == 'active') {
-            let check = Session.get('orderStatus');
+            // let check = Session.get('orderStatus');
             return true
-        } else {
-            let orderId = Router.current().params.orderId;
-            let order = Collection.Order.findOne(orderId);
-            let status = order.status;
-            if (status == 'active') {
-                return true;
-            } else {
-                return false;
-            }
         }
+        // else {
+        //     let orderId = Router.current().params.orderId;
+        //     let order = Collection.Order.findOne(orderId);
+        //     let status = order.status;
+        //     if (status == 'active') {
+        //         return true;
+        //     } else {
+        //         return false;
+        //     }
+        // }
     },
     order() {
         let params = Router.current().params;
@@ -105,11 +106,87 @@ Template.itemOrder.helpers({
         if (discountType == 'c') {
             return true;
         }
+    },
+    serviceItem(){
+        let item = Collection.Item.find().fetch();
+        if(item) {
+            return item;
+        }
     }
 });
 
 //event
 Template.itemOrder.events({
+    'click [name="service-item"]'(){
+        // console.log(this);
+        let params = Router.current().params;
+        let customerId = $('.js-customer');
+        let staffId = $('.js-staff');
+        let orderDate = Session.get('orderDate');
+        let selector = Session.get('orderDetailObj');
+        selector[this._id] = {
+            orderId: params.orderId,
+            itemId: this._id,
+            itemName: this.name,
+            price: this.price,
+            quantity: 1,
+            discount: 0,
+            amount: this.price * 1
+        };
+        if (selector) {
+            Meteor.call('insertOrderDetail', selector, (error, result) => {
+                if (error) {
+                    swal({
+                        title: "Error",
+                        text: error,
+                        type: "error",
+                        timer: 3000,
+                        showConfirmButton: true
+                    });
+                    IonLoading.hide();
+                } else {
+                    let orderId = params.orderId;
+                    if (orderId) {
+                        Meteor.call('updateOrderTotal', orderId, (error, result)=> {
+                            if (error) {
+                                swal({
+                                    title: "Error",
+                                    text: error,
+                                    type: "error",
+                                    timer: 3000,
+                                    showConfirmButton: true
+                                });
+                                IonLoading.hide();
+                            } else {
+                                Meteor.call('updateGrandTotal', orderId, (error, result)=> {
+                                    if (error) {
+                                        swal({
+                                            title: "Error",
+                                            text: error,
+                                            type: "error",
+                                            timer: 3000,
+                                            showConfirmButton: true
+                                        })
+                                    } else {
+                                        swal({
+                                            title: "Success",
+                                            text: "Service item add success",
+                                            type: "success",
+                                            timer: 800,
+                                            confirmButtonColor: "#45B1FC",
+                                            showConfirmButton: true
+                                        });
+                                        IonLoading.hide();
+                                        Session.set('orderId', result);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    },
     'change .js-orderDate'(){
         let orderDate = $('.js-orderDate').val();
         let staffId = $('.js-staff').val();

@@ -9,13 +9,13 @@
                 <h1 class="title">Service List</h1>
             {{/contentFor}}
 
-            {{#contentFor "headerButtonRight"}}
-                {{#if checkStatus}}
-                    <button data-ion-modal="searchItem" class="button button-clear pull-left search-item">
-                        {{> ionIcon icon="ion ion-ios-search-strong"}}
-                    </button>
-                {{/if}}
-            {{/contentFor}}
+                <!--{{#contentFor "headerButtonRight"}}-->
+                <!--{{#if checkStatus}}-->
+                <!--<button data-ion-modal="searchItem" class="button button-clear pull-left search-item">-->
+                <!--{{> ionIcon icon="ion ion-ios-search-strong"}}-->
+                <!--</button>-->
+                    <!--{{/if}}-->
+                <!--{{/contentFor}}-->
 
             {{#ionView}}
                 {{#ionContent}}
@@ -57,52 +57,123 @@
                             </div>
                         {{/if}}
                     {{/if}}
-                    {{#each showOrderDetail}}
-                        <div class="card">
-                            <div class="item animated bounceInDown item-text-wrap">
-                                <div class="row">
-                                    <div class="col">
-                                        {{itemName}}
-                                    </div>
-                                    <div class="col" style="color: #0c60ee;">
-                                        {{numFormat price '0,0.00 $'}}
-                                    </div>
-                                    <div class="col">
-                                        x{{quantity}}
-                                    </div>
-                                    <div class="col">
-                                        {{discount}} %
-                                    </div>
-                                    <div class="col">
-                                        {{numFormat amount '0,0.00 $'}}
+
+                    {{#if checkStatus}}
+                        <div class="row">
+                            <div class="col-33">
+                                <div class="card">
+                                    <div class="list">
+                                        {{#if serviceItem}}
+                                            {{#each serviceItem}}
+                                                <div class="item" name="service-item"
+                                                     style="cursor: pointer;">{{name}}</div>
+                                            {{/each}}
+                                        {{/if}}
                                     </div>
                                 </div>
-                                {{#if checkStatus}}
-                                    <div class="row">
-                                        <div class="col">
-                                            <div style="float: right">
-                                                <button class="button button-balanced increase-quantity"
-                                                        data-action="fake">
-                                                    {{> ionIcon class="ion ion-plus-round"}}
-                                                </button>
-                                                <button class="button button-assertive decrease-quantity">
-                                                    {{> ionIcon class="ion ion-minus-round"}}
-                                                </button>
-                                                <button class="button button-positive edit-order"
-                                                        data-ion-modal="editOrder" data-id="{{_id}}"
-                                                        data-qty="{{quantity}}">
-                                                    {{> ionIcon class="ion-edit"}}
-                                                </button>
-                                                <button class="button button-assertive delete-item-order">
-                                                    {{> ionIcon class="ion ion-trash-a"}}
-                                                </button>
+                            </div>
+                            <div class="col-67">
+                                {{#each showOrderDetail}}
+                                    <div class="card">
+                                        <div class="item animated bounceInDown item-text-wrap">
+                                            <div class="row">
+                                                <div class="col">
+                                                    {{itemName}}
+                                                </div>
+                                                <div class="col" style="color: #0c60ee;">
+                                                    {{numFormat price '0,0.00 $'}}
+                                                </div>
+                                                <div class="col">
+                                                    x{{quantity}}
+                                                </div>
+                                                <div class="col">
+                                                    {{discount}} %
+                                                </div>
+                                                <div class="col">
+                                                    {{numFormat amount '0,0.00 $'}}
+                                                </div>
                                             </div>
+                                            {{#if checkStatus}}
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div style="float: right">
+                                                            <button class="button button-balanced increase-quantity"
+                                                                    data-action="fake">
+                                                                {{> ionIcon class="ion ion-plus-round"}}
+                                                            </button>
+                                                            <button class="button button-assertive decrease-quantity">
+                                                                {{> ionIcon class="ion ion-minus-round"}}
+                                                            </button>
+                                                            <button class="button button-positive edit-order"
+                                                                    data-ion-modal="editOrder" data-id="{{_id}}"
+                                                                    data-qty="{{quantity}}">
+                                                                {{> ionIcon class="ion-edit"}}
+                                                            </button>
+                                                            <button class="button button-assertive delete-item-order">
+                                                                {{> ionIcon class="ion ion-trash-a"}}
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {{/if}}
                                         </div>
                                     </div>
-                                {{/if}}
+                                {{/each}}
                             </div>
                         </div>
-                    {{/each}}
+                        {{else}}
+                        <div class="row">
+                            <div class="col">
+                                {{#each showOrderDetail}}
+                                    <div class="card">
+                                        <div class="item animated bounceInDown item-text-wrap">
+                                            <div class="row">
+                                                <div class="col">
+                                                    {{itemName}}
+                                                </div>
+                                                <div class="col" style="color: #0c60ee;">
+                                                    {{numFormat price '0,0.00 $'}}
+                                                </div>
+                                                <div class="col">
+                                                    x{{quantity}}
+                                                </div>
+                                                <div class="col">
+                                                    {{discount}} %
+                                                </div>
+                                                <div class="col">
+                                                    {{numFormat amount '0,0.00 $'}}
+                                                </div>
+                                            </div>
+                                            {{#if checkStatus}}
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div style="float: right">
+                                                            <button class="button button-balanced increase-quantity"
+                                                                    data-action="fake">
+                                                                {{> ionIcon class="ion ion-plus-round"}}
+                                                            </button>
+                                                            <button class="button button-assertive decrease-quantity">
+                                                                {{> ionIcon class="ion ion-minus-round"}}
+                                                            </button>
+                                                            <button class="button button-positive edit-order"
+                                                                    data-ion-modal="editOrder" data-id="{{_id}}"
+                                                                    data-qty="{{quantity}}">
+                                                                {{> ionIcon class="ion-edit"}}
+                                                            </button>
+                                                            <button class="button button-assertive delete-item-order">
+                                                                {{> ionIcon class="ion ion-trash-a"}}
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {{/if}}
+                                        </div>
+                                    </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    {{/if}}
+
                     <div class="row responsive-sm">
                         <div class="col-offset-50 col-50">
                             <div class="card">

@@ -3,8 +3,8 @@
         {{#if isInRole 'setting'}}
             <div class="bar bar-header bar-positive nav-bar-block nav-bar-transition-ios nav-bar-direction-forward"
                  data-navbar-container>
-                <button class="button button-clear pull-left button-entering button-active" data-ion-menu-toggle="left">
-                    <i class="icon ion-navicon"></i>
+                <button class="button button-clear pull-left button-entering button-active">
+                    {{>ionNavBackButton path="setting"}}
                 </button>
                 <h1 class="title">Staff List</h1>
                 <button class="button button-clear add-order button-icon icon ion-plus-circled"

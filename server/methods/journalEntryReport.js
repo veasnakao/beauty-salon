@@ -299,8 +299,8 @@ Meteor.methods({
     //     }
     // },
     journalEntryReport(fromDate, toDate, journalType){
-        fromDate = moment(fromDate).toDate();
-        toDate = moment(toDate).toDate();
+        fromDate = moment(fromDate).startOf('days').toDate();
+        toDate = moment(toDate).endOf('days').toDate();
         let journalEntry = Collection.JournalEntry.aggregate([
             {
                 $match: {
