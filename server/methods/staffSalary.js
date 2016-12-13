@@ -1,7 +1,7 @@
 Meteor.methods({
     staffSalary(fromDate, toDate){
-        fromDate = moment(fromDate).toDate();
-        toDate = moment(toDate).toDate();
+        fromDate = moment(fromDate).startOf('days').toDate();
+        toDate = moment(toDate).endOf('days').toDate();
         let staffSalary = Collection.Order.aggregate([
             {
                 $match: {

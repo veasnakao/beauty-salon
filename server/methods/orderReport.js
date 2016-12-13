@@ -1,7 +1,7 @@
 Meteor.methods({
     orderAllStaff(fromDate, toDate){
-        fromDate = moment(fromDate).toDate();
-        toDate = moment(toDate).toDate();
+        fromDate = moment(fromDate).startOf('days').toDate();
+        toDate = moment(toDate).endOf('days').toDate();
 
         let orderAllStaff = Collection.Order.aggregate([
             {
@@ -106,8 +106,8 @@ Meteor.methods({
         return data;
     },
     orderByStaff(fromDate, toDate, staffId){
-        fromDate = moment(fromDate).toDate();
-        toDate = moment(toDate).toDate();
+        fromDate = moment(fromDate).startOf('days').toDate();
+        toDate = moment(toDate).endOf('days').toDate();
 
         let orderByStaff = Collection.Order.aggregate([
             {

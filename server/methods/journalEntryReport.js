@@ -113,7 +113,7 @@ Meteor.methods({
         }
     },
     journalEntryDetail(date, journalType){
-        date = moment(date).toDate();
+        date = moment(date).endOf('days').toDate();
         // fromDate = moment(fromDate).toDate();
         let journalEntryDetail = Collection.JournalEntry.aggregate([
             {
