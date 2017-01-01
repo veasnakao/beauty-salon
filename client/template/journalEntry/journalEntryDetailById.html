@@ -14,7 +14,6 @@
                     {{#ionList}}
                         {{#if journalEntryDetailById}}
                             {{#each journalEntryDetailById.content}}
-                            <!--{{#if subTotalIsNotZero subTotal}}-->
                                 {{#ionItem path="journalEntryDetail" iconRight=true}}
                                     <div class="row">
                                         <div class="col">
@@ -46,8 +45,7 @@
                                             {{numFormat subTotal '0,0.00 $'}}
                                         </div>
                                     </div>
-                                {{/ionItem}}<br>
-                                    <!--{{/if}}-->
+                                {{/ionItem}}
                             {{/each}}
                             <div class="row">
                                 <div class="col">
@@ -56,14 +54,15 @@
                                         Delete
                                     </button>
                                 </div>
-                                {{#if checkDate}}
+                                <!--{{#if checkDate}}-->
                                     <div class="col">
-                                        <button class="button button-block button-positive js-update-journal">
+                                        <button class="button button-block button-positive"
+                                                data-ion-modal="editJournalEntry" data-id="{{editJournalEntry._id}}">
                                             {{> ionIcon class="ion ion-edit"}}
                                             Update
                                         </button>
                                     </div>
-                                {{/if}}
+                                <!--{{/if}}-->
                             </div>
                         {{/if}}
                     {{/ionList}}

@@ -15,8 +15,9 @@ AutoForm.hooks({
                 type: "success",
                 timer: 1000,
                 confirmButtonColor: "#45B1FC",
-                showConfirmButton: true
-            })
+                showConfirmButton: false
+            });
+            $("[name='close']").trigger("click");
         },
         onError(formType, error){
             swal({
@@ -24,7 +25,7 @@ AutoForm.hooks({
                 text: error,
                 type: "error",
                 timer: 3000,
-                showConfirmButton: true
+                showConfirmButton: false
             })
         }
     }

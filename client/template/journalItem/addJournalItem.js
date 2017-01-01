@@ -23,7 +23,7 @@ AutoForm.hooks({
     addJournalItem: {//id autoform
         before: {
             insert: function (doc) {
-                doc._id = idGenerator.genWithPrefix(Collection.JournalItem, '001-', 7);
+                doc._id = idGenerator.gen(Collection.JournalItem, 5);
                 return doc;
             }
         },
@@ -34,7 +34,7 @@ AutoForm.hooks({
                 type: "success",
                 timer: 1000,
                 confirmButtonColor: "#45B1FC",
-                showConfirmButton: true
+                showConfirmButton: false
             })
         },
         onError(formType, error){

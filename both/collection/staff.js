@@ -60,24 +60,24 @@ Schema.Staff = new SimpleSchema({
 Collection.Staff.attachSchema(Schema.Staff);
 
 //search staff
-Collection.Staff.search = function (query, limit) {
-    let limitAmount = limit || 10;
-    if (!query) {
-        return;
-    }
-    let regPattern = `${query}`;
-    let reg = new RegExp(regPattern, 'i');//match all case
-    let selector = {};
-    selector.$or = [{
-        name: {
-            $regex: reg
-        }
-    }];
-    let staffs = Collection.Staff.find(selector, {
-        sort: {
-            _id: 1
-        },
-        limit: limitAmount
-    });
-    return staffs;
-};
+// Collection.Staff.search = function (query, limit) {
+//     let limitAmount = limit || 10;
+//     if (!query) {
+//         return;
+//     }
+//     let regPattern = `${query}`;
+//     let reg = new RegExp(regPattern, 'i');//match all case
+//     let selector = {};
+//     selector.$or = [{
+//         name: {
+//             $regex: reg
+//         }
+//     }];
+//     let staffs = Collection.Staff.find(selector, {
+//         sort: {
+//             _id: 1
+//         },
+//         limit: limitAmount
+//     });
+//     return staffs;
+// };

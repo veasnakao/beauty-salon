@@ -23,9 +23,7 @@ AutoForm.hooks({
                 title: "Success",
                 text: "Staff add success",
                 type: "success",
-                timer: 1000,
-                confirmButtonColor: "#45B1FC",
-                showConfirmButton: true
+                timer: 1000
             })
         },
         onError(formType, error){
@@ -33,8 +31,7 @@ AutoForm.hooks({
                 title: "Error",
                 text:error,
                 type:"error",
-                timer: 3000,
-                showConfirmButton: true
+                timer: 3000
             })
         }
     }

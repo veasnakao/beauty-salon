@@ -1,4 +1,7 @@
 Meteor.methods({
+    removeIncomeByStaff(id){
+        Collection.IncomeByStaff.remove(id);
+    },
     removeStaff(id){
         Collection.Staff.remove(id);
     },

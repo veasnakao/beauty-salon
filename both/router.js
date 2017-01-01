@@ -15,6 +15,33 @@ Router.map(function () {
         path: '/staffInfo/:_id',
     });
 
+    //incomeByStaff
+    this.route('showIncomeByStaff');
+    this.route('incomeByStaffDetail', {
+        path: '/incomeByStaffDetail/:_id'
+    });
+
+    // this.route('journalEntryDetailById', {
+    //     path: '/journalEntryDetailById/:_id'
+    // });
+    // this.route('editJournalEntry', {
+    //     path: '/editJournalEntry/:_id'
+    // });
+    // this.route('addJournalEntry');
+
+    //journalEntry
+    this.route('showJournalEntry');
+    this.route('journalEntryDetail', {
+        path: '/journalEntryDetail/date/:date/journalType/:journalType'
+    });
+    this.route('journalEntryDetailById', {
+        path: '/journalEntryDetailById/:_id'
+    });
+    this.route('editJournalEntry', {
+        path: '/editJournalEntry/:_id'
+    });
+    this.route('addJournalEntry');
+
     //item
     this.route('showItem');
     this.route('itemInfo', {
@@ -32,19 +59,6 @@ Router.map(function () {
     this.route('journalItemInfo', {
         path: '/journalItemInfo/:_id'
     });
-
-    //journalEntry
-    this.route('showJournalEntry');
-    this.route('journalEntryDetail', {
-        path: '/journalEntryDetail/date/:date/journalType/:journalType'
-    });
-    this.route('journalEntryDetailById', {
-        path: '/journalEntryDetailById/:_id'
-    });
-    this.route('editJournalEntry', {
-        path: '/editJournalEntry/:_id'
-    });
-    this.route('addJournalEntry');
 
     //order
     this.route('showOrder');

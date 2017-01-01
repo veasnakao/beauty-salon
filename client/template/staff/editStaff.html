@@ -2,12 +2,9 @@
     {{#ionModal customTemplate=true}}
         {{#autoForm collection="Collection.Staff" doc=staffInfo id="editStaff" type="update"}}
             <div class="bar bar-header bar-stable" style="background-color: #387ef5;">
-                <button data-dismiss="modal" type="button" class="button button-clear" style="color: white;">
-                    Cancel
-                </button>
                 <h2 class="title" style="color: white;">Edit Staff</h2>
-                <button class="button button-clear pull-left js-editStaff" style="color:white;">
-                    {{> ionIcon icon="ion ion-checkmark-circled"}}
+                <button data-dismiss="modal" type="button" class="button button-clear pull-right" style="color: white;">
+                    {{> ionIcon icon="ion ion-close-circled"}}
                 </button>
             </div>
             <div class="content has-header overflow-scroll">
@@ -18,6 +15,14 @@
                 {{> afQuickField name='baseSalary' class="js-baseSalary"}}
                 {{> afQuickField name='status'}}
                 {{> afQuickField name='tel'}}
+                <div class="row">
+                    <div class="col">
+                        <button type="reset" class="button button-block button-stable">Reset</button>
+                    </div>
+                    <div class="col">
+                        <button class="button button-block button-positive">Submit</button>
+                    </div>
+                </div>
             </div>
         {{/autoForm}}
     {{/ionModal}}

@@ -1,0 +1,65 @@
+<template name="incomeByStaffDetail">
+    {{#if currentUser}}
+        {{#if isInRole 'setting'}}
+            {{#contentFor "headerButtonLeft"}}
+                {{>ionNavBackButton path="showIncomeByStaff"}}
+            {{/contentFor}}
+
+            {{#contentFor "headerTitle"}}
+                <h1 class="title">Income By Staff Detail</h1>
+            {{/contentFor}}
+
+            {{#ionView}}
+                {{#ionContent}}
+                    {{#ionList}}
+                        {{#if incomeByStaffDetail}}
+                            {{#each incomeByStaffDetail}}
+                                {{#ionItem path="customerInfo" iconRight=true}}
+
+                                    <u>Date</u> : {{moFormat date 'MM/DD/YYYY'}}
+                                    <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
+                                    <div class="row">
+                                        <div class="col"><u>Name</u></div>
+                                        <div class="col"><u>Gender</u></div>
+                                        <div class="col"><u>Amount</u></div>
+                                    </div>
+                                    {{#each incomeByStaff}}
+                                        <div class="row">
+                                            <div class="col">{{name}}</div>
+                                            <div class="col">{{gender}}</div>
+                                            <div class="col">{{numFormat amount '0,0.00$'}}</div>
+                                        </div>
+                                    {{/each}}
+                                    <hr style="border-top: 1px dashed #8c8b8b;border-bottom: none;">
+                                    <div class="row">
+                                        <div class="col"><u>Total</u></div>
+                                        <div class="col"></div>
+                                        <div class="col">{{numFormat total '0,0.00$'}}</div>
+                                    </div>
+                                {{/ionItem}}
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="button button-block button-assertive js-delete-incomeByStaff">
+                                            {{> ionIcon class="ion ion-ios-trash"}}
+                                            Delete
+                                        </button>
+                                    </div>
+                                    <div class="col">
+                                        <button class="button button-block button-positive" data-ion-modal="editIncomeByStaff" data-id="{{editIncomeByStaff._id}}">
+                                            {{> ionIcon class="ion ion-edit"}}
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
+                            {{/each}}
+                        {{/if}}
+                    {{/ionList}}
+                {{/ionContent}}
+            {{/ionView}}
+        {{else}}
+            {{> checkRoleUser}}
+        {{/if}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>

@@ -11,13 +11,12 @@
                         data-ion-modal="addStaff">
                 </button>
             </div>
-
             {{#ionView}}
                 {{#ionContent}}
                     {{#ionList}}
                         {{#if showStaff}}
                             {{#each showStaff}}
-                                {{#ionItem path="staffInfo" iconRight=true}}
+                                {{#ionItem iconRight=true path="staffInfo"}}
                                     <h2>{{name}}</h2>
                                     {{#if checkSalary baseSalary}}
                                         Base Salary : {{numFormat baseSalary '0,0.00 $'}}

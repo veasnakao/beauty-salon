@@ -84,9 +84,20 @@
                             {{/ionItem}}
                         {{/with}}
                     {{/ionList}}
-                    <button class="button button-block button-assertive ion-trash-a delete-staff">
-                        Delete
-                    </button>
+                    <div class="row">
+                        <div class="col">
+                            <button class="button button-block button-assertive delete-staff">
+                                {{> ionIcon icon="ion ion-trash-a"}} Delete
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button class="button button-block button-positive" data-ion-modal="editStaff"
+                                    data-id="{{staffInfo._id}}">
+                                {{> ionIcon icon="ion ion-edit"}} Update
+                            </button>
+                        </div>
+                    </div>
+
                 {{/ionContent}}
             {{/ionView}}
         {{else}}

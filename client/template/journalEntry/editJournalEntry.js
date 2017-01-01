@@ -31,6 +31,7 @@ Template.editJournalEntry.helpers({
             _id: journalEntryId
         });
         if (journalEntry) {
+            console.log(journalEntry);
             return journalEntry;
         }
     }
@@ -42,15 +43,28 @@ AutoForm.hooks({
         onSuccess(formType, id){
             let params = Router.current().params;
             let journalEntryId = params._id;
-            Router.go(`/journalEntryDetailById/${journalEntryId}`);
             swal({
                 title: "Success",
                 text: "Journal entry update success",
                 type: "success",
                 timer: 1000,
                 confirmButtonColor: "#45B1FC",
-                showConfirmButton: true
-            })
+                showConfirmButton: false
+            });
+            Meteor.call('journalEntryDetailById', journalEntryId, (error, result)=> {
+                if (error) {
+                    swal({
+                        title: "Error",
+                        text: error,
+                        type: "error",
+                        timer: 3000,
+                        showConfirmButton: false
+                    })
+                } else {
+                    Session.set('journalEntryDetailById', result);
+                }
+            });
+            $("[name='close']").trigger("click");
         },
         onError(formType, error){
             swal({

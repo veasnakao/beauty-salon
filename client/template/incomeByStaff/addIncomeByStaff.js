@@ -1,13 +1,11 @@
-//oncreated
-Template.addJournalEntry.created = function () {
+Template.addIncomeByStaff.onCreated(function () {
     this.autorun(function () {
-        this.subscription = Meteor.subscribe('journalEntrys');
-        this.subscription = Meteor.subscribe('journalItems');
+        this.subscription = Meteor.subscribe('staffs');
+        this.subscription = Meteor.subscribe('incomeByStaff');
     }.bind(this));
-};
+});
 
-//onrender
-Template.addJournalEntry.rendered = function () {
+Template.addIncomeByStaff.rendered = function () {
     try {
         this.autorun(() => {
             if (!this.subscription.ready()) {
@@ -22,36 +20,33 @@ Template.addJournalEntry.rendered = function () {
 };
 
 AutoForm.hooks({
-    addJournalEntry: {
+    addIncomeByStaff: {//id autoform
         before: {
             insert: function (doc) {
-                let date = doc.date;
-                date = moment(date).format('MMDDYYYY');
-                let prefix = date + '-';
-                doc._id = idGenerator.genWithPrefix(Collection.JournalEntry, prefix, 4);
+                doc._id = idGenerator.gen(Collection.IncomeByStaff, 6);
                 return doc;
             }
         },
         onSuccess(formType, id){
             swal({
                 title: "Success",
-                text: "Journal entry add success",
+                text: "Add success",
                 type: "success",
                 timer: 1000,
                 confirmButtonColor: "#45B1FC",
                 showConfirmButton: false
             });
-            Meteor.call('showJournalEntry', Session.get('limitJournal'), (error, result)=> {
+            Meteor.call('showIncomeByStaff', Session.get('limitShowIncomeByStaff'), (error, result) => {
                 if (error) {
                     swal({
                         title: "Error",
                         text: error,
                         type: "error",
                         timer: 3000,
-                        showConfirmButton: true
+                        showConfirmButton: false
                     })
                 } else {
-                    Session.set('showJournalEntry', result);
+                    Session.set('showIncomeByStaff', result);
                 }
             });
         },
@@ -64,11 +59,5 @@ AutoForm.hooks({
                 showConfirmButton: false
             })
         }
-    }
-});
-
-Template.addJournalEntry.events({
-    'click .js-back'(){
-        Router.go('showJournalEntry');
     }
 });

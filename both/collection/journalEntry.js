@@ -2,11 +2,14 @@ Collection.JournalEntry = new Mongo.Collection("journalEntry");
 Schema.JournalEntry = new SimpleSchema({
     date: {
         type: Date,
-        label: "Date"
+        label: "Date",
+        autoform: {
+            placeholder: "date"
+        }
     },
     typeOfJournal: {
         type: String,
-        label: "Journal",
+        label: "Type",
         autoform: {
             type: "select",
             options: function () {
@@ -27,7 +30,7 @@ Schema.JournalEntry = new SimpleSchema({
     },
     'journalEntryItem.$.journalItemId': {
         type: String,
-        label: "Journal Item Name",
+        label: "Name",
         autoform: {
             type: "select",
             options: function () {
@@ -47,8 +50,11 @@ Schema.JournalEntry = new SimpleSchema({
     },
     'journalEntryItem.$.journalItemPrice': {
         type: Number,
-        label: "Price ($)",
-        decimal: true
+        label: "Amount ($)",
+        decimal: true,
+        autoform: {
+            placeholder: "amount"
+        }
     },
     orderId:{
         type:String,

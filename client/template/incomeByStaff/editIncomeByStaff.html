@@ -1,18 +1,18 @@
-<template name="editJournalEntry">
-    {{#ionModal customTemplate=true id="modalEditJournalEntry"}}
-        {{#autoForm collection="Collection.JournalEntry" doc=journalEntryDetail id="editJournalEntry" type="update"}}
+<template name="editIncomeByStaff">
+    {{#ionModal customTemplate=true id="modalEditIncomeByStaff"}}
+        {{#autoForm collection="Collection.IncomeByStaff" doc=data id="editIncomeByStaff" type="update"}}
             <div class="bar bar-header bar-stable" style="background-color: #387ef5;">
-                <h2 class="title" style="color: white;">Edit Journal Entry</h2>
+                <h2 class="title" style="color: white;">Edit IncomeByStaff</h2>
                 <button name="close" data-dismiss="modal" type="button" class="button button-clear pull-left" style="color: white;">
                     {{> ionIcon icon="ion ion-close-circled"}}
                 </button>
             </div>
             <div class="content has-header overflow-scroll">
-                {{> afQuickField name='date'}}
-                {{> afQuickField name='typeOfJournal' type="text" readonly=true}}
-                {{> afQuickField name='journalEntryItem'}}
+                {{> afQuickField name='date' placeholder="date"}}
+                {{> afQuickField name='type' readonly=true type='hidden'}}
+                {{> afQuickField name="incomeByStaff"}}
                 <div class="col">
-                    <button class="button button-block button-positive js-updateJournal">
+                    <button class="button button-block button-positive js-update-incomeByStaff">
                         {{> ionIcon icon="ion ion-checkmark-circled"}} Update
                     </button>
                 </div>

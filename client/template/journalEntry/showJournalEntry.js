@@ -15,6 +15,7 @@ Tracker.autorun(function () {
         });
     }
 });
+
 //oncreated
 Template.showJournalEntry.created = function () {
     Session.set('limitJournal', 10);
@@ -64,10 +65,6 @@ Template.showJournalEntry.events({
         let id = this.journalEntryId;
         // Router.go(`/journalEntryDetail/orderId/${orderId}?staffId=${order.staffId}&customerId=${order.customerId}`);
         Router.go(`/journalEntryDetailById/${id}`);
-
-    },
-    'click .add-journalEntry'(){
-        Router.go('addJournalEntry');
     }
 });
 

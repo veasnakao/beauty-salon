@@ -114,11 +114,12 @@ Meteor.methods({
     },
     journalEntryDetail(date, journalType){
         date = moment(date).endOf('days').toDate();
-        // fromDate = moment(fromDate).toDate();
+        let startDate = moment(date).startOf('days').toDate();
+        let endDate = moment(date).endOf('days').toDate();
         let journalEntryDetail = Collection.JournalEntry.aggregate([
             {
                 $match: {
-                    date: date,
+                    date: {$gte: startDate, $lte: endDate},
                     typeOfJournal: journalType
                 }
             },

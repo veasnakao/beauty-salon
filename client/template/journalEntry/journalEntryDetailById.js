@@ -12,7 +12,7 @@ Template.journalEntryDetailById.created = function () {
                 text: error,
                 type: "error",
                 timer: 3000,
-                showConfirmButton: true
+                showConfirmButton: false
             })
         } else {
             Session.set('journalEntryDetailById', result);
@@ -23,19 +23,19 @@ Template.journalEntryDetailById.created = function () {
 //helper
 Template.journalEntryDetailById.helpers({
     checkDate(){
-        let params = Router.current().params;
-        let id = params._id;
-        let journalEntry = Collection.JournalEntry.findOne(id);
-        if (journalEntry) {
-            let journalDate = journalEntry.date;
-            let today = new Date();
-            let tomorrow = today.setDate(today.getDate() + 1);
-            if (journalDate < tomorrow) {
-                return false;
-            } else {
-                return true;
-            }
-        }
+        // let params = Router.current().params;
+        // let id = params._id;
+        // let journalEntry = Collection.JournalEntry.findOne(id);
+        // if (journalEntry) {
+        //     let journalDate = journalEntry.date;
+        //     let today = new Date();
+        //     let tomorrow = today.setDate(today.getDate() + 1);
+        //     if (journalDate < tomorrow) {
+        //         return false;
+        //     } else {
+        //         return true;
+        //     }
+        // }
     },
     subTotalIsNotZero(subTotal){
         return subTotal != 0 && subTotal != null;
@@ -71,7 +71,14 @@ Template.journalEntryDetailById.events({
                                 type: "error"
                             });
                         } else {
-                            swal("Deleted!", "Your journal entry has been deleted.", "success");
+                            swal({
+                                title: "Success",
+                                text: "Deleted success",
+                                type: "success",
+                                timer: 1000,
+                                showConfirmButton: false
+                            });
+                            Session.set('journalEntryDetailById', undefined);
                             Router.go(`/showJournalEntry`);
                         }
                     });
@@ -83,10 +90,5 @@ Template.journalEntryDetailById.events({
                 }
             });
         }
-    },
-    'click .js-update-journal'(){
-        let params = Router.current().params;
-        let journalEntryId = params._id;
-        Router.go(`/editJournalEntry/${journalEntryId}`);
     }
 });

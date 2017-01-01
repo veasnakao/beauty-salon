@@ -28,6 +28,7 @@ Template.editStaff.helpers({
         });
     }
 });
+
 Template.editStaff.events({
     'click .js-editStaff': ()=> {
         if ($(".js-fee").val().length == 0) {
@@ -40,29 +41,27 @@ Template.editStaff.events({
 });
 AutoForm.hooks({
     editStaff: {
-        before: {
-            insert: function (doc) {
-                doc._id = idGenerator.gen(Collection.Staff, 4);
-                return doc;
-            }
-        },
+        // before: {
+        //     insert: function (doc) {
+        //         doc._id = idGenerator.gen(Collection.Staff, 4);
+        //         return doc;
+        //     }
+        // },
         onSuccess(formType, id){
+            // debugger;
             swal({
                 title: "Success",
                 text: "Staff update success",
                 type: "success",
-                timer: 1000,
-                confirmButtonColor: "#45B1FC",
-                showConfirmButton: true
-            })
+                timer: 1000
+            });
         },
         onError(formType, error){
             swal({
                 title: "Error",
                 text:error,
                 type:"error",
-                timer: 3000,
-                showConfirmButton: true
+                timer: 2000
             })
         }
     }
