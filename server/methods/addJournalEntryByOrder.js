@@ -1,7 +1,7 @@
 Meteor.methods({
     addJournalEntryByOrder(selector){
         let date = selector.date;
-        let todayDate = moment(date).format('YYYYMMDD');
+        let todayDate = moment(date).format('MMDDYYYY');
         let prefix = todayDate + '-';
         selector._id = idGenerator.genWithPrefix(Collection.JournalEntry, prefix, 4);
         let journalEntry = Collection.JournalEntry.insert(selector);

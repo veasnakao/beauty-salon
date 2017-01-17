@@ -1,14 +1,8 @@
-Template.staffSalaryReport.created = function () {
-    this.autorun(function () {
-        this.subscription = Meteor.subscribe('orders');
-    }.bind(this));
-};
-
-Template.staffSalaryReport.helpers({
-    staffSalary(){
-        if (Session.get('staffSalary')) {
-            let staffSalary = Session.get('staffSalary');
-            return staffSalary;
+Template.incomeByStaffReport.helpers({
+    incomeByStaff(){
+        if (Session.get('incomeByStaff')) {
+            let incomeByStaff = Session.get('incomeByStaff');
+            return incomeByStaff;
         }
     },
     date(){
@@ -29,7 +23,7 @@ Template.staffSalaryReport.helpers({
     },
 });
 
-Template.staffSalaryReport.events({
+Template.incomeByStaffReport.events({
     'click #print'(){
         var mode = 'iframe';
         var close = mode == "popup";
@@ -42,11 +36,11 @@ Template.staffSalaryReport.events({
         if (fromDate && toDate) {
             Session.set('fromDate', fromDate);
             Session.set('toDate', toDate);
-            Meteor.call('staffSalary', fromDate, toDate, (error, result)=> {
+            Meteor.call('incomeByStaff', fromDate, toDate, (error, result)=> {
                 if (error) {
                     sAlert.error(error.message);
                 } else {
-                    Session.set('staffSalary', result);
+                    Session.set('incomeByStaff', result);
                 }
             });
         }
@@ -54,8 +48,8 @@ Template.staffSalaryReport.events({
 });
 
 //onDestroyed
-Template.staffSalaryReport.onDestroyed(function () {
-    Session.set('staffSalary', undefined);
+Template.incomeByStaffReport.onDestroyed(function () {
+    Session.set('incomeByStaff', undefined);
     Session.set('fromDate', undefined);
     Session.set('toDate', undefined);
 });

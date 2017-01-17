@@ -29,26 +29,27 @@
                                     <input type="date" class="js-to-date">
                                 </div>
                             </label>
-                            <ul class="list">
-                                <li class="item item-toggle">
-                                    Expense
-                                    <label class="toggle toggle-balance">
-                                        <input type="checkbox" class="js-expense">
-                                        <div class="track">
-                                            <div class="handle"></div>
-                                        </div>
-                                    </label>
-                                </li>
-                                <li class="item item-toggle">
-                                    Income
-                                    <label class="toggle toggle-balance">
-                                        <input type="checkbox" class="js-income">
-                                        <div class="track">
-                                            <div class="handle"></div>
-                                        </div>
-                                    </label>
-                                </li>
-                            </ul>
+
+                            <!--<ul class="list">-->
+                            <!--<li class="item item-toggle">-->
+                            <!--Expense-->
+                            <!--<label class="toggle toggle-balance">-->
+                            <!--<input type="checkbox" class="js-expense">-->
+                            <!--<div class="track">-->
+                            <!--<div class="handle"></div>-->
+                            <!--</div>-->
+                            <!--</label>-->
+                            <!--</li>-->
+                            <!--<li class="item item-toggle">-->
+                            <!--Income-->
+                            <!--<label class="toggle toggle-balance">-->
+                            <!--<input type="checkbox" class="js-income">-->
+                            <!--<div class="track">-->
+                            <!--<div class="handle"></div>-->
+                            <!--</div>-->
+                            <!--</label>-->
+                            <!--</li>-->
+                            <!--</ul>-->
 
                             <button class="button button-block button-positive js-journalEntry-report">
                                 OK
@@ -80,61 +81,39 @@
                                         Date : {{moFormat fromDate 'MM/DD/YYYY'}} - {{moFormat toDate 'MM/DD/YYYY'}}
                                     {{/with}}
                                 </h5>
-                                <h5 style="margin-left: 10px;">Journal Type : {{journalType}}</h5>
-                                <div style="border:1px solid #797979;">
+
+                                <table style="border: 1px solid #797979;" class="report-content">
+                                    <tr class="profit" style="background-color: #E6E6E6;">
+                                        <td style="padding: 10px;">Date</td>
+                                        <td style="padding: 10px;">Type</td>
+                                        <td style="padding: 10px;">Item</td>
+                                        <td style="padding: 10px;">Amount</td>
+                                    </tr>
                                     {{#each journalEntryReport.content}}
-                                        <div class="row"
-                                             style="background-color:#E6E6E6;border-bottom:1px solid #797979;">
-                                            <div class="col">Date</div>
-                                            <div class="col">Journal Item</div>
-                                            <div class="col">Total</div>
-                                        </div>
-                                        {{#each journalEntryData}}
-                                            <div style="padding: 5px;border-bottom:1px solid #797979;">
-                                                <div class="row">
-                                                    <div class="col">{{moFormat date 'MM/DD/YYYY'}}</div>
-                                                    <div class="col"></div>
-                                                    <div class="col"></div>
-                                                </div>
-                                                <div style="margin-top: -41px;">
-                                                    {{#each serviceTotal}}
-                                                        {{#if checkIsNotEmpty serviceTotalByDate}}
-                                                            <div class="row">
-                                                                <div class="col"></div>
-                                                                <div class="col">Service</div>
-                                                                <div class="col">{{numFormat serviceTotalByDate
-                                                                                             '0,0.00 $'}}</div>
-                                                            </div>
-                                                        {{/if}}
-                                                    {{/each}}
-                                                    {{#each journalEntry}}
-                                                        {{#if checkIsNotEmpty totalByItem}}
-                                                            <div class="row">
-                                                                <div class="col"></div>
-                                                                <div class="col">{{journalItemName}}</div>
-                                                                <div class="col">{{numFormat totalByItem
-                                                                                             '0,0.00 $'}}</div>
-                                                            </div>
-                                                        {{/if}}
-                                                    {{/each}}
-                                                </div>
-                                                <div style="border-top:1px solid #797979;">
-                                                    <div class="row">
-                                                        <div class="col"></div>
-                                                        <div class="col"><u>Sub Total</u></div>
-                                                        <div class="col"><u>{{numFormat journalEntryTotalByDate
-                                                                                        '0,0.00 $'}}</u></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {{/each}}
-                                        <div class="row" style="background: #FFFBAC;">
-                                            <div class="col"></div>
-                                            <div class="col">Total</div>
-                                            <div class="col">{{numFormat total '0,0.00 $'}}</div>
-                                        </div>
+                                        {{#if checkIsNotEmpty total}}
+                                            <tr style="border: 1px solid #797979;">
+                                                <td style="padding: 10px;">{{moFormat date 'MM/DD/YYYY'}}</td>
+                                                <td style="padding: 10px;">{{typeOfJournal}}</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            {{#each journalItemDoc}}
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td style="padding: 10px;">{{itemName}}</td>
+                                                    <td style="padding: 10px;">{{numFormat amount '0,0.00 $'}}</td>
+                                                </tr>
+                                            {{/each}}
+                                            <tr style="background-color: #FFFBAC;border: 1px solid #797979;">
+                                                <td></td>
+                                                <td></td>
+                                                <td style="padding: 10px;">Total</td>
+                                                <td style="padding: 10px;">{{numFormat total '0,0.00 $'}}</td>
+                                            </tr>
+                                        {{/if}}
                                     {{/each}}
-                                </div>
+                                </table>
                             </div>
                         {{else}}
                             <div class="card">

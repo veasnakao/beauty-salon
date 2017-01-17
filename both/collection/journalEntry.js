@@ -60,6 +60,11 @@ Schema.JournalEntry = new SimpleSchema({
         type:String,
         label:"OrderId",
         optional:true
+    },
+    incomeByStaffId:{
+        type:String,
+        label:"Income By Staff",
+        optional:true
     }
 });
 Collection.JournalEntry.attachSchema(Schema.JournalEntry);

@@ -49,31 +49,44 @@ Template.journalEntryReport.events({
         }
     },
     'click .js-journalEntry-report'(e, instance){
-        let fromDate = instance.$('.js-from-date').val();
-        let toDate = instance.$('.js-to-date').val();
-        Session.set('fromDate', fromDate);
-        Session.set('toDate', toDate);
-        if ($('.js-expense').is(':checked')) {
-            let journalType = 'expense';
-            Session.set('journalType', journalType);
-            Meteor.call('journalEntryReport', fromDate, toDate, journalType, (error, result)=> {
-                if (error) {
-                    sAlert.error(error.message)
-                } else {
-                    Session.set('journalEntry', result);
-                }
-            });
-        } else if ($('.js-income').is(':checked')) {
-            let journalType = 'income';
-            Session.set('journalType', journalType);
-            Meteor.call('journalEntryReport', fromDate, toDate, journalType, (error, result)=> {
-                if (error) {
-                    sAlert.error(error.message);
-                } else {
-                    Session.set('journalEntry', result);
-                }
-            });
-        }
+        let getFromDate = instance.$('.js-from-date').val();
+        let getToDate = instance.$('.js-to-date').val();
+        Session.set('fromDate', getFromDate);
+        Session.set('toDate', getToDate);
+
+        let fromDate = moment(getFromDate, 'YYYY/MM/DD').endOf('days').toDate();
+        let toDate = moment(getToDate, 'YYYY/MM/DD').endOf('days').toDate();
+
+        Meteor.call('journalEntryReport', fromDate, toDate,(error, result)=> {
+            if (error) {
+                sAlert.error(error.message)
+            } else {
+                console.log(result);
+                Session.set('journalEntry', result);
+            }
+        });
+
+        // if ($('.js-expense').is(':checked')) {
+        //     let journalType = 'expense';
+        //     Session.set('journalType', journalType);
+        //     Meteor.call('journalEntryReport', fromDate, toDate, journalType, (error, result)=> {
+        //         if (error) {
+        //             sAlert.error(error.message)
+        //         } else {
+        //             Session.set('journalEntry', result);
+        //         }
+        //     });
+        // } else if ($('.js-income').is(':checked')) {
+        //     let journalType = 'income';
+        //     Session.set('journalType', journalType);
+        //     Meteor.call('journalEntryReport', fromDate, toDate, journalType, (error, result)=> {
+        //         if (error) {
+        //             sAlert.error(error.message);
+        //         } else {
+        //             Session.set('journalEntry', result);
+        //         }
+        //     });
+        // }
     }
 });
 Template.journalEntryReport.onDestroyed(function () {

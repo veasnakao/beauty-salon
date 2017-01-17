@@ -1,4 +1,4 @@
-<template name="staffSalaryReport">
+<template name="incomeByStaffReport">
     {{#if currentUser}}
         {{#if isInRole 'setting'}}
             {{#contentFor "headerButtonLeft"}}
@@ -6,7 +6,7 @@
             {{/contentFor}}
 
             {{#contentFor "headerTitle"}}
-                <h1 class="title">Salary Report</h1>
+                <h1 class="title">Income by Staff Report</h1>
             {{/contentFor}}
 
             <div class="content has-header overflow-scroll">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="print" style="margin: 0;padding: 0;width: 720px;height: auto;margin: 0 auto;">
-                    {{#if staffSalary}}
+                    {{#if incomeByStaff}}
                         <div style="margin:20px 10px;">
                             {{#if company}}
                                 {{#each company}}
@@ -43,7 +43,7 @@
                                     <h4 style="text-align: center;">{{address}}</h4>
                                 {{/each}}
                             {{/if}}
-                            <h5 style="text-align: center;"><u>Staff Salary Report</u></h5>
+                            <h5 style="text-align: center;"><u>Income by Staff Report</u></h5>
                             <div style="border-bottom: 1px solid #797979;"></div>
                             <h5 style="margin-left: 10px;">
                                 {{#with date}}
@@ -55,30 +55,21 @@
                                 <tr class="profit" style="background-color: #E6E6E6;">
                                     <td style="padding: 10px;">ID</td>
                                     <td style="padding: 10px;">Name</td>
-                                    <td style="padding: 10px;">Fee</td>
-                                    <td style="padding: 10px;">Total Income</td>
-                                    <td style="padding: 10px;">Total Fee</td>
-                                    <td style="padding: 10px;">Base Salary</td>
-                                    <td style="padding: 10px;">Total Salary</td>
+                                    <td style="padding: 10px;">Gender</td>
+                                    <td style="padding: 10px;">Amount</td>
                                 </tr>
-                                {{#each staffSalary.content}}
+                                {{#each incomeByStaff.content}}
                                     {{#each data}}
                                         <tr style="border: 1px solid #797979;">
                                             <td style="padding: 10px;">{{_id}}</td>
                                             <td style="padding: 10px;">{{staffName}}</td>
-                                            <td style="padding: 10px;">{{fee}} %</td>
+                                            <td style="padding: 10px;">{{gender}}</td>
                                             <td style="padding: 10px;">{{numFormat totalIncomeByStaff '0,0.00 $'}}</td>
-                                            <td style="padding: 10px;">{{numFormat totalFee '0,0.00 $'}}</td>
-                                            <td style="padding: 10px;">{{numFormat baseSalary '0,0.00 $'}}</td>
-                                            <td style="padding: 10px;">{{numFormat totalSalary '0,0.00 $'}}</td>
                                         </tr>
                                     {{/each}}
                                     <tr style="background-color: #FFFBAC">
                                         <td colspan="3" style="padding: 10px;">Total</td>
-                                        <td style="padding: 10px;">{{numFormat totalIncomeByStaff '0,0.00 $'}}</td>
-                                        <td style="padding: 10px;">{{numFormat totalFee '0,0.00 $'}}</td>
-                                        <td style="padding: 10px;">{{numFormat totalBaseSalary '0,0.00 $'}}</td>
-                                        <td style="padding: 10px;">{{numFormat totalSalary '0,0.00 $'}}</td>
+                                        <td style="padding: 10px;">{{numFormat total '0,0.00 $'}}</td>
                                     </tr>
                                 {{/each}}
                             </table>

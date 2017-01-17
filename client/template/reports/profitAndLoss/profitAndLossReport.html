@@ -58,10 +58,11 @@
                                         <td colspan="2" style="padding: 10px;">{{journalType}}</td>
                                         <td style="padding: 10px;"></td>
                                     </tr>
-                                    {{#if checkIsNotEmpty serviceTotal}}
+                                    {{#if checkIsNotEmpty totalIncomeByStaff}}
                                         <tr style="border: 1px solid #797979;">
-                                            <td colspan="2" style="padding: 10px;padding-left: 50px;">Service</td>
-                                            <td style="padding: 10px;">{{numFormat serviceTotal '0,0.00 $'}}</td>
+                                            <td colspan="2" style="padding: 10px;padding-left: 50px;">Income by Staff
+                                            </td>
+                                            <td style="padding: 10px;">{{numFormat totalIncomeByStaff '0,0.00 $'}}</td>
                                         </tr>
                                     {{/if}}
                                     {{#each journalItem}}

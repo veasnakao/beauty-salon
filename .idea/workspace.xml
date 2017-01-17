@@ -2,58 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5fbfa6e6-227e-46b1-917f-9caa09b60352" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/both/collection/incomeByStaff.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/incomeByStaff/addIncomeByStaff.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/incomeByStaff/addIncomeByStaff.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/incomeByStaff/editIncomeByStaff.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/incomeByStaff/editIncomeByStaff.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaff.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaff.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaffDetail.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaffDetail.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/methods/showIncomeByStaff.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/methods/showIncomeByStaffDetail.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/publications/company.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/publications/customer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/publications/customerSearch.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/publications/incomeByStaff.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/publications/itemSearh.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/publications/items.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/publications/journalEntry.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/publications/journalItems.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/publications/order.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/publications/orderDetail.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/publications/payment.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/publications/staff.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/publications/staffSearch.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/publications/user.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/server/publications.js" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/reports/incomeByStaff/incomeByStaff.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/reports/incomeByStaff/incomeByStaff.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/methods/incomeByStaff.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/both/collection/journalEntry.js" afterPath="$PROJECT_DIR$/both/collection/journalEntry.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/both/collection/staff.js" afterPath="$PROJECT_DIR$/both/collection/staff.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/both/router.js" afterPath="$PROJECT_DIR$/both/router.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/company/editCompany.html" afterPath="$PROJECT_DIR$/client/template/company/editCompany.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/company/editCompany.js" afterPath="$PROJECT_DIR$/client/template/company/editCompany.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/journalEntry/addJournalEntry.html" afterPath="$PROJECT_DIR$/client/template/journalEntry/addJournalEntry.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/journalEntry/addJournalEntry.js" afterPath="$PROJECT_DIR$/client/template/journalEntry/addJournalEntry.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/journalEntry/editJournalEntry.html" afterPath="$PROJECT_DIR$/client/template/journalEntry/editJournalEntry.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/journalEntry/editJournalEntry.js" afterPath="$PROJECT_DIR$/client/template/journalEntry/editJournalEntry.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/journalEntry/journalEntryDetail.js" afterPath="$PROJECT_DIR$/client/template/journalEntry/journalEntryDetail.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/journalEntry/journalEntryDetailById.html" afterPath="$PROJECT_DIR$/client/template/journalEntry/journalEntryDetailById.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/journalEntry/journalEntryDetailById.js" afterPath="$PROJECT_DIR$/client/template/journalEntry/journalEntryDetailById.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/journalEntry/showJournalEntry.html" afterPath="$PROJECT_DIR$/client/template/journalEntry/showJournalEntry.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/journalEntry/showJournalEntry.js" afterPath="$PROJECT_DIR$/client/template/journalEntry/showJournalEntry.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/journalItem/addJournalItem.js" afterPath="$PROJECT_DIR$/client/template/journalItem/addJournalItem.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/layout/sideMenu.html" afterPath="$PROJECT_DIR$/client/template/layout/sideMenu.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/setting/setting.html" afterPath="$PROJECT_DIR$/client/template/setting/setting.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/staff/addStaff.html" afterPath="$PROJECT_DIR$/client/template/staff/addStaff.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/staff/addStaff.js" afterPath="$PROJECT_DIR$/client/template/staff/addStaff.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/staff/editStaff.html" afterPath="$PROJECT_DIR$/client/template/staff/editStaff.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/staff/editStaff.js" afterPath="$PROJECT_DIR$/client/template/staff/editStaff.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/staff/showStaff.html" afterPath="$PROJECT_DIR$/client/template/staff/showStaff.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/staff/staffInfo.html" afterPath="$PROJECT_DIR$/client/template/staff/staffInfo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/stylesheet/mystyle.css" afterPath="$PROJECT_DIR$/client/stylesheet/mystyle.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/incomeByStaff/addIncomeByStaff.html" afterPath="$PROJECT_DIR$/client/template/incomeByStaff/addIncomeByStaff.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/incomeByStaff/addIncomeByStaff.js" afterPath="$PROJECT_DIR$/client/template/incomeByStaff/addIncomeByStaff.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaffDetail.html" afterPath="$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaffDetail.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaffDetail.js" afterPath="$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaffDetail.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/reports/journalEntryList/journalEntryReport.html" afterPath="$PROJECT_DIR$/client/template/reports/journalEntryList/journalEntryReport.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/reports/journalEntryList/journalEntryReport.js" afterPath="$PROJECT_DIR$/client/template/reports/journalEntryList/journalEntryReport.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.html" afterPath="$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/reports/reports.html" afterPath="$PROJECT_DIR$/client/template/reports/reports.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/reports/staffSalary/staffSalary.html" afterPath="$PROJECT_DIR$/client/template/reports/staffSalary/staffSalary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/reports/staffSalary/staffSalary.js" afterPath="$PROJECT_DIR$/client/template/reports/staffSalary/staffSalary.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/methods/addJournalEntryByOrder.js" afterPath="$PROJECT_DIR$/server/methods/addJournalEntryByOrder.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/methods/journalEntryReport.js" afterPath="$PROJECT_DIR$/server/methods/journalEntryReport.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/methods/profitAndLossReport.js" afterPath="$PROJECT_DIR$/server/methods/profitAndLossReport.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/methods/removeDataCollection.js" afterPath="$PROJECT_DIR$/server/methods/removeDataCollection.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/methods/staffSalary.js" afterPath="$PROJECT_DIR$/server/methods/staffSalary.js" />
     </list>
     <ignored path="beauty-shop.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -73,42 +43,45 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="addStaff.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/template/staff/addStaff.html">
+      <file leaf-file-name="journalEntryReport.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/template/reports/journalEntryList/journalEntryReport.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="27" column="26" lean-forward="true" selection-start-line="23" selection-start-column="20" selection-end-line="27" selection-end-column="26" />
-              <folding />
+            <state relative-caret-position="400">
+              <caret line="16" column="19" lean-forward="false" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="19" />
+              <folding>
+                <element signature="e#2002#2043#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="staffInfo.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/template/staff/staffInfo.html">
+      <file leaf-file-name="journalEntryReport.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/methods/journalEntryReport.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="80" column="7" lean-forward="true" selection-start-line="80" selection-start-column="7" selection-end-line="80" selection-end-column="7" />
-              <folding />
+            <state relative-caret-position="468">
+              <caret line="353" column="12" lean-forward="true" selection-start-line="353" selection-start-column="12" selection-end-line="353" selection-end-column="24" />
+              <folding>
+                <element signature="e#8322#8343#0" expanded="false" />
+                <element signature="e#12409#12430#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="editStaff.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/template/staff/editStaff.html">
+      <file leaf-file-name="journalEntryReport.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/template/reports/journalEntryList/journalEntryReport.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="24" column="22" lean-forward="true" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addIncomeByStaff.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/template/incomeByStaff/addIncomeByStaff.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="15" column="67" lean-forward="false" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="67" />
-              <folding />
+            <state relative-caret-position="245">
+              <caret line="109" column="52" lean-forward="false" selection-start-line="109" selection-start-column="52" selection-end-line="109" selection-end-column="52" />
+              <folding>
+                <element signature="n#style#0;n#tr#1;n#table#0;n#div#0;n#div#2;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#1;n#table#0;n#div#0;n#div#2;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#2;n#table#0;n#div#0;n#div#2;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#3;n#tr#2;n#table#0;n#div#0;n#div#2;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#tr#3;n#table#0;n#div#0;n#div#2;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#3;n#table#0;n#div#0;n#div#2;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#3;n#tr#3;n#table#0;n#div#0;n#div#2;n#template#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -131,24 +104,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/client/template/staff/editStaff.html" />
-        <option value="$PROJECT_DIR$/client/template/layout/sideMenu.html" />
-        <option value="$PROJECT_DIR$/both/collection/staff.js" />
-        <option value="$PROJECT_DIR$/both/collection/incomeByStaff.js" />
-        <option value="$PROJECT_DIR$/client/template/incomeByStaff/addIncomeByStaff.js" />
-        <option value="$PROJECT_DIR$/app.scss" />
-        <option value="$PROJECT_DIR$/server/methods/journalEntryReport.js" />
-        <option value="$PROJECT_DIR$/both/router.js" />
-        <option value="$PROJECT_DIR$/server/methods/showIncomeByStaffDetail.js" />
-        <option value="$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaffDetail.html" />
-        <option value="$PROJECT_DIR$/client/template/staff/editStaff.js" />
-        <option value="$PROJECT_DIR$/server/publications/staff.js" />
-        <option value="$PROJECT_DIR$/server/publications/incomeByStaff.js" />
-        <option value="$PROJECT_DIR$/server/publications/customer.js" />
-        <option value="$PROJECT_DIR$/server/publications/items.js" />
-        <option value="$PROJECT_DIR$/server/publications/journalItems.js" />
-        <option value="$PROJECT_DIR$/server/publications/journalEntry.js" />
-        <option value="$PROJECT_DIR$/server/publications/order.js" />
         <option value="$PROJECT_DIR$/server/publications/orderDetail.js" />
         <option value="$PROJECT_DIR$/server/publications/payment.js" />
         <option value="$PROJECT_DIR$/server/publications/itemSearh.js" />
@@ -157,22 +112,18 @@
         <option value="$PROJECT_DIR$/server/publications/company.js" />
         <option value="$PROJECT_DIR$/server/publications.js" />
         <option value="$PROJECT_DIR$/server/publications/user.js" />
-        <option value="$PROJECT_DIR$/server/methods/removeDataCollection.js" />
         <option value="$PROJECT_DIR$/client/template/journalItem/addJournalItem.js" />
         <option value="$PROJECT_DIR$/client/template/customer/addCustomer.html" />
         <option value="$PROJECT_DIR$/client/template/journalItem/addJournalItem.html" />
-        <option value="$PROJECT_DIR$/client/template/incomeByStaff/addIncomeByStaff.html" />
         <option value="$PROJECT_DIR$/server/methods/showIncomeByStaff.js" />
         <option value="$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaff.html" />
         <option value="$PROJECT_DIR$/client/template/journalEntry/journalEntryDetail.js" />
-        <option value="$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaffDetail.js" />
         <option value="$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaff.js" />
         <option value="$PROJECT_DIR$/client/template/journalEntry/addJournalEntry.html" />
         <option value="$PROJECT_DIR$/client/template/journalEntry/showJournalEntry.js" />
         <option value="$PROJECT_DIR$/client/template/journalEntry/addJournalEntry.js" />
         <option value="$PROJECT_DIR$/client/template/incomeByStaff/editIncomeByStaff.html" />
         <option value="$PROJECT_DIR$/client/template/journalEntry/journalEntryDetailById.html" />
-        <option value="$PROJECT_DIR$/both/collection/journalEntry.js" />
         <option value="$PROJECT_DIR$/client/template/journalEntry/editJournalEntry.html" />
         <option value="$PROJECT_DIR$/client/template/journalEntry/showJournalEntry.html" />
         <option value="$PROJECT_DIR$/client/template/journalEntry/journalEntryDetailById.js" />
@@ -182,6 +133,28 @@
         <option value="$PROJECT_DIR$/client/template/company/editCompany.js" />
         <option value="$PROJECT_DIR$/client/template/staff/addStaff.html" />
         <option value="$PROJECT_DIR$/client/template/staff/staffInfo.html" />
+        <option value="$PROJECT_DIR$/client/stylesheet/mystyle.css" />
+        <option value="$PROJECT_DIR$/client/template/incomeByStaff/addIncomeByStaff.html" />
+        <option value="$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaffDetail.html" />
+        <option value="$PROJECT_DIR$/both/router.js" />
+        <option value="$PROJECT_DIR$/client/template/reports/reports.html" />
+        <option value="$PROJECT_DIR$/client/template/reports/staffSalary/staffSalary.js" />
+        <option value="$PROJECT_DIR$/client/template/reports/incomeByStaff/incomeByStaff.html" />
+        <option value="$PROJECT_DIR$/client/template/reports/incomeByStaff/incomeByStaff.js" />
+        <option value="$PROJECT_DIR$/client/template/reports/staffSalary/staffSalary.html" />
+        <option value="$PROJECT_DIR$/server/methods/incomeByStaff.js" />
+        <option value="$PROJECT_DIR$/server/methods/staffSalary.js" />
+        <option value="$PROJECT_DIR$/both/collection/journalEntry.js" />
+        <option value="$PROJECT_DIR$/client/template/incomeByStaff/addIncomeByStaff.js" />
+        <option value="$PROJECT_DIR$/server/methods/addJournalEntryByOrder.js" />
+        <option value="$PROJECT_DIR$/server/methods/removeDataCollection.js" />
+        <option value="$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaffDetail.js" />
+        <option value="$PROJECT_DIR$/server/methods/profitAndLossReport.js" />
+        <option value="$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.html" />
+        <option value="$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.js" />
+        <option value="$PROJECT_DIR$/server/methods/journalEntryReport.js" />
+        <option value="$PROJECT_DIR$/client/template/reports/journalEntryList/journalEntryReport.js" />
+        <option value="$PROJECT_DIR$/client/template/reports/journalEntryList/journalEntryReport.html" />
       </list>
     </option>
   </component>
@@ -196,8 +169,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
     <option name="y" value="24" />
-    <option name="width" value="1855" />
-    <option name="height" value="1056" />
+    <option name="width" value="1535" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -217,7 +190,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -254,24 +226,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="methods" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="beauty-salon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="beauty-salon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -298,7 +252,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="staff" />
+              <option name="myItemId" value="reports" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -313,11 +267,52 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="template" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="reports" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="staffSalary" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="beauty-salon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="beauty-salon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="beauty-salon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="beauty-salon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="both" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -651,17 +646,23 @@
       <workItem from="1483147283051" duration="11136000" />
       <workItem from="1483166954989" duration="9253000" />
       <workItem from="1483272207119" duration="11867000" />
+      <workItem from="1483341574496" duration="114000" />
+      <workItem from="1483454779713" duration="1713000" />
+      <workItem from="1484489491078" duration="1511000" />
+      <workItem from="1484549134676" duration="12999000" />
+      <workItem from="1484580121926" duration="860000" />
+      <workItem from="1484635834032" duration="3552000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1273057000" />
+    <option name="totallyTimeSpent" value="1293806000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
+    <frame x="65" y="24" width="1535" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23126684" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21628664" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -701,328 +702,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/server/publications/customer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/publications/items.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/publications/journalItems.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/publications/journalEntry.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/publications/order.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/publications/orderDetail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/publications/payment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/publications/itemSearh.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/publications/customerSearch.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="3" lean-forward="false" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/publications/staffSearch.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="3" lean-forward="false" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/publications/company.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/publications.js" />
-    <entry file="file://$PROJECT_DIR$/server/publications/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="3" column="3" lean-forward="true" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/publications/staff.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="3" lean-forward="false" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/staff/editStaff.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="51" column="18" lean-forward="true" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/staff/addStaff.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="26" column="14" lean-forward="true" selection-start-line="21" selection-start-column="12" selection-end-line="26" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/methods/removeDataCollection.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="1" column="23" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/customer/addCustomer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="41" lean-forward="false" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/journalItem/addJournalItem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="25" column="41" lean-forward="false" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/staff/staffInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="50" column="22" lean-forward="false" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/customer/addCustomer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="15" column="63" lean-forward="false" selection-start-line="15" selection-start-column="63" selection-end-line="15" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/both/collection/incomeByStaff.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="41" column="9" lean-forward="false" selection-start-line="39" selection-start-column="8" selection-end-line="41" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/methods/showIncomeByStaffDetail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/methods/showIncomeByStaff.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1550">
-          <caret line="62" column="29" lean-forward="false" selection-start-line="62" selection-start-column="29" selection-end-line="62" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaffDetail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="723">
-          <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaff.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="60" column="9" lean-forward="false" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaff.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" column="57" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="57" />
-          <folding>
-            <element signature="e#877#2406#0#Spacebars" expanded="false" />
-            <marker date="1483276785743" expanded="false" signature="1123:1174" ph="..." />
-            <marker date="1483276785743" expanded="false" signature="1988:2039" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/journalEntry/addJournalEntry.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="31" lean-forward="false" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="31" />
-          <folding>
-            <marker date="1483278261615" expanded="true" signature="224:250" ph="..." />
-            <marker date="1483278261615" expanded="false" signature="294:307" ph="..." />
-            <marker date="1483278261615" expanded="false" signature="422:435" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/incomeByStaff/addIncomeByStaff.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-250">
-          <caret line="11" column="34" lean-forward="true" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/journalEntry/journalEntryDetail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/journalEntry/journalEntryDetail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="13" column="32" lean-forward="true" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaffDetail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="573">
-          <caret line="47" column="162" lean-forward="false" selection-start-line="47" selection-start-column="92" selection-end-line="47" selection-end-column="162" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/journalEntry/showJournalEntry.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" column="31" lean-forward="false" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/methods/journalEntryDetail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="166" column="4" lean-forward="false" selection-start-line="166" selection-start-column="4" selection-end-line="166" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/both/collection/journalEntry.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="32" column="22" lean-forward="true" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/journalEntry/journalEntryDetailById.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="56" column="56" lean-forward="true" selection-start-line="56" selection-start-column="56" selection-end-line="56" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/journalEntry/journalEntryDetailById.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="31" lean-forward="true" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/journalEntry/editJournalEntry.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="24" lean-forward="true" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/journalEntry/editJournalEntry.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="673">
-          <caret line="66" column="49" lean-forward="false" selection-start-line="66" selection-start-column="49" selection-end-line="66" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/journalEntry/addJournalEntry.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-427">
-          <caret line="26" column="11" lean-forward="false" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/journalEntry/showJournalEntry.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="16" column="48" lean-forward="true" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/incomeByStaff/editIncomeByStaff.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="25" lean-forward="true" selection-start-line="5" selection-start-column="16" selection-end-line="7" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/template/incomeByStaff/editIncomeByStaff.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="700">
           <caret line="61" column="49" lean-forward="true" selection-start-line="61" selection-start-column="12" selection-end-line="61" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1030,7 +713,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="3" column="86" lean-forward="false" selection-start-line="3" selection-start-column="86" selection-end-line="3" selection-end-column="86" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1038,7 +720,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
           <caret line="19" column="49" lean-forward="false" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1046,7 +727,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
           <caret line="14" column="18" lean-forward="true" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1054,39 +734,349 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-525">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/incomeByStaff/addIncomeByStaff.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="15" column="67" lean-forward="false" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/staff/addStaff.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="27" column="26" lean-forward="true" selection-start-line="23" selection-start-column="20" selection-end-line="27" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/template/staff/editStaff.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
-          <caret line="24" column="22" lean-forward="true" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-          <folding />
+          <caret line="24" column="22" lean-forward="false" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/both/collection/customer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="8" column="7" lean-forward="false" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/template/staff/staffInfo.html">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="90" column="37" lean-forward="true" selection-start-line="90" selection-start-column="37" selection-end-line="90" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/staff/addStaff.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="27" column="26" lean-forward="false" selection-start-line="23" selection-start-column="20" selection-end-line="27" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/layout/sideMenu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="625">
+          <caret line="25" column="54" lean-forward="false" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.meteor/packages">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="37" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/customer/addCustomer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="41" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="28" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/customer/addCustomer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="15" column="63" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="19" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/publications/customer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/customer/showCustomer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="30" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/customer/showCustomer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/stylesheet/mystyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaffDetail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="16" column="44" lean-forward="false" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/incomeByStaff/addIncomeByStaff.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="12" column="55" lean-forward="false" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/reports/orderDetail/orderDetail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2100">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/reports/reports.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="19" column="54" lean-forward="false" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/both/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="579">
+          <caret line="103" column="35" lean-forward="false" selection-start-line="103" selection-start-column="35" selection-end-line="103" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/reports/staffSalary/staffSalary.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="20" column="10" lean-forward="false" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/reports/incomeByStaff/incomeByStaff.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="3" column="61" lean-forward="false" selection-start-line="3" selection-start-column="61" selection-end-line="3" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/reports/incomeByStaff/incomeByStaff.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="65" column="81" lean-forward="false" selection-start-line="65" selection-start-column="81" selection-end-line="65" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/methods/incomeByStaff.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="39" column="14" lean-forward="true" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/methods/staffSalary.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="224" column="9" lean-forward="true" selection-start-line="224" selection-start-column="9" selection-end-line="224" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/order/addOrder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/order/itemOrder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-13650">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/methods/order.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-721">
+          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/order/showOrder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="11" column="43" lean-forward="true" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/both/collection/journalEntry.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="579">
+          <caret line="64" column="20" lean-forward="true" selection-start-line="64" selection-start-column="20" selection-end-line="64" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/hook/journalEntry.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/methods/removeDataCollection.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="1" column="39" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/incomeByStaff/incomeByStaffDetail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1625">
+          <caret line="65" column="20" lean-forward="true" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/methods/addJournalEntryByOrder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="3" column="56" lean-forward="true" selection-start-line="3" selection-start-column="56" selection-end-line="3" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/incomeByStaff/addIncomeByStaff.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="37" column="44" lean-forward="false" selection-start-line="37" selection-start-column="44" selection-end-line="37" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/journalEntry/addJournalEntry.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="718">
+          <caret line="61" column="24" lean-forward="true" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/hook/payment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="19" column="8" lean-forward="false" selection-start-line="19" selection-start-column="8" selection-end-line="28" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/payment/payment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-471">
+          <caret line="173" column="28" lean-forward="true" selection-start-line="173" selection-start-column="28" selection-end-line="173" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/methods/profitAndLossReport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1554">
+          <caret line="311" column="28" lean-forward="false" selection-start-line="311" selection-start-column="28" selection-end-line="311" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
-          <caret line="80" column="7" lean-forward="true" selection-start-line="80" selection-start-column="7" selection-end-line="80" selection-end-column="7" />
+          <caret line="13" column="4" lean-forward="true" selection-start-line="13" selection-start-column="4" selection-end-line="15" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/reports/profitAndLoss/profitAndLossReport.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="52" column="74" lean-forward="false" selection-start-line="52" selection-start-column="52" selection-end-line="52" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/methods/journalEntryDetail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5375">
+          <caret line="228" column="11" lean-forward="true" selection-start-line="228" selection-start-column="11" selection-end-line="228" selection-end-column="11" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/journalEntry/journalEntryDetailById.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/reports/journalItemReport/journalItemReport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="13" column="6" lean-forward="false" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/reports/journalItemReport/journalItemReport.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/reports/staffSalary/staffSalary.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="83" column="36" lean-forward="true" selection-start-line="53" selection-start-column="28" selection-end-line="83" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/methods/journalEntryReport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="353" column="12" lean-forward="true" selection-start-line="353" selection-start-column="12" selection-end-line="353" selection-end-column="24" />
+          <folding>
+            <element signature="e#8322#8343#0" expanded="false" />
+            <element signature="e#12409#12430#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/reports/journalEntryList/journalEntryReport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="16" column="19" lean-forward="false" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="19" />
+          <folding>
+            <element signature="e#2002#2043#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/reports/journalEntryList/journalEntryReport.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="109" column="52" lean-forward="false" selection-start-line="109" selection-start-column="52" selection-end-line="109" selection-end-column="52" />
+          <folding>
+            <element signature="n#style#0;n#tr#1;n#table#0;n#div#0;n#div#2;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#1;n#table#0;n#div#0;n#div#2;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#2;n#table#0;n#div#0;n#div#2;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#2;n#table#0;n#div#0;n#div#2;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#3;n#table#0;n#div#0;n#div#2;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#3;n#table#0;n#div#0;n#div#2;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#3;n#table#0;n#div#0;n#div#2;n#template#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

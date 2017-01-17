@@ -58,8 +58,18 @@ Template.incomeByStaffDetail.events({
                             showConfirmButton: false,
                             timer: 1000
                         });
-                        Router.go('/showIncomeByStaff');
-                        Session.set('incomeByStaffDetail', undefined);
+                        Meteor.call('removeJournalEntryWithIncomeByStaff', id, (error, result) => {
+                            if(error) {
+                                swal({
+                                    title: "Error",
+                                    text: error,
+                                    type: "error"
+                                });
+                            }
+                            Router.go('/showIncomeByStaff');
+                            Session.set('incomeByStaffDetail', undefined);
+                        });
+
                     }
                 });
             } else {

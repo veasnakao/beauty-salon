@@ -299,20 +299,20 @@ Meteor.methods({
     //         return data;
     //     }
     // },
-    journalEntryReport(fromDate, toDate, journalType){
-        fromDate = moment(fromDate).startOf('days').toDate();
-        toDate = moment(toDate).endOf('days').toDate();
+
+    journalEntryReport(fromDate, toDate){
+        // fromDate = moment(fromDate).startOf('days').toDate();
+        // toDate = moment(toDate).endOf('days').toDate();
         let journalEntry = Collection.JournalEntry.aggregate([
             {
                 $match: {
                     date: {
                         $gte: fromDate, $lte: toDate
-                    },
-                    typeOfJournal: journalType
+                    }
                 }
             },
             {
-                $unwind: {path: '$journalEntryItem', preserveNullAndEmptyArrays: true}
+                $unwind: { path: '$journalEntryItem', preserveNullAndEmptyArrays: true }
             },
             {
                 $lookup: {
@@ -323,189 +323,25 @@ Meteor.methods({
                 }
             },
             {
-                $unwind: {path: '$journalItemDoc', preserveNullAndEmptyArrays: true}
-            },
-            {
-                $lookup: {
-                    from: "order",
-                    localField: "orderId",
-                    foreignField: "_id",
-                    as: "serviceDoc"
-                }
-            },
-            {
-                $unwind: {path: '$serviceDoc', preserveNullAndEmptyArrays: true}
-            },
-            {
-                $project: {
-                    date: '$date',
-                    journalType: '$typeOfJournal',
-                    serviceSubTotal: '$serviceDoc.total',
-                    journalItemName: '$journalItemDoc.journalItemName',
-                    journalItemPrice: '$journalEntryItem.journalItemPrice'
-                }
+                $unwind: { path: '$journalItemDoc', preserveNullAndEmptyArrays: true }
             },
             {
                 $group: {
-                    _id: {
-                        month: {$month: "$date"},
-                        day: {$dayOfMonth: "$date"},
-                        year: {$year: "$date"},
-                        journalItemName: '$journalItemName',
-                        journaType: '$journalType'
+                    _id: '$_id',
+                    typeOfJournal: {
+                        $last: "$typeOfJournal"
                     },
-                    date: {
-                        $last: "$date"
+                    date:{
+                        $last:'$date'
                     },
-                    journalType: {
-                        $last: "$journalType"
-                    },
-                    journalItem: {
+                    journalItemDoc: {
                         $addToSet: {
-                            journalItemName: '$journalItemName',
-                            journalItemPrice: '$journalItemPrice',
+                            itemName: '$journalItemDoc.journalItemName',
+                            amount: '$journalEntryItem.journalItemPrice'
                         }
                     },
-                    service: {
-                        $sum: '$serviceSubTotal'
-                    }
-                }
-            },
-            {
-                $unwind: {path: '$journalItem', preserveNullAndEmptyArrays: true}
-            },
-
-            {
-                $group: {
-                    _id: {
-                        month: {$month: "$date"},
-                        day: {$dayOfMonth: "$date"},
-                        year: {$year: "$date"},
-                        journaType: '$journalItem.journalItemName'
-                    },
-                    date: {
-                        $last: "$date"
-                    },
-                    journalType: {
-                        $last: "$journalType"
-                    },
-                    journalItemName: {
-                        $last: '$journalItem.journalItemName'
-                    },
-                    totalJournalByItem: {
-                        $sum: '$journalItem.journalItemPrice'
-                    },
-                    serviceTotal: {
-                        $sum: '$service'
-                    }
-                }
-            },
-            {
-                $group: {
-                    _id: {
-                        month: {$month: "$date"},
-                        day: {$dayOfMonth: "$date"},
-                        year: {$year: "$date"},
-                    },
-                    date: {
-                        $last: "$date"
-                    },
-                    journalEntry: {
-                        $addToSet: {
-                            journalItemName: '$journalItemName',
-                            totalByItem: '$totalJournalByItem'
-                        }
-                    },
-                    serviceTotal: {
-                        $sum: '$serviceTotal'
-                    }
-                }
-            },
-            {
-                $unwind: {path: '$journalEntry', preserveNullAndEmptyArrays: true}
-            }, {
-                $group: {
-                    _id: {
-                        month: {$month: "$date"},
-                        day: {$dayOfMonth: "$date"},
-                        year: {$year: "$date"},
-                    },
-                    date: {
-                        $last: "$date"
-                    },
-                    journalEntry: {
-                        $addToSet: {
-                            journalItemName: '$journalEntry.journalItemName',
-                            totalByItem: '$journalEntry.totalByItem'
-                        }
-                    },
-                    journalTotal: {
-                        $sum: '$journalEntry.totalByItem'
-                    },
-                    serviceTotal: {
-                        $last: '$serviceTotal'
-                    }
-                }
-            },
-            {
-                $unwind: {path: '$journalEntry', preserveNullAndEmptyArrays: true}
-            },
-            {
-                $project: {
-                    date: '$date',
-                    journalItemName: '$journalEntry.journalItemName',
-                    totalByItem: '$journalEntry.totalByItem',
-                    serviceTotal: '$serviceTotal',
-                    journalEntryTotalByDate: {
-                        $add: ['$journalTotal', '$serviceTotal']
-                    }
-                }
-            },
-            {
-                $group: {
-                    _id: {
-                        month: {$month: "$date"},
-                        day: {$dayOfMonth: "$date"},
-                        year: {$year: "$date"},
-                    },
-                    date: {
-                        $last: "$date"
-                    },
-                    journalEntry: {
-                        $addToSet: {
-                            journalItemName: '$journalItemName',
-                            totalByItem: '$totalByItem'
-                        }
-                    },
-                    serviceTotal: {
-                        $addToSet: {
-                            serviceTotalByDate: '$serviceTotal'
-                        }
-                    },
-                    journalEntryTotalByDate: {
-                        $last: "$journalEntryTotalByDate"
-                    }
-                }
-            },
-            {
-                $project: {
-                    _id: {$concat: [{$dateToString: {format: "%Y-%m-%d", date: "$date"}}]},
-                    date: 1,
-                    journalEntry: 1,
-                    serviceTotal: 1,
-                    journalEntryTotalByDate: 1
-
-                }
-            },
-            {$sort: {_id: -1}},
-            {
-                $group: {
-                    _id: null,
-                    journalEntryData: {
-                        $addToSet: '$$ROOT'
-                    },
-                    total: {
-                        $sum: "$journalEntryTotalByDate"
+                    total:{
+                        $sum: '$journalEntryItem.journalItemPrice'
                     }
                 }
             }
@@ -513,10 +349,12 @@ Meteor.methods({
         let data = {};
         let content = [];
         if (journalEntry) {
+            console.log(journalEntry);
             data.content = journalEntry;
             return data;
         }
     },
+
     // allJournalEntry(){
     //     let allJournalEntry = Collection.JournalEntry.aggregate([
     //         {

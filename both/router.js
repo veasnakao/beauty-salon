@@ -101,4 +101,5 @@ Router.map(function () {
     this.route('orderDetailReport');
     this.route('journalEntryReport');
     this.route('profitAndLossReport');
+    this.route('incomeByStaffReport');
 });
