@@ -9,12 +9,12 @@
                 <h1 class="title">Expense Item Info</h1>
             {{/contentFor}}
 
-            {{#contentFor "headerButtonRight"}}
-                <button class="button button-clear pull-left" data-ion-modal="editJournalItem"
-                        data-id="{{journalItemInfo._id}}">
-                    {{> ionIcon icon="ion ion-edit"}}
-                </button>
-            {{/contentFor}}
+            <!--{{#contentFor "headerButtonRight"}}-->
+                <!--<button class="button button-clear pull-left" data-ion-modal="editJournalItem"-->
+                        <!--data-id="{{journalItemInfo._id}}">-->
+                    <!--{{> ionIcon icon="ion ion-edit"}}-->
+                <!--</button>-->
+            <!--{{/contentFor}}-->
 
             {{#ionView}}
                 {{#ionContent}}
@@ -40,9 +40,17 @@
                             {{/ionItem}}
                         {{/with}}
                     {{/ionList}}
-                    <button class="button button-block button-assertive ion-trash-a delete-journalItem">
-                        Delete
-                    </button>
+                    <div class="col">
+                        <button class="button button-block button-assertive delete-journalItem">
+                            {{> ionIcon icon="ion ion-trash-a"}} Delete
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button class="button button-block button-positive" data-ion-modal="editJournalItem"
+                                data-id="{{journalItemInfo._id}}">
+                            {{> ionIcon icon="ion ion-edit"}} Update
+                        </button>
+                    </div>
                 {{/ionContent}}
             {{/ionView}}
         {{else}}

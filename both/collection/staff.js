@@ -42,8 +42,8 @@ Schema.Staff = new SimpleSchema({
             type: "select",
             options: function () {
                 return [
+                    {label: 'Active', value: 'active'},
                     {label: 'Close', value: 'close'},
-                    {label: 'Active', value: 'active'}
                 ];
             }
         }
